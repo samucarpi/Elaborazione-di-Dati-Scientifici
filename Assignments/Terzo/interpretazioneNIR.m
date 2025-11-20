@@ -34,24 +34,6 @@ subplot(1, 2, 2);
 plot(wl, loading(:,1), 'b-', 'LineWidth', 1.0); hold on; % loading PC1
 plot(wl, loading(:,2), 'r-', 'LineWidth', 1.0); % loading PC2
 yline(0);
-% Acqua (O-H stretch + O-H def.) ~5159 cm^-1
-xline(5159, 'b:', 'LineWidth', 1.5);
-text(5159, max(loading(:,1)), '  Acqua', 'Color', 'b', 'Rotation', 90);
-% Amido (O-H stretch + O-H def. ) ~4480 cm^-1
-xline(4480, 'r:', 'LineWidth', 1.5);
-text(4480, max(loading(:,2)), '  Amido', 'Color', 'r', 'Rotation', 90);
-% Amido (2 O-H def. + C-O stretch ) ~4715 cm^-1
-xline(4715, 'r:', 'LineWidth', 1.5);
-text(4715, max(loading(:,2)), '  Amido', 'Color', 'r', 'Rotation', 90);
-% Amido (2 O-H def. + C-O def. ) ~4970 cm^-1
-xline(4970, 'r:', 'LineWidth', 1.5);
-text(4970, max(loading(:,2)), '  Amido', 'Color', 'r', 'Rotation', 90);
-% Cellulosa (C-H stretch + C-H deformazione) ~4300 cm^-1
-xline(4300, 'r:', 'LineWidth', 1.5);
-text(4300, max(loading(:,2)), '  Cellulosa', 'Color', 'r', 'Rotation', 90);
-% Lipidi (C-H stretch 1° sovratono gruppi (CH2) ) ~5890 cm^-1
-xline(5890, 'r:', 'LineWidth', 1.5);
-text(5890, max(loading(:,2)), '  Lipidi', 'Color', 'r', 'Rotation', 90);
 title('PCA LOADINGS SU ASSEXSCALE');
 xlabel('Wavenumber (cm^{-1})');
 ylabel('Peso (Loading)');
