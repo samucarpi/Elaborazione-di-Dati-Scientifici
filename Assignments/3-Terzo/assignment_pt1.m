@@ -183,7 +183,27 @@ title('PCA SCORES');
 
 
 %% DERIVATA PRIMA CON SMOOTHING
-X_der1 = sgolayfilt(X', 2, 15, [], 1)'; % (finestra=15 con polinomio=2)
+% parametri
+window = 15;
+polyOrder = 2;
+derivOrder = 1; 
+% coefficienti del filtro Savitzky-Golay
+[~, g] = sgolay(polyOrder, window);
+% estrazione filtro: 
+% 1) smoothing
+% 2) derivata 1
+% 3) derivata 2
+my_filter = g(:, derivOrder + 1); 
+% applicazione del filtro
+[n, m] = size(X);
+X_der1_full = zeros(n, m);
+for i = 1:n
+    X_der1_full(i,:) = conv(X(i,:), my_filter, 'same');
+end
+% taglio bordi
+cut = 10; 
+X_der1 = X_der1_full(:, (cut+1) : (end-cut));
+wl_cut = wl((cut+1) : (end-cut));
 X_mc = X_der1 - mean(X_der1); % mean centering
 
 % PCA
@@ -194,7 +214,7 @@ npc = 2;
 figure('Name', 'Derivata 1', 'Position', [50, 500, 1000, 400]);
 subplot(1,2,1); hold on; % 2 colonne 1 riga (1° colonna)
 for c = 1:max(y)
-    plot(wl, X_der1(y==c, :), 'Color', colors(c,:));
+    plot(wl_cut, X_der1(y==c, :), 'Color', colors(c,:));
 end
 % griglia e assi
 xlabel('Numero di onda');
@@ -216,7 +236,27 @@ title('PCA SCORES');
 
 
 %% DERIVATA SECONDA CON SMOOTHING
-X_der2 = sgolayfilt(X', 2, 15, [], 2)';  % (finestra=15 con polinomio=2)
+% parametri
+window = 9;
+polyOrder = 2;
+derivOrder = 2; 
+% coefficienti del filtro Savitzky-Golay
+[~, g] = sgolay(polyOrder, window);
+% estrazione filtro: 
+% 1) smoothing
+% 2) derivata 1
+% 3) derivata 2
+my_filter = g(:, derivOrder + 1); 
+% applicazione del filtro
+[n, m] = size(X);
+X_der2_full = zeros(n, m);
+for i = 1:n
+    X_der2_full(i,:) = conv(X(i,:), my_filter, 'same');
+end
+% taglio bordi
+cut = 10; 
+X_der2 = X_der2_full(:, (cut+1) : (end-cut));
+wl_cut = wl((cut+1) : (end-cut));
 X_mc = X_der2 - mean(X_der2); % mean centering
 
 % PCA
@@ -227,7 +267,7 @@ npc = 2;
 figure('Name', 'Derivata 2', 'Position', [50, 500, 1000, 400]);
 subplot(1,2,1); hold on; % 2 colonne 1 riga (1° colonna)
 for c = 1:max(y)
-    plot(wl, X_der2(y==c, :), 'Color', colors(c,:));
+    plot(wl_cut, X_der2(y==c, :), 'Color', colors(c,:));
 end
 % griglia e assi
 xlabel('Numero di onda');

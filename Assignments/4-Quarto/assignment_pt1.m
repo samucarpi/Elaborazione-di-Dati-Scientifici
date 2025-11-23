@@ -34,6 +34,9 @@ gscatter(scores(:,1), scores(:,2), T_clusters);
 xlabel(['PC1 (' num2str(varexpl(1),'%.1f') '%)']);
 ylabel(['PC2 (' num2str(varexpl(2),'%.1f') '%)']);
 title(['PCA Scores - Threshold: ' num2str(cutoff)]);
+% legenda
+lgd = legend('Location', 'bestoutside'); 
+title(lgd, 'Cluster ID'); 
 grid on;
 
 %% IMAGESC CON CAMPIONI E VARIABILI ORDINATE
