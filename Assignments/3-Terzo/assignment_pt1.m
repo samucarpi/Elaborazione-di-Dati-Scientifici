@@ -237,7 +237,7 @@ title('PCA SCORES');
 
 %% DERIVATA SECONDA CON SMOOTHING
 % parametri
-window = 11;
+window = 9;
 polyOrder = 2;
 derivOrder = 2; 
 % coefficienti del filtro Savitzky-Golay

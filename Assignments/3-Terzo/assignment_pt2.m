@@ -7,8 +7,27 @@ wl = assexscale; % asse x (lunghezze d'onda)
 colors = [0 0.447 0.741; 0.850 0.325 0.098; 0.929 0.694 0.125]; % colori
 
 %% APPLICAZIONE PREPROCESSING MIGLIORE
-% applicazione "Derivata 2 con smoothing"
-X_der2 = sgolayfilt(X', 2, 15, [], 2)';  % (finestra=15 con polinomio=2)
+% parametri
+window = 9;
+polyOrder = 2;
+derivOrder = 2; 
+% coefficienti del filtro Savitzky-Golay
+[~, g] = sgolay(polyOrder, window);
+% estrazione filtro: 
+% 1) smoothing
+% 2) derivata 1
+% 3) derivata 2
+my_filter = g(:, derivOrder + 1); 
+% applicazione del filtro
+[n, m] = size(X);
+X_der2_full = zeros(n, m);
+for i = 1:n
+    X_der2_full(i,:) = conv(X(i,:), flip(my_filter), 'same');
+end
+% taglio bordi
+cut = 10; 
+X_der2 = X_der2_full(:, (cut+1) : (end-cut));
+wl_cut = wl((cut+1) : (end-cut));
 X_mc = X_der2 - mean(X_der2); % mean centering
 
 %% GRAFICO PCA E LOADINGS
@@ -31,8 +50,8 @@ grid on; axis square;
 
 % grafico Loadings (line plot con assexscale)
 subplot(1, 2, 2);
-plot(wl, loading(:,1), 'b-', 'LineWidth', 1.0); hold on; % loading PC1
-plot(wl, loading(:,2), 'r-', 'LineWidth', 1.0); % loading PC2
+plot(wl_cut, loading(:,1), 'b-', 'LineWidth', 1.0); hold on; % loading PC1
+plot(wl_cut, loading(:,2), 'r-', 'LineWidth', 1.0); % loading PC2
 yline(0);
 title('PCA LOADINGS SU ASSEXSCALE');
 xlabel('Wavenumber (cm^{-1})');
