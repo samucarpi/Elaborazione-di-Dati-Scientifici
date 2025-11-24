@@ -6,7 +6,7 @@ varNames = string(oliv_var_name);
 
 %% SAMPLES DENDROGRAM
 linkageMethod = 'ward';
-distanceMethod = 'euclidean';
+distanceMethod = 'single';
 Z = linkage(data, linkageMethod, distanceMethod);
 cutoff = 25;
 

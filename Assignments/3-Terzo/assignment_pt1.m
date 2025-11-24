@@ -198,7 +198,7 @@ my_filter = g(:, derivOrder + 1);
 [n, m] = size(X);
 X_der1_full = zeros(n, m);
 for i = 1:n
-    X_der1_full(i,:) = conv(X(i,:), my_filter, 'same');
+    X_der1_full(i,:) = conv(X(i,:), flip(my_filter), 'same');
 end
 % taglio bordi
 cut = 10; 
@@ -237,7 +237,7 @@ title('PCA SCORES');
 
 %% DERIVATA SECONDA CON SMOOTHING
 % parametri
-window = 9;
+window = 11;
 polyOrder = 2;
 derivOrder = 2; 
 % coefficienti del filtro Savitzky-Golay
@@ -251,7 +251,7 @@ my_filter = g(:, derivOrder + 1);
 [n, m] = size(X);
 X_der2_full = zeros(n, m);
 for i = 1:n
-    X_der2_full(i,:) = conv(X(i,:), my_filter, 'same');
+    X_der2_full(i,:) = conv(X(i,:), flip(my_filter), 'same');
 end
 % taglio bordi
 cut = 10; 
