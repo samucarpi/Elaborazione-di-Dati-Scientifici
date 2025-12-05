@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif; /* Set font family */
+            font-size: 18px;
+            /* font-weight: bold; */
+        }
+
+        .result-container {
+            background-color: #0d2940; /* Background color for the container */
+            padding: 0px; /* Padding for the container */
+            width: 254px; /* Limit container width */
+            border-radius: 8px; /* Rounded corners for the container */
+        }
+
+        .result-item {
+            display: flex; /* Make result-item a flex container */
+            flex-direction: row; /* Arrange items horizontally */
+            justify-content: space-evenly; /* Spread items evenly */
+            align-items: normal; /* Align items vertically */
+            margin-bottom: 0px; /* Add margin between result items */
+        }
+
+        .result-labels {
+            padding: 0px; /* Padding for labels container */
+            border-radius: 8px; /* Rounded corners for labels container */
+            text-align: right;
+        }
+
+        .result-label {
+            color: #d6edff; /* Change label color */
+            display: block; /* Make labels a block element */
+            margin-bottom: 9px; /* Add margin between labels */
+        }
+
+        .result-numerical-values {
+            height: 148px;
+            width: auto;
+            /* width: 150px; */
+            background-color: #7a99b3; /* Background color for numerical values container */
+            justify-content: space-evenly; /* Spread items evenly */
+            padding: 1px; /* Padding for numerical values container */
+            border-radius: 8px; /* Rounded corners for numerical values container */
+            align-items: normal;
+            font-weight: bold;
+            overflow: scroll;
+           
+        }
+
+        .numerical-value {
+            margin-bottom: 9px; /* Add margin between numerical values */
+            display: flex; /* Make numerical-value a flex container */
+            align-items: center; /* Align items vertically */
+            white-space: nowrap; /* Prevent line breaks */
+            
+        }
+
+        .numerical-value span {
+            margin-left: 5px; /* Add margin between numerical value parts */
+            margin-right: 5px;
+        }
+
+        .green-text {
+            color: green; /* Set color to green */
+        }
+
+        .red-text {
+            color: rgb(180, 26, 26); /* Set color to red */
+        }
+    </style>
+
+<script defer>
+    function updateData(htmlComponent, id, value) {
+        document.getElementById(id).innerHTML = value;
+    }
+
+    function updateTheme(theme){
+        switch (theme){
+            case "light":
+
+                // Change .result-container background color
+                document.querySelectorAll('.result-container').forEach(el => {
+                    el.style.backgroundColor = "#ffffff";
+                });
+
+                // Change .result-label color
+                document.querySelectorAll('.result-label').forEach(el => {
+                    el.style.color = "#000000";
+                });
+
+                // Change .result-numerical-values background color
+                document.querySelectorAll('.result-numerical-values').forEach(el => {
+                    el.style.backgroundColor = "#e0e0e0";
+                });
+
+                // Change .green-text color
+                document.querySelectorAll('.green-text').forEach(el => {
+                    el.style.color = "green";
+                });
+
+                // Change .red-text color
+                document.querySelectorAll('.red-text').forEach(el => {
+                    el.style.color = "rgb(180, 26, 26)";
+               });
+
+                break;
+
+            case "dark":
+
+                // Change .result-container background color
+                document.querySelectorAll('.result-container').forEach(el => {
+                    el.style.backgroundColor = "#0d2940";
+                });
+
+                // Change .result-label color
+                document.querySelectorAll('.result-label').forEach(el => {
+                    el.style.color = "#d6edff";
+                });
+
+                // Change .result-numerical-values background color
+                document.querySelectorAll('.result-numerical-values').forEach(el => {
+                    el.style.backgroundColor = "#7a99b3";
+                });
+
+                // Change .green-text color
+                document.querySelectorAll('.green-text').forEach(el => {
+                    el.style.color = "green";
+                });
+
+                // Change .red-text color
+                document.querySelectorAll('.red-text').forEach(el => {
+                    el.style.color = "rgb(180, 26, 26)";
+                });
+
+                break;
+        }
+    }
+
+    function setup(htmlComponent) {
+        htmlComponent.addEventListener("DataChanged", function(event) {
+            const theme = htmlComponent.Data.Theme;
+            updateTheme(theme)
+            const data = htmlComponent.Data.Data;
+            updateData(htmlComponent, "modelNumber", Math.round(data[0]));
+            updateData(htmlComponent, "outlierLow", Math.round(data[1]));
+            updateData(htmlComponent, "outlierHigh", Math.round(data[2]));
+            updateData(htmlComponent, "rmsecLow", data[3].toFixed(2));
+            updateData(htmlComponent, "rmsecHigh", data[4].toFixed(2));
+            updateData(htmlComponent, "rmsecvLow", data[5].toFixed(2));
+            updateData(htmlComponent, "rmsecvHigh", data[6].toFixed(2));
+            updateData(htmlComponent, "rmsepLow", data[7].toFixed(2));
+            updateData(htmlComponent, "rmsepHigh", data[8].toFixed(2));
+        });
+    }
+</script>
+
+
+</head>
+<body>
+    <div class="result-container">
+        <div class="result-item">
+            <div class="result-labels">
+                <span class="result-label">Models:</span>
+                <span class="result-label">Outliers:</span>
+                <span class="result-label">RMSEC:</span>
+                <span class="result-label">RMSECV:</span>
+                <span class="result-label">RMSEP:</span>
+            </div>
+
+            <div class="result-numerical-values">
+                <div class="numerical-value">
+                    <span id="modelNumber">0</span>
+                </div>
+                <div class="numerical-value">
+                    <span id="outlierLow">0</span>
+                    /
+                    <span id="outlierHigh">0</span>
+                </div>
+                <div class="numerical-value">
+                    <span class="green-text" id="rmsecLow">0.00</span>
+                    -
+                    <span class="red-text" id="rmsecHigh">0.00</span>
+                </div>
+                <div class="numerical-value">
+                    <span class="green-text" id="rmsecvLow">0.00</span>
+                    -
+                    <span class="red-text" id="rmsecvHigh">0.00</span>
+                </div>
+                <div class="numerical-value">
+                    <span class="green-text" id="rmsepLow">0.00</span>
+                    -
+                    <span class="red-text" id="rmsepHigh">0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

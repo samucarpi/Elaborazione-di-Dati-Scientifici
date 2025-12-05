@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Release Notes Version 7 0 2 - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Release_Notes_Version_7_0_2 rootpage-Release_Notes_Version_7_0_2 skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_0_2"><span class="mw-page-title-main">Release Notes Version 7 0 2</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><h2><span class="mw-headline" id="Changes_and_Bug_Fixes_in_Version_7.0.2">Changes and Bug Fixes in Version 7.0.2</span></h2>
+<p>Version 7.0.2 of PLS_Toolbox and Solo was released in November, 2012 as a minor update to <a href="release_notes_version_7_0.html" title="Release Notes Version 7 0">Version 7.0</a>.
+</p><p>This release was done in conjunction with <a href="release_notes_mia_toolbox_version_2_8_2.html" title="Release Notes MIA Toolbox Version 2 8 2">MIA_Toolbox / Solo+MIA version 2.8.2</a>
+</p><p>(back to <a href="release_notes_pls_toolbox_and_solo.html" title="Release Notes PLS Toolbox and Solo">Release Notes PLS Toolbox and Solo</a>)
+</p>
+<h3><span class="mw-headline" id="Major_Enhancements_and_High-level_Bug_Fixes">Major Enhancements and High-level Bug Fixes</span></h3>
+<table>
+
+
+<tbody><tr valign="top">
+<td><b><a href="analysis.html" title="Analysis">analysis</a></b>
+</td>
+<td>
+<ul><li>Allow split cal/val even when no cal is present</li>
+<li>Fix for error when loading old model with custom cross-validation (loaded cvi which had only the INCLUDED samples liseted. New detail.cvi field contains both included and excluded samples and is what crossval was expecting to get)</li>
+<li>Fix for missing "block" information when drilling down from summary contributions to full contributions in MPCA model</li>
+<li>Allow relative T and Q contributions in MPCA models</li>
+<li>Fix for multiway bug in calculating Q contributions</li>
+<li>Give warning when user attempts to change conf. limit on batch maturity model type that this has no effect on shown conf. limits.</li>
+<li>Show used conf. limit in plot controls for Batch Maturity</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="bspcgui.html" title="Bspcgui">batch processor</a></b>
+<p>and <b><a href="batchfold.html" title="Batchfold">batchfold</a></b>
+</p>
+</td>
+<td>
+<ul><li>If steps are disabled, ignore extraction by steps!</li>
+<li>Remove forced removal of steps if Batch Maturity.</li>
+<li>Add name to dataset.</li>
+<li>Add per batch linear axis scale.</li>
+<li>Updates for alignment on BM and other.</li>
+<li>Fix model saving. Fix cow options. Add 'none' option in alignment. Add better loading of model and settings. Fix tab enable on load of model.</li>
+<li>Fix for allowing no steps. Become all one step.</li>
+<li>Add new plotting style, apply to new data, and remove class 0 from batch list.</li>
+<li>Always push data into the same Analysis window (if it is still open), otherwise use a new window</li>
+<li>If model or data is loaded, ask how to load data when pushed (calibration / validation)</li>
+<li>Add default alignment plus default method for BM and other.</li>
+<li>Add "stacked" plotting on batch plot.</li>
+<li>Update to drag patch behavior in linear view.</li>
+<li>Fix for batch list selections, make default batch plot style = stack.</li>
+<li>Remove unneeded batch selection now that Class 0 has been removed.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="batchmaturity.html" title="Batchmaturity">batchmaturity</a></b>
+</td>
+<td>
+<ul><li>Added asymmetric standard deviation as method to calculate confidence limits</li>
+<li>Added confidence limit algorithm (clalgorithm) option with default to asymmetric least squares (astd)</li>
+<li>Adjusted default confidence limit to 95% to match default in other level 2 functions</li>
+<li>Remove weighting applied to deviations when calculating the score limits using "percentile" method</li>
+<li>Don't calculate score limits when building raw model as this would be done unnecessarily for 10 PCs. This could be time consuming.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="preprocess.html" title="Preprocess">preprocess</a></b>
+</td>
+<td>
+<ul><li>Add "Favorites" button to</li></ul>
+<dl><dd>(a) move certain methods to the top of the preprocessing list OR</dd>
+<dd>(b) to create new aggregate methods from the current selection of multiple methods</dd></dl>
+<ul><li>Add "Hide/Unhide" button to hide items you don't use often</li>
+<li>Add support for font size changing (via <a href="setplspref.html" title="Setplspref">setplspref</a>)</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="plotgui.html" title="Plotgui">plot controls</a></b>
+</td>
+<td>
+<ul><li>Add separators above Bar and Mesh to make menu easier to read</li>
+<li>Add "enhanced surface" mode</li>
+<li>Better handling duplication of data as needed for 3D plots (to avoid errors when plotting)</li>
+<li>Change settings on viewinterpolated so it will be available from the settings control button on the toolbar</li>
+<li>Fix for plotting scatter plots with n-way data in 3rd dimension (xdata is row vector instead of column vector)</li>
+<li>Don't reset 'PlotBoxAspectRatioMode','CameraViewAngleMode', or 'DataAspectRatioMode' in 2008b or later (seems to cause strange plot box resizing problems)</li>
+<li>Better position labels when rotated text is being used</li>
+<li>Add ability to use logical in search</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>adjust axis limits interface</b>
+</td>
+<td>
+<ul><li>Fix use with multiple axes and multiple figures. Fix bugs with initializing settings. Better handle restoring color.</li>
+<li>Fix for color of background when target figure has BLACK (or dark gray) background (can't see text!!)</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="trendtool.html" title="Trendtool">trendtool</a></b>
+</td>
+<td>
+<ul><li>Consider a "viewSpec" request for the a spectrum beyond the highest numbered spectrum as a request for "the last" spectrum (e.g. "inf" will give the max)</li>
+<li>Add 'interpolation' as new property that trendtool can set on the trend view</li>
+<li>Add ability to access new interpolation property through evrigui as property: obj.setInterpolation(n)</li>
+<li>Add plottype surface and toolbar button and evrigui connection to modify it (setPlottype)</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel Objects</a></b>
+</td>
+<td>
+<ul><li>Rearrange logic when updating from old model version (generalize copying of fields from old model into new one</li>
+<li>Add conrearrange as private method to re-arrange contributions into "used", "passed", or "full" forms (like with Solo_Predictor)</li>
+<li>Add "contributions" and "matchvarsmap" (hidden) properties</li>
+<li>Fix logic which assigns calibrate.options.plots and calibrate.options.display settings (also set in top-level)</li>
+<li>Add "matchvars" property to models as option to DISABLE call to matchvars during apply, xhat and tcon/qcon calculations.</li>
+<li>If user turns off model object, don't expect evrimodelversion field (use modelversion only) and automatically extract model contents. Now users can automatically down-grade models using simply:</li></ul>
+<pre>setplspref('evrimodel','noobject',1)
+</pre>
+<dl><dd>then loading the new model</dd></dl>
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Low-Level_Bug_Fixes_and_Enhancements">Low-Level Bug Fixes and Enhancements</span></h3>
+<table>
+
+
+<tbody><tr valign="top">
+<td><b>add3dlight</b>
+</td>
+<td>
+<ul><li>Add "add3dlight" as new GUI utility to add 3D lighting effects for enhanced surface plots</li></ul>
+<p><br />
+</p>
+</td></tr>
+<tr valign="top">
+<td><b><a href="boxplot.html" title="Boxplot">boxplot</a></b>
+</td>
+<td>
+<ul><li>No "Extreme" outliers plotted if there were no "Standard" outliers. This was the case for either upper or lower outliers, so upper (lower) extremes only plotted if there were upper (lower) standard outliers.</li>
+<li>Fix undefined “lbl” when cls is numeric and has as many elements as x.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="browse.html" title="Browse">browse</a></b>
+</td>
+<td>
+<ul><li>Add message saying browse is initializing</li></ul>
+<p><br />
+</p>
+</td></tr>
+<tr valign="top">
+<td><b><a href="b3spline.html" title="B3spline">b3spline</a></b>
+</td>
+<td>
+<ul><li>Fix error in display option handling</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="corrspecgui.html" title="Corrspecgui">corrspecgui</a></b>
+</td>
+<td>
+<ul><li>Fix typo in plot type.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="experimentreadr.html" title="Experimentreadr">experimentreadr</a></b>
+</td>
+<td>
+<ul><li>Switch cal/val class numbers (so calibration is 0 and shows as black circles, and 1 as red triangles as with scores plots)</li>
+<li>Handle case when all samples are converted to validation</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="evrigui_objects.html" title="EVRIGUI Objects">EVRIGUI Objects</a></b>
+</td>
+<td>
+<ul><li>Add fieldnames to EVRIGUI object to allow tab-completion of valid methods and properties</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>evridb</b>
+</td>
+<td>
+<ul><li>Add display of error report for connection test.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="genalgplot.html" title="Genalgplot">genalgplot</a></b>
+</td>
+<td>
+<ul><li>add drawnow to make sure some plots get updated when we switch from selection plot to the information plot</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="modelcache.html" title="Modelcache">modelcache</a></b>
+</td>
+<td>
+<ul><li>Add new deletedates mode to modelcache</li></ul>
+<p><br />
+</p>
+</td></tr>
+<tr valign="top">
+<td><b>modelviewertool</b>
+</td>
+<td>
+<ul><li>Fixed a bug in Tucker where the core was plotted as a loading in modelviewer when fitting e.g. Tucker(X,[3 3 1])</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="mscorr.html" title="Mscorr">mscorr</a></b>
+</td>
+<td>
+<ul><li>Fix typo in error message</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="parafac.html" title="Parafac">parafac</a></b>
+</td>
+<td>
+<ul><li>Fix for serious but rare bug in PARAFAC: For higher than three-way, the constraint in mode two was also imposed in mode three. So the bug is only seen when those constraints are different. Most of the time constraints would just be nonneg all over the place,so bug is unlikely to be seen.</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="peakfind.html" title="Peakfind">peakfind</a></b>
+</td>
+<td>
+<ul><li>Don't do search for peaks if fewer than window*2 variables!</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>peakfindgui</b>
+</td>
+<td>
+<ul><li>Allow for more or less adjustability in sensitivity depending on the # of variables</li>
+<li>Encode logic to handle non-integer values for found peak position (in case center of mass calculation is used and non-integer peak positions values get returned)</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="piconnectgui.html" title="Piconnectgui">piconnectgui</a></b>
+</td>
+<td>
+<ul><li>better handling of errors thrown during initialization</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="plsda.html" title="Plsda">plsda</a></b>
+</td>
+<td>
+<ul><li>Treat "0" as unknown class only if input y has more than 2 unique values</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="splitcaltest.html" title="Splitcaltest">splitcaltest</a></b>
+</td>
+<td>
+<ul><li>Fix bug where splitcaltest does nothing (all samples remain as calibration) if input data is "short and wide", as with nir_data for example with SVM, or when ncomp &gt;=10 for PCA, LWR, etc.</li>
+<li>Remove requirement that the input data were acquired in a random order</li>
+<li>Initial demo added</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="summary.html" title="Summary">summary</a></b>
+</td>
+<td>
+<ul><li>Fix for error when all of a given variable are excluded/missing</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b><a href="tconcalc.html" title="Tconcalc">tconcalc</a></b>
+</td>
+<td>
+<ul><li>Add support for tcon calculation from PCR and PLS models even when tconcalc is passed ONLY the prediction structure (as long as the necessary eigenvalues information is in the model details)</li></ul>
+</td></tr>
+</tbody></table>
+<!-- 
+NewPP limit report
+Cached time: 20240930183417
+Cache expiry: 86400
+Reduced expiry: false
+Complications: []
+CPU time usage: 0.015 seconds
+Real time usage: 0.018 seconds
+Preprocessor visited node count: 20/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1204-0!canonical and timestamp 20240930183417 and revision id 8574.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_0_2&amp;oldid=8574">https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_0_2&amp;oldid=8574</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 26 November 2012, at 23:07.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

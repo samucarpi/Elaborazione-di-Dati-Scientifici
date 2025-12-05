@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>DataSet XML Format - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-DataSet_XML_Format rootpage-DataSet_XML_Format skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=DataSet_XML_Format"><span class="mw-page-title-main">DataSet XML Format</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Basic_DSO_XML"><span class="tocnumber">1</span> <span class="toctext">Basic DSO XML</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#DSO_with_Labels"><span class="tocnumber">2</span> <span class="toctext">DSO with Labels</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#DSO_with_Axis_Scale"><span class="tocnumber">3</span> <span class="toctext">DSO with Axis Scale</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Other_DSO_Properties"><span class="tocnumber">4</span> <span class="toctext">Other DSO Properties</span></a></li>
+</ul>
+</div>
+
+<p>This page describes the XML format to construct a DataSet object. The DataSet object is a container for scientific data which permits the storage of numerical values (known as the data) along with the typical associated contextual information.
+</p><p>For the purposes of this appendix, it is important to note that the DataSet object allows the inclusion of one or more sets of textual labels to be associated with each column and/or row of a data matrix. In addition, numerical "axis scale" values can also be associated with each column or row.
+</p><p>It should be noted that the object has a significant amount of flexibility beyond what this document will discuss. For additional information on the fields and construct of the DSO, the user is directed to the <a href="dataset_object.html" title="DataSet Object"> object's documentation</a>.
+</p><p>By convention in Solo and PLS_Toolbox, each row of a data table is considered a "sample" (or "observation") and the columns of a data table are the variables measured on each sample. Thus, to create a typical DataSet object (DSO) which can be used to make a prediction, a DSO will be created around a single row of values. An XML construct of a DSO will, therefore, always contain at least a tag to describe the data.
+</p><p>Numerical values for an XML construct of a DSO are given in comma-separated and semicolon-separated format. Commas indicate values on the same row of a matrix (item,item,item); Semicolons indicate row-wise breaks (row; row; row). White space is always ignored.
+</p>
+<h2><span class="mw-headline" id="Basic_DSO_XML">Basic DSO XML</span></h2>
+<p>The basic XML DSO construct consists of the outer object tag with a "class" attribute indicating that the object is a DSO. There are actually two formats for creating a DataSet objects. One uses class="dataset" and is a complete and complicated description of a dataset object. The other uses class="dso" and is much easier to create. We recommend class="dso" for most applications and will not discuss class="dataset" in this document.
+</p><p>The outer tag must contain a <data> tag which will always have the class="numeric" attribute (because data will always be numeric).
+</data></p>
+<pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt; 1,2,3,4,5 &lt;/data&gt;
+&lt;/obj&gt;
+</pre>
+<p>This XML construct would create a simple DSO containing the values 1 to 5 in a row vector. If the DSO being created should contain multiple rows, a semicolon should be used after each row of numbers. Note that all rows <b>must</b> contain the same number of elements. The following would create a data matrix with 3 rows and 5 columns:
+</p>
+<pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt; 11,12,13,14,15; 21,22,23,24,25; 31,32,33,34,35 &lt;/data&gt;
+&lt;/obj&gt;
+</pre>
+<h2><span class="mw-headline" id="DSO_with_Labels">DSO with Labels</span></h2>
+<p>In most cases, it is desirable to associate some contextual information regarding the variables which are being passed to the predictor. This is often expressed as either textual labels, indicating the measured parameter (often giving the name of purpose of the device: "thermocouple A") or numeric axis scale values (often used in spectroscopy, electrochemistry, time-based measurements, etc.) These contextual data will be used by Solo_Predictor to help align new data to a model, verify that the new data has all the expected variables, and replace those which are missing.
+</p><p>To include labels in a DSO, an additional &lt;label&gt; tag must be added to the XML description. The label tag can contain one or more label "sets" each enclosed in a &lt;set&gt; tag. Each set contains three elements: mode, name, and content. The mode tag indicates the data mode (1=rows/samples, 2 = columns/variables) for which the label set is being defined. The name tag is optional but, if present, indicates a name to associate with this label set. The content tag defines the actual labels for <i>each element</i> on the given mode. Each label must be enclosed in its own separate &lt;sr&gt; tag and there must be an appropriate number of tags for the number of columns or rows (whichever mode the labels are being associated with). For example, the following creates the labels "A" through "E" for the five columns of our example data:
+</p>
+<pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt; 1,2,3,4,5 &lt;/data&gt;
+  &lt;label&gt;
+    &lt;set&gt;
+      &lt;mode&gt;2&lt;/mode&gt;
+      &lt;name class="string"&gt;example variable labels&lt;/name&gt;
+      &lt;content class="string"&gt;
+        &lt;sr&gt;A&lt;/sr&gt;
+        &lt;sr&gt;B&lt;/sr&gt;
+        &lt;sr&gt;C&lt;/sr&gt;
+        &lt;sr&gt;D&lt;/sr&gt;
+        &lt;sr&gt;E&lt;/sr&gt;
+      &lt;/content&gt;
+    &lt;/set&gt;
+  &lt;/label&gt;
+&lt;/obj&gt;
+</pre>
+<p>A label can be added for the sample (first mode) by including an additional &lt;set&gt; tag inside the &lt;label&gt; tag (before or after the &lt;set&gt; tags already included above):
+</p>
+<pre>  &lt;set&gt;
+    &lt;mode&gt;1&lt;/mode&gt;
+    &lt;name&gt;example sample label&lt;/name&gt;
+    &lt;content class="string"&gt;
+      &lt;sr&gt;This is my one sample&lt;/sr&gt;
+    &lt;/content&gt;
+  &lt;/set&gt;
+</pre>
+<p>Although the &lt;content&gt; tag uses the &lt;sr&gt; tags to enclose the string, this is not necessary in this case. Any time a single string value is being created, the &lt;sr&gt; tags can be omitted as can the class attribute. Thus the content tag could have read:
+</p>
+<pre>   &lt;content&gt;This is my one sample&lt;/content&gt;
+</pre>
+<h2><span class="mw-headline" id="DSO_with_Axis_Scale">DSO with Axis Scale</span></h2>
+<p>Numeric axis scale values can be added using an axisscale tag (note the tag name does not contain a space) with similar content to the label tag. The only difference is that the axisscale property expects a numeric value so the &lt;content&gt; tag is defined with the class="numeric" attribute and the values are supplied as a comma-separated values list. The following defines an axisscale for the variables running from 500 to 508 in steps of 2:
+</p>
+<pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt; 1,2,3,4,5 &lt;/data&gt;
+  &lt;axisscale&gt;
+    &lt;set&gt;
+      &lt;mode&gt;2&lt;/mode&gt;
+      &lt;name&gt;example axis scale&lt;/name&gt;
+      &lt;content class="numeric"&gt; 
+         500,502,504,506,508
+      &lt;/content&gt;
+    &lt;/set&gt;
+  &lt;/axisscale&gt;
+&lt;/obj&gt;
+</pre>
+<p>As with labels, note that the number of items defined in the content must match the length (number of elements) of the given mode (columns in this example).
+</p>
+<h2><span class="mw-headline" id="Other_DSO_Properties">Other DSO Properties</span></h2>
+<p>Most of the remaining DSO properties (fields) can be set using similar calls. For example, classes and titles (see the DataSet object documentation for more information on these fields) can be added to the DSO using tags similar to label and axisscale. Titles must have content of class="string" and must contain a single string. Classes can have numeric or string content and must have sufficient elements to match the size of the given mode.
+</p><p>In addition, the include field uses the &lt;set&gt; notation described above and the author, name, description, and userdata fields all use the single-tag notation (as with the data tag where the field name is given with the class attribute and the content within the tag). For example, see below:
+</p>
+<pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt; 1,2,3,4,5 &lt;/data&gt;
+  &lt;name class="string"&gt;Name for Dataset&lt;/name&gt;
+  &lt;author class="string"&gt;Dataset\'s Author&lt;/author&gt;
+  &lt;description class="string"&gt;
+    &lt;sr&gt;Include a multi-line string here&lt;/sr&gt;
+    &lt;sr&gt;Use as many sr tags as you have lines&lt;/sr&gt;
+  &lt;/description&gt;
+&lt;/obj&gt;
+</pre>
+<p>Note the use of the backslash in front of the single quote included in the Author tag. This is only necessary when passing XML through the Solo_Predictor interface. When XML is saved to a file, backslashes are not needed.
+</p>
+ <pre>&lt;obj class="dso"&gt;
+  &lt;data class="numeric"&gt;1,2,3,4,5&lt;/data&gt;
+  &lt;name&gt;Name for Dataset&lt;/name&gt;
+  &lt;author&gt;Dataset\'s Author&lt;/author&gt;
+  &lt;description class="string"&gt;
+    &lt;sr&gt;Include a multi-line string here&lt;/sr&gt;
+    &lt;sr&gt;Use as many sr tags as you have lines&lt;/sr&gt;
+  &lt;/description&gt;
+  &lt;axisscale&gt;
+    &lt;set&gt;
+      &lt;mode&gt;2&lt;/mode&gt;
+      &lt;name&gt;example axis scale&lt;/name&gt;
+      &lt;content class="numeric"&gt; 
+         500,502,504,506,508&lt;/content&gt;
+    &lt;/set&gt;
+  &lt;/axisscale&gt;
+  &lt;label&gt;
+    &lt;set&gt;
+      &lt;mode&gt;2&lt;/mode&gt;
+      &lt;name&gt;example variable labels&lt;/name&gt;
+      &lt;content class="string"&gt;
+        &lt;sr&gt;A&lt;/sr&gt;
+        &lt;sr&gt;B&lt;/sr&gt;
+        &lt;sr&gt;C&lt;/sr&gt; 
+        &lt;sr&gt;D&lt;/sr&gt; 
+        &lt;sr&gt;E&lt;/sr&gt; 
+      &lt;/content&gt;
+    &lt;/set&gt;
+    &lt;set&gt;
+      &lt;mode&gt;1&lt;/mode&gt;
+      &lt;name&gt;example sample label&lt;/name&gt;
+      &lt;content&gt;This is my one sample&lt;/content&gt;
+    &lt;/set&gt;
+  &lt;/label&gt;
+&lt;/obj&gt;
+</pre>
+<p>Please contact Eigenvector Research for more information on DSO XML format, if needed.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205533
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.006 seconds
+Real time usage: 0.009 seconds
+Preprocessor visited node count: 44/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 2886/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:604-0!canonical and timestamp 20240930205533 and revision id 5027.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=DataSet_XML_Format&amp;oldid=5027">https://www.wiki.eigenvector.com/index.php?title=DataSet_XML_Format&amp;oldid=5027</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 25 June 2010, at 09:02.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

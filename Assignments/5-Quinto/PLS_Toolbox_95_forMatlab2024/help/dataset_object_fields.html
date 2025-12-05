@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>DataSet Object Fields - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-DataSet_Object_Fields rootpage-DataSet_Object_Fields skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=DataSet_Object_Fields"><span class="mw-page-title-main">DataSet Object Fields</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>The following is a list of the <a href="dataset_object.html" title="DataSet Object">DataSet Object</a> properties (fields). The values in all fields can be assigned or retrieved using direct assignments (See <a href="dataset_subsasgn.html" title="Dataset subsasgn">dataset_subsasgn</a> and  <a href="dataset_subsref.html" title="Dataset subsref">dataset_subsref</a>) or through the <tt> <a href="dataset_set.html" title="Dataset set">dataset_set</a></tt> and <tt><a href="dataset_get.html" title="Dataset get">dataset_get</a></tt> <a href="dataset_object_methods.html" title="DataSet Object Methods">DataSet Object Methods</a> although direct assignments are the preferred of those two methods. See <a href="dataset_object_examples.html" title="DataSet Object Examples">DataSet Object Examples</a> for a walk-through example of how to build a DataSet object.
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#.name"><span class="tocnumber">1</span> <span class="toctext">.name</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#.type"><span class="tocnumber">2</span> <span class="toctext">.type</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#.author"><span class="tocnumber">3</span> <span class="toctext">.author</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#.date"><span class="tocnumber">4</span> <span class="toctext">.date</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#.moddate"><span class="tocnumber">5</span> <span class="toctext">.moddate</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#.data"><span class="tocnumber">6</span> <span class="toctext">.data</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#.size"><span class="tocnumber">7</span> <span class="toctext">.size</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#.sizestr"><span class="tocnumber">8</span> <span class="toctext">.sizestr</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#.imagemode"><span class="tocnumber">9</span> <span class="toctext">.imagemode</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#.imagesize"><span class="tocnumber">10</span> <span class="toctext">.imagesize</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#.imagesizestr"><span class="tocnumber">11</span> <span class="toctext">.imagesizestr</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#.foldedsize"><span class="tocnumber">12</span> <span class="toctext">.foldedsize</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#.foldedsizestr"><span class="tocnumber">13</span> <span class="toctext">.foldedsizestr</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#.imagedata"><span class="tocnumber">14</span> <span class="toctext">.imagedata</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="#.imagedataf"><span class="tocnumber">15</span> <span class="toctext">.imagedataf</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="#.label"><span class="tocnumber">16</span> <span class="toctext">.label</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="#.labelname"><span class="tocnumber">17</span> <span class="toctext">.labelname</span></a></li>
+<li class="toclevel-1 tocsection-18"><a href="#.axisscale"><span class="tocnumber">18</span> <span class="toctext">.axisscale</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#.axisscalename"><span class="tocnumber">19</span> <span class="toctext">.axisscalename</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="#.axistype"><span class="tocnumber">20</span> <span class="toctext">.axistype</span></a></li>
+<li class="toclevel-1 tocsection-21"><a href="#.imageaxisscale"><span class="tocnumber">21</span> <span class="toctext">.imageaxisscale</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="#.imageaxisscalename"><span class="tocnumber">22</span> <span class="toctext">.imageaxisscalename</span></a></li>
+<li class="toclevel-1 tocsection-23"><a href="#.imageaxistype"><span class="tocnumber">23</span> <span class="toctext">.imageaxistype</span></a></li>
+<li class="toclevel-1 tocsection-24"><a href="#.title"><span class="tocnumber">24</span> <span class="toctext">.title</span></a></li>
+<li class="toclevel-1 tocsection-25"><a href="#.titlename"><span class="tocnumber">25</span> <span class="toctext">.titlename</span></a></li>
+<li class="toclevel-1 tocsection-26"><a href="#.class"><span class="tocnumber">26</span> <span class="toctext">.class</span></a></li>
+<li class="toclevel-1 tocsection-27"><a href="#.classid"><span class="tocnumber">27</span> <span class="toctext">.classid</span></a></li>
+<li class="toclevel-1 tocsection-28"><a href="#.classlookup"><span class="tocnumber">28</span> <span class="toctext">.classlookup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-29"><a href="#.classlookup.assign"><span class="tocnumber">28.1</span> <span class="toctext">.classlookup.assign</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-30"><a href="#.classname"><span class="tocnumber">29</span> <span class="toctext">.classname</span></a></li>
+<li class="toclevel-1 tocsection-31"><a href="#.include"><span class="tocnumber">30</span> <span class="toctext">.include</span></a></li>
+<li class="toclevel-1 tocsection-32"><a href="#.uniqueid"><span class="tocnumber">31</span> <span class="toctext">.uniqueid</span></a></li>
+<li class="toclevel-1 tocsection-33"><a href="#.description"><span class="tocnumber">32</span> <span class="toctext">.description</span></a></li>
+<li class="toclevel-1 tocsection-34"><a href="#.history"><span class="tocnumber">33</span> <span class="toctext">.history</span></a></li>
+<li class="toclevel-1 tocsection-35"><a href="#.userdata"><span class="tocnumber">34</span> <span class="toctext">.userdata</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id=".name"><tt>.name</tt></span></h2>
+<p><b>char array (<i>row vector</i>)</b>
+</p><p>This is usually the original variable name but can be set by the user. For example:
+</p>
+<pre>h = dataset(randn(5));
+h.name = 'mydata';
+h.name
+ans =
+   mydata
+</pre>
+<p>where <tt>ans</tt> is a 1x6 character array.
+</p>
+<h2><span class="mw-headline" id=".type"><tt>.type</tt></span></h2>
+<p><b>string with one of the following values</b>
+</p><p>'<tt>data</tt>', '<tt>image</tt>', and '<tt>batch</tt>'. See field '.<tt>data</tt>' for more information on these data types.
+</p><p>When <tt>.type = 'image'</tt>, three additional fields are available in the DataSet: <tt>.imagemode, .imagesize, .imagedata,</tt> and<tt> .imageinclude</tt>. Each of these fields is described below.
+</p>
+<h2><span class="mw-headline" id=".author"><tt>.author</tt></span></h2>
+<p><b>char array (<i>row vector</i>)</b>
+</p><p>Used to assign authorship to a DataSet.
+</p>
+<pre>h.author = 'Joan Smith / Big Name Pharma';
+</pre>
+<h2><span class="mw-headline" id=".date"><tt>.date</tt></span></h2>
+<p><b>double array (1x6)</b>
+</p><p>Six-element date/time stamp [year, month, day, hour, minute, second] indicating when the DataSet was created.
+</p>
+<h2><span class="mw-headline" id=".moddate"><tt>.moddate</tt></span></h2>
+<p><b>double array (1x6)</b>
+</p><p>Six-element date/time stamp indicating when the DataSet was last modified.
+</p>
+<h2><span class="mw-headline" id=".data"><tt>.data</tt></span></h2>
+<p>Field holding the numerical data of the DataSet. Can take one of two forms:
+</p><p><b>1) Fixed-size array</b> (<i>i.e. </i>the data matrix is <i>N1xN2x…xNM</i>) of class: double, single, logical, [u]int8, [u]int16, or [u]int32.
+</p><p>When the data are contained in a standard fixed-size array (field <tt>.type</tt> = '<tt>data</tt>' or '<tt>image</tt>') then <i>M </i>is the number of modes, indices are <i>nm = 1, 2, …, Nm</i>, and <i>m = 1, 2, …, M</i>. This notation follows, but is slightly more general than, the notation proposed by Kiers(2000). For example,                                                        where <i>M=2 </i>is <i>N1xN2</i>.
+</p><p>With multi-block analyses, the first mode (<i>m=1</i>) of the .<tt>data</tt> array corresponds to the common dimension between blocks (<i>e.g.</i> samples). Any function that changes this convention requires an optional control for sample/object mode.
+</p><p>For example, the following forms a three-slab multiway DataSet:
+</p>
+<pre>mwa(:,:,1) = randn(5);
+mwa(:,:,2) = magic(5);
+mwa(:,:,3) = sin([1:5]')\*cos(1:5);
+mydatb = dataset(mwa);
+size(mydatb.data,3)
+ans =
+  3
+</pre>
+<p>For more information on type 'image' DataSet objects, see the <tt>.imagemode</tt> field below.
+</p><p>Indexing into the <tt>.data</tt> field can be done several ways.
+</p>
+<ol><li>Using <tt>.data</tt> will return entire matrix of data.</li>
+<li>The data can be index into with standard notation:<br /><pre>column_1 = mydatb.data(:,1);%Return first column of data.</pre></li>
+<li>Using named labels or classes. If the DataSet contains labels and or classids, these can be indexed into:<br /><pre>load arch; fe_column = arch.Fe.data;</pre></li>
+<li>Included data can be accessed with an additional <tt>.include</tt> suffix:<br /><pre>include_data = arch.data.include;</pre> Note: Data cannot be assigned using this method. Data cannot be indexed into via this field.</li></ol>
+<p><b>2) cell array</b> (Length <i>I </i>with <i>i = 1, 2, …, I</i>. Each cell contains a double array with <i>m = 2, 3, …, M</i>. The size of mode 1 (<i>N1,i</i>) for each array can vary from cell to cell. All other modes must be of equal size from cell to cell.)
+</p><p>This data construct allows for matrices that are all the same size except for in the first mode which can be of variable length. This data can not be stored in a multiway array and instead are stored in a cell array (field <tt>.type = 'batch'</tt>). This results in differences between double array data that are reflected in <tt>SET</tt>, <tt>GET</tt>, and the field <tt>.axisscale</tt>.
+</p><p>A standard DataSet object (type='data') can be created from a type='batch' DataSet object by using the standard cell-array indexing on the main DataSet object. For example, the first batch of a multi-batch DataSet object called <tt>allbatches</tt> can be extracted using the command:
+</p>
+<pre> batch_1 = allbatches{1}
+</pre>
+<p>The <tt>.data</tt> field and all other fields will be reduced down to include only the information related to the batch specified.
+</p>
+<h2><span class="mw-headline" id=".size"><tt>.size</tt></span></h2>
+<p><b>double vector {<i>1xndims</i>}</b>
+</p><p>Returns vector of each dim size.
+</p><p><br />
+</p>
+<pre>&gt;&gt; wine.size
+ans =
+    10     5</pre>
+<p><br />
+</p>
+<h2><span class="mw-headline" id=".sizestr"><tt>.sizestr</tt></span></h2>
+<p><b>char array (<i>row vector</i>)</b>
+</p><p>Returns string of size vector.
+</p>
+<pre>&gt;&gt; wine.sizestr
+ans =
+10x5</pre>
+<h2><span class="mw-headline" id=".imagemode"><tt>.imagemode </tt></span></h2>
+<p><b>double scalar {<i>1x1</i>}</b>
+</p><p>Mode which image data is unfolded to. For example, a typical RGB image (.jpg) would, by default, be unfolded into .imagemode=1 by <a href="buildimage.html" title="Buildimage">buildimage</a>.
+</p>
+<pre>&gt;&gt; dat = imread('EchoRidgeClouds.jpeg','jpeg');
+size(dat)
+ans =
+   768   512     3
+&gt;&gt; imgdso = buildimage(dat, [1 2], 1);
+&gt;&gt; imgdso.imagemode
+ans = 
+     1</pre>
+<h2><span class="mw-headline" id=".imagesize"><tt>.imagesize </tt></span></h2>
+<p><b>double vector {<i>1xMimg</i>}</b>
+</p><p>Size of image modes. The "spatial" size of the image before it was unfolded. Using the example from above, the image size would be:
+</p>
+<pre>&gt;&gt; imgdso.imagesize
+ans =
+   768   512</pre>
+<h2><span class="mw-headline" id=".imagesizestr"><tt>.imagesizestr </tt></span></h2>
+<p><b>char array (<i>row vector</i>)</b>
+</p><p>Returns string of image size vector. From the example above:
+</p>
+<pre>&gt;&gt; imgdso.imagesizestr
+ans =
+768x512</pre>
+<h2><span class="mw-headline" id=".foldedsize"><tt>.foldedsize </tt></span></h2>
+<p><b>double vector {<i>1xMimg</i>}</b>
+</p><p>Size of folded image, note that this size respects the .imagemode value so if an image was unfolded into a mode other than '1' the value would be reflected in this field. In this example the EchoRidgeClouds image is unfolded into mode=2 of the dataset so the folded size has the "slabs" in mode 1:
+</p>
+<pre>&gt;&gt; imgdso = buildimage(dat, [1 2], 2);
+&gt;&gt; imgdso.foldedsize
+ans =
+     3   768   512</pre>
+<h2><span class="mw-headline" id=".foldedsizestr"><tt>.foldedsizestr </tt></span></h2>
+<p><b>char array (<i>row vector</i>)</b>
+</p><p>Returns string of folded image size (from above).
+</p>
+<h2><span class="mw-headline" id=".imagedata"><tt>.imagedata </tt></span></h2>
+<p><b>double array</b>
+</p><p>These three fields are only available for type 'image' DataSet objects. In image DataSet objects, the <tt>.data</tt> field contains "unfolded" image data. Image data is usually contained in a 2<sup>nd</sup> or higher-order matrix in which several modes are used to describe a spatial relationship between pieces of information. For example, many standard JPEG images are three-way images of size <tt>M x N x 3</tt>. The first two dimensions are the spatial dimensions in that the actual image is M pixels high by N pixels wide. The third dimension is the wavelength dimension and, in this case, contains 3 slabs – one for each of the Red, Green, Blue image components.
+</p><p>Working with such image data in DataSet objects is made easier by unfolding such multi-way images so that all the spatial modes are stacked on top of each other in a single mode. Unfolding is done so that all the spatial information is contained in a single mode and can be handled together – often so that each pixel can be analyzed as an individual sample (or even sometimes as variables). Individual pixels in an unfolded image are independent and can be individually included and excluded (see .include field) or assigned particular classes (see .class field), for example. In the case of the JPEG mentioned above, the unfolded image would be stored as an <tt>(MN) x 3</tt> matrix where the first mode was M times N elements (i.e. pixels) in size.
+</p><p>The <tt>.imagemode</tt> field contains a scalar value indicating which mode of the <tt>.data</tt> field contains the spatial information. In the JPEG example, <tt>.imagemode</tt> would be 1 (one). Similarly the <tt>.imagesize</tt> field contains a vector describing the original size of the spatial mode before unfolding. The JPEG example would contain the two-element vector:<tt> [M N]</tt> Note: that .<tt>imagesize</tt> contains <b>only</b> the size of the image mode, not the entire data matrix. Note that the product of the <tt>.imagesize</tt> field must be equal to the size of the <tt>.imagemode</tt> mode of the <tt>.data</tt> field. That is, the number of pixels contained in the spatial mode of the data must be appropriate that it can be reshaped into a matrix of size <tt>.imagesize</tt>. See the <tt>.foldedsize</tt> field for the size of entire folded matrix.
+</p><p>The <tt>.imagedata</tt> field is a special <i>read-only</i> field which returns the contents of the <tt>.data</tt> field refolded back into the original image-sized matrix. In the JPEG example, the <tt>.data</tt> field would return a matrix of size <tt>(MN) x 3</tt> (the unfolded image) but the <tt>.imagedata</tt> field would return the original <tt>M x N x 3</tt> matrix. Any changes you make to the contents of the <tt>.data</tt> field will automatically be reflected in the contents returned by <tt>.imagedata</tt>. <tt>.imagedata</tt>, however, can not be written to.
+</p><p>To create a type 'image' DataSet object:
+</p><p>(a) Unfold the spatial mode of the original data (the following example is for three way data but is easily extended to multi-way images):
+</p>
+<pre>sz = size(x);
+x = reshape(x, sz(1)*sz(2), sz(3));
+</pre>
+<p>(b) Create the standard DataSet object (type='data') from the unfolded data:
+</p>
+<pre>imgdso = dataset(x);
+</pre>
+<p>(c) Change the DataSet object type to 'image':
+</p>
+<pre>imgdso.type = 'image';
+</pre>
+<p>(d) And store the original image size in the DataSet
+</p>
+<pre>imgdso.imagemode = 1;
+imgdso.imagesize = sz(1:2);
+</pre>
+<p>Note that although this example shows the image being unfolded into the first mode, there is no requirement that the first mode be the pixel mode. The first mode is, however, the most consistent with the concept that individual pixels are often considered separate samples. Use the permute function on x prior to creating the DataSet (before step (b) above) to move the spatial mode to a different dimension.
+</p>
+<h2><span class="mw-headline" id=".imagedataf"><tt>.imagedataf </tt></span></h2>
+<p><b>double array</b>
+</p><p>By default the <tt>.imagedata</tt> field folds data with the spacial dims first (e.g., <b>m</b> pixels by <b>n</b> pixels by <b>z</b> values) without regard to the <tt>.imagemode</tt> field. The <tt>.imagedataf</tt> field will return folded data where the spacial modes are inserted beginning at the .imagemode dim. For example, if you have a 250x250x3 image dataset where imagemode = 2 your DSO will look similar to:
+</p>
+<pre>...
+       data: 3x62500 [double]
+  imagesize: 250x250
+  imagemode: 2
+...</pre>
+<p>The <tt>.imagedataf</tt> field will return folded data for size 3x250x250 where as the <tt>.imagedata</tt> field will return 250x250x3.
+</p>
+<h2><span class="mw-headline" id=".label"><tt>.label </tt></span></h2>
+<p><b>cell array {<i>MxSlbls</i>}</b>
+</p><p>Each column of the cell contains char arrays of labels for each mode of '<tt>.data</tt>' (the cell entries may be empty.) The first row corresponds to labels for the first mode of '<tt>.data</tt>' and contains char arrays with <i>N1 </i>rows. Subsequent rows of the cell contain labels for corresponding modes of '<tt>.data</tt>' each of which are char arrays with <i>Nm </i>rows. Additional columns contain alternate sets of labels for all modes.
+</p><p>Assignments to individual cell elements may be a character array or a cell array. Labels are always converted to character arrays when retrieved.
+</p><p>For example, suppose there is a DataSet object <tt>x</tt>. Its labels for the <i>mth </i>mode are contained in <tt>x.label{m,1}</tt>. If there is a second set of labels for this mode, they are contained in <tt>x.label{m, 2}</tt>. The following sets the second set of labels for the first mode of DataSet <tt>x</tt> assuming size(x.data,1) = 3
+</p>
+<pre>x.label{1,2} = {'firstlabel','secondlabel','thirdlabel'};
+</pre>
+<p>An individual label in any set can be changed by adding an additional index using "curly braces" (the ones used for cell indexing) and the string which should be used. For example, changing the second row's label (in the second set) would be accomplished using:
+</p>
+<pre><tt>x.label{1,2}{2} = 'New second label';</tt>
+</pre>
+<h2><span class="mw-headline" id=".labelname"><tt>.labelname </tt></span></h2>
+<p><b>cell array {<i>MxSlbls</i>}</b>
+</p><p>Each column of the cell is associated with the corresponding column of <tt>'.label'</tt> and contains string descriptions (each a row char array) of the corresponding labels for each mode of <tt>'.data'</tt> (<i>e.g. '</i>Mode 1 Lbls', 'Mode 2 Lbls', …). Additional columns contain alternate sets of label names.
+</p><p>For example, the label name associated with the first set of labels for mode <i>m</i> is contained in <tt>x.labelname{m,1}</tt>.
+</p>
+<h2><span class="mw-headline" id=".axisscale"><tt>.axisscale</tt></span></h2>
+<p><b>1) cell array</b> {<i>MxSscale</i>} (when <tt>'.data'</tt> is a fixed-size array)
+</p><p>When '<tt>.data</tt>' is a fixed-size array (other than cell), each column of the cell contains a set of axis scales (a total of <i>Mx1</i> vectors,<i> </i>each <i>Nmx1</i> of class double) for each mode of '<tt>.data</tt>' (<i>e.g. </i>a time axis, or sample number). Rows of the cell correspond to modes of '<tt>.data</tt>' (<i>e.g. </i>a wavelength axis, or variable number). Additional columns of <tt>'.axisscale'</tt> contain alternate sets of axis scales for all modes.
+</p><p>For example, suppose there is a DataSet object <tt>x</tt>. Its axis scale for the <i>mth </i>mode are contained in <tt>x.axisscale{m,1}.</tt> If there is a second set of axis scales they are contained in <tt>x.axisscale{m,2}</tt>. The following sets the first set of axisscales for the third mode of DataSet <tt>x</tt> assuming size(x.data,3) = 10
+</p><p><tt>x.axisscale{3,1} = 1:10;</tt>
+</p><p><b>2) cell array</b> {<i>MxSscale</i>} (when <tt>'.data'</tt> is a cell array)
+</p><p>When <tt>'.data'</tt> is class cell, the contents of '<tt>.axisscale</tt>' are similar to those described above, except for mode 1 (<i>i.e. </i>first row of the '<tt>.axisscale</tt>' cell). In this case, the contents of the first row contain <i>cell arrays </i>(in contrast to vectors of class double) whose contents are axis scales (<i>Nn1x1 </i>vectors). Each axis scale corresponds to the first mode of each cell of '<tt>.data</tt>' (<i>e.g. </i>a time axis, or sample number). This allows for variable axis scales when the data matrices are of variable length in the first mode. Subsequent rows of the cell contain scales (<i>Nmx1 </i>vectors) for corresponding modes of '<tt>.data</tt>' (<i>e.g. </i>a wavelength axis, or variable number) just as when '<tt>.data</tt>' is a fixed-size array.
+</p>
+<h2><span class="mw-headline" id=".axisscalename"><tt>.axisscalename </tt></span></h2>
+<p><b>cell array {<i>MxSscale</i>}</b>
+</p><p>Each column of the cell is associated with the corresponding column of '<tt>.axisscale'</tt> and contains string descriptions (each a row char array) of the corresponding axis scale for each mode of '.<tt>data</tt>' (<i>e.g. '</i>Mode 1 Axis', 'Mode 2 Axis', …). Multiple columns contain alternate sets of axis scale names.
+</p><p>For example, the axis scale name associated with the first set axis scale for mode <i>m</i> is contained in <tt>x.axisscalename{m,1}</tt>.
+</p>
+<h2><span class="mw-headline" id=".axistype"><tt>.axistype </tt></span></h2>
+<p><b>cell array {<i>MxSscale</i>}</b>
+</p><p>The <tt>'axistype'</tt> field is informational only and does not effect other properties of the DataSet object. The <tt>axistype</tt> field identifies the relationship between adjacent elements in the corresponding <tt>axisscale</tt> (same mode and set). Axistype identifies this relationship using one of the following keywords:
+</p><p><tt>none&#160;:</tt> {default} a relationship between values is not known. Software may default to whatever display and calculation mode desired.
+</p><p><tt>discrete&#160;:</tt> Individual items (e.g. columns) are discrete of each other and should not be interpolated between in plots or other numerical operations. Show as individual points.
+</p><p><tt>stick&#160;:</tt> Individual items (e.g. columns) are discrete of each other and should not be interpolated between in plots or other numerical operations, however, each item has a connection to a value of zero at the given axisscale position (e.g. sticks down to the zero line on the y-axis)
+</p><p><tt>continuous&#160;:</tt> Individual items (e.g. columns) are considered points on a continuous axis and may be interpolated between in plots and other numerical operations.
+</p><p>When concatenating two DataSets with different axistypes for the concatenation mode, the least-presumptive axistype in this list will be used. That is, "none" will be selected over "discrete" which will be selected over "stick" which would be selected over "continuous".
+</p><p>Although some software makes use of this field to help customize plots and numerical operations, it is not required operation.
+</p>
+<h2><span class="mw-headline" id=".imageaxisscale"><tt>.imageaxisscale</tt></span></h2>
+<p><b>1) cell array</b> {<i>MxSscale</i>} (when <tt>'.data'</tt> is a fixed-size array)
+</p><p>This field applys to the image modes (i.e. spatial image mode) and there is one entry in each of these fields per image mode. For general information see <tt>axisscale</tt>. With the EchoRidgeCoulds example:
+</p>
+<pre>dat = imread('EchoRidgeClouds.jpeg','jpeg');
+imgdso = buildimage(dat, [1 2], 1);
+imgdso.imageaxisscale{1} = [1:768]/10;%Change image scale to tenths.
+imgdso.imageaxisscale{2} = [1:512]/10;%Change image scale to tenths.</pre>
+<h2><span class="mw-headline" id=".imageaxisscalename"><tt>.imageaxisscalename </tt></span></h2>
+<p><b>cell array {<i>MxSscale</i>}</b>
+</p><p>This field applys to the image modes (i.e. spatial image mode) and there is one entry in each of these fields per image mode. See <tt>axisscalename</tt>.
+</p>
+<h2><span class="mw-headline" id=".imageaxistype"><tt>.imageaxistype </tt></span></h2>
+<p><b>cell array {<i>MxSscale</i>}</b>
+</p><p>This field applys to the image modes (i.e. spatial image mode) and there is one entry in each of these fields per image mode. See <tt>axistype</tt>.
+</p>
+<h2><span class="mw-headline" id=".title"><tt>.title</tt></span></h2>
+<p><b>cell array {<i>MxStitle</i>}</b>
+</p><p>Each column of the cell contains a set of mode titles (each a char array) for each mode of '<tt>.data</tt>'. Rows of the cell correspond to modes of '<tt>.data</tt>' and additional columns of '<tt>.title</tt>' contain alternate sets of mode titles for all modes.
+</p><p>For example, suppose there is a DataSet object <tt>x</tt>. Its mode title for the <i>mth </i>mode is contained in <tt>x.title{m,1}</tt>. If there is a second set of mode titles they are contained in <tt>x.title{m,2}</tt>.
+</p>
+<h2><span class="mw-headline" id=".titlename"><tt>.titlename </tt></span></h2>
+<p><b>cell array {<i>MxStitle</i>}</b>
+</p><p>Each column of the cell is associated with the corresponding column of <tt>'.title'</tt> and contains string descriptions (each a row char array) of the corresponding mode titles for each mode of <tt>'.data'</tt> (<i>e.g. '</i>Mode 1 Title', 'Mode 2 Title', …). Additional columns contain alternate sets of mode title names.
+</p><p>For example, the mode title name associated with the first set mode title for mode <i>m</i> is contained in <tt>x.titlename{m,1}</tt>.
+</p>
+<h2><span class="mw-headline" id=".class"><tt>.class</tt></span></h2>
+<p><b>cell array {<i>MxSclass</i>}</b>
+</p><p>Each column of the cell contains a set of class identifiers (each an <i>Nmx1 </i>vector) for each mode of <tt>'.data'</tt>. Rows of the cell correspond to modes of <tt>'.data'</tt> and additional columns contain alternate sets of class identifiers for all modes.
+</p><p>For example, suppose there is a DataSet object <tt>x</tt>. Its class identifier for the <i>mth </i>mode is contained in <tt>x.class{m,1}</tt>. If there is a second set of class identifiers they are contained in <tt>x.class{m,2}</tt>. See example for <tt>axisscale</tt> field.
+</p><p>Assignments into class can be either numeric (assigning an appropriate-length vector of numbers) or string (using an appropriate-length cell array of strings). However, retrieving values from the .class field will <i>always </i>return numerical values. See the <tt>classid</tt> field to retrieve classes as strings instead of numerical values and the <tt>classlookup</tt> field to retrieve the table used to translate numerical classes to string values.
+</p>
+<h2><span class="mw-headline" id=".classid"><tt>.classid </tt></span></h2>
+<p><b>cell array {<i>MxSclass</i>}</b>
+</p><p>This field is a pseudonym for the <tt>class</tt> field and is indexed exactly the same except that when retrieving values from this field, the returned value is a cell array of strings where each string represents the class of the object (row, column, etc). Assignments to this field can also be either class strings or numerical class values. See also the <tt>classlookup</tt> field to retrieve the table used to translate numerical classes to string values.
+</p>
+<h2><span class="mw-headline" id=".classlookup"><tt>.classlookup </tt></span></h2>
+<p><b>cell array {<i>MxSclass</i>}</b>
+</p><p>The <tt>classlookup</tt> field is sized the same as the <tt>class</tt> field but each entry contains a lookup table, structured as a <i>k</i> by 2 cell array. This lookup table contains the numerical class values in the first column and the corresponding class name in the second column. A shortcut to look up a class number or class string in this table is provided by adding the indexing command find() onto the end of the classlookup extraction command. Given a DataSet object, x, with a set of row classes:
+</p>
+<pre><tt>x.classlookup{1,1}.find(val)</tt>
+</pre>
+<p>returns the string associated with the numerical value "val". Likewise:
+</p>
+<pre><tt>x.classlookup{1,1}.find('string')</tt>
+</pre>
+<p>returns the numerical class value associated with the class description string 'string'.
+</p>
+<h3><span class="mw-headline" id=".classlookup.assign"><tt>.classlookup.assign</tt></span></h3>
+<p>Assignment into the <tt>classlookup</tt> field is specially controlled. Individual entries can not be directly edited but, instead, must be changed using the indexing: <tt>assignstr</tt> or <tt>assignval</tt>. These commands are given after the .classlookup{mode,set} indexing and are followed by an assignment which gives the new values. For example, given a DataSet object, <tt>x</tt>, the following notation is used to change the string associated with a given class number:
+</p>
+<pre><tt>x.classlookup{1,1}.assignstr = {3 'new string'};</tt>
+</pre>
+<p>The above would change the string associated with class 3 (of mode 1, set 1) to be 'new string'. Similarly:
+</p>
+<pre><tt>x.classlookup{1,1}.assignval = {18 'current string'};</tt>
+</pre>
+<p>would change the class number associated with the class 'current string' to be 18. 
+</p><p>If the entire lookup table is replaced by direct assignment, any class number which appears in the <tt>class</tt> field but does <i>not</i> appear in the new lookup table will be automatically changed to class 0 (zero) in the <tt>class</tt> field. Thus, replacing the lookup table can be used to effectively delete a class from the <tt>class</tt> field.
+</p>
+<h2><span class="mw-headline" id=".classname"><tt>.classname </tt></span></h2>
+<p><b>cell array {<i>MxSclass</i>}</b>
+</p><p>Each column of the cell is associated with the corresponding column of <tt>'.class'</tt> and contains string descriptions (each a row char array) of the corresponding class identifiers for each mode of <tt>'.data'</tt> (<i>e.g. '</i>Mode 1 Classes', 'Mode 2 Classes', …). Additional columns contain alternate sets of class identifier names.
+</p><p>For example, the class name associated with the first set class identifiers for mode <i>m</i> is contained in <tt>x.classname{m,1}</tt>.
+</p>
+<h2><span class="mw-headline" id=".include"><tt>.include </tt></span></h2>
+<p><b>cell array {<i>Mx1</i>} with vector contents</b>
+</p><p>Each row of '<tt>.include</tt>' contains a vector of indices indicating which samples or variables to use in an analysis. When first constructed the contents of each cell in '<tt>.include</tt>' is <tt>[1:Nm]</tt>. The '<tt>.include</tt>' field allows for sample or variable exclusion (<i>e.g. </i>soft delete) of '<tt>.data</tt>' rows or columns without actually removing or modifying the raw data in the data set. Note: In earlier versions of the DataSet object this field was named '<tt>.includ</tt>'. Although that field name will be translated into '<tt>.include</tt>', use of the full field name is recommended.
+</p>
+<h2><span class="mw-headline" id=".uniqueid"><tt>.uniqueid</tt></span></h2>
+<p><b>char array (<i>row vector</i>) read-only</b>
+</p><p>Unique identifier for a dataset.
+</p>
+<h2><span class="mw-headline" id=".description"><tt>.description</tt></span></h2>
+<p><b>char array</b>
+</p><p>Contains any text as a description of the data set.
+</p>
+<h2><span class="mw-headline" id=".history"><tt>.history</tt></span></h2>
+<p><b>cell array of strings</b>
+</p><p>Running history of commands that have modified the DataSet contents. User can add comments by using:
+</p>
+<pre>&gt;&gt; mydataset.history = 'Comment here.';
+&gt;&gt; mydataset.history{end}
+ans =
+%%% Comment: Comment here. (08-Sep-2009 17:14:52.538)
+</pre>
+<h2><span class="mw-headline" id=".userdata"><tt>.userdata</tt></span></h2>
+<p>can contain any class and is a container for additional user data.
+</p><p>Note that when DataSet objects are concatenated this field may be turned into a cell array containing user data from each concatenated object in the cell containers.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930081012
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.031 seconds
+Real time usage: 0.033 seconds
+Preprocessor visited node count: 186/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1334/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:474-0!canonical and timestamp 20240930081012 and revision id 11256.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=DataSet_Object_Fields&amp;oldid=11256">https://www.wiki.eigenvector.com/index.php?title=DataSet_Object_Fields&amp;oldid=11256</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 23 March 2021, at 15:33.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

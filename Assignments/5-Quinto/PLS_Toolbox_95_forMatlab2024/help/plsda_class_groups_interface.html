@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>PLSDA Class Groups Interface - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-PLSDA_Class_Groups_Interface rootpage-PLSDA_Class_Groups_Interface skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=PLSDA_Class_Groups_Interface"><span class="mw-page-title-main">PLSDA Class Groups Interface</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#PLSDA_Class-Grouping_How_To"><span class="tocnumber">1</span> <span class="toctext">PLSDA Class-Grouping How To</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#How_To_Use_PLSDA_Class_Groups"><span class="tocnumber">2</span> <span class="toctext">How To Use PLSDA Class Groups</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Why_Use_PLSDA_Class_Groups?"><span class="tocnumber">3</span> <span class="toctext">Why Use PLSDA Class Groups?</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="PLSDA_Class-Grouping_How_To">PLSDA Class-Grouping How To</span></h2>
+<p>This page describes how to use the PLSDA Class Groups interface. The How To Use PLSDA Class Groups section describes the mechanics of how the GUI works. The Why Use PLSDA Class Groups section describes the theory behind class groups and when you might want to use them.
+</p><p><a href="" class="image" title="PLSDA Window"><img alt="PLSDA Window" src="400px_plsda_class_groups_gui.png" decoding="async" width="400" height="476" /></a>
+</p>
+<h2><span class="mw-headline" id="How_To_Use_PLSDA_Class_Groups">How To Use PLSDA Class Groups</span></h2>
+<ul><li>Creating Groups: Select one or more classes to group together in the Available Classes list on the left of the PLSDA Class Groups interface. Click the Model as Group button to add the selected classes as a group. Classes will appear as a group in the Class Groups list on the right and be removed from the Available Classes list. Note that no class can be added to more than one group at a time.</li></ul>
+<ul><li>Removing / Disbanding Groups: To remove (disband) a group, select the group in the Class Groups list and click the Remove Group button. The group will be removed and the classes added back to the Available Classes list</li></ul>
+<ul><li>Resetting All Groups: To reset the groups so that each class will be modeled as an individual group (default behavior), click the Default button.</li></ul>
+<ul><li>The Rename Selected Group button is designed to be used along with the Create New Class Set button. These buttons allow the selected group to be renamed and allows a new class set to be created that will contain the newly named grouped. If the selected group is renamed but no new class set is created then the new name will not be used.</li></ul>
+<ul><li>Accepting / Discarding Groups: When all desired class groups have been formed, click OK to accept the groups. To discard any changes made to the class groups, click Cancel.</li></ul>
+<ul><li>Notes: If a class is not added to any group, it will not be modeled, unless no class groups are created. If no class groups are created, each class will be modeled as its own group (default behavior).</li></ul>
+<h2><span id="Why_Use_PLSDA_Class_Groups.3F"></span><span class="mw-headline" id="Why_Use_PLSDA_Class_Groups?">Why Use PLSDA Class Groups?</span></h2>
+<p>Ordinarily, PLSDA builds a model which attempts to discriminate each individual class (specified in your data using sample classes on your X block). For example, if you have four classes, the PLSDA model will give you four separate regression vectors (and corresponding predicted Y values), one for each of the four classes.
+</p><p>In some cases, it is beneficial to combine multiple classes together and have them considered a single class. Such combinations of classes are called "class groups". For purposes of modeling, grouped classes are considered as a single class. They are modeled as one and predict as one. Below are two situations when class groups may be useful.
+</p>
+<ul><li>Indistinguishable Groups: One situation when class groups can be useful is when you observe that two classes are essentially indistinguishable from each other, but they can be distinguished from the other class(es) in the data. In this case, combining the two similar classes together into a "group" and modeling them together against the other class(es) will often improve the performance of the PLSDA model. For example, given four classes where classes one and two are essentially identical, but classes three and four are different from each other (and from classes one and two), the following groups would be useful:</li></ul>
+<pre>[ 1 2 ] vs [ 3 ] vs [ 4 ]</pre>
+<dl><dd>Where classes one and two are grouped together but three and four are alone in their groups.</dd></dl>
+<ul><li>Single Class Models: Another situation when class groups are useful is to limit the scope of a PLSDA model. When attempting to distinguish between more than two classes, a single PLSDA model which must distinguish all four classes from each other at once will tend to do more poorly than a model which must only distinguish one class from the other n classes. For this reason, it may be beneficial to build separate PLSDA models (each of which being responsible for separating one class from all of the others). Class groups allow you to do this by grouping one class into its own group and all the other classes into a single group. For example with four classes, the following grouping may provide a better model to distinguish class one from the other classes (when compared to a standard PLSDA model on all four classes):</li></ul>
+<pre>[ 1 ] vs [ 2 3 4 ]</pre>
+<dl><dd>Where class one is grouped on its own but two, three and four are all together in a group. Usually, such models are used along with "class-specific" models created for each of the other n classes ([2] vs [1 3 4], [3] vs [1 2 4], and [4] vs [1 2 3]). These four individual PLSDA models will sometimes do better than a single PLSDA model attempting to separate all four classes at once.</dd></dl>
+<p>Note that when the data consists of only two classes, there is no benefit to using (or way to use!) class groups.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930193604
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.016 seconds
+Real time usage: 0.020 seconds
+Preprocessor visited node count: 16/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 65/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:482-0!canonical and timestamp 20240930193604 and revision id 11100.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=PLSDA_Class_Groups_Interface&amp;oldid=11100">https://www.wiki.eigenvector.com/index.php?title=PLSDA_Class_Groups_Interface&amp;oldid=11100</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 31 August 2020, at 12:58.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

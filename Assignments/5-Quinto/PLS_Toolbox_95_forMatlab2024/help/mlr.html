@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Mlr - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Mlr rootpage-Mlr skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Mlr"><span class="mw-page-title-main">Mlr</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#MLR_Algorithms"><span class="tocnumber">4.1</span> <span class="toctext">MLR Algorithms</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#Leastsquares"><span class="tocnumber">4.1.1</span> <span class="toctext">Leastsquares</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Ridge"><span class="tocnumber">4.1.2</span> <span class="toctext">Ridge</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="#Ridge_HKB"><span class="tocnumber">4.1.3</span> <span class="toctext">Ridge HKB</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="#Optimized_Ridge"><span class="tocnumber">4.1.4</span> <span class="toctext">Optimized Ridge</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="#Optimized_Lasso"><span class="tocnumber">4.1.5</span> <span class="toctext">Optimized Lasso</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="#Elasticnet"><span class="tocnumber">4.1.6</span> <span class="toctext">Elasticnet</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="#Studentized_Residuals"><span class="tocnumber">4.2</span> <span class="toctext">Studentized Residuals</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Multiple Linear Regression for multivariate Y.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>model = mlr(x,y,options)</dd>
+<dd>pred  = mlr(x,model,options)</dd>
+<dd>valid = mlr(x,y,model,options)</dd>
+<dd>mlr &#160;% Launches analysis window with MLR as the selected method.</dd></dl>
+<p>Please note that the recommended way to build and apply a MLR model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>. 
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>MLR identifies models of the form Xb = y + e.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block: predictor block (2-way array or DataSet Object)</li></ul>
+<ul><li><b>y</b> = Y-block: predictor block (2-way array or DataSet Object)</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = scalar, estimate of filtered data.</li></ul>
+<ul><li><b>pred</b> = structure array with predictions</li></ul>
+<ul><li><b>valid</b> = structure array with predictions</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><b>options</b> = a structure array with the following fields.
+</p>
+<ul><li><b>display</b>: [ {'off'} | 'on'] Governs screen display to command line.</li></ul>
+<ul><li><b>plots</b>: [ 'none' | {'final'} ]  governs level of plotting.</li></ul>
+<ul><li><b>algorithm</b>: [ {'leastsquares'} | 'ridge' | 'ridge_hkb' | 'optimized_ridge' | 'optimized_lasso' | 'elasticnet' ] Governs the level of regularization used when calculating the regression vector.</li></ul>
+<ul><li><b>condmax</b>: [{[ ]}] Value for maximum condition number. Default value = [] leads to MLR calculation at full rank. Any value &gt; 0 leads to truncation of factors based upon SVD until the condition number is less than the specified value. Used only for algorithm 'leastsquares'.</li></ul>
+<ul><li><b>ridge</b>: [ { 1 } ] Scalar value for ridge parameter for algorithm 'ridge'.</li></ul>
+<ul><li><b>optimized_ridge</b>: Vector of ridge (L2) entries used to determine optimized value for θ for algorithms 'optimized_ridge' or 'elasticnet'</li></ul>
+<ul><li><b>optimized_lasso</b>: Vector of ridge (L1) entries used to determine optimized value for θ for algorithms 'optimized_lasso' or 'elasticnet'</li></ul>
+<ul><li><b>preprocessing</b>:  { [] [] } preprocessing structure (see PREPROCESS).</li></ul>
+<ul><li><b>blockdetails</b>: [  'compact' | {'standard'} | 'all' ] level of detail (predictions, raw residuals, and calibration data) included in the model.</li></ul>
+<dl><dd><ul><li>‘Standard’ = the predictions and raw residuals for the X-block as well as the X-block itself are not stored in the model to reduce its size in memory. Specifically, these fields in the model object are left empty: 'model.pred{1}', 'model.detail.res{1}', 'model.detail.data{1}'.</li>
+<li>‘Compact’ = for this function, 'compact' is identical to 'standard'.</li>
+<li>'All' = keep predictions, raw residuals for both X- &amp; Y-blocks as well as the X- &amp; Y-blocks themselves.</li></ul></dd></dl>
+<h4><span class="mw-headline" id="MLR_Algorithms">MLR Algorithms</span></h4>
+<h5><span class="mw-headline" id="Leastsquares">Leastsquares</span></h5>
+<p>Standard MLR regression carried out to the full rank of the x-block is obtained by setting <code>options.algorithm = 'leastsquares'</code> and leaving <code>options.condmax</code> empty (default setting).  For options.condmax &gt; 0, singular value decomposition is performed on <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle X^{T}X}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mi>X</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X^{T}X}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1cf126839e1552c18f9c9951a9267bee93f3d243" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:5.366ex; height:2.676ex;" alt="{\displaystyle X^{T}X}"/></span>, and factors are removed from the decomposition (in reverse order of the eigenvalues) until the condition number of the covariance matrix is less than this value.
+</p><p><br />
+Beginning with PLS_Toolbox/Solo 9.1, additional options are available for regularization when constructing MLR models. Adding regularization to an MLR model may be helpful when the x-block is ill-conditioned and can also be used as a variable selection tool. 
+</p>
+<h5><span class="mw-headline" id="Ridge">Ridge</span></h5>
+<p>Ridge regularization based upon the standard formulation from Hoerl and Kennard (1970)
+<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta =(X^{T}X+\theta I)^{-1}X^{T}Y}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+        <mo>=</mo>
+        <mo stretchy="false">(</mo>
+        <msup>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mi>X</mi>
+        <mo>+</mo>
+        <mi>&#x03B8;<!-- θ --></mi>
+        <mi>I</mi>
+        <msup>
+          <mo stretchy="false">)</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <msup>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mi>Y</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta =(X^{T}X+\theta I)^{-1}X^{T}Y}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5595791be55fcfdeef531b57e42c4df16280aad2" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:24.201ex; height:3.176ex;" alt="{\displaystyle \beta =(X^{T}X+\theta I)^{-1}X^{T}Y}"/></span>
+may be selected by setting <code>options.algorithm = 'ridge'</code> and setting a positive scalar value for <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span> (regularization parameter) in <code>options.ridge</code>; the regression vector <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span> is calculated directly through matrix inversion.  
+</p>
+<h5><span class="mw-headline" id="Ridge_HKB">Ridge HKB</span></h5>
+<p>An estimate of an optimal value for  and the corresponding regression vector <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span> may be determined using the method of Hoerl, Kennard, and Baldwin (1975) by setting <code>options.algorithm = 'ridge_hkb'</code>.  No other parameters are used for this option and the resulting optimal value of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span> is calculated by matrix inversion.
+</p>
+<h5><span class="mw-headline" id="Optimized_Ridge">Optimized Ridge</span></h5>
+<p>Ridge regularization can also be cast as an optimization (in this case, the L2 norm of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span>) and is included for completeness.  For this case, <code>options.algorithm = 'optimized_ridge'</code> and the optimal value of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span> is obtained from the range in <code>options.optimized_ridge</code> (vector).  This mode may be used to place bounds around the value of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>.  
+</p>
+<h5><span class="mw-headline" id="Optimized_Lasso">Optimized Lasso</span></h5>
+<p>Lasso regularization minimizes the L1 norm of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span> and uses the settings <code>options.algorithm = 'optimized_lasso'</code> and supplying a vector of values for the appropriate parameter in <code>options.optimized_lasso</code>.
+</p>
+<h5><span class="mw-headline" id="Elasticnet">Elasticnet</span></h5>
+<p>Elastic net regularization seeks to minimize the L2 and L1 norms of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span> simultaneously using the initial estimates for the parameters in <code>options.optimized_ridge</code> and <code>options.optimized_lasso</code>, respectively.  The appropriate value for <code>options.algorithm</code> is <code>'elasticnet'</code> for this scenario.
+</p><p><br />
+The following figure shows the valid settings <code>options.algorithm</code> and the corresponding parameters which are used as inputs for these methods:
+<a href="" class="image"><img alt="MlrAlgorithmsOptions.png" src="mlralgorithmsoptions.png" decoding="async" width="624" height="525" /></a>
+</p><p>Note that the MATLAB Parallel Computing Toolbox (PCT) will be used for calculations based upon numerical optimization if installed, but is not required.
+Regression vectors  are available for all algorithms from <code>model.reg</code>.  The following table provides a list of parameters provided in the calibrated models specific to each algorithm:
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>algorithm</th>
+<th>calibrated model parameters
+</th></tr>
+<tr>
+<td><code>'leastsquares'</code></td>
+<td><code>model.detail.mlr.condmax_value</code>:
+<p><code>condmax</code> (specified at model building)
+</p><p><br />
+<code>model.detail.mlr.condmax_ncomp</code>:
+number of components used based upon <code>condmax</code>
+</p>
+</td></tr>
+<tr>
+<td><code>'ridge'</code></td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>: <code>model.detail.ridge_theta</code>
+</td></tr>
+<tr>
+<td>'<code>ridge_hkb'</code></td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>: <code>model.detail.mlr_ridge_hkb_theta</code>
+</td></tr>
+<tr>
+<td><code>'optimized_ridge'</code></td>
+<td><code>model.detail.mlr.optimized_ridge_theta</code> contains the vector of L2 (<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>) values supplied in <code>options.optimized_ridge</code>
+<p><code>model.detail.mlr.best_params.optimized_ridge</code>
+contains the best single value for L2(<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>) from the values in 
+<code>model.detail.mlr.optimized_ridge_theta</code>
+</p>
+</td></tr>
+<tr>
+<td><code>'optimized_lasso'</code></td>
+<td><code>model.detail.mlr.optimized_lasso_theta</code> contains the vector of L1 (<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>) values supplied in <code>options.optimized_lasso</code>
+<p><code>model.detail.mlr.best_params.optimized_lasso</code>
+contains the best single value for L1(<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B8;<!-- θ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6e5ab2664b422d53eb0c7df3b87e1360d75ad9af" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.09ex; height:2.176ex;" alt="{\displaystyle \theta }"/></span>) from the values in 
+<code>model.detail.mlr.optimized_lasso_theta</code>
+</p>
+</td></tr>
+<tr>
+<td><code>'elasticnet'</code></td>
+<td>entries above for both <code>optimized_ridge</code> and <code>optimized_lasso</code> algorithms apply
+</td></tr></tbody></table>
+<p>In MLR, our hypothesis function is
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle h_{\beta }(x)=\beta ^{T}X}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <msup>
+          <mi>&#x03B2;<!-- β --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mi>X</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle h_{\beta }(x)=\beta ^{T}X}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b97106d04888623cd714c74e3724b8b9c52939c7" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:13.457ex; height:3.343ex;" alt="{\displaystyle h_{\beta }(x)=\beta ^{T}X}"/></span>
+</p><p>where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ed48a5e36207156fb792fa79d29925d2f7901e8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.332ex; height:2.509ex;" alt="{\displaystyle \beta }"/></span> is the regression vector we wish to calculate.
+</p><p>The loss function for MLR is
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle L(h_{\beta }(x_{i}),y)={\frac {1}{2}}(h_{\beta }(x_{i})-y_{i})^{2}.}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mn>2</mn>
+          </mfrac>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2212;<!-- − --></mo>
+        <msub>
+          <mi>y</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <msup>
+          <mo stretchy="false">)</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msup>
+        <mo>.</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle L(h_{\beta }(x_{i}),y)={\frac {1}{2}}(h_{\beta }(x_{i})-y_{i})^{2}.}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/53a207a7e70d899b01097a97b9bfeec3fdcd8887" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.838ex; width:31.872ex; height:5.176ex;" alt="{\displaystyle L(h_{\beta }(x_{i}),y)={\frac {1}{2}}(h_{\beta }(x_{i})-y_{i})^{2}.}"/></span>
+</p><p>The cost function <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle J_{\beta }}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>J</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle J_{\beta }}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d7151c7c5c97d9c6639e3dc743ec1003775c5d9e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:2.464ex; height:2.843ex;" alt="{\displaystyle J_{\beta }}"/></span> is used to minimize the loss <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle L(h_{\beta }(x_{i}),y)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle L(h_{\beta }(x_{i}),y)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2f1ca9c42511ee835ce9bee1b376807edac976f6" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:12.033ex; height:3.009ex;" alt="{\displaystyle L(h_{\beta }(x_{i}),y)}"/></span>, and is found by the following equation
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle J_{\beta }={\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>J</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mi>m</mi>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>m</mi>
+          </mrow>
+        </munderover>
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle J_{\beta }={\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/56101096e541fb82c95a6dcb7f6d1b3f56b6f5f3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:24.602ex; height:6.843ex;" alt="{\displaystyle J_{\beta }={\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}"/></span>
+</p><p>But when it comes to regularization, the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle J_{\beta }}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>J</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle J_{\beta }}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d7151c7c5c97d9c6639e3dc743ec1003775c5d9e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:2.464ex; height:2.843ex;" alt="{\displaystyle J_{\beta }}"/></span> is differed by the incorporation of the penalty terms. Consult the table below to note the differences in the cost functions between each algorithm:
+</p><p><br />
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>options.algorithm</th>
+<th><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle J_{\beta }}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>J</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle J_{\beta }}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d7151c7c5c97d9c6639e3dc743ec1003775c5d9e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:2.464ex; height:2.843ex;" alt="{\displaystyle J_{\beta }}"/></span> (Cost Function)
+</th></tr>
+<tr>
+<td>'leastsquares'</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mi>m</mi>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>m</mi>
+          </mrow>
+        </munderover>
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/caa3d6c03a677ef7c745a105fca8f3ec7c29a3bb" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:19.039ex; height:6.843ex;" alt="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)}"/></span>
+</td></tr>
+<tr>
+<td>'optimized_ridge'</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mi>m</mi>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>m</mi>
+          </mrow>
+        </munderover>
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>&#x03B8;<!-- θ --></mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>a</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <msubsup>
+          <mi>&#x03B2;<!-- β --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msubsup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bbd14afce88f4573d5bdb3facb03a5f73878214a" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:32.439ex; height:7.176ex;" alt="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}"/></span>
+</td></tr>
+<tr>
+<td>'optimized_lasso'</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mi>m</mi>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>m</mi>
+          </mrow>
+        </munderover>
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>&#x03B8;<!-- θ --></mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>b</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <msub>
+          <mi>&#x03B2;<!-- β --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/66509e6cd910fb7edf6a1bc71d7ec8a115565112" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:33.567ex; height:7.176ex;" alt="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|}"/></span>
+</td></tr>
+<tr>
+<td>'elasticnet'</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mn>1</mn>
+            <mi>m</mi>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>m</mi>
+          </mrow>
+        </munderover>
+        <mi>L</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>h</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03B2;<!-- β --></mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>&#x03B8;<!-- θ --></mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>b</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <msub>
+          <mi>&#x03B2;<!-- β --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <mo>+</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>&#x03B8;<!-- θ --></mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>a</mi>
+              </mrow>
+            </msub>
+            <mrow>
+              <mn>2</mn>
+              <mi>m</mi>
+            </mrow>
+          </mfrac>
+        </mrow>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <msubsup>
+          <mi>&#x03B2;<!-- β --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msubsup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2df6d8831aed5393ec940a6f6d262204670cfbb6" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:46.967ex; height:7.176ex;" alt="{\displaystyle {\frac {1}{m}}\sum _{i=1}^{m}L(h_{\beta }(x_{i}),y)+{\frac {\theta _{b}}{2m}}\sum _{j=1}^{n}|\beta _{j}|+{\frac {\theta _{a}}{2m}}\sum _{j=1}^{n}\beta _{j}^{2}}"/></span>
+</td></tr></tbody></table>
+<p>Note: <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta _{a}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>&#x03B8;<!-- θ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>a</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta _{a}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6d495c3f1ee0d4c4aa1e7e665e78490e20408d2b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.192ex; height:2.509ex;" alt="{\displaystyle \theta _{a}}"/></span> pertains to the L2 penalty value and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \theta _{b}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>&#x03B8;<!-- θ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>b</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \theta _{b}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fb0153b45618da7666799f6b44280fdc78650123" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.028ex; height:2.509ex;" alt="{\displaystyle \theta _{b}}"/></span> pertains to the L1 penalty value.
+</p>
+<h4><span class="mw-headline" id="Studentized_Residuals">Studentized Residuals</span></h4>
+<p>From version 8.8 onwards, the Studentized Residuals shown for MLR Scores Plot are now calculated for calibration samples as:
+</p>
+<pre> MSE   = sum((res).^2)./(m-1);
+ syres = res./sqrt(MSE.*(1-L));
+</pre>
+<p>where res = y residual, m = number of samples, and L = sample leverage.
+This represents a constant multiplier change from how Studentized Residuals were previously calculated.
+For test datasets, where pres = predicted y residual, the semi-Studentized residuals are calculated as:
+</p>
+<pre> MSE   = sum((res).^2)./(m-1);
+ syres = pres./sqrt(MSE);
+</pre>
+<p>This represents a constant multiplier change from how the semi-Studentized Residuals were previously calculated.
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="crossval.html" title="Crossval">crossval</a>, <a href="ils_esterror.html" title="Ils esterror">ils_esterror</a>, <a href="modelstruct.html" title="Modelstruct">modelstruct</a>, <a href="pcr.html" title="Pcr">pcr</a>, <a href="pls.html" title="Pls">pls</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="ridge.html" title="Ridge">ridge</a>, <a href="testrobustness.html" title="Testrobustness">testrobustness</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240929230611
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 1.659 seconds
+Real time usage: 1.999 seconds
+Preprocessor visited node count: 201/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1116/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:151-0!canonical and timestamp 20240929230609 and revision id 11632.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Mlr&amp;oldid=11632">https://www.wiki.eigenvector.com/index.php?title=Mlr&amp;oldid=11632</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 4 August 2022, at 08:52.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

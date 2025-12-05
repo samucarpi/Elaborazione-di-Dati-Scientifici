@@ -1,0 +1,47 @@
+<productinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="optional">
+    <?xml-stylesheet type="text/xsl"href="optional"?>
+     
+<matlabrelease>14</matlabrelease>
+<name>PLS_Toolbox</name>
+<type>other</type>
+
+<icon>help\PLS_Toolbox.gif</icon>
+<!-- Following line contains the help location. -->
+<help_location>help</help_location>
+
+<list>
+
+<listitem>
+<label>Chemometrics Tutorial</label>
+<callback>pls_toolboxhelp man</callback>
+<icon>help\PLS_ToolboxDOC.gif</icon>
+</listitem>
+
+<listitem>
+<label>Getting Started with PLS_Toolbox</label>
+<callback>pls_toolboxhelp ref</callback>
+<icon>help\PLS_ToolboxTopics.gif</icon>
+</listitem>
+
+<listitem>
+<label>PLS_Toolbox Workspace Browser</label>
+<callback>browse</callback>
+<icon>help\hammericon.gif</icon>
+</listitem>
+
+<listitem>
+<label>Product Page (Web)</label>
+<callback>web http://www.eigenvector.com -browser;</callback>
+<icon>help\webicon.gif</icon>
+</listitem>
+
+<listitem>
+<label>Demos</label>
+<callback> demo toolbox 'PLS_Toolbox';</callback>
+<icon>help/demoicon.gif</icon>
+</listitem>
+
+</list>
+
+</productinfo>

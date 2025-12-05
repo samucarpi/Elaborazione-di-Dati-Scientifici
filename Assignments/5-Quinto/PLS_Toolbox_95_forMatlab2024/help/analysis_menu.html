@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Analysis Menu - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Analysis_Menu rootpage-Analysis_Menu skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Analysis_Menu"><span class="mw-page-title-main">Analysis Menu</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Exploratory_and_Cluster_Analysis_Methods_(Decomposition/Cluster)"><span class="tocnumber">1</span> <span class="toctext">Exploratory and Cluster Analysis Methods (Decomposition/Cluster)</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Quantitative_Analysis_Methods_(Regression)"><span class="tocnumber">2</span> <span class="toctext">Quantitative Analysis Methods (Regression)</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Classification_Methods"><span class="tocnumber">3</span> <span class="toctext">Classification Methods</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Statistical_Methods"><span class="tocnumber">4</span> <span class="toctext">Statistical Methods</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Multi-way_Methods"><span class="tocnumber">5</span> <span class="toctext">Multi-way Methods</span></a></li>
+</ul>
+</div>
+
+<p>The Analysis Menu in the <a href="analysis_gui.html" class="mw-redirect" title="Analysis GUI">Analysis GUI</a> provides access to various analysis methods within the GUI. Some of these methods are "one-block" methods (meaning they operate on only the X data) and others are "two-block" methods (meaning they require both an X and a Y data be loaded). Most methods also create a "model" when they are executed.
+</p><p>In all cases, once the analysis method has been selected and appropriate data loaded, a model can be built by clicking on the Calibrate button in the toolbar (the Gears) <a href="" class="image" title="Calibrate Button"><img alt="Calibrate Button" src="calibrate_button.png" decoding="async" width="28" height="28" /></a> or by clicking on the "Model" button in the <a href="analysiswindow_statuspane.html" class="mw-redirect" title="AnalysisWindow StatusPane">Status Panel</a>. 
+</p><p>For many methods, particular <a href="analysis_options_menu.html" class="mw-redirect" title="Analysis Options Menu">method options</a> can be selected or modified using the Options button: <a href="" class="image" title="Options Button"><img alt="Options Button" src="options_button.png" decoding="async" width="28" height="27" /></a>
+</p><p>The following methods are available in most versions of Solo and PLS_Toolbox (some special versions of the software may have fewer or additional methods). The methods are listed here, divided into groups based on their typical application:
+</p>
+<h3><span id="Exploratory_and_Cluster_Analysis_Methods_.28Decomposition.2FCluster.29"></span><span class="mw-headline" id="Exploratory_and_Cluster_Analysis_Methods_(Decomposition/Cluster)">Exploratory and Cluster Analysis Methods (Decomposition/Cluster)</span></h3>
+<p>These methods are one-block methods and require only the X block to operate. The Y block is not used in these methods.
+</p>
+<ul><li><b>PCA</b> Principal Component Analysis: used for exploratory data analysis and Multivariate Statistical Process Control as well as general pattern recognition and fault detection applications. See also: <a href="pca.html" title="Pca">pca</a></li>
+<li><b>Purity</b>: Interactive mixture analysis method used to resolve mixtures of unknown responses and provide more physically-interpretable results than PCA. Most useful on data where some samples and/or variables represent "pure" responses or components (non-mixtures). Goal is to provide more physically-interpretable results than PCA. See also: <a href="purity.html" title="Purity">purity</a></li>
+<li><b>MCR</b> Multivariate Curve Resolution: Automated mixture analysis method used to resolve mixtures of unknown responses and provide more physically-interpretable results than PCA. Uses an algorithm with successive approximations which can take some time to complete and has some ambiguity, but can operate with complicated mixtures of unknown components. See also: <a href="mcr.html" title="Mcr">mcr</a></li>
+<li><b>MPCA</b> Multiway Principal Component Analysis: used for exploratory analysis of 3-way batch data in which the first mode is usually time, the second mode is variables, and the third mode is sample (e.g. batch number, or wafer number, in the case of semiconductor field). MPCA identifies trends both between variables, but also changes in variables through time, known as trajectory. Models can be more complicated to interpret than PCA models and may be more sensitive to minor variations, but can provide improved selectivity in some cases. See also: <a href="mpca.html" title="Mpca">mpca</a></li>
+<li><b>Batch Maturity</b> Batch Maturity is a PCA decomposition method which defines confidence limits which are dependent on how far through a "batch" (time-based) process the a new measurement is determined to be. It involves both a standard PCA decomposition model and a second regression model (usually PLS) which attempts to predict how close to completion a new sample is (a.k.a. the "batch maturity"). Given the maturity, a subset of calibration samples are used to determine the expected scores limits. See also <a href="batchmaturity.html" title="Batchmaturity">batchmaturity</a></li>
+<li><b>Cluster</b>&#160;: Performs a variety of unsupervised cluster analysis methods. Used to look for similarities between samples with resutls displayed as a dendrogram with similar samples grouped together and attached by short "branches". A number of similarity metrics are available with different sensitivities. For details, see: <a href="cluster.html#Description" title="Cluster"> cluster</a></li></ul>
+<h3><span id="Quantitative_Analysis_Methods_.28Regression.29"></span><span class="mw-headline" id="Quantitative_Analysis_Methods_(Regression)">Quantitative Analysis Methods (Regression)</span></h3>
+<p>These methods are used in quantitative problems where one needs to determine the amount of a component, property, or other value based on the measured X-block responses. They are all two-block methods and most require both an X and a Y block to operate.
+</p>
+<ul><li><b>PLS</b> Partial Least Squares: Factor-based regression method using an inverse regression equation. PLS identifies latent variables (factors or patterns) in the X block which can be used to predict the column(s) of the Y block. Inverse methods are often used when not all underlying sources of variation are known and quantified. See also: <a href="pls.html" title="Pls">pls</a></li>
+<li><b>PCR</b> Principal Component Regression: Inverse regression method closely related to PLS with similar goals. PCR may be less sensitive to random and systematic error in the Y block but more sensitive to systematic error in the X block. See also: <a href="pcr.html" title="Pcr">pcr</a></li>
+<li><b>LWR</b> Locally Weighted Regression: Inverse regression method often used with non-linear systems. LWR uses PCA to automatically select the calibration samples most similar to a new (unknown) sample and calculates a PLS or PCR model from only those samples (this is called the "local" model). User must select the number of samples to include in the local model and whether the model should be a PLS, PCR, or Global PCR model. Global PCR uses the scores from the original PCA. The other two are standard PLS or PCR models which can use the same number of latent variables as the global model or a user-selected number. See also: <a href="lwr.html" title="Lwr">lwr</a></li>
+<li><b>SVM-R</b> Support Vector Machine [Regression]: Sometimes called SVR (Support Vector Regression), this is a non-linear regression method which can be considered a hybrid of MLR and LWR. The calibration step selects calibration samples (called "support vectors") which are deemed the most critical to defining the regression relationship. These samples are used with [usually] non-linear weighting terms to define a locally-weighted prediction for new samples. Unlike the other regression methods, SVM is intrinsically non-linear and can better approximate non-linear responses, however, its predictions can also be more chaotic as a result.  See also: <a href="svm.html" title="Svm">svm</a></li>
+<li><b>MLR</b> Multiple Linear Regression: Non-factor based inverse regression method. MLR uses raw variable responses in X to predict Y. This method requires that all columns of X be unique (not highly correlated) and may be highly unstable or unusable with many variables. Models do not provide quality of fit statistics. See also: <a href="mlr.html" title="Mlr">mlr</a></li>
+<li><b>CLS</b> Classical Least Squares: Factor-based classical regression method based on a simple linearly additive model. CLS works well when all responses in a system are known or can be determined experimentally. Often works well when several underlying sources of variance exist and their quantity needs to be determined. Unlike the other methods, CLS can operate on an X block alone. If no Y block is loaded, CLS assumes that the samples in the X block are "pure component responses" (i.e. each row of the X block represents what an individual component of the system looks like when measured on its own.) See also: <a href="cls.html" title="Cls">cls</a></li>
+<li><b>XGB</b> Gradient Boosted Decision Tree Regression: The gradient boosted tree method additively combines an ensemble of decision trees to produce a better predictor. XGB can be used as a linear or non-linear method and can include regularization to reduce overfitting. Computational performance scales much better than SVM for large numbers of samples. See also: <a href="xgb.html" title="Xgb">xgb</a></li></ul>
+<h3><span class="mw-headline" id="Classification_Methods">Classification Methods</span></h3>
+<p>These methods are used to identify a sample as belonging to one or more groups of previously-classified samples. The samples in the calibration set must be assigned to class(es). These class assignments are then used to help identify the class for an unknown sample. They are mostly one-block methods which operate on a single X block with the calibration samples' "class" field assigned to indicate the class membership (For information on assigning classes to the X-block, see <a href="assigning_sample_classes.html" title="Assigning Sample Classes">Assigning Sample Classes</a>). The scores predicted by these models include the class predictions as described in <a href="sample_classification_predictions.html" title="Sample Classification Predictions">Sample Classification Predictions</a>.
+</p>
+<ul><li><b>KNN</b> K-Nearest Neighbors: A classification method which assigns an unknown sample to a class by identifying the "k" closest samples in the calibration set and tallying a "vote" of the classes of these samples. The class which receives the highest vote count is determined to be the class of the unknown. See also: <a href="knn.html" title="Knn">knn</a></li>
+<li><b>PLSDA</b> Partial Least Squares Discriminant Analysis: A classification method which identifies the differences between two or more classes by identifying what is different between the classes. PLSDA is a factor-based method very similar to Linear Discriminant Analysis (LDA) but does not suffer from problems with collinear (highly related) variables. See also: <a href="plsda.html" title="Plsda">plsda</a></li>
+<li><b>SVMDA</b> Support Vector Machine Discriminant Analysis: Sometimes called SVC (Support Vector Classification), this is a non-linear classification method which can be considered a variant of KNN. The calibration step selects calibration samples (called "support vectors") which are deemed the most critical to defining the class boundries. These samples are used with [usually] non-linear weighting terms to define a locally-weighted prediction for new samples. As opposed to PLSDA and KNN, SVM is intrinsically non-linear and can better approximate non-linear responses, but can also be more chaotic as a result. See also: <a href="svmda.html" title="Svmda">svmda</a></li>
+<li><b>SIMCA</b> Soft Independent Modeling of/by Class Analogy: A classification method in which a PCA model is created for each class in the calibration data. Unknown samples are then projected into each PCA model and classified as in or not in each class based on whether the sample falls "inside" each PCA model. See also: <a href="simca.html" title="Simca">simca</a></li>
+<li><b>XGBDA</b> Gradient Boosted Decision Tree Discriminant Analysis: The gradient boosted tree method additively combines an ensemble of decision trees to produce a better classifier. XGBDA can be used as a linear or non-linear method and can include regularization to reduce overfitting. Computational performance scales much better than SVMDA for large numbers of samples. See also: <a href="xgbda.html" title="Xgbda">xgbda</a></li></ul>
+<h3><span class="mw-headline" id="Statistical_Methods">Statistical Methods</span></h3>
+<p>These methods are usually used to analyze data created through an experimental design to determine the effect of the controlled factors of the design. They are similar to Decomposition methods except they require additional information about the design to perform the analysis.
+</p>
+<ul><li><b>ASCA</b> Analysis of Variance (ANOVA) Simultaneous Component Analysis: a method to determine which factors within a fixed effects experimental design are significant relative to the residual error. ASCA permits an ANOVA-like analysis even when there are many more variables than samples and interprets the significance of all variables together in PCA model loadings. See also: <a href="asca.html" title="Asca">asca</a></li></ul>
+<ul><li><b>MLSCA</b> Multi-level Simultaneous Component Analysis: a which analyzes the variability in datasets from designed experiments with nested factors. It separates variability into that associated with each factor and the residuals, estimating the contribution of each factor to total sum of squares. A PCA model is built for each factor showing the scores and loadings for these effects. MLSCA also builds a PCA model on the residuals, or “within” variability. The “Within” variability is often the focus of the analysis. See also: <a href="mlsca.html" title="Mlsca">mlsca</a></li></ul>
+<h3><span class="mw-headline" id="Multi-way_Methods">Multi-way Methods</span></h3>
+<p>Multi-way methods work on X-block data which has 3 or more dimensions ("modes"). Whereas other methods expect 2-way data "tables" where rows are samples and columns are variables, these methods allow for 2 or more modes of variables where each variable is also collected as a function of one or more other parameters (e.g. Excitation Emission Matrices (EEMs), sensory data, GC-MS).
+</p>
+<ul><li><b>PARAFAC</b> PARAllel FACtor analysis: Very similar to <a href="#Exploratory_and_Cluster_Analysis_Methods">MCR</a>, but can be applied to multi-way data (data with 3 or more dimensions) as well as typical 2-way data. Results for 2-way data are essentially the same as MCR, but results on multiway data can be very deterministic. PLS_Toolbox users, see also: <a href="parafac.html" title="Parafac">parafac</a></li>
+<li><b>Multi-way PLS (NPLS)</b> Multi-way Partial Least Squares: <a href="#Quantitative_Analysis_Methods">quantitative analysis method</a> for use with multi-way X. PLS_Toolbox users, see also: <a href="npls.html" title="Npls">npls</a></li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930005357
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.016 seconds
+Real time usage: 0.019 seconds
+Preprocessor visited node count: 42/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:522-0!canonical and timestamp 20240930005357 and revision id 4455.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Analysis_Menu&amp;oldid=4455">https://www.wiki.eigenvector.com/index.php?title=Analysis_Menu&amp;oldid=4455</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 23 December 2018, at 00:08.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

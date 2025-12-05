@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Installation - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Installation rootpage-Installation skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Installation"><span class="mw-page-title-main">Installation</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Installing_PLS_Toolbox"><span class="tocnumber">1</span> <span class="toctext">Installing PLS_Toolbox</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#System_Requirements"><span class="tocnumber">1.1</span> <span class="toctext">System Requirements</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#MATLAB_Compatibility"><span class="tocnumber">1.2</span> <span class="toctext">MATLAB Compatibility</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Using_the_Windows_EXE_Installer"><span class="tocnumber">1.3</span> <span class="toctext">Using the Windows EXE Installer</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Manually_Installing_from_ZIP_File_(all_platforms)"><span class="tocnumber">1.4</span> <span class="toctext">Manually Installing from ZIP File (all platforms)</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Configuring_Java"><span class="tocnumber">1.5</span> <span class="toctext">Configuring Java</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Installing_Solo"><span class="tocnumber">2</span> <span class="toctext">Installing Solo</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#System_Requirements_2"><span class="tocnumber">2.1</span> <span class="toctext">System Requirements</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Installation"><span class="tocnumber">2.2</span> <span class="toctext">Installation</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="#Windows"><span class="tocnumber">2.2.1</span> <span class="toctext">Windows</span></a>
+<ul>
+<li class="toclevel-4 tocsection-11"><a href="#For_Installing_Solo_9.0_and_newer"><span class="tocnumber">2.2.1.1</span> <span class="toctext">For Installing Solo 9.0 and newer</span></a></li>
+<li class="toclevel-4 tocsection-12"><a href="#For_Installing_Solo_8.9.2_and_older"><span class="tocnumber">2.2.1.2</span> <span class="toctext">For Installing Solo 8.9.2 and older</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-13"><a href="#Mac"><span class="tocnumber">2.2.2</span> <span class="toctext">Mac</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="#Linux"><span class="tocnumber">2.2.3</span> <span class="toctext">Linux</span></a>
+<ul>
+<li class="toclevel-4 tocsection-15"><a href="#For_Installing_Solo_9.0_and_newer:"><span class="tocnumber">2.2.3.1</span> <span class="toctext">For Installing Solo 9.0 and newer:</span></a></li>
+<li class="toclevel-4 tocsection-16"><a href="#For_older_installations:"><span class="tocnumber">2.2.3.2</span> <span class="toctext">For older installations:</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-17"><a href="#Troubleshooting_Solo"><span class="tocnumber">2.3</span> <span class="toctext">Troubleshooting Solo</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="#Starting_Solo"><span class="tocnumber">3</span> <span class="toctext">Starting Solo</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#Python_Configuration_-_PLS_Toolbox_and_Solo"><span class="tocnumber">4</span> <span class="toctext">Python Configuration - PLS_Toolbox and Solo</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="#Updating"><span class="tocnumber">5</span> <span class="toctext">Updating</span></a></li>
+<li class="toclevel-1 tocsection-21"><a href="#Recommendations_for_Offline_Installation"><span class="tocnumber">6</span> <span class="toctext">Recommendations for Offline Installation</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="#Checking_Your_Installation"><span class="tocnumber">7</span> <span class="toctext">Checking Your Installation</span></a></li>
+<li class="toclevel-1 tocsection-23"><a href="#Getting_Help"><span class="tocnumber">8</span> <span class="toctext">Getting Help</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Installing_PLS_Toolbox">Installing PLS_Toolbox</span></h2>
+<p>PLS_Toolbox is delivered as a Windows Installer (.exe for Windows 
+only) or as a compressed ZIP file (all platforms). Installation is a two-part process of 
+copying and decompressing files into a local folder and then adding those files to your 
+MATLAB path. You will need your <b>License Code</b> (obtained at the time of purchase). 
+</p>
+<h3><span class="mw-headline" id="System_Requirements">System Requirements</span></h3>
+<ul><li>Compatible with any MATLAB released within 5 years of released date of this product. In general, Eigenvector products should work on most modern computers. For system requirements of specific versions of MATLAB <a rel="nofollow" class="external text" href="https://www.mathworks.com/support/requirements/previous-releases.html">see here</a>.</li></ul>
+<ul><li>PLS_Toolbox does not require any other MATLAB toolboxes but will make use of the Parallel Computing Toolbox in certain scenarios if present.</li></ul>
+<h3><span class="mw-headline" id="MATLAB_Compatibility">MATLAB Compatibility</span></h3>
+<p>Although we try to maintain inter-compatibility with MATLAB add-on Toolboxes to the greatest extent possible some incompatibilities do exist. Most of these cases originate from situations where PLS_Toolbox has an established function and The MathWorks (TMW) introduces a new function with the same name and is unwilling to rename it. Because we don't have access to the entire TMW product family this list may not include all incompatible functions:
+</p>
+<ul><li>Incompatible Functions
+<ul><li>cluster.m (Stats Toolbox)</li>
+<li>crossval.m (Stats Toolbox)</li>
+<li>regression.m (Neural Net Toolbox)</li>
+<li>ridge.m (Stats Toolbox)</li></ul></li></ul>
+<ul><li>Intentional overloads:
+<ul><li>boxplot.m (Stats Toolbox because of DataSet Object <a rel="nofollow" class="external text" href="http://www.eigenvector.com/evriblog/?p=10">conflict</a>)</li></ul></li></ul>
+<ul><li>Compatible Functions
+<ul><li>dendrogram.m (Stats Toolbox)</li>
+<li>range.m (Stats Toolbox)</li>
+<li>kstest.m (Stats Toolbox)</li></ul></li></ul>
+<p><br />
+To manage which function is being called, relocate PLS_Toolbox on your MATLAB path. Putting PLS_Toolbox at the bottom of the path will allow the use of MATLAB functions but will often make PLS_Toolbox inoperable until it's moved back to the top of the path. Within Browse you can select Help&gt;Move Path Folders and indicate the location (Top or Bottom). The <a href="evrimovepath.html" title="Evrimovepath">evrimovepath</a> function can be used from the command line.
+</p>
+<h3><span class="mw-headline" id="Using_the_Windows_EXE_Installer">Using the Windows EXE Installer</span></h3>
+<p>It is recommended that Windows users use the PLS_Toolbox Windows Installer. 
+</p>
+<ol><li>Copy the .exe file to your Desktop (or other suitable local location).</li>
+<li>Double click the icon and follow the instructions. Be sure to verify the location of the installation folder; by default it will be the "toolbox" folder of your current MATLAB installation. <b>Windows users:</b> may need to choose a folder within your personal Documents folder in order to avoid permissions problems caused by Windows security.</li>
+<li>When the Installer has completed, it will prompt you to start MATLAB and run an install script.</li>
+<li>If MATLAB doesn't start see Step 2 below.</li></ol>
+<h3><span id="Manually_Installing_from_ZIP_File_.28all_platforms.29"></span><span class="mw-headline" id="Manually_Installing_from_ZIP_File_(all_platforms)">Manually Installing from ZIP File (all platforms)</span></h3>
+<ol><li><b>File Extraction</b> <br /> Decompress the PLS_Toolbox ZIP file. We recommend placing the decompressed PLS_Toolbox main folder into the <a rel="nofollow" class="external text" href="https://www.mathworks.com/help/matlab/ref/userpath.html">'userpath'</a> folder for your MATLAB installation (the default location for this folder is your <b>Documents</b> folder). Older versions of PLS_Toolbox may have been placed in the MATLAB "toolbox" folder (e.g. C:\Program Files\MATLAB\R2016a\toolbox) but this is no longer recommended.
+<dl><dd><b>Note</b>: If you already have a version of PLS_Toolbox installed, be sure the folders do not have the same name (by default they should not). Rename your existing copy of PLS_Toolbox if necessary.</dd></dl></li>
+<li><b>Run <code>evriinstall</code></b> <br />For MATLAB to find PLS_Toolbox, the directories that contain the toolbox files must be added to the MATLAB search path.
+<dl><dd><b>Please Note</b>: If you are familiar with installing toolboxes purchased from The MathWorks, this process is different. TMW installers typically are able to set the path automatically. PLS_Toolbox has its own installation method.</dd>
+<dd>Start MATLAB and follow these steps:
+<ul><li>Start MATLAB and use the Current Folder toolbar to navigate to the PLS_Toolbox main folder (created in step 1).</li>
+<li>Type evriinstall at the command line (in the COMMAND WINDOW): <pre>&gt;&gt; evriinstall</pre>A dialog box will appear (see below.) Change the settings as needed then click the <b>Install</b> button. EVRIINSTALL will add PLS_Toolbox to the MATLAB path, check for any installation problems, and output results to the command window.</li>
+<li>See the <a href="pls_toolbox_topics.html" title="PLS Toolbox Topics"> Reference Topics</a> page for information about PLS_Toolbox functions. Continue reading the <a href="software_user_guide.html" title="Software User Guide">Software User Guide</a> for information using Solo and PLS_Toolbox.</li></ul>
+<dl><dd><a href="" class="image"><img alt="Installation Guide Window PLS TB 8.7.PNG" src="installation_guide_window_pls_tb_8.7.png" decoding="async" width="790" height="401" /></a></dd></dl></dd></dl></li></ol>
+<h3><span class="mw-headline" id="Configuring_Java">Configuring Java</span></h3>
+<p>In some older versions of MATLAB, including version 7.0.4 (R14SP2), it is necessary to manually add the jar files included with PLS_Toolbox to the MATLAB java class path. Please see this FAQ for more information:
+</p><p><a href="faq_how_to_configure_java_files_in_older_matlab.html" title="Faq how to configure java files in older MATLAB"> How to configure Java files in older versions of MATLAB?</a>
+</p>
+<h2><span class="mw-headline" id="Installing_Solo">Installing Solo</span></h2>
+<h3><span class="mw-headline" id="System_Requirements_2">System Requirements</span></h3>
+<p>For Solo based products the system requirements will track the version of MATLAB used to build Solo. See <b>MATLAB Runtime</b> column in the <a href="release_notes_pls_toolbox_and_solo.html#Version_Inter-compatibility" title="Release Notes PLS Toolbox and Solo"> release notes</a> for the version of MATLAB used to build Solo and then check the system requirements for that specific version of MATLAB <a rel="nofollow" class="external text" href="https://www.mathworks.com/support/requirements/previous-releases.html">here</a>. The <b>MATLAB Runtime</b> is automatically installed during the installation process. All Solo based products <u><b><a href="faq_do_i_need_internet_to_install.html" title="Faq do I need Internet to Install">require an internet connection</a></b></u> to be installed.
+</p>
+<h3><span class="mw-headline" id="Installation">Installation</span></h3>
+<h4><span class="mw-headline" id="Windows">Windows</span></h4>
+<p>If you install Solo into the default "Destination Folder", C:\Program Files\EVRI\Solo_###, where ### is the version number, then you need to install it "As Administrator" in order for library folders to be created under that path. Using "As Administrator" should not be necessary if you install it to a Destination Folder which your user account has access rights to.
+</p>
+<h5><span class="mw-headline" id="For_Installing_Solo_9.0_and_newer">For Installing Solo 9.0 and newer</span></h5>
+<p><b>Important System Requirement:</b>  Please ensure that the latest Microsoft Windows Visual C++ Redistributable library is installed on the computer. This can be installed from: 
+<a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022">Microsoft</a>
+Choose the "X64" 64-bit architecture choice. 
+If this is not installed you will get an error window saying "The code execution cannot proceed because VCRUNTIME140.dll was not found. Reinstalling the program may fix this problem".
+</p>
+<ol><li>Copy the installer.exe file to your Desktop (or other suitable local location).</li>
+<li>Double click the icon and follow the instructions. (To customize the installation process, see <a rel="nofollow" class="external text" href="https://www.mathworks.com/help/compiler/install-deployed-application.html#mw_de969f75-f6dc-4296-9463-69ae760c0401%7C%7C">here</a>)</li>
+<li>Click Next in the Solo Installer window. This window has basic product information about Solo.</li>
+<li>In the Installation Options window, choose the Installation folder, by default it will be in the "EVRI" folder of your program files folder. Also choose if you wish the create a Desktop shortcut. Click Next.</li>
+<li>Click Next in the Required Software window. This window says that Solo requires MATLAB Runtime (as of 2023 this is version 2020b but the EVRI will upgrade the version in the future to accommodate updated operating systems and new features, this occurs roughly every 3-5 years). If the MATLAB Runtime is not already installed on the computer then it will be installed, offering a default install location which you can change if necessary.</li>
+<li>Click Install in the Confirmation window. This windows shows were Solo will be installed and where the Runtime is installed.</li>
+<li>Click Finish on the Installation Complete window. This window shows that the installation was successful and give instructions on how to launch Solo.</li>
+<li>To launch Solo:
+<ul><li>Navigate to the installation location and go to the "application" folder.</li>
+<li>If installing with a license file (evrilicense.lic) or license server file (evrilm.xml), move these files into this "application" folder with the .exe file.</li>
+<li>Double click on the Solo icon. If this is the first time launching Solo then you will be prompted for the license code. The correct license code can be found by logging in to your Eigenvector account and navigating to the Download tab.</li></ul></li></ol>
+<h5><span class="mw-headline" id="For_Installing_Solo_8.9.2_and_older">For Installing Solo 8.9.2 and older</span></h5>
+<ol><li>Copy the installer.exe file to your Desktop (or other suitable local location).</li>
+<li>If installing with a license file (evrilicense.lic) or license server file (evrilm.xml), move these files into the same folder as the installer .exe file.</li>
+<li>Double click the icon and follow the instructions. Be sure to verify the location of the installation folder; by default it will be in the "EVRI" folder of your program files folder. (To customize the installation process, see <a href="solo_installer_flags.html" title="Solo Installer Flags">Solo Installer Flags</a>)</li>
+<li>Identify if you want desktop and Start menu shortcuts created as well as if you want to associate .mat files with Solo.</li>
+<li>Identify if you want to add Solo to the system path. Doing so will assure 3rd-party programs will be able to start up Solo (where the 3rd-party program offers this feature.)</li>
+<li>When the Installer has completed, you will be asked if you want to start Solo now. The first time you run Solo, it will need to unpack several libraries and make take a minute or so to complete installation. Subsequent startups will take less time. Note that when installed in the standard Program Files folder, this step needs to be done as a user with administrative privileges so it is best to do from the installer.</li></ol>
+<p><b>NOTE:</b> If installing Solo with a license server, see the <a href="evri_license_server.html" title="Evri license server">Evri_license_server</a> documentation.
+</p><p><b>Troubleshooting:</b> If having problems downloading, installing or running Solo, see the <a href="solo_troubleshooting.html" title="Solo Troubleshooting">Solo Troubleshooting</a> page.
+</p>
+<h4><span class="mw-headline" id="Mac">Mac</span></h4>
+<p>For macOS and Solo 8.9.2 and newer:
+</p>
+<ol><li><b>Image Mounting</b><br />Open the Solo.dmg (or Solo+MIA.dmg) disk image file by double-clicking on it. The disk image will mount on your computer.</li>
+<li><b>Launching The Installer Application</b><br />Right-click the Solo_WebInstaller.app and select <b>Open</b> to open the application. You will be prompted for a password to run the java based installer ("java wants to make changes").</li>
+<li><b>Follow Instructions</b><br />Follow the dialog box instructions, the MATLAB Compiler Runtime (MCR) will be installed if it hasn't been already. The Installation Complete dialog may have instructions relating to opening the application from a shell script, these instructions can be ignored. Double-clicking the application will open it.</li>
+<li><b>Drag the App to the Dock</b><br />By default, the applications will be located in the /Applications/EigenvectorResearchInc/ folder. A versioned folder name (e.g., Solo_892) will be created and the .app folder will be located in the "application" folder. For version 8.9.2 of Solo the app is located at /Applications/EVRI/Solo_892/application. Open the app and drag its icon to the MacOS application dock for easy access.</li></ol>
+<p><br />
+For installing Solo 8.9.2 and older on macOS Catalina and later, the Matlab 2019b MCR (MATLAB Compiler Runtime) must be installed prior to opening the Solo app:
+</p><p><a rel="nofollow" class="external free" href="https://www.mathworks.com/products/compiler/matlab-runtime.html">https://www.mathworks.com/products/compiler/matlab-runtime.html</a>
+</p>
+<ol><li><b>Image Mounting</b><br />Open the Solo.dmg (or Solo+MIA.dmg) disk image file by double-clicking on it. The disk image will mount on your computer.</li>
+<li><b>Copy Solo APP</b><br />Copy the Solo.app (or Solo+MIA.app) bundle to your Applications folder.</li>
+<li><b>Launching The Application</b><br />Right-click Solo.app and select <b>Open</b> to open the application.</li>
+<li><b>Errors on Startup</b><br />If you receive a message saying "the Disk has been damaged" (OS X 10.7+) you may need to disable Mac Gatekeeper as described <a rel="nofollow" class="external text" href="http://support.apple.com/kb/ht5290">here</a> and for Mac OS Sierra (and higher) see <a rel="nofollow" class="external text" href="https://www.tekrevue.com/tip/gatekeeper-macos-sierra/">here</a>.</li></ol>
+<dl><dd><ul><li>To disable Gatekeeper (i.e., set it to install from  “Anywhere”) from the command line, open a new Terminal window then enter the following command:</li></ul>
+<dl><dd><pre>$ sudo spctl --master-disable</pre></dd></dl>
+<ul><li>To re-enable Gatekeeper enter the following command:</li></ul>
+<dl><dd><pre>$ sudo spctl --master-enable</pre></dd></dl></dd></dl>
+<p><b>NOTE</b>: The first time you run Solo, it will need to unpack several libraries and may take several minutes (or longer depending on system resources) to complete installation. Subsequent startups will take less time.
+</p><p><b>Troubleshooting:</b> If having problems downloading, installing or running Solo, see the <a href="solo_troubleshooting.html" title="Solo Troubleshooting">Solo Troubleshooting</a> page.
+</p>
+<h4><span class="mw-headline" id="Linux">Linux</span></h4>
+<h5><span class="mw-headline" id="For_Installing_Solo_9.0_and_newer:">For Installing Solo 9.0 and newer:</span></h5>
+<ol><li>Extract the Solo_WebInstaller.install package.</li>
+<li>Run the installer as a super user, the default location will be <code>/usr/local/bin</code>.</li>
+<li>Use the shell script provided to launch the application by providing the MCR location as the first input:
+<dl><dd><code>./run_Solo.sh /usr/local/MATLAB/MATLAB_Runtime/v99/</code></dd></dl></li>
+<li>Additional inputs can be added (contained in single quotes):
+<dl><dd><code>./run_Solo.sh /usr/local/MATLAB/MATLAB_Runtime/v99/ '-debug -loadsettings "/home/scott/default.xml"'</code></dd></dl></li></ol>
+<h5><span class="mw-headline" id="For_older_installations:">For older installations:</span></h5>
+<ol><li><b>Unzip/UnTar</b><br />Copy the tar.gz file into a target folder (create one using the <tt>mkdir</tt> command) in any convenient location (e.g. the user's home directory or any accessible location) and use the following command to unzip/untar the application:<pre> tar -xzf solo.tar.gz</pre>(note: archive name will be depend on the exact application you are installing)</li>
+<li><b>Launching The Application</b><br />In a console window, change the working directory to the target folder and use the command:<pre> ./solo</pre> (application name will depend on the exact application you purchased). If starting from a different working directory, use the full path to the solo application. You can also create a shortcut which performs this operation.</li></ol>
+<dl><dd><dl><dd><b>First Run Notes</b>: The first time you run Solo, it will need to unpack several libraries and make take several minutes (or longer depending on system resources) to complete installation. Subsequent startups will take less time. If the program has been installed in a general system folder (such as /usr/local/bin ) then the initial run of Solo may need to be done using SUDO so the program has sufficient privileges to unpack the libraries.</dd></dl></dd></dl>
+<p><b>Troubleshooting:</b> If having problems downloading, installing or running Solo, see the <a href="solo_troubleshooting.html" title="Solo Troubleshooting">Solo Troubleshooting</a> page.
+</p><p><b>Solo_Predictor:</b> If installing Solo_Predictor see <a href="solomanager.html#Running_SoloManager_as_a_Unix.2FLinux_Daemon" title="SoloManager"> this page</a>
+</p>
+<h3><span class="mw-headline" id="Troubleshooting_Solo">Troubleshooting Solo</span></h3>
+<p>If having problems downloading, installing or running Solo, see the <a href="solo_troubleshooting.html" title="Solo Troubleshooting">Solo Troubleshooting</a> page.
+</p>
+<h2><span class="mw-headline" id="Starting_Solo">Starting Solo</span></h2>
+<p>On all platforms, Solo can be started using the installed shortcuts (double-clicking the shortcut), or by calling the application directly from either a shortcut or DOS/Linux command window. The application can also take <a href="solo_startup_flags.html" title="Solo Startup Flags">various command-line flags</a> that modify startup behavior.
+</p>
+<h2><span class="mw-headline" id="Python_Configuration_-_PLS_Toolbox_and_Solo">Python Configuration - PLS_Toolbox and Solo</span></h2>
+<p>To configure Solo/PLS_Toolbox to use python methods please see the <a href="python_configuration.html" title="Python configuration">Python configuration</a> page.
+</p>
+<h2><span class="mw-headline" id="Updating">Updating</span></h2>
+<p>The most up-to-date version of PLS_Toolbox and Solo will be made available to users on our web 
+site, www.eigenvector.com. Registered users can download new copies of the toolbox 
+that incorporate the latest bug fixes. A username and password is required for access to 
+the upgrades. Usernames and passwords are supplied when licenses are 
+purchased (older version users should have received this information by registering their 
+software). If you have forgotten your username and/or password, please write to 
+helpdesk@eigenvector.com or use the lost username/password page accessible from the download page <a rel="nofollow" class="external text" href="http://download.eigenvector.com/">on the Eigenvector Research website</a>.
+</p><p>To check for updates select <b>Check for Updates</b> from the <b>Help</b> menu of the Workspace Browser or Analysis interface, or, for PLS_Toolbox users, use the command:
+</p>
+<pre>&gt;&gt; evriupdate 
+</pre>
+<p>at the MATLAB command line. This will bring up a small dialog box indicating the status of your installed products.
+</p>
+<h2><span class="mw-headline" id="Recommendations_for_Offline_Installation">Recommendations for Offline Installation</span></h2>
+<p>In environments without Internet access the following items can be saved to media and loaded/installed on a remote machine. These items should be installed in order listed: 
+</p>
+<ul><li><b>MATLAB</b> or <a rel="nofollow" class="external text" href="https://www.mathworks.com/products/compiler/matlab-runtime.html">MCR (MATLAB Compiler Runtime)</a>. The MCR should be the correct version for the <a href="release_notes_pls_toolbox_and_solo.html#Release_Management" title="Release Notes PLS Toolbox and Solo"> given version of Solo</a>. For example, Solo 9.3 uses the 2020b MCR.</li></ul>
+<ol><li>Copy the MATLAB_Runtime .zip file to the target computer.</li>
+<li>Expand this .zip file to any accessible folder. It will create a folder there, for example named: MATLAB_Runtime_R2020b_Update_8_win64.</li>
+<li>In the expanded folder double-click the file "setup.exe" to start the installer.": Accept suggested installation folder: C:\Program Files\MATLAB\MATLAB Runtime. This will take several minutes and finishes by installing the Matlab Runtime in: C:\Program Files\MATLAB\MATLAB Runtime\v99</li>
+<li>Add the path, in this example: "C:\Program Files\MATLAB\MATLAB Runtime\v99\runtime\win64", to the System PATH environment variable.</li></ol>
+<ul><li><b><a href="python_configuration.html" title="Python configuration"> Miniconda3</a></b>, Python virtual environment management software to enable python tools in PLS_Toolbox and Solo.</li></ul>
+<ul><li><b>PLS_Toolbox</b>, download from your account at the Eigenvector website.</li>
+<li><b>Solo_Predictor</b>, request the offline installer (Windows only) from Eigenvector Helpdesk.</li>
+<li><b>Solo, Solo_MIA, Solo_Model_Exporter, or Solo_MIA_Model_Exporter</b>: These installers will not work on a computer without internet connectivity. Instead, do the following:</li></ul>
+<ol><li>Run the installer on another computer which does have internet connectivity. In the case of Solo 9.3. This will create an installation folder wherever you specified, for example C:\tmp\Solo_93, which contains the "application" folder.</li>
+<li>Copy this Solo_93 folder and its contents (create a .zip file for convenience) to the offline computer, for example as C:\evri\Solo_93.</li>
+<li>Solo can now be started by double-clicking on the C:\evri\Solo_93\application\Solo.exe file.</li>
+<li>For a single-user license enter the license code when prompted. For a floating site license follow the normal floating license instructions (see <a href="license_server_quick_start.html#On_each_client_computer" title="License Server Quick Start">On_each_client_computer</a> ).</li></ol>
+<h2><span class="mw-headline" id="Checking_Your_Installation">Checking Your Installation</span></h2>
+<p>You can check that your software is installed and working correctly by:
+</p>
+<ul><li>PLS_Toolbox: Run the "evridebug" MATLAB command. Running this should report that "No PLS_Toolbox installation problems were identified".</li>
+<li>Solo: Solo should open with the Browser window presented. You can confirm Solo is installed correctly by running any analysis method, for example PCA. See the short video on using PCA at: <a rel="nofollow" class="external text" href="http://www.eigenvector.com/eigenguide.php?m=PCA_2014">PCA</a>.</li></ul>
+<p><br />
+Solo or PLS_Toolbox users can get product information from the Help &gt; About menu in the Workspace Browser or Analysis window.
+</p><p>PLS_Toolbox users can use the following commands to verify a new or existing installation. We request the output from these commands when you submit a request to <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>.
+</p>
+<ul><li>ver - Matlab command show a list of installed products.</li>
+<li>path - Matlab command showing the current folders on the Matlab path. <b>ALL</b> PLS_Toolbox folders (and sub-folders) should be on the Matlab path.</li>
+<li><a href="evridebug.html" title="Evridebug">evridebug</a> - PLS_Toolbox command that checks for common installation problems.</li></ul>
+<p>Also check <a rel="nofollow" class="external text" href="http://www.eigenvector.com/faq">our FAQ page</a>, there are several more detailed issues including <a rel="nofollow" class="external text" href="http://www.eigenvector.com/faq/index.php?id=141">trouble with the Matlab path</a> discussed there.
+</p>
+<h2><span class="mw-headline" id="Getting_Help">Getting Help</span></h2>
+<p>Start by checking our <a rel="nofollow" class="external text" href="http://www.eigenvector.com/faq">FAQ Pages</a>.
+For Solo: also check the <a href="solo_troubleshooting.html" title="Solo Troubleshooting">Solo Troubleshooting Pages</a>
+</p><p>If you cannot find the information you need there, send problem reports to <a rel="nofollow" class="external text" href="mailto://helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>
+</p><p>Please send your message with the following information:
+</p>
+<ul><li>Product License/Registration Number</li>
+<li>Computer type, model and operating system version</li>
+<li>Exact errors you are receiving (if any)</li>
+<li>Hardware and memory configuration (if reporting a memory issue)</li>
+<li>Your contact information including either your Eigenvector Username or the following information</li></ul>
+<dl><dd><dl><dd>First Name</dd>
+<dd>Last Name</dd>
+<dd>Company Name</dd>
+<dd>Phone Country Code</dd>
+<dd>Phone Area Code</dd>
+<dd>Phone Main</dd>
+<dd>Phone Extension</dd></dl></dd></dl>
+<!-- 
+NewPP limit report
+Cached time: 20240930154524
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.038 seconds
+Real time usage: 0.043 seconds
+Preprocessor visited node count: 114/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 160/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:337-0!canonical and timestamp 20240930154524 and revision id 12412.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Installation&amp;oldid=12412">https://www.wiki.eigenvector.com/index.php?title=Installation&amp;oldid=12412</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 9 September 2024, at 17:30.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

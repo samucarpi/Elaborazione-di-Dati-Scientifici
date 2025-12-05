@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Alignmat - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Alignmat rootpage-Alignmat skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Alignmat"><span class="mw-page-title-main">Alignmat</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Algorithm"><span class="tocnumber">4</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Alignment of matrices and N-way arrays
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[bi,itst] = alignmat(amodel,b);</dd>
+<dd>[bi,itst] = alignmat(a,b,ncomp);</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>In some cases, data arrays require alignment to aid the performance of the three-way (e.g. GRAM, or PARAFAC) or unfold models such as MPCA. For example, sometimes GC peaks or data from batch operations can be shifted on a sample-to-sample basis (each sample is a M<sub>b</sub> by N matrix). In these cases, it is advantageous to choose a sub-matrix of a single matrix <b>A</b> as a standard and find the sub-matrix of subsequent samples <b>B</b> that best align or match the standard matrix. It is also possible to use a model of one or more standard matrices <b>A</b><sub>model</sub> and find the sub-matrix of subsequent samples <b>B</b> that best align or match the model. In the latter case, it is also possible to find the sub-array of <b>B</b> that best aligns with the model of a N-way data set (<b>A</b><sub>model</sub>). This can be performed along multiple modes using ALIGNMAT.
+</p><p>ALIGNMAT finds the subarray of input (b), (bi), that most matches a using two different algorithms. For input:
+</p>
+<pre> [bi,itst] = alignmat(amodel,b);
+</pre>
+<p>the sub-array (bi) is found using a projection method. In this case, (bi) is the sub-array of (b) that has the lowest residuals on a model of (a) called (amodel). Models for (amodel) are standard model structures from PCA, PCR, GRAM, TLD, or PARAFAC. Input (b) can be class "double" or "dataset" and must have the same number of modes/dimensions as (a) with each element of size(b) <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \geq }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo>&#x2265;<!-- ≥ --></mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \geq }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bcef7c0e95bb77a35fd1a874ca91f425215f3c26" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:1.808ex; height:2.176ex;" alt="{\displaystyle \geq }"/></span> size(a). Alignment is performed for modes with size(b) &gt; size(a).
+</p><p>For input:
+</p>
+<pre> [bi,itst] = alignmat(a,b,ncomp);
+</pre>
+<p>both (a) and (b) can be class "double" or "dataset", but both are two-way arrays (matrices). For (a) M by N then (b) must be Mb by N where Mb <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \geq }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo>&#x2265;<!-- ≥ --></mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \geq }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bcef7c0e95bb77a35fd1a874ca91f425215f3c26" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:1.808ex; height:2.176ex;" alt="{\displaystyle \geq }"/></span> M (when Mb = M no alignment is performed). The output (bi) is the sub-array of (b) that best matches the matrix (a). Optional input (ncomp) is a scalar of the number of components to use in the decomposition {default: ncomp = 1}.
+</p><p>Output (bi) is an array of class "double", (itst) is a cell array containing the indices of (b) that match (bi). Note that since interpolation is used the indices in (itst) are <i>not</i> in general integers.
+</p>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>For the projection method, <b>A</b><sub>model</sub> is a model of array <b>A</b>. This can be a model from PCA, GRAM, TLD, or PARAFAC. For example, if <b>A</b> is a <i>M</i> by <i>N</i> matrix then the PCA model of <b>A</b> is   where <b>T</b> is <i>M</i> by <i>K</i> and <b>P</b> is <i>N</i> by <i>K</i>. Alignmat finds the submatrix of <b>B</b>, <b>B</b><sub>i</sub>, that has the lowest residuals on the model of <b>A</b> i.e., <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {B} _{i}=\min \left(\sum \limits _{n=k}^{N+k}{\sum \limits _{m=j}^{M+j}{\left[\mathbf {B} _{k,j}\left(\mathbf {I} -\mathbf {PP} ^{T}\right)\right]^{2}}}\right)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">B</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mo movablelimits="true" form="prefix">min</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <munderover>
+              <mo movablelimits="false">&#x2211;<!-- ∑ --></mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>n</mi>
+                <mo>=</mo>
+                <mi>k</mi>
+              </mrow>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>N</mi>
+                <mo>+</mo>
+                <mi>k</mi>
+              </mrow>
+            </munderover>
+            <mrow class="MJX-TeXAtom-ORD">
+              <munderover>
+                <mo movablelimits="false">&#x2211;<!-- ∑ --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>m</mi>
+                  <mo>=</mo>
+                  <mi>j</mi>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>M</mi>
+                  <mo>+</mo>
+                  <mi>j</mi>
+                </mrow>
+              </munderover>
+              <mrow class="MJX-TeXAtom-ORD">
+                <msup>
+                  <mrow>
+                    <mo>[</mo>
+                    <mrow>
+                      <msub>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mi mathvariant="bold">B</mi>
+                        </mrow>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mi>k</mi>
+                          <mo>,</mo>
+                          <mi>j</mi>
+                        </mrow>
+                      </msub>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi mathvariant="bold">I</mi>
+                          </mrow>
+                          <mo>&#x2212;<!-- − --></mo>
+                          <msup>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi mathvariant="bold">P</mi>
+                              <mi mathvariant="bold">P</mi>
+                            </mrow>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi>T</mi>
+                            </mrow>
+                          </msup>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                    </mrow>
+                    <mo>]</mo>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {B} _{i}=\min \left(\sum \limits _{n=k}^{N+k}{\sum \limits _{m=j}^{M+j}{\left[\mathbf {B} _{k,j}\left(\mathbf {I} -\mathbf {PP} ^{T}\right)\right]^{2}}}\right)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b4a410664baaa0d4dbb0a8455888e8b1832bf1ec" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:40.326ex; height:7.676ex;" alt="{\displaystyle \mathbf {B} _{i}=\min \left(\sum \limits _{n=k}^{N+k}{\sum \limits _{m=j}^{M+j}{\left[\mathbf {B} _{k,j}\left(\mathbf {I} -\mathbf {PP} ^{T}\right)\right]^{2}}}\right)}"/></span>. This can be used to find the data "cube" within N-way arrays.
+</p>
+<pre>        <a href="" class="image"><img alt="Alignmat 01.gif" src="alignmat_01.gif" decoding="async" width="226" height="205" /></a>               <a href="" class="image"><img alt="Alignmat 02.gif" src="alignmat_02.gif" decoding="async" width="279" height="206" /></a>
+</pre>
+<p>In the left figure, this is represented as having each of the <i>M</i> by <i>N</i> sub-matrices of <b>B</b> projected onto the model of the <i>M</i> by <i>N</i> model of <b>A</b>. Note that in the figure that the size of <b>B</b> is <i>Mb</i> by <i>Nb</i> with <i>Mb&gt;M</i> and <i>Nb&gt;N</i>.
+</p><p>The projection method was presented in Gallagher, N.B. and Wise, B.M., "Standardization for Three-Way Analysis", <i>TRICAP 2000: Three-way Methods in Chemistry and Psychology</i>, Hvedholm Castle, Faaborg, Denmark, July (2000). In that study, it was found that the projection method was faster and more robust than the SVD-based algorithm discussed below.
+</p><p>In the SVD method, the standard matrix <b>A</b> and a sub-matrix of <b>B</b>, <b>B</b><sub>i</sub>, are aumented and a singular value decomposition of the result is performed such that [u,s,v] = svd([<b>A</b><sub><i>MxN</i></sub>|<b>B</b><sub>i,<i>MxNb</i></sub>]) (right figure). The sub-matrix is incremented and the SVD is performed again. The sub-matrix that minimizes the rank is selected as matching best. The objective function is <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle R=\left(\sum \limits _{j=ncomp+1}^{\min(M,N+N_{b})}{s_{j}}\right)\left(\sum \limits _{j=1}^{ncomp}{s_{j}}\right)^{-1}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>R</mi>
+        <mo>=</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <munderover>
+              <mo movablelimits="false">&#x2211;<!-- ∑ --></mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>j</mi>
+                <mo>=</mo>
+                <mi>n</mi>
+                <mi>c</mi>
+                <mi>o</mi>
+                <mi>m</mi>
+                <mi>p</mi>
+                <mo>+</mo>
+                <mn>1</mn>
+              </mrow>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mo movablelimits="true" form="prefix">min</mo>
+                <mo stretchy="false">(</mo>
+                <mi>M</mi>
+                <mo>,</mo>
+                <mi>N</mi>
+                <mo>+</mo>
+                <msub>
+                  <mi>N</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>b</mi>
+                  </mrow>
+                </msub>
+                <mo stretchy="false">)</mo>
+              </mrow>
+            </munderover>
+            <mrow class="MJX-TeXAtom-ORD">
+              <msub>
+                <mi>s</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>j</mi>
+                </mrow>
+              </msub>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mrow>
+              <munderover>
+                <mo movablelimits="false">&#x2211;<!-- ∑ --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>j</mi>
+                  <mo>=</mo>
+                  <mn>1</mn>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>n</mi>
+                  <mi>c</mi>
+                  <mi>o</mi>
+                  <mi>m</mi>
+                  <mi>p</mi>
+                </mrow>
+              </munderover>
+              <mrow class="MJX-TeXAtom-ORD">
+                <msub>
+                  <mi>s</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>j</mi>
+                  </mrow>
+                </msub>
+              </mrow>
+            </mrow>
+            <mo>)</mo>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle R=\left(\sum \limits _{j=ncomp+1}^{\min(M,N+N_{b})}{s_{j}}\right)\left(\sum \limits _{j=1}^{ncomp}{s_{j}}\right)^{-1}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0432aaca2976c743d01e003b313dc6c7ab7f1796" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:35.483ex; height:8.176ex;" alt="{\displaystyle R=\left(\sum \limits _{j=ncomp+1}^{\min(M,N+N_{b})}{s_{j}}\right)\left(\sum \limits _{j=1}^{ncomp}{s_{j}}\right)^{-1}}"/></span>. Note that in this algorithm <i>N</i> and <i>Nb</i> do not have to be equal.<i> </i>The algorithm is discussed in Prazen, et al., <i>Anal. Chem.</i>, <b>70</b>, 218-225, 1998.
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="alignpeaks.html" title="Alignpeaks">alignpeaks</a>, <a href="alignspectra.html" title="Alignspectra">alignspectra</a>, <a href="analysis.html" title="Analysis">analysis</a>, <a href="caltransfer.html" title="Caltransfer">caltransfer</a>, <a href="gram.html" title="Gram">gram</a>, <a href="matchrows.html" title="Matchrows">matchrows</a>, <a href="parafac.html" title="Parafac">parafac</a>, <a href="pca.html" title="Pca">pca</a>, <a href="registerspec.html" title="Registerspec">registerspec</a>, <a href="tld.html" title="Tld">tld</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930162351
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.230 seconds
+Real time usage: 0.623 seconds
+Preprocessor visited node count: 36/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 144/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:23-0!canonical and timestamp 20240930162350 and revision id 504.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Alignmat&amp;oldid=504">https://www.wiki.eigenvector.com/index.php?title=Alignmat&amp;oldid=504</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 22 February 2013, at 11:11.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

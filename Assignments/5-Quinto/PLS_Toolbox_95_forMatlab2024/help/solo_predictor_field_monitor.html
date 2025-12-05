@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Solo Predictor Field Monitor - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Solo_Predictor_Field_Monitor rootpage-Solo_Predictor_Field_Monitor skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Solo_Predictor_Field_Monitor"><span class="mw-page-title-main">Solo Predictor Field Monitor</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Trend_Plot"><span class="tocnumber">1.1</span> <span class="toctext">Trend Plot</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Selecting_Historical_Values"><span class="tocnumber">1.2</span> <span class="toctext">Selecting Historical Values</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#Initial_Setup"><span class="tocnumber">2</span> <span class="toctext">Initial Setup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#Accessing_the_Field_Monitor"><span class="tocnumber">2.1</span> <span class="toctext">Accessing the Field Monitor</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Specifying_Models"><span class="tocnumber">2.2</span> <span class="toctext">Specifying Models</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Specifying_Data"><span class="tocnumber">2.3</span> <span class="toctext">Specifying Data</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Clearing_Field_Monitor_History"><span class="tocnumber">2.4</span> <span class="toctext">Clearing Field Monitor History</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#Drill-Down_Access"><span class="tocnumber">3</span> <span class="toctext">Drill-Down Access</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Property_Alarm_Limits"><span class="tocnumber">4</span> <span class="toctext">Property Alarm Limits</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#User_Access_Control"><span class="tocnumber">5</span> <span class="toctext">User Access Control</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="#User_Management"><span class="tocnumber">5.1</span> <span class="toctext">User Management</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Password_Requirements"><span class="tocnumber">5.2</span> <span class="toctext">Password Requirements</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="#Customization"><span class="tocnumber">6</span> <span class="toctext">Customization</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="#Javascript_Configuration_Settings"><span class="tocnumber">6.1</span> <span class="toctext">Javascript Configuration Settings</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Custom_Application"><span class="tocnumber">6.2</span> <span class="toctext">Custom Application</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p><a href="solo_predictor_user_guide.html" title="Solo Predictor User Guide">Solo_Predictor</a> includes the <b>Solo_Predictor Field Monitor</b>, a web-based interface for use as a real-time results monitor.
+</p><p>The interface can be accessed through a standard web browser application or a web-browser window embedded in a 3rd party application. Features include:
+</p>
+<ul><li>A real-time updated display of results from applying a model to data.</li>
+<li>"Drill-down" functionality to view raw data, Q contributions (residuals), or Hotelling T^2 Contributions for any given sample.</li>
+<li>Alarm levels on predicted values exceeding high or low thresholds.</li>
+<li>Hover and Click-to-view numeric results for given data point(s).</li>
+<li>Optional user-access control with selectable user permission levels.</li>
+<li>Customizable Javascript and CSS-based interface.</li></ul>
+<p>The Field Monitor is accessible when Solo_Predictor has been configured to allow web-based connections and when the serverfolder is set (usually to the htpd folder in Solo_Predictor's main application folder.)
+</p>
+<h3><span class="mw-headline" id="Trend_Plot">Trend Plot</span></h3>
+<p>The default mode for the field monitor is to analyze continuous processes or operations and display the prediction results as a function of time. An example of this time-based display is shown below for a regression model (predicting "Y1"), shown as the dark-blue line, along with the Q and T^2 values (dimmed red and blue lines towards the bottom of the plot). Below the figure, the values and time stamps for the currently selected points are shown. By default, the most recent collected data is selected.
+</p><p><a href="" class="image"><img alt="Fmrunning.png" src="fmrunning.png" decoding="async" width="614" height="437" /></a>
+</p>
+<h3><span class="mw-headline" id="Selecting_Historical_Values">Selecting Historical Values</span></h3>
+<p>Historical property values can be viewed by either hovering the pointer over the data of interest, by clicking on one or more points in the plot to select those points, or by clicking and dragging a box around one or more points to select. The selected properties for the selected time points are shown in the current selection table below the plot.
+</p><p><a href="" class="image"><img alt="Fmselection.png" src="fmselection.png" decoding="async" width="735" height="505" /></a>
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="Initial_Setup">Initial Setup</span></h2>
+<h3><span class="mw-headline" id="Accessing_the_Field_Monitor">Accessing the Field Monitor</span></h3>
+<p>With the serverfolder setting defined and the socket enabled, a browser can be pointed at Solo_Predictor by using the computer's IP address, plus a colon and the socket port. When accessing Solo_Predictor from the same computer with the default settings, this would be the loopback address and port 2211:
+</p>
+<pre> <a rel="nofollow" class="external free" href="http://127.0.0.1:2211">http://127.0.0.1:2211</a>
+</pre>
+<h3><span class="mw-headline" id="Specifying_Models">Specifying Models</span></h3>
+<p>Solo_Predictor will look for available models in a folder named <tt>C:/models</tt> (for Windows - contact helpdesk for Linux) Models should be stored in the standard .mat format with a single model per file. When the page is first loaded, if no models have been copied into the models folder, the user will be advised:
+</p><p><a href="" class="image"><img alt="Fmnomodels.png" src="fmnomodels.png" decoding="async" width="282" height="113" /></a>
+</p><p>Once models are present, the user will be provided a list of the available models. One or more of the available models can be selected for use. Each selected model will be applied to the data and the results shown.
+</p><p>Each model type defines the default values which are available for display:
+</p>
+<ul><li><b>Regression models:</b> predicted Y values are displayed along with Q and T^2 values (if applicable for the regression model type).</li>
+<li><b>Classification models:</b> predicted probabilities for each modeled class are displayed along with Q and T^2 values (if applicable for the model type)</li>
+<li><b>Decomposition models:</b> (e.g. MCR and PCA models)&#160;: scores for all components are displayed</li></ul>
+<p>Other options can be made available using custom scripts and saving those scripts as .txt files in the models folder <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">Write Eigenvector's Help Desk</a> for more information on this file format.
+</p><p><b>Selecting New Models</b> - To select a new model for display, click on the axis scale on the left side of the plot. The list of available models will be given. Selected models will be highlighted. Click on any model to select/deselect the model. Click on the refresh icon (green arrows) to re-read the contents of the models folder.
+</p><p><a href="" class="image"><img alt="Fmmodelselect.png" src="fmmodelselect.png" decoding="async" width="187" height="165" /></a>
+</p>
+<h3><span class="mw-headline" id="Specifying_Data">Specifying Data</span></h3>
+<p>In order to make predictions and show results, Solo_Predictor must be given data to analyze. The typical operation mode of the Field Monitor is to show results as a function of time with real-time updating of the display.
+</p><p>To this end, there are various methods to load data and make it available to the Field Monitor for analysis:
+</p>
+<ul><li>Wait-for-file, with no waitscript defined, will automatically make any imported data available to the web interface. Waitscripts can also make data available to the web interface by making use of the <a href="datacache_object.html" title="DataCache object">DataCache object</a>.</li>
+<li>Third-party applications can access Solo_Predictor by Socket or ActiveX and "push" in data</li>
+<li>Solo_Predictor can make use of <a href="solo_predictor_installation_and_configuration.html#User_Timers" title="Solo Predictor Installation and Configuration">user timers</a> to access databases or files periodically</li></ul>
+<p>The wait-for-file method is the easiest to use. Simply enable wait-for-file and do not specify a waitscript and the data will be made available to the Field Monitor for real-time analysis.
+</p><p>The maximum amount of data and maximum age of data to display is managed via the <a href="datacache_object.html" title="DataCache object">DataCache object</a> settings.
+</p><p>For on-demand applications where data is collected only when a user requests it, the Field Monitor must be set up using the customization options discussed later in this document.
+</p>
+<h3><span class="mw-headline" id="Clearing_Field_Monitor_History">Clearing Field Monitor History</span></h3>
+<p>To clear the the Field Monitor history, follow these steps:
+</p>
+<ul><li>Click on the EVRI logo in the top left corner, an edit box will appear below the plot</li>
+<li>In this edit box, type:<br /><code>dc=@datacache.empty;</code></li></ul>
+<h2><span class="mw-headline" id="Drill-Down_Access">Drill-Down Access</span></h2>
+<p>The data, Q Contributions (a.k.a. residuals) and Hotelling T^2 Contributions associated with any time point can be accessed through the drill controls on the left-hand side of the selected points table. These buttons, labeled [D] [Q] and [T] access the data, Q contributions and T^2 contributions, respectively.
+</p><p><a href="" class="image"><img alt="Fmdrillcontrols.png" src="fmdrillcontrols.png" decoding="async" width="498" height="81" /></a>
+</p><p>If more than one point is currently selected for the given property, the plot generated will contain the contributions (or data) for all time points selected in the trend plot, but with the results for the given time point (the one for which the drill control button was pressed) highlighted.
+</p><p>For example, the Q contributions plot below shows the Q contributions for the 11:15:15 time point highlighted, but with all other selected points shown on the same figure.
+</p><p><a href="" class="image"><img alt="Fmqcon.png" src="fmqcon.png" decoding="async" width="569" height="238" /></a>
+</p>
+<h2><span class="mw-headline" id="Property_Alarm_Limits">Property Alarm Limits</span></h2>
+<p>For many model types, the user can define high and low alarm limits for the predicted values. To set an alarm for these items, locate the [L] control in the current selection results table at the bottom of the display.
+</p><p><a href="" class="image"><img alt="Fmlimitcontrol.png" src="fmlimitcontrol.png" decoding="async" width="606" height="76" /></a>
+</p><p>Clicking on this link will open this limits setting dialog for the given property:
+</p><p><a href="" class="image"><img alt="Fmlimitset.png" src="fmlimitset.png" decoding="async" width="202" height="115" /></a>
+</p><p>Enter the desired minimum and/or maximum limit values and click "OK". To clear a limit, simply delete the corresponding value.
+</p><p>Once set, limits are shown as dotted lines matching the color of the property they are set for. Regions of the property which exceed the given limits will be shown with a red fill and, if selected, the corresponding value will be shown in red in the current selection table.
+</p><p><a href="" class="image"><img alt="Fmoverlimit.png" src="fmoverlimit.png" decoding="async" width="662" height="307" /></a>
+<a href="" class="image"><img alt="Fmoverlimittable.png" src="fmoverlimittable.png" decoding="async" width="619" height="193" /></a>
+</p><p>Once a limit is set, you can also modify the value by clicking on the dashed limit line.
+</p><p><i>These alarm limits are only used for display in the Field Monitor window. To take action such as passing alarms to distributed control systems or sending email or other physical alarms, the alarm limits must be stored in a Solo_Predictor script which will be executed with each new data arrival.</i>
+</p>
+<h2><span class="mw-headline" id="User_Access_Control">User Access Control</span></h2>
+<p>Solo_Predictor can be set to require any users to log into an account to access the web interface by setting the <i>requirelogin</i> configuration setting to "true" in the default.xml file. When enabled, the user will be prompted to provide a username and password before they can access the web interface.
+</p><p>Initially, there is one account with the username "admin" (no quotes) and the password "admin". When the admin account is initially accessed, the user will be required to change the password.
+</p>
+<h3><span class="mw-headline" id="User_Management">User Management</span></h3>
+<p>Users can be added, modified, and removed via the user management panel accessed from the user management button: <a href="" class="image"><img alt="Useradminbutton.png" src="useradminbutton.png" decoding="async" width="31" height="28" /></a> Only Administrative users can access the user administration page.
+</p><p>The user administration page will be displayed on which existing users can be edited (a user may not delete their own account, nor disable their own Adminstrator flag.)
+</p><p><a href="" class="image"><img alt="Useradminpage.png" src="useradminpage.png" decoding="async" width="608" height="167" /></a>
+</p><p>If a user has 3 failed login attempts, their account is "locked" and will not be permitted to log in without first clearing the lock. Only an administrator can clear the locked status on the account. This lock can be cleared from the user adminstration page.
+</p>
+<h3><span class="mw-headline" id="Password_Requirements">Password Requirements</span></h3>
+<p>Users will usually be prompted to change their password on the initial login (unless the administrator specifically un-checks the password expiration checkbox when creating the account). The new password:
+</p>
+<ol><li>. Must not be the same as the previous password</li>
+<li>. Must not contain the username within it</li>
+<li>. Will be expired after 14 days (default setting) but can be expired by any administrator through the user administration page</li></ol>
+<h2><span class="mw-headline" id="Customization">Customization</span></h2>
+<h3><span class="mw-headline" id="Javascript_Configuration_Settings">Javascript Configuration Settings</span></h3>
+<p>Some customization of the interface can be done through the <tt>predictor.js</tt> file located in the <tt>Solo_Predictor/htpd/js</tt> folder. This file contains a header that includes various parameters which can be customized for a given application. Below is an example (although it may not reflect the currently available configuration settings). Note that the location of this file often requires administrative permission to modify.
+</p>
+<pre>//-------------------------------------------------------------------
+//options
+var drillEverything = false;   //does the drill function give data and contributions all at once?
+var drillDataOnly   = false;   //does the drill function only allow drilling data?
+var maxHighlights   = 25;      //maximum number of points that can be highlighted at once
+var maxstatlimit    = 10;      //largest value to show for Q and T^2 statistics use 0 to auto-scale
+var alarmstatlimit  = 1;       //level at which alarms should be thrown for Q and T^2
+var overlayBadStats = true;    //overlay plot in regions where statistics are over-limit
+var showDataLimits  = true;    //show lines indicating min/max limits
+var hidestats       = true;    //do we hide stats (Q/T2) in the legend?
+var tableNotes      = 'off';   //show data notes in table? 'on' = show both labels and notes, 'off' = show only labels, 'only' = show ONLY notes (no labels)
+var varplottype     = 'lines'; //lines or bars for variable plots
+var noDataWarning   = true;    //give warning if there is no data found?
+var noDataMessage   = "";      //alternative message to give if no data is found
+var noModelList     = false;   //disable the ability to show the model list
+var lbldefault = "Multiple Properties";  //what to show when multiple items are shown on an axis
+         
+var plotOnlyOnApply = false;   //should we skip the "apply" call when applyModels is called? (e.g. has be done by other method)
+     
+//timer settings
+var updateRate   = 5;     //rate (in seconds) at which plots are updated when autoupdating
+var unPauseAfter = 60;    //delay (in seconds) after last user interaction that plot is automatically un-paused
+var unPauseAfterLocked = 10; //same as unPauseAfter but used when locked
+
+var maxAttempts  = 5;     //more than this number of queued requests will disable the autoupdate mode
+</pre>
+<h3><span class="mw-headline" id="Custom_Application">Custom Application</span></h3>
+<p>Custom applications can be created based around the existing interface by creating a javascript file named <tt>custom.js</tt> in the <tt>Solo_Predictor/htpd/js</tt> folder and optionally a cascading style sheet (CSS) named <tt>custom.css</tt> in the <tt>Solo_Predictor/htpd</tt> folder. The files can modify the existing configuration settings (see above), the objects on the page, and add additional objects and methods.
+</p><p>The interface in general is based around <a rel="nofollow" class="external text" href="http://jquery.com/">JQuery</a> and <a rel="nofollow" class="external text" href="http://www.flotcharts.org/">Flot Charts</a> so familiarity with both these tools is recommended. In addition, there is a <a href="javascript_predictor_object.html" title="JavaScript Predictor Object">JavaScript Predictor Object</a> available which can be used to develop custom applications that interface with Solo_Predictor similarly to the Field Monitor.
+</p><p>Eigenvector Research can also work with customers to develop custom applications based around the web interface. <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">Contact Eigenvector's Help Desk</a> for more information.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930090101
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.027 seconds
+Real time usage: 0.039 seconds
+Preprocessor visited node count: 69/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1870/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1329-0!canonical and timestamp 20240930090101 and revision id 9128.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Field_Monitor&amp;oldid=9128">https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Field_Monitor&amp;oldid=9128</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 24 April 2019, at 12:46.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

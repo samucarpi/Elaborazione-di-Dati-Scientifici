@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Mscorr - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Mscorr rootpage-Mscorr skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Mscorr"><span class="mw-page-title-main">Mscorr</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Optional_Inputs"><span class="tocnumber">3.2</span> <span class="toctext">Optional Inputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Outputs"><span class="tocnumber">3.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Algorithm"><span class="tocnumber">5</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Multiplicative scatter/signal correction (MSC).
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[sx,alpha,beta,xref] = mscorr(x,xref)</dd>
+<dd>[sx,alpha,beta,xref] = mscorr(x,options)</dd>
+<dd>[sx,alpha,beta,xref] = mscorr(x,xref,options)</dd>
+<dd>[sx,alpha,beta,xref] = mscorr(x,xref,mc,win,specmode,subind)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>MSCORR performs multiplicative scatter correction (a.k.a. multiplicative signal correction) on an input matrix of spectra x (class "double") regressed against a reference spectra xref (class "double"). If (xref) is empty or omitted, the mean of (x) is used as the reference (or median of (x) if options.algorithm = 'median').
+</p><p>If the optional input <i>mc</i> is 1 {default} then an intercept is used. If <i>mc</i> is set to 0 (zero) then a force fit through zero is used.
+</p><p>Optional input <i>win</i> is a <i>NK</i> element cell array of indices corresponding to windows to perform MSC, i.e. MSC is performed in each window win{i} for <i>i=1:NK</i>. In this case, (alpha and beta are not assigned). Optional input (specmode) defines which mode of the data is the spectral mode (default = 2) and is only used when (x) contains 3 or more modes. Optional input (subind) specifies the indices within the included spectral variables that are used to calculate the MSC correction factors (alpha and beta); default is that ALL included spectral variables are used.
+</p><p>Outputs are the corrected spectra sx, the intercepts/offsets alpha, the multiplicative scatter factor/slope beta, and the reference spectrum xref.
+</p><p>Note: the 'median' method does not work well if there are many negative values in xref or x samples.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = input spectra (class double).</li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<ul><li><b>xref</b> = 1xN reference or "target" spectrum. If empty, mean or median of (x) is used.</li></ul>
+<ul><li><b>mc</b> = [{1} | 0] flag indicating if an offset should be removed from the spectra in addition to correcting the multiplicative scaling. 1 = correct for offset {default}, or 0 = do not remove offset.</li></ul>
+<ul><li><b>win</b> = allows for scatter correction in spectral "windows" that can be of different widths. Input (win) is a cell array with NK elements corresponding to the number of windows desired. Each cell of (win) contains the indices corresponding to each window (i.e. this is not a moving window approach - see STDFIR). MSC is then performed in each of the NK windows. (alpha and beta are not assigned). If (win) is empty, the entire spectrum is treated at once (standard approach),</li></ul>
+<ul><li><b>specmode</b> = defines which mode of the data is the spectral mode (default = 2) and is only used when (x) contains 3 or more modes.</li></ul>
+<ul><li><b>subind</b> = specifies the indices within the included spectral variables that are used to calculate the MSC correction; default is that ALL included spectral variables are used. Correction is always applied to the entire spectrum even if subind indicates that only a sub-portion should be used to calculate correction factors.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>sx</b> = corrected spectra,</li></ul>
+<ul><li><b>alpha</b> = the intercepts/offsets,</li></ul>
+<ul><li><b>beta</b> = the multiplicative scatter factor/slope,</li></ul>
+<ul><li><b>xref</b> = the reference spectrum used.</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><b>options</b> = structure array with the following fields&#160;:
+</p>
+<ul><li><b>algorithm</b>: [ {'leastsquares'} | 'median' ] Specifies spectrum scale factors are determined. Default by least squares regression between between each spectrum and the reference spectrumj. 'median' uses the median of the ratio between a spectrum and the reference. Thus median is only appropriate if most values are non-negative. If algorithm = 'median' then mc is set = 0,</li></ul>
+<ul><li><b>robust</b>: [{<i>none'} | 'lsq2top' ] Governs the use of robust least squares. If "lsq2top" is used then "trbflag", "tsqlim", and "stopcrit" are also used (see LSQ2TOP for descriptions of these fields).</i></li></ul>
+<ul><li><b>res</b>: [] approximate fit residual [scalar]. Required with "robust" set to "lsq2top". (res) is input (res) to the LSQ2TOP function.</li></ul>
+<ul><li><b>trbflag</b>: [ 'top' | 'bottom' | {'middle'}] Used only with "lsq2top". (trbflag) is a flag that tells algorithm to fit to the top, bottom, or middle of the data cloud. When 'middle' is used, "lsq2top" can be considered a robust least squares method.</li></ul>
+<ul><li><b>tsqlim</b>: [ 0.99 ] Used only with "lsq2top." (tsqlim) is T2 limit that governs whether a data point is outside the fit residual defined by input (res).</li></ul>
+<ul><li><b>mc</b>: [{1} | 0] See description above,</li></ul>
+<ul><li><b>win</b>: [{[ ]} | cell array]  See description above,</li></ul>
+<ul><li><b>specmode</b>: [{2}]  See description above,</li></ul>
+<ul><li><b>subind</b>: [vector]  See description above.</li></ul>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>For input spectra <b>x</b> (1x<i>N</i>) and reference spectra <b>x</b><sub>ref</sub> (1x<i>N</i>) the model is:
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle x^{T}\beta +\alpha =x_{ref}^{T}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msup>
+        <mi>&#x03B2;<!-- β --></mi>
+        <mo>+</mo>
+        <mi>&#x03B1;<!-- α --></mi>
+        <mo>=</mo>
+        <msubsup>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>r</mi>
+            <mi>e</mi>
+            <mi>f</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msubsup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle x^{T}\beta +\alpha =x_{ref}^{T}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e1bce890702ab47676136a3a1744d57b21cf8968" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.338ex; width:15.451ex; height:3.676ex;" alt="{\displaystyle x^{T}\beta +\alpha =x_{ref}^{T}}"/></span>
+</p><p>and the corrected spectra <b>x</b><sub>s</sub> (1x<i>N</i>) is given by:
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle x_{S}=(x_{ref}-\alpha )/\beta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>S</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>r</mi>
+            <mi>e</mi>
+            <mi>f</mi>
+          </mrow>
+        </msub>
+        <mo>&#x2212;<!-- − --></mo>
+        <mi>&#x03B1;<!-- α --></mi>
+        <mo stretchy="false">)</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo>/</mo>
+        </mrow>
+        <mi>&#x03B2;<!-- β --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle x_{S}=(x_{ref}-\alpha )/\beta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2d0b5e43df44dba4feb060a6df9f2cef8484a270" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:18.326ex; height:3.009ex;" alt="{\displaystyle x_{S}=(x_{ref}-\alpha )/\beta }"/></span>
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="frpcr.html" title="Frpcr">frpcr</a>, <a href="stdfir.html" title="Stdfir">stdfir</a>, <a href="stdgen.html" title="Stdgen">stdgen</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930142902
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.116 seconds
+Real time usage: 0.428 seconds
+Preprocessor visited node count: 36/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 72/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:161-0!canonical and timestamp 20240930142902 and revision id 11062.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Mscorr&amp;oldid=11062">https://www.wiki.eigenvector.com/index.php?title=Mscorr&amp;oldid=11062</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 4 June 2020, at 12:25.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Analysis EVRIGUI Object - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Analysis_EVRIGUI_Object rootpage-Analysis_EVRIGUI_Object skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Analysis_EVRIGUI_Object"><span class="mw-page-title-main">Analysis EVRIGUI Object</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Loading_and_Retrieving_Data_and_Models"><span class="tocnumber">1</span> <span class="toctext">Loading and Retrieving Data and Models</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Loading_Data"><span class="tocnumber">1.1</span> <span class="toctext">Loading Data</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Retrieving_Data"><span class="tocnumber">1.2</span> <span class="toctext">Retrieving Data</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Loading_and_Retrieving_Models"><span class="tocnumber">1.3</span> <span class="toctext">Loading and Retrieving Models</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Loading_and_Retrieving_Predictions"><span class="tocnumber">1.4</span> <span class="toctext">Loading and Retrieving Predictions</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Drop_method"><span class="tocnumber">1.5</span> <span class="toctext">Drop method</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Clearing_Data_and_Models"><span class="tocnumber">1.6</span> <span class="toctext">Clearing Data and Models</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#Model_Creation_and_Method_Settings"><span class="tocnumber">2</span> <span class="toctext">Model Creation and Method Settings</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="#Creating_Models"><span class="tocnumber">2.1</span> <span class="toctext">Creating Models</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Analysis_Methods_and_Settings"><span class="tocnumber">2.2</span> <span class="toctext">Analysis Methods and Settings</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Preprocessing"><span class="tocnumber">2.3</span> <span class="toctext">Preprocessing</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Toolbar_Buttons"><span class="tocnumber">2.4</span> <span class="toctext">Toolbar Buttons</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#Generic_GUI_Methods"><span class="tocnumber">3</span> <span class="toctext">Generic GUI Methods</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#Advanced_Methods"><span class="tocnumber">4</span> <span class="toctext">Advanced Methods</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="#Analysis_Method_Options"><span class="tocnumber">4.1</span> <span class="toctext">Analysis Method Options</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Shared_Data_Object_Access"><span class="tocnumber">4.2</span> <span class="toctext">Shared Data Object Access</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#Generic_Object_Access"><span class="tocnumber">4.3</span> <span class="toctext">Generic Object Access</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="#Complex_Example"><span class="tocnumber">5</span> <span class="toctext">Complex Example</span></a></li>
+</ul>
+</div>
+
+<p>These are the methods defined for Analysis GUI when accessed through an <a href="evrigui_objects.html" title="EVRIGUI Objects"> EVRIGUI object</a>. The following methods are called by referring to the given EVRIGUI object, followed by the method to be accessed. For example, given an EVRIGUI object in the workspace called "obj", the following call sets the Calibration X-block data to a given DataSet object called "data":
+</p>
+<pre>  obj.setXblock(data);
+</pre>
+<p>And this would retrieve the currently loaded Calibration X-block data:
+</p>
+<pre>  data = obj.getXblock;
+</pre>
+<p>See <a href="#Complex_Example" title="Analysis EVRIGUI Object"> Complex Example</a> for another example of using these methods.
+</p><p>The specific methods available are described in the sections below.
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="Loading_and_Retrieving_Data_and_Models">Loading and Retrieving Data and Models</span></h2>
+<h3><span class="mw-headline" id="Loading_Data">Loading Data</span></h3>
+<p>These methods can be used to set (i.e. "load") the specified data. Note that all take a single parameter as input and this parameter must be a DataSet object. If the object is not a valid DataSet object, an error will be thrown.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.setXblock(dataset)</tt></td>
+<td>Sets the Calibration X-block
+</td></tr>
+<tr>
+<td><tt>.setXblockVal(dataset)</tt></td>
+<td>Sets the Validation X-block
+</td></tr>
+<tr>
+<td><tt>.setYblock(dataset)</tt></td>
+<td>Sets the Calibration Y-block
+</td></tr>
+<tr>
+<td><tt>.setYblockVal(dataset)</tt></td>
+<td>Sets the Validation Y-block
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Retrieving_Data">Retrieving Data</span></h3>
+<p>These methods can be used to retrieve the specified data as a DataSet object:
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getXblock</tt></td>
+<td>Returns Calibration X-block
+</td></tr>
+<tr>
+<td><tt>.getXblockVal</tt></td>
+<td>Returns Validation X-block
+</td></tr>
+<tr>
+<td><tt>.getYblock</tt></td>
+<td>Returns Calibration Y-block
+</td></tr>
+<tr>
+<td><tt>.getYblockVal</tt></td>
+<td>Returns Validation Y-block
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Loading_and_Retrieving_Models">Loading and Retrieving Models</span></h3>
+<p>Models can be set (loaded) or retrieved using the following two methods:
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getModel</tt></td>
+<td>Returns the currently calibrated model (if any)
+</td></tr>
+<tr>
+<td><tt>.setModel(model)</tt></td>
+<td>Loads the given model into the Analysis GUI and switches the <a href="#Analysis_Methods_and_Settings" title="Analysis EVRIGUI Object"> analysis method</a> to that specified by the model. See the <tt>.apply</tt> method to apply the model to validation or test data.
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Loading_and_Retrieving_Predictions">Loading and Retrieving Predictions</span></h3>
+<p>Similarly, predictions can be loaded or retrieved using these methods:
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getPrediction</tt></td>
+<td>Returns the current prediction structure. This is the result of applying the loaded model to the validation (a.k.a. test) data.
+</td></tr>
+<tr>
+<td><tt>.setPrediction(prediction)</tt></td>
+<td>Loads the given prediction structure into Analysis GUI. This method is often used to load previous predictions following by one of the plotting commands.
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Drop_method">Drop method</span></h3>
+<p>The "drop" method is a simplified loading method. Any valid data, model or prediction can be "dropped" on a valid Analysis EVRIGUI object and the GUI will attempt to load the given data into the most logical location based on the GUI's current status. Since this may be ambiguious to the script or program accessing the EVRIGUI object where the data will be loaded, it is often recommended that an explict .set____ command (see above) be used in most cases.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.drop(dataset)</tt></td>
+<td>Attempt to load the specified DataSet into the most logical data location in the GUI
+</td></tr>
+<tr>
+<td><tt>.drop(model)</tt></td>
+<td>Attemp to load the specified model into the GUI (see also <tt>.setModel</tt> above)
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Clearing_Data_and_Models">Clearing Data and Models</span></h3>
+<p>Clearing of data, models, and predictions can be achieved using these methods. In all cases, if the given data or model is already cleared, no error occurs.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.clearAll</tt></td>
+<td>Clears all data, models, options, and predictions (return to initial startup state)
+</td></tr>
+<tr>
+<td><tt>.clearBothCal</tt></td>
+<td>Clears both X and Y Calibration Data
+</td></tr>
+<tr>
+<td><tt>.clearBothVal</tt></td>
+<td>Clears both X and Y Validation Data
+</td></tr>
+<tr>
+<td><tt>.clearModel</tt></td>
+<td>Clears current model
+</td></tr>
+<tr>
+<td><tt>.clearXblock</tt></td>
+<td>Clears Calibration X-block
+</td></tr>
+<tr>
+<td><tt>.clearXblockVal</tt></td>
+<td>Clears Validation X-block
+</td></tr>
+<tr>
+<td><tt>.clearYblock</tt></td>
+<td>Clears Calibration Y-block
+</td></tr>
+<tr>
+<td><tt>.clearYblockVal</tt></td>
+<td>Clears Validation Y-block
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Model_Creation_and_Method_Settings">Model Creation and Method Settings</span></h2>
+<p>These methods allow creation of models and manipulation of the basic modeling parameters.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Creating_Models">Creating Models</span></h3>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.calibrate</tt></td>
+<td>Calculates or recalculates a model if the model is non-existant or out of date with the current settings, and/or applies the current model to the validation data, if loaded. This is equivalent to clicking on the "Calibrate" (gears) button on the Analysis GUI.
+</td></tr>
+<tr>
+<td><tt>.apply</tt></td>
+<td>Identical to the .calibrate method.
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Analysis_Methods_and_Settings">Analysis Methods and Settings</span></h3>
+<p>These methods work with the current analysis method (i.e. modeling method) of the Analysis GUI. This is any of the modeling techniques available in the Analysis GUI <a href="analysis_menu.html" title="Analysis Menu">Analysis_Menu</a>.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getMethod</tt></td>
+<td>Returns a string specifying the Analysis method (e.g. 'pca', 'pls', 'parafac').
+</td></tr>
+<tr>
+<td><tt>.setMethod('method')</tt></td>
+<td>Sets the Analysis method to 'method' (e.g. 'pca', 'pls', 'parafac'). If the requested method is not the currently selected method, any existing model and prediction are cleared.
+</td></tr></tbody></table>
+<p><br />
+The <tt>.getComponents</tt> and <tt>.setComponents</tt> methods allow reviewing and changing of the number of components used in a factor-based model. Changing this property will cause the model to be cleared (requiring the use of the .calibrate method described above.) Note that some analysis methods (e.g. 'mlr' and 'cluster') do not use the Components settings and any values returned or set using these methods will be ignored. 
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getComponents</tt></td>
+<td>Returns the number of components currently selected.
+</td></tr>
+<tr>
+<td><tt>.setComponents(n)</tt></td>
+<td>Sets the number of components to use in a model. After this value is changed, the .calibrate method should be called to request an update of the model. Any value set here will not be reflected in the model until the after .calibrate method is called.
+<p><b>Note:</b> If n is an empty value [] or is omitted entirely, Analysis GUI will clear the model and attempt to recalibrate the model with an automatically selected number of factors. Not all analysis methods support this operation and those methods will simply recalculate with the default components (usually 1).
+</p>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Preprocessing">Preprocessing</span></h3>
+<p>The preprocessing methods allow getting and setting the current X and Y-block preprocessing methods. Currently, these set methods require complex preprocessing structure inputs and require knowledge and use of the Preprocess functionality in PLS_Toolbox.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getXPreprocessing</tt></td>
+<td>Return the current X-block preprocessing structure
+</td></tr>
+<tr>
+<td><tt>.getYPreprocessing</tt></td>
+<td>Return the current Y-block preprocessing structure
+</td></tr>
+<tr>
+<td><tt>.setXPreprocessing(p)</tt></td>
+<td>Sets the X-block preprocessing to the structure passed as p
+</td></tr>
+<tr>
+<td><tt>.setYPreprocessing(p)</tt></td>
+<td>Sets the Y-block preprocessing to the structure passed as p
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Toolbar_Buttons">Toolbar Buttons</span></h3>
+<p>These methods allow the automatic "pressing" of any of the Toolbar buttons. The .getButtons method returns a list of all the current toolbar buttons as a list of their "tags" (unique names). The .pressButton method can then be used with any one of these tags to simulate the clicking of the given button. By using these methods, an outside program can automatically bring up plots like scores and loadings plots, or start up "helper GUIs" like the <a href="plsda_class_groups_interface.html" title="PLSDA Class Groups Interface">PLSDA_Class_Groups_Interface</a>.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getButtons</tt></td>
+<td>Returns a cell array of strings indicating the tags for each of the current toolbar buttons.
+</td></tr>
+<tr>
+<td><tt>.pressButton(tag)</tt></td>
+<td>Equivalent to the user clicking the toolbar button specified by the given tag.
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Generic_GUI_Methods">Generic GUI Methods</span></h2>
+<p>These methods provide simple access to simple GUI actions such as controlling the visibility of the GUI and closing or creating the GUI
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getVisibility</tt></td>
+<td>Returns 1 (one) if the GUI is currently visible (not hidden) and 0 (zero) otherwise
+</td></tr>
+<tr>
+<td><tt>.setVisibility(vis)</tt></td>
+<td>When input is 1 (one), the GUI is made visible. When input is 0 (zero), the GUI is hidden from view and from the task bar (when relevent). Note that some methods may make a hidden GUI visible again even if this value has been set to zero.
+</td></tr>
+<tr>
+<td><tt>.close</tt></td>
+<td>Forces the GUI to close
+</td></tr>
+<tr>
+<td><tt>.create</tt></td>
+<td>Used to create a new Analysis GUI - <b>NOTE:</b> This method is called automatically by the main EVRIGUI object and should not be called directly by the user (an error will always be thrown in that situation)
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Advanced_Methods">Advanced Methods</span></h2>
+<h3><span class="mw-headline" id="Analysis_Method_Options">Analysis Method Options</span></h3>
+<p>These methods allows access and manipulation of the low-level "Analysis Method" options. These options are specific to each method and often change very fundamental aspects of how the modeling algorithms operate. It is possible to cause a complete failure to model or get unexpected models using these options so their use is only recommended for expert users. The options being set here are equivalent to the options which are passed to the specific modeling functions (in Matlab: pls.m, pca.m, parafac.m) and the individual function for the currently selected method (see .setMethod above) should be consulted in setting these options. The one field that is required when setting options is the functionname field which must be set to the string equivalent to the method name (e.g. functionname = 'pca' ).
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getOptions</tt></td>
+<td>Returns the current options for the given analysis method. Note that, if the user or an outside program has not modified the options, this will be returned as an empty matrix. In that case, the default function options are generally used
+</td></tr>
+<tr>
+<td><tt>.setOptions(opts)</tt></td>
+<td>Sets the current options for the given analysis method to the options structure passed as "opts". Note that some options are always overridden (e.g. the automatic generation of plots controlled in many functions through the .plots option is always ignored, even if set here to be "on")
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Shared_Data_Object_Access">Shared Data Object Access</span></h3>
+<p>These methods can be used to access a Shared Data object which gives direct, dynamic access to the data and model being used in the GUI. This allows an advanced user to view and/or modify the used data directly. Changes to the object are automatically acted on by the GUI (e.g. clearing of models and updating of plots when Data changes.) However, the use of Shared Data objects is for advanced users only and describing their use is beyond the scope of this document. See the Shared Data object documentation for more information on using Shared Data.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getXblockId</tt></td>
+<td>Returns Shared Data object to Calibration X-block
+</td></tr>
+<tr>
+<td><tt>.getXblockValId</tt></td>
+<td>Returns Shared Data object to Validation X-block
+</td></tr>
+<tr>
+<td><tt>.getYblockId</tt></td>
+<td>Returns Shared Data object to Calibration Y-block
+</td></tr>
+<tr>
+<td><tt>.getYblockValId</tt></td>
+<td>Returns Shared Data object to Validation Y-block
+</td></tr>
+<tr>
+<td><tt>.getModelId</tt></td>
+<td>Returns Shared Data object to Model
+</td></tr>
+<tr>
+<td><tt>.getPredictionId</tt></td>
+<td>Returns Shared Data object to Predictions
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Generic_Object_Access">Generic Object Access</span></h3>
+<p>The generic <tt>.getObject</tt> method returns the object specified using a keyword string from Analysis GUI. This is the actual DataSet, model, or other object itself (not the shared data object) Valid keywords are internal and may be subject to chage. As a result this function is not recommended for most uses. Instead, the user is directed to the general .get____ commands described earlier in this document. This method does, however, provide access to objects which may not be accessible through the other .get____ methods.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" style="margin-left:3em">
+<tbody><tr>
+<td><tt>.getObject('object_keyword')</tt></td>
+<td>Returns specified object from GUI
+</td></tr></tbody></table>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Complex_Example">Complex Example</span></h2>
+<p>The following sequence of operations would create an Analysis GUI EVRIGUI object called "obj", load the data "data", set the analysis method to PCA, set the number of components at 5, calibrate a model, bring up a scores plot, and grab the model object:
+</p>
+<pre>  obj = evrigui('analysis');      &#160;% open a new Analysis GUI and create an attached EVRIGUI object
+  obj.setXblock(data);            &#160;% load "data" into GUI
+  obj.setMethod('pca');           &#160;% set PCA as analysis method
+  obj.setComponents(5);           &#160;% set 5 PCs as number of components
+  obj.calibrate;                  &#160;% calibrate the model
+  obj.pressButton('plotscores');  &#160;% bring up a scores plot
+  model = obj.getModel;           &#160;% retreive the model as a variable called "model"
+</pre>
+<p>Note that text following the&#160;% is comment text only. When passing commands like these into Solo, this text can be omitted.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930033020
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.019 seconds
+Real time usage: 0.020 seconds
+Preprocessor visited node count: 59/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:591-0!canonical and timestamp 20240930033020 and revision id 4873.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Analysis_EVRIGUI_Object&amp;oldid=4873">https://www.wiki.eigenvector.com/index.php?title=Analysis_EVRIGUI_Object&amp;oldid=4873</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 19 February 2010, at 13:15.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

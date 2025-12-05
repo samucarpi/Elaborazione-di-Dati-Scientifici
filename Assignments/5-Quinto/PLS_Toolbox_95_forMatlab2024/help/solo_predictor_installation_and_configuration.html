@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Solo Predictor Installation and Configuration - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Solo_Predictor_Installation_and_Configuration rootpage-Solo_Predictor_Installation_and_Configuration skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Solo_Predictor_Installation_and_Configuration"><span class="mw-page-title-main">Solo Predictor Installation and Configuration</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Installation_and_Configuration"><span class="tocnumber">1</span> <span class="toctext">Installation and Configuration</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Installation"><span class="tocnumber">1.1</span> <span class="toctext">Installation</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="#Windows"><span class="tocnumber">1.1.1</span> <span class="toctext">Windows</span></a>
+<ul>
+<li class="toclevel-4 tocsection-4"><a href="#Important_System_Requirement"><span class="tocnumber">1.1.1.1</span> <span class="toctext">Important System Requirement</span></a></li>
+<li class="toclevel-4 tocsection-5"><a href="#No_Internet_Connection_Case"><span class="tocnumber">1.1.1.2</span> <span class="toctext">No Internet Connection Case</span></a></li>
+<li class="toclevel-4 tocsection-6"><a href="#Location_of_Solo_Predictor_startup_files"><span class="tocnumber">1.1.1.3</span> <span class="toctext">Location of Solo_Predictor startup files</span></a></li>
+<li class="toclevel-4 tocsection-7"><a href="#Steps"><span class="tocnumber">1.1.1.4</span> <span class="toctext">Steps</span></a></li>
+<li class="toclevel-4 tocsection-8"><a href="#Specifying_a_Settings_File"><span class="tocnumber">1.1.1.5</span> <span class="toctext">Specifying a Settings File</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-9"><a href="#Linux"><span class="tocnumber">1.1.2</span> <span class="toctext">Linux</span></a>
+<ul>
+<li class="toclevel-4 tocsection-10"><a href="#Location_of_Solo_Predictor_startup_files_2"><span class="tocnumber">1.1.2.1</span> <span class="toctext">Location of Solo_Predictor startup files</span></a></li>
+<li class="toclevel-4 tocsection-11"><a href="#Steps_2"><span class="tocnumber">1.1.2.2</span> <span class="toctext">Steps</span></a></li>
+<li class="toclevel-4 tocsection-12"><a href="#Specifying_a_Settings_File_2"><span class="tocnumber">1.1.2.3</span> <span class="toctext">Specifying a Settings File</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-13"><a href="#Installing_a_New_Version_(Updating)"><span class="tocnumber">1.2</span> <span class="toctext">Installing a New Version (Updating)</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Starting_Solo_Predictor"><span class="tocnumber">1.3</span> <span class="toctext">Starting Solo_Predictor</span></a>
+<ul>
+<li class="toclevel-3 tocsection-15"><a href="#Starting_Solo_Predictor_Manually"><span class="tocnumber">1.3.1</span> <span class="toctext">Starting Solo_Predictor Manually</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="#Solo_Predictor_with_SoloManager_as_a_service/daemon"><span class="tocnumber">1.3.2</span> <span class="toctext">Solo_Predictor with SoloManager as a service/daemon</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-17"><a href="#Configuration"><span class="tocnumber">1.4</span> <span class="toctext">Configuration</span></a>
+<ul>
+<li class="toclevel-3 tocsection-18"><a href="#Load_Settings_command_line_flag"><span class="tocnumber">1.4.1</span> <span class="toctext">Load Settings command line flag</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="#License_Code"><span class="tocnumber">1.4.2</span> <span class="toctext">License Code</span></a></li>
+<li class="toclevel-3 tocsection-20"><a href="#Status_Window_and_Controls_Options"><span class="tocnumber">1.4.3</span> <span class="toctext">Status Window and Controls Options</span></a></li>
+<li class="toclevel-3 tocsection-21"><a href="#Log_File"><span class="tocnumber">1.4.4</span> <span class="toctext">Log File</span></a></li>
+<li class="toclevel-3 tocsection-22"><a href="#Server_Connection_Options"><span class="tocnumber">1.4.5</span> <span class="toctext">Server Connection Options</span></a></li>
+<li class="toclevel-3 tocsection-23"><a href="#Incoming_Message_Format_and_Timeout_Settings"><span class="tocnumber">1.4.6</span> <span class="toctext">Incoming Message Format and Timeout Settings</span></a></li>
+<li class="toclevel-3 tocsection-24"><a href="#Wait-For-File_Options"><span class="tocnumber">1.4.7</span> <span class="toctext">Wait-For-File Options</span></a></li>
+<li class="toclevel-3 tocsection-25"><a href="#Output_Format_Options"><span class="tocnumber">1.4.8</span> <span class="toctext">Output Format Options</span></a></li>
+<li class="toclevel-3 tocsection-26"><a href="#User_Timers"><span class="tocnumber">1.4.9</span> <span class="toctext">User Timers</span></a></li>
+<li class="toclevel-3 tocsection-27"><a href="#Web_Access"><span class="tocnumber">1.4.10</span> <span class="toctext">Web Access</span></a></li>
+<li class="toclevel-3 tocsection-28"><a href="#Q_and_T_Squared_Statistics"><span class="tocnumber">1.4.11</span> <span class="toctext">Q and T Squared Statistics</span></a></li>
+<li class="toclevel-3 tocsection-29"><a href="#Evriscript_Object_Use"><span class="tocnumber">1.4.12</span> <span class="toctext">Evriscript Object Use</span></a></li>
+<li class="toclevel-3 tocsection-30"><a href="#Python_Archived_File"><span class="tocnumber">1.4.13</span> <span class="toctext">Python Archived File</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-31"><a href="#Example_default.xml_File"><span class="tocnumber">1.5</span> <span class="toctext">Example default.xml File</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Installation_and_Configuration">Installation and Configuration</span></h2>
+<p>The following section describes the options available for configuring Solo_Predictor. For details on interfacing, scripting Solo_Predictor, see the <a href="solo_predictor_reference_manual.html" title="Solo Predictor Reference Manual">Solo_Predictor Reference Manual</a>.
+</p>
+<h3><span class="mw-headline" id="Installation">Installation</span></h3>
+<p>Solo_Predictor is packaged in several different ways depending on the platform on which it is being installed. Follow the instructions on the <a href="installation.html#Installing_Solo" title="Installation">main Solo installation page</a> to install on the appropriate platform.
+</p>
+<h4><span class="mw-headline" id="Windows">Windows</span></h4>
+<h5><span class="mw-headline" id="Important_System_Requirement">Important System Requirement</span></h5>
+<p><b>Microsoft Windows Visual C++ Redistributable:</b> This applies to versions of Solo_Predictor 4.3 and later. Ensure that the latest Microsoft Windows Visual C++ Redistributable library is installed on the computer. This can be installed from: 
+<a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022">Microsoft</a>.
+Choose the "X64" 64-bit architecture choice. 
+If this is not installed you will get an error window saying "The code execution cannot proceed because VCRUNTIME140.dll was not found. Reinstalling the program may fix this problem".
+</p>
+<h5><span class="mw-headline" id="No_Internet_Connection_Case">No Internet Connection Case</span></h5>
+<p>These instructions presume that the computer has an Internet connection. If you need to install Solo_Predictor version 4.3 or later on a computer which does not have an Internet connection then please contact our help desk to obtain an offline version of the Solo_Predictor installer. Note that the installer for the Microsoft Windows Visual C++ Redistributable mentioned above will also install on a computer with no Internet connection, and this should be done before using Solo_Predictor installer.
+</p>
+<h5><span class="mw-headline" id="Location_of_Solo_Predictor_startup_files">Location of Solo_Predictor startup files</span></h5>
+<p>Prior to version 4.3, the startup files for Solo_Predictor were located in the Solo_Predictor installation folder, e.g. "C:\Program Files\EVRI\Solo_Predictor_41". For versions 4.3 and later, these same startup files are located in the "application" folder under Solo_Predictor, e.g. "C:\Program Files\EVRI\Solo_Predictor_43\application".
+</p>
+<h5><span class="mw-headline" id="Steps">Steps</span></h5>
+<ol><li>Please use an “administrator” user account to install Solo_Predictor since administrator privileges are needed to add files under the default C:\Program Files\EVRI location. Note your Solo_Predictor's license code as this will be needed to launch Solo_Predictor.</li>
+<li>Run the installer .exe by double clicking.</li>
+<li>After a window “User Account Control” appears asking if you want to allow this app to make changes to your device, you will be guided by an installation wizard which presents:
+<ol><li>"Solo" splash screen appears.</li>
+<li>Within one minute a wizard page appears identifying "Solo_Predictor M.N", where "M.N" is the version being installed, for example, we'll refer to version "4.3" here. Click "Next&gt;".</li>
+<li>A window appears allowing you to choose the installation folder. The default choice is: "C:\Program Files\EVRI\Solo_Predictor_43". Then click "Next".</li>
+<li>Solo_Predictor requires a version of the Matlab Runtime library.
+<ol><li>If the MATLAB Runtime library is not found on your computer then a window will appear telling you that it will need to be downloaded and installed. In this case you must enter the path for the installation folder to use. The default choice is: "C:\Program Files\MATLAB\MATLAB Runtime". Accept this or choose where you want to install it. This can take fifteen minutes or more to complete.</li>
+<li>If the required Matlab Runtime version is found on your computer then a window appears saying "MATLAB Runtime is already installed in:" and lists the location filepath. You can click "Next" to continue with installation of Solo_Predictor.</li></ol></li>
+<li>A confirmation page appears summarizing the configuration choices. Click "Install&gt;".</li>
+<li>A progress-bar window appears showing the installation progress until a window appears reporting "Installation completed successfully". It also gives the default install location for Solo_Predictor (C:\Program Files\EVRI\Solo_Predictor_43\application). Click "Finish" icon. You will launch Solo_Predictor by double-clicking on the Solo_Predictor icon (the Solo_Predictor.exe file) in your installation folder's "application" folder.</li></ol></li>
+<li>Use Windows Explorer to navigate to the installation folder you entered in step 3 above and double-click on the Solo_Predictor.exe file to start it. If you used the default installation folder, namely under "C:\Program Files\", then you will need to start Solo_Predictor.exe "As administrator" the first time you start it.</li>
+<li>This opens the S_P configuration window where you can specify commonly used configuration settings. Details of these fields are available at: <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Configuration_Page">Solo Predictor Configuration Page</a>
+<ol><li>You must enter the licensecode for Solo_Predictor in addition to any other changes you want to make, then click "Save".</li>
+<li>You may see a "Windows Security Alert" window appear. Click on the default button, "Allow access'.</li></ol></li>
+<li>Solo_Predictor now starts and opens a Solo_Predictor logging console window.</li></ol>
+<p>Notes:<br />
+</p>
+<ul><li>The settings file,  "C:\Program Files\EVRI\Solo_Predictor\application\default.xml" is updated with your configuration inputs when you close the configuration window by clicking "Save".</li>
+<li>The Solo_Predictor Configuration window only appears when Solo_Predictor is started for the first time. You must edit the saved settings file to make any subsequent changes to the configuration as this file is read whenever Solo_Predictor starts. Thus you can change any Solo_Predictor settings by editing this file and restarting Solo_Predictor.</li>
+<li>A simple test to see if Solo_Predictor is working correctly is to use a web browser, for example Firefox, and this URL:</li></ul>
+<pre>   <a rel="nofollow" class="external free" href="http://127.0.0.1:2211/?:version">http://127.0.0.1:2211/?:version</a>
+</pre>
+<dl><dd>This assumes you are using the default port, 2211.</dd></dl>
+<h5><span class="mw-headline" id="Specifying_a_Settings_File">Specifying a Settings File</span></h5>
+<p>When Solo_Predictor is started by double-clicking on the installed Solo_Predictor.exe file it uses the settings file "default.xml" located in the same folder. If a shortcut file is created from this Solo_Predictor.exe then this shortcut can be edited ("Properties") to start in any specified folder, and then it will start Solo_Predictor using a "default.xml" settings file found in that specified folder, if it exists.
+</p><p>Solo_Predictor can also be started by a command entered in a terminal (Windows "cmd" or any other, for example Cmder). 
+The simplest example is:
+</p>
+<pre> "C:\Program Files\EVRI\Solo_Predictor_43\application\Solo_Predictor.exe"
+</pre>
+<p>which starts Solo_Predictor and uses the settings file "default.xml" found in this folder, if it exists. If this settings file does not exist then an error window appears which says: "Could not locate preferences file. Error in =&gt; startsolo.m at line 2".
+</p><p>It is possible to specify exactly which settings file should be used by including it as an argument to the command, for example:
+</p>
+<pre> "C:\Program Files\EVRI\Solo_Predictor_43\application\Solo_Predictor.exe" "-loadsettings \"C:\Program Files\EVRI\Solo_Predictor_43\application\default_43.xml\""
+</pre>
+<p>In this case the Solo_Predictor executable and the settings file are specified by their full paths and so do not depend on any assumptions about where the executable starts. Note the need to escape the double-quotes around the path in the command's argument using a back-slash.
+</p>
+<h4><span class="mw-headline" id="Linux">Linux</span></h4>
+<h5><span class="mw-headline" id="Location_of_Solo_Predictor_startup_files_2">Location of Solo_Predictor startup files</span></h5>
+<p>Prior to version 4.3, the startup files for Solo_Predictor were located in the Solo_Predictor installation folder, e.g. "/usr/local/bin/Solo_Predictor41". For versions 4.3 and later, these same startup files are located in the "application" folder under Solo_Predictor, e.g. "/usr/local/bin/Solo_Predictor43/application".
+</p>
+<h5><span class="mw-headline" id="Steps_2">Steps</span></h5>
+<ol><li>Download the .install installer from your Eigenvector account. Note your Solo_Predictor's license code as this will be needed to launch Solo_Predictor.</li>
+<li>Run the installer .install in Terminal by running <code> ./Solo_Predictor_WebInstaller.install</code>. You will be guided by an installation wizard which presents:
+<ol><li>"Solo" splash screen appears.</li>
+<li>Within one minute a wizard page appears identifying "Solo_Predictor M.N", where "M.N" is the version being installed, for example, we'll refer to version "4.3" here. Click "Next&gt;".</li>
+<li>Choose the installation folder. The default choice is: "/usr/local/bin/Solo_Predictor_MN".</li>
+<li>If the MATLAB Runtime library is not found on your computer then a window will appear telling you that it will need to be downloaded and installed. In this case you must enter the path for the installation folder to use. The default choice is: "/usr/local/MATLAB/MATLAB_Runtime". Accept this or choose where you want to install it. This can take fifteen minutes or more to complete.</li>
+<li>License Agreement page. Click to accept, and "Next&gt;".</li>
+<li>A confirmation page appears summarizing the configuration choices. Click "Install&gt;".</li>
+<li>A progress-bar window appears showing the installation progress until a window appears reporting "Installation completed successfully". It also gives the default install location for Solo_Predictor (/usr/local/bin/Solo_Predictor_MN/application). The installer will also tell you to update the Terminal environment variables <code>LD_LIBRARY_PATH</code> and <code>XAPPLRESDIR</code>. Do this in Terminal before launching Solo_Predictor. Click "Finish" icon. You will launch Solo_Predictor by navigating to the location of Solo_Predictor and running the run_Solo_Predictor.sh file by executing <code>./run_Solo_Predictor.sh [MCR_Root]</code>, where MCR_Root is the location of the MATLAB Runtime. For example, Solo_Predictor 4.3 uses MATLAB v99 (R2020b) Runtime. So the way to launch Solo_Predictor under these conditions would be to run</li></ol></li></ol>
+<pre> ./run_Solo_Predictor.sh /usr/local/MATLAB/MATLAB_Runtime/v99
+</pre>
+<ol><li><ol><li>This opens the S_P configuration window where you can specify commonly used configuration settings. Details of these fields are available at: <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Configuration_Page">Solo Predictor Configuration Page</a></li>
+<li>You must enter the licensecode for Solo_Predictor in addition to any other changes you want to make, then click "Save".</li>
+<li>You may see a "Windows Security Alert" window appear. Click on the default button, "Allow access'.</li>
+<li>Solo_Predictor now starts and opens a Solo_Predictor logging console window.</li></ol></li></ol>
+<p>Notes:<br />
+</p>
+<ul><li>The settings file,  "/usr/local/bin/Solo_Predictor_43/application/default.xml" is updated with your configuration inputs when you close the configuration window by clicking "Save".</li>
+<li>The Solo_Predictor Configuration window only appears when Solo_Predictor is started for the first time. You must edit the saved settings file to make any subsequent changes to the configuration as this file is read whenever Solo_Predictor starts. Thus you can change any Solo_Predictor settings by editing this file and restarting Solo_Predictor.</li>
+<li>A simple test to see if Solo_Predictor is working correctly is to use a web browser, for example Firefox, and this URL:</li></ul>
+<pre>   <a rel="nofollow" class="external free" href="http://127.0.0.1:2211/?:version">http://127.0.0.1:2211/?:version</a>
+</pre>
+<dl><dd>This assumes you are using the default port, 2211.</dd></dl>
+<h5><span class="mw-headline" id="Specifying_a_Settings_File_2">Specifying a Settings File</span></h5>
+<p>When Solo_Predictor is started file it uses the settings file "default.xml" located in the same folder. If a shortcut file is created from this Solo_Predictor then this shortcut can be edited ("Properties") to start in any specified folder, and then it will start Solo_Predictor using a "default.xml" settings file found in that specified folder, if it exists. If the default.xml settings file does not exist then an error window appears which says: "Could not locate preferences file. Error in =&gt; startsolo.m at line 2".
+</p><p>It is possible to specify exactly which settings file should be used by including it as an argument to the command, for example:
+</p>
+<pre> ./run_Solo_Predictor.sh /usr/local/MATLAB/MATLAB_Runtime/v99 '-debug -loadsettings "/home/scott/default.xml"'
+</pre>
+<p>In this case the Solo_Predictor executable and the settings file are specified by their full paths and so do not depend on any assumptions about where the executable starts.
+Prior to or at the first start of Solo_Predictor, the user must enter a license code to enable the software. There are two ways of providing this information:
+</p>
+<ol><li>Starting Solo_Predictor and provide the code on the <a href="solo_predictor_configuration_page.html" title="Solo Predictor Configuration Page">Configuration Page</a>. This same page allows you to change frequently modified settings. If you need to modify configuration options not included in this dialog, these must be done by manually modifying the default.xml file located in the main Solo_Predictor application folder.</li>
+<li><a href="#License_Code" title="Solo Predictor Installation and Configuration">Adding the license code to the configuration file</a> directly.</li></ol>
+<p><b>NOTE:</b> If Solo_Predictor is installed as administrator but run as a different user, copies of default.xml may be stored in (%userprofile%\AppData\local\VirtualStore\Program Files\EVRI\Solo_Predictor). To update default.xml either delete the copy in the VirtualStore or update the copy.
+</p>
+<h3><span id="Installing_a_New_Version_.28Updating.29"></span><span class="mw-headline" id="Installing_a_New_Version_(Updating)">Installing a New Version (Updating)</span></h3>
+<p>Installing a new version of Solo_Predictor into the same location ("Destination Folder", default = "C:\Program Files\EVRI\Solo_Predictor) as the earlier version is performed just like a new install. This means that the previous version's default.xml file will be overwritten, losing any special setting which might have been present there. In this case it is a good idea to save a copy of the earlier default.xml file for use with the new Solo_Predictor. Once a copy has been saved then proceed with installing the new Solo_Predictor. 
+Once Solo_Predictor has been installed, then navigate to the Solo_Predictor executable as describe in the Installation Steps section above, and launch it, by right-click and "Run as administrator" for example.
+</p><p>When Solo_Predictor is used for the first time it opens a "Solo_Predictor_Configuration" window. click on the "Cancel" button. At this stage the new Solo_Predictor files will have been installed. Now edit the copy of the earlier default.xml file to insert the new Solo_Predictor license code value. Copy this file over the newly installed Solo_Predictor's default.xml file (this will require Admin privileges to copy into C:\Program Files\...). Finally, start Solo_Predictor as usual. The new default.xml file settings will be used and Solo_Predictor will start without the Solo_Predictor_Configuration window appearing.
+</p>
+<h3><span class="mw-headline" id="Starting_Solo_Predictor">Starting Solo_Predictor</span></h3>
+<p>Solo_Predictor is an executable file and can be started by manually running the executable. Executable programs can also be configured to start automatically when the computer system starts up, and this is desirable for a program like Solo_Predictor which acts as a prediction server. Solo_Predictor can be started by:
+</p>
+<dl><dd><ol><li>Started manually by simply executing the Solo_Predictor executable file or shortcut.</li>
+<li>Configure it as an automatic start-up process, such as a service (on Windows) or daemon (on Linux).  (see the <a href="solomanager.html" title="SoloManager">SoloManager page</a> for installation and configuration information)</li>
+<li>Prior to version 4.3 of Solo_Predictor it was possible for a client program to make a connection using the .NET EigenvectorTools objects, which could start Solo_Predictor. This option is no longer available due to changes in the MATLAB Runtime. See the <a href="eigenvectortools.html" title="EigenvectorTools">EigenvectorTools object page</a> for installation and configuration information.</li></ol></dd></dl>
+<h4><span class="mw-headline" id="Starting_Solo_Predictor_Manually">Starting Solo_Predictor Manually</span></h4>
+<p>If starting Solo_Predictor by the first method then a status console window should appear:
+</p><p><a href="" class="image" title="Solo_Predictor Console"><img alt="Solo_Predictor Console" src="500px_solo_predictor_console.png" decoding="async" width="500" height="297" /></a>
+</p><p>This window's menu options for stopping or restarting the server depend on the configuration of the Status Window (see below).
+</p>
+<h4><span id="Solo_Predictor_with_SoloManager_as_a_service.2Fdaemon"></span><span class="mw-headline" id="Solo_Predictor_with_SoloManager_as_a_service/daemon">Solo_Predictor with SoloManager as a service/daemon</span></h4>
+<p>The second start up method of starting Solo_Predictor involves using a Windows service or daemon script which starts automatically when the system starts.. It is often important to ensure that Solo_Predictor is always available and for this reason we have added a SoloManager <a href="solomanager.html" title="SoloManager">SoloManager</a> program to monitor Solo_Predictor's availability. and to restart it if necessary. The SoloManager program can be run as a Windows service or Linux daemon.
+</p><p>To use Solo_Predictor with SoloManager please see the <a href="solomanager.html" title="SoloManager">SoloManager</a> Wiki page. In summary, this usually involves 
+a) installing Java and adding its "bin" folder to your system PATH environmental variable, 
+b) making a few changes under the [Solo_Predictor-install-location]\application\solomonitor folder.
+</p><p>On Windows you would edit the SoloManager.ini file, for example located at:
+C:\Program Files\EVRI\Solo_Predictor_44\application\solomonitor\SoloManager.ini
+</p><p>Modify entries in theSoloManager.ini to the correct values:
+</p>
+<ol><li>startExecutableCommandPre to the path to the Solo_Predictor executable, such as: startExecutableCommandPre = C:\\Program Files\\EVRI\\Solo_Predictor_44\\application\\</li>
+<li>startExecutableCommandPost to Solo_Predictor command parameters, such as: startExecutableCommandPost = -loadsettings \\\"C:\\Program Files\\EVRI\\Solo_Predictor_44\\application\\default.xml\\\"</li>
+<li>outdir: Check that the "outdir" entry's folder does exist, for example:outdir = C:\\temp.  SoloManager writes its log file to this location as SoloManagerLog.txt. This can be very helpful in identifying any problems which occur with SoloManager.</li></ol>
+<p>Note that on Windows systems it may be necessary to copy the SoloManager.ini file out from under "C:\Program Files\" to some other folder where you have permission to make edits, and then copy it back, in order to satisfy the Microsoft Windows file modification security.
+</p><p>SoloManager is packaged as a Java file, solomanager.jar, which can be started on-demand (Windows) by right-click and "Run as administrator" the solomanager.jar file, or from a command terminal. See <a href="solomanager.html#Starting_SoloManager_Manually" title="SoloManager">SoloManager#Starting_SoloManager_Manually</a>.
+</p><p>However, you will usually want to run SoloManager as a service and this can be done by 
+</p>
+<ol><li>copying or moving the SoloManager.ini file into the "C:\Program Files\EVRI\Solo_Predictor_44\application\solomonitor\service64" folder and</li>
+<li>running the Install_Service.bat and Start_Service.bat files which are located there.</li></ol>
+<p>SoloManager is then run as a service, ensuring that Solo_Predictor is available. See <a href="solomanager.html#Starting_SoloManager_Automatically" title="SoloManager">SoloManager#Starting_SoloManager_Automatically</a>. There is also a Stop_Service.bat file to stop the SoloManager service.
+</p><p>This is a short summary of using SoloManager. Please refer to the <a href="solomanager.html" title="SoloManager">SoloManager</a> Wiki page for full details.
+</p>
+<h3><span class="mw-headline" id="Configuration">Configuration</span></h3>
+<p>All configuration of Solo_Predictor is accomplished through the default.xml file which is located in the program's main folder and/or through the <a href="solo_predictor_configuration_page.html" title="Solo Predictor Configuration Page">Solo_Predictor Configuration Page</a>. This XML file uses the <a href="settings_file_format.html" title="Settings file format">Solo Settings File Format</a> and contains a number of tags which can be edited by the user. Note that changes in this file will not be read by Solo_Predictor until the server is stopped and restarted.
+</p><p>The tags within the &lt;socketserver&gt; tag control the server settings. In each case, an options value is provided using standard XML notation:
+</p>
+<pre> &lt;optionname&gt;value&lt;/optionname&gt;
+</pre>
+<p>In addition, inside each opening tag, several attributes are set:
+</p>
+<pre> &lt;optionname class="numeric" size="[1,1]"&gt;1&lt;/optionname&gt;
+</pre>
+<p>The "class" attribute should not be changed from the given value. The "size" attribute is informational only and can be omitted.
+</p>
+<h6><span class="mw-headline" id="Load_Settings_command_line_flag">Load Settings command line flag</span></h6>
+<p>The user can specify a different XML file using the command line startup flag loadsettings. 
+</p>
+<pre> -loadsettings "filename"
+</pre>
+<p>This startup flag will load user settings from the XML file specified by the fully-qualified string "filename".  A settings XML file can be created by using the "Save" option from the Preferences Expert or using the settings file format description. Often used with -clearsettings so that only the settings in the specified file are used.
+</p><p>If a file named Default.xml is present in the application folder or the top-level installation folder (usually C:/Program Files/EVRI/Solo or similar on Windows), this file will always be read before reading the file specified by the -loadsettings flag. 
+</p><p><br />
+The following are the user-modifiable options. The expected class attribute is included in parentheses.
+</p>
+<h4><span class="mw-headline" id="License_Code">License Code</span></h4>
+<p>At the bottom of the configuration file is the licensecode tag which is empty in a new installation. Entering a code into this tag allows Solo_Predictor to start up without asking the user for the code. The license code, provided by Eigenvector Research, can be added to the file by simply entering it between the &lt;licensecode&gt;&lt;/licensecode&gt; tags. The next time the server is restarted, the code (if valid) will be used and Solo_Predictor will not prompt for a code. If the license code is a demonstration code and expires, or if the code is invalid, Solo_Predictor will display a dialog indicating the error when it starts up. When done, the license code tag would look like that shown below:
+</p>
+<pre>&lt;licensecode&gt;123456-3456789-12-34ab-cdef&lt;/licensecode&gt;
+</pre>
+<h4><span class="mw-headline" id="Status_Window_and_Controls_Options">Status Window and Controls Options</span></h4>
+<p>These options control functionality of the Solo_Predictor status window.
+</p>
+<ul><li><b>controls</b> (class="string"): Manages the display and functionality of the status window. Valid settings include:
+<ul><li><b>none: </b>no status window will be given and all controls are hidden.</li>
+<li><b>status:</b> status window is shown, but all server controls are disabled.</li>
+<li><b>limited:</b> status window is shown and only the "restart" control is enabled.</li>
+<li><b>full:</b> status window is shown and all controls (stop/start/restart/exit) are enabled.</li></ul></li></ul>
+<dl><dd>Except when "full" settings are used, the only means to stop and/or restart the server is by using operating-system-specific process kill commands ("Program Manager" in windows, the "Activity Monitor" in OS X, and the kill command in linux or unix). Default is "status".</dd></dl>
+<ul><li><b>max_screen_lines</b> (class="numeric"): Defines the total number of past message lines displayed on the (on-screen) status window. Default is 20 lines.</li>
+<li><b>pulseperiod</b> (class="numeric"): Defines the number of seconds between "pulse" messages in the status window. Default is 15 seconds.</li></ul>
+<p><br />
+</p>
+<h4><span class="mw-headline" id="Log_File">Log File</span></h4>
+<p>These options control the log file and the level of detail and age of messages retained.
+</p>
+<ul><li><b>log_severity</b> (class="numeric"): Defines the minimum message "severity" which will be reported in the log file (on disk). The level must be one of the following:</li></ul>
+<dl><dd><dl><dd>0 = log all messages</dd>
+<dd>1 = log all startup, shutdown, rejected connection and fatal error messages</dd>
+<dd>2 = log fatal error messages only</dd>
+<dd>3 = log no messages (disable logging).</dd></dl></dd>
+<dd>The default level is 1 (one).</dd>
+<dd>If the <b>debug</b> mode is on (see below), an additional setting is available:
+<dl><dd>-1 = log all messages including debug-mode information</dd></dl></dd></dl>
+<ul><li><b>max_log_size</b> (class="numeric"): Defines the maximum log file size (in bytes). Solo_Predictor will discard old messages to keep the log file from exceeding this size. Default is 50000 (50 Kb).</li>
+<li><b>logfile</b> (class="string"): Gives the path and filename to use for the log file. By default, this is solo_pred.log in the user's temporary directory. The exact location of the temporary folder depends on the operating system. For example, this is usually:</li></ul>
+<dl><dd><dl><dd>Windows XP: \Documents and Settings\username\Local Settings\Temp.</dd>
+<dd>Windows Vista, Windows 10: \Users\username\AppData\Local\Temp</dd></dl></dd></dl>
+<ul><li><b>log_backups</b> (class="numeric"): Indicates how many "backup" copies of the log file to allow to exist at any one time. If zero, then the one log file will be rolled over and messages removed. If greater than zero, the existing log file will be rolled into a backup file when it reaches <b>max_log_size</b> bytes. Old backup files are renumbered in increasing order (allowing up to this number of backup files) and the oldest file is deleted. For example, a value of 2 will allow two backups of the log file (each <b>max_log_size</b> in bytes)</li>
+<li><b>debug</b> (class="numeric"): This tag is not normally listed in the <tt>default.xml</tt> file but can be added at any time to enable/disable the "debug" mode of Solo_Predictor. A value of 1 (one) will enable debug mode and 0 (zero) will disable it (the default). When debug mode is enabled, Solo_Predictor will display on the screen and optionally log in the log file (see <b>log_severity</b> above) details about each connection and action including information like timing of each step in processing, content of incoming messages, and names of requested files. This can be helpful in diagnosing issues with socket connections. Note that, because any messages being sent are logged and displayed, debug mode may significantly slow down processing if large messages are being passed in (e.g. large data files in XML format)</li></ul>
+<h4><span class="mw-headline" id="Server_Connection_Options">Server Connection Options</span></h4>
+<p>These options control the behavior of the socket server and the kind of connections it will accept.
+</p>
+<ul><li><b>port</b> (class="numeric"): Defines the computer port on which the socket server will respond to requests. This value should be changed with great care as some sockets are used by the operating system and other software. The default port value of 2211 is selected to minimize conflict between known port uses. Additional ports which might be of use include: 2210, 2212, and 2005. Contact Eigenvector Research for more information on valid ports.</li>
+<li><b>loopbackonly</b> (class="numeric"): If set to 1 (one), the server will only respond to a client which is located on the same computer as the server. All external requests will be ignored. A value of 0 (zero) will respond to any IP address (see also validip option). Default is 1 (one).</li>
+<li><b>validip</b> (class="cell"): Gives a list of valid IP addresses to which the server may respond. If empty, any IP address client is permitted to contact the server (unless the loopbackonly option is set to 1 (one)). Remember that the server is limited to a given number of clients (usually 1 (one)) and once it has been contacted by that many clients, it cannot respond to any other clients. This setting only limits the clients who can contact the server before it has imprinted on a given client.</li></ul>
+<dl><dd>The ip addresses must be supplied as separate items each inside a set of  tags with all  tags enclosed in a set of  tags. For example:</dd></dl>
+<p><tt>
+</tt></p><tt><pre> &lt;validip class="cell"&gt;
+</pre></tt><p><tt>
+    
+      10.0.0.1
+      10.0.0.2
+    
+  &lt;/validip&gt;
+</tt>
+</p><ul><li><b>privateworkspace</b> (class="numeric"): If set to 1 (one), each client will have its own workspace to store objects and no client can access another client's objects. If set to 0 (zero), each client accesses the same workspace. A client may access and/or overwrite other client's objects. This may lead to unexpected results (if a given client expects a model to stay loaded but other clients are using the same object name and overwrite the model, for example). Default is one.</li>
+<li><b>maxclients</b> (class="numeric"): Maximum number of clients allowed to connect into server. If 1 (one), the first client to connect to the server will be the only client allowed to connect ever. If 0 (zero), no socket connections will be allowed. If set to the numeric value inf (infinity), there will be no limit to the number of clients allowed to connect. This final setting is used when Solo_Predictor is being used as a web server, for example.</li></ul>
+
+<h4><span class="mw-headline" id="Incoming_Message_Format_and_Timeout_Settings">Incoming Message Format and Timeout Settings</span></h4>
+<ul><li><b>eomstring</b> (class="string") End Of Message character or string. If non-empty, this character or string must be passed to indicate end of message. The same string will be appended onto any messages returned by the server. The use of an EOM string allows Solo_Predictor to function on higher-load systems or with large messages where the entire contents of the message may not be queued and delivered all at once. See <a href="solo_predictor_reference_manual.html#Introduction_to_Socket_Interfaces" title="Solo Predictor Reference Manual"> Introduction to Socket Interfaces</a> for more information. It is best to set a string which is very unique and will never show up in a common message, for example: **EndOfMessage**</li>
+<li><b>tickletimeout</b> (class="numeric") Number of seconds of delay allowed between opening socket and getting first character. At timeout,  before sending client a space character. Required to tickle some clients into responding.</li>
+<li><b>emptytimeout</b> (class="numeric") Number of seconds of delay allowed before receiving first message from client. At timeout, throws an empty packet message.</li>
+<li><b>eomtimeout</b> (class="numeric") Number of seconds after which no more characters received indicates an end-of-message (generally for use with POST messages and EOMSTRING messages only).</li></ul>
+<h4><span class="mw-headline" id="Wait-For-File_Options">Wait-For-File Options</span></h4>
+<p>Wait for file options control the optional Solo_Predictor wait-for-file engine. This engine will watch a given folder for a new file (with an optional specific file type). When a new file appears, the file will be automatically loaded as the object "data" and a specific script (stored in a disk file) will be executed. This script can use a :writefile command (see Script Construction section) to store results of an analysis in an output file. Files added to this folder remain there and are not moved or deleted by Solo_Predictor when they are processed.
+</p>
+<ul><li><b>waitforfile</b> (class="string"): either "on" or "off" (the default). When "on", the wait-for-file functionality is enabled (although the waitfolder and waitscript must also be non-empty strings for wait-for-file to operate).</li>
+<li><b>waitfolder</b> (class="string"): defines the folder (local or networked) in which Solo_Predictor should look for new files.</li>
+<li><b>waitfilespec</b> (class="string"): defines the file specifications (if any) to which the wait-for-file should be limited. For example, waitfilespec = "*.spc" will only recognize .spc files appearing in the wait folder.</li>
+<li><b>waitfilemode</b> (class="String"): either "date" (default) or "name". When waitfilemode = "date" process files which are added to the waitfolder which are newer than the most recently run file. Note that this uses files' modification date, NOT the date or time when a file is dropped into the waitfolder. This may explain why "new" files dropped into the waitfolder are not being processed. Check their modification dates. Also note that files already present in the waitfolder when Solo_Predictor starts will not be processed as they are assumed to have already been processed.  When waitfilemode = "name" process files which were not in the folder before. If there are multiple new files then they are processed in order based on their modification date, oldest first.</li>
+<li><b>waitfileimporter</b> (class="string")&#160;: defines the file import method to use. If empty (the default value), the file extension is used to determine the import method. This option allows overriding  normal import behavior if the file extension is ambiguous (e.g. "dat") or otherwise misleading.</li>
+<li><b>waitloadfile</b> (class="string"): If "on", the contents of the file are loaded into the object named "data" in the Solo_Predictor workspace. If "off", the contents are not read and only the file name is passed (in the object named "filename")</li>
+<li><b>waitscript</b> (class="string"): defines the file containing the script to execute when a new file is found. This option must contain the entire path to the file. Note that the indicated script should expect to find the loaded data in the object named "data" in the current workspace (see <i>waitloadfile</i> above) and the file name in the "filename" object. <b>NOTE:</b> If no wait script is defined, any imported data will be added to the DataCache which is used by the <a href="solo_predictor_field_monitor.html" title="Solo Predictor Field Monitor">Solo_Predictor Field Monitor</a> and can also be accessed via a datacache scripting object.</li>
+<li><b>waiterrorscript</b> (class="string"): defines the file containing the script to execute if the file import <i>or</i> waitscript throws an error. This script can anticipate having the object "filename" in its workspace but should not anticipate any other objects.</li></ul>
+<h4><span class="mw-headline" id="Output_Format_Options">Output Format Options</span></h4>
+<ul><li><b>default_format</b> (class="string"): Defines the default response format. This is the output format used by the server if no format type is included in the request script. Valid types are: "xml", "plain" or "html". See Scripting Language for more information on these formats. Default is "xml".</li></ul>
+<ul><li><b>plaindelimiter</b> (class="string", default = , ) Character which should be used to separate numerical values when outputting a vector in the plain text format. The comma is default (implying comma-separated-values) but can be any character (e.g. tab, semicolon). If a control-character is to be used, use regular expression notation such as "\t" or "\r" (without quotes) also accepted is hex notation, for example, use "\x20" to represent a space character:</li></ul>
+<dl><dd><dl><dd><pre>&lt;plaindelimiter class="string"&gt;\t&lt;/plaindelimeter&gt;  &lt;!-- tab character --&gt;</pre></dd></dl></dd></dl>
+<ul><li><b>writefilefolder</b> (class="string"): Defines the top-level folder to which the <tt>:writefile</tt> and <tt>:export</tt> commands are allowed to write. These commands can ONLY write to this folder and any sub-folders within it. An empty string for writefilefolder indicates that <tt>:writefile</tt> and <tt>:export</tt> commands are NOT permitted.</li></ul>
+<h4><span class="mw-headline" id="User_Timers">User Timers</span></h4>
+<p>User timers allow you to schedule particular scripts to be run at specified intervals. These scripts could perform cleanup, or trigger hardware, or even system restarts (to clean up system resources). User timers primarily consist of specifying a script to run, a time interval at which the script should be run, and the recurrence of the event (one time, repeating).
+</p><p>User timers are created by adding one or more <b>&lt;usertimer&gt;</b> tags to the configuration file (within the <b>socketserver</b> tag) with the following possible properties set as tags within each outer tag:
+</p><p><b>Required Usertimer Properties</b>
+</p>
+<ul><li><b>script</b>&#160;: (class="string") Any valid Solo_Predictor script script to execute. Often uses an <tt>:include</tt> command to read a script.</li>
+<li><b>name</b>&#160;: (class="string") REQUIRED descriptive name for the timer object, should be unique.</li></ul>
+<p><b>Recommended Usertimer Properties</b>
+</p>
+<ul><li><b>ExecutionMode</b>&#160;: (class="string") [ 'fixedDelay' | 'fixedRate' | 'fixedSpacing' |{'singleShot'}] type of timer execution.</li></ul>
+<dl><dd><dl><dd>A timer follows the sequence:  Queue --&gt; Start --&gt; Run --&gt; End ... where "Queue" is an indefinite period of time in which other processes may delay the script starting, the following execution modes can be used:</dd>
+<dd><b> 'singleShot' </b> = script is executed once (default)</dd>
+<dd><b> 'fixedRate' </b> = script is queued for execution <i>Period</i> seconds after the last execution was queued (queue-queue = Period)</dd>
+<dd><b> 'fixedDelay' </b> = script is queued for execution <i>Period</i> seconds after the last execution started (start-queue = Period).</dd>
+<dd><b> 'fixedSpacing' </b> = script is queued for execution <i>Period</i> seconds after the last execution ended (end-start = Period)</dd></dl></dd></dl>
+<p><br />
+</p>
+<ul><li><b>Period</b>&#160;: (class="numeric") [default = 1] seconds between executions if any mode other than 'singleShot'</li>
+<li><b>BusyMode</b>&#160;: (class="string") [{'drop'}| 'error' | 'queue' ] control overlapping timer executions. 'drop' ignores timer requests which occur while another timer process is executing. 'queue' keeps a queued list of executions which occured while another timer was executing and executes these missed actions in sequence. 'error' throws an error if two timers conflict.</li>
+<li><b>StartDelay</b>&#160;: (class="numeric") [default = 0] number of seconds to wait before initial execution.</li></ul>
+<p><b>Other Usertimer Properties:</b>
+</p>
+<ul><li><b>error</b>&#160;: (class="string") define how the timer should handle if an untrapped error occurs during the script. One of the following strings:
+<dl><dd>'die'  Let the timer die without action except log messages.</dd>
+<dd>'restart'  [default] Attempt to restart the timer (see maxrestart setting below)</dd>
+<dd>'reboot'  Reboot the computer (requires "shutdown" (Windows) or "reboot" (Linux) functions be on the system path)</dd>
+<dd>'stop'  Stops Solo_Predictor (often used to trigger an alarm on the watchdog program.)</dd></dl></li></ul>
+<ul><li><b>maxrestart</b>&#160;: (class="numeric") number of times a timer can be restarted before switching to "errorrestart" error mode [default = 5]</li>
+<li><b>errorrestart</b>&#160;: (class="string") error mode (see error above) to use if restarts failed maxrestart times [default = 'die']</li></ul>
+<h4><span class="mw-headline" id="Web_Access">Web Access</span></h4>
+<p>The following elements appear within the <b>socketserver</b> element, as tags:
+</p>
+<ul><li><b>serverfolder</b> (class="string"): The folder where files for web access are located.</li></ul>
+<ul><li><b>requirelogin</b> (class="numeric"): Does web access require login via authorization object? Choices are 'true' or 'false'.</li></ul>
+<ul><li><b>loginfolder</b> (class="string"): The folder were served files are stored for non-logged in users (used when requirelogin is true and user hasn't logged in).</li></ul>
+<h4><span class="mw-headline" id="Q_and_T_Squared_Statistics">Q and T Squared Statistics</span></h4>
+<p>The following elements appear within the <b>socketparse</b> element, as tags:
+</p>
+<ul><li><b>matchvars</b> (class="string"): Governs whether variable matching to model is performed. Valid choices are: 'on' or 'off'. When 'on', variables provided in data are automatically matched to model before application (if possible - see MATCHVARS for more information). When 'off', mismatch of passed variables and those expected by model will return an error.</li></ul>
+<ul><li><b>reducedstats</b> (class="string"): Governs whether Q and T^2 statistics from models are "reduced" using the confidence limit set in the model.detail.reslim and model.detail.tsqlim fields.  Valid choices are: 'off', 'on', or 'force'.  If 'on', statistics accesed methods like .Q and .T2 are normalized using the value stored in the appropriate detail sub-field. If 'off', statistics are returned as calculated. If 'force', the old-style of normalization is used in which the raw fields (.ssqresiduals and .tsqs) are reduced so that any route to access the Q and T2 will return reduced values. Note that in 'on' mode, the non-reduced statistics will be returned by .ssqresiduals or .tsqs references.</li></ul>
+<ul><li><b>contributions</b> (class="string"): Governs detail of returned T^2 and Q contributions.  Valid choices are: 'passed', 'used', and  'full'.  Return contributions for:
+<dl><dd>'passed' = only the variables passed by the client in the order passed. This mode allows the client to easily map contributions back to passed data and is the preferred mode.</dd>
+<dd>'used'   = all variables used by the model including even variables which client did not provide. Variable order is that used by model and may not match the order passed by the client.</dd>
+<dd>'full'   = all variables used or excluded by the model, including even variables which client did not provide.  Variable order is that used by model and may not match the order passed by the client.</dd></dl></li></ul>
+<h4><span class="mw-headline" id="Evriscript_Object_Use">Evriscript Object Use</span></h4>
+<p>The following element may appear within the <b>evriscript</b> element, as a tag:
+</p>
+<ul><li><b>keywordonly</b> (class="numeric"): Values 0 or 1. Default value 1 limits access to evriscripts to predefined objects only. Value 0 is required if customized evriscripts have been added to this product by Eigenvector Research.</li></ul>
+<p><br />
+</p>
+<h4><span class="mw-headline" id="Python_Archived_File">Python Archived File</span></h4>
+<p>The following element may appear within the <b>socketserver</b> element, as a tag:
+</p>
+<ul><li><b>pythonarchivefile</b> (class="string"): Path to location of Python archived file for Python Configuration. Setting the value for this tag is optional. If value is set, <b>:configure_python</b> will use this to build Python. Otherwise, <b>:configure_python</b> will use Conda to build Python. Configuring Python will allow access to Python-based evrimodel objects. See the <a href="python_configuration.html" title="Python configuration">Python configuration</a> wiki entry for more details.</li></ul>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Example_default.xml_File">Example default.xml File</span></h3>
+<p>The following is an example of a typical Solo_Predictor default.xml configuration file.
+</p>
+<pre>&lt;Settings&gt;
+  &lt;Preferences&gt;
+    &lt;socketserver&gt;
+      &lt;controls class="string"&gt;limited&lt;/controls&gt;
+      &lt;max_screen_lines class="numeric" size="[1,1]"&gt;20&lt;/max_screen_lines&gt;
+      &lt;pulse_period class="numeric" size="[1,1]"&gt;15&lt;/pulse_period&gt;
+      &lt;log_severity class="numeric" size="[1,1]"&gt;1&lt;/log_severity&gt;
+      &lt;max_log_size class="numeric" size="[1,1]"&gt;50000&lt;/max_log_size&gt;
+      &lt;logfile class="string"&gt;C:\Program Files\EVRI\Solo_Predictor\log_sp.txt&lt;/logfile&gt;
+      &lt;port class="numeric" size="[1,1]"&gt;2211&lt;/port&gt;
+      &lt;maxclients class="numeric" size="[1,1]"&gt;1&lt;/maxclients&gt;
+      &lt;loopbackonly class="numeric" size="[1,1]"&gt;1&lt;/loopbackonly&gt;
+      &lt;validip class="cell" /&gt;
+      &lt;privateworkspace class="numeric" size="[1,1]"&gt;1&lt;/privateworkspace&gt;
+      &lt;eomstring class="string" /&gt;
+      &lt;tickletimeout class="numeric" size="[1,1]"&gt;1&lt;/tickletimeout&gt;
+      &lt;emptytimeout class="numeric" size="[1,1]"&gt;2&lt;/emptytimeout&gt;
+      &lt;eomtimeout class="numeric" size="[1,1]"&gt;3&lt;/eomtimeout&gt;
+      &lt;waitforfile class="string"&gt;on&lt;/waitforfile&gt;
+      &lt;waitfolder class="string"&gt;C:\temp\solopredictor\waitforSP&lt;/waitfolder&gt;
+      &lt;waitfilespec class="string"&gt;*.mat&lt;/waitfilespec&gt;
+      &lt;waitscript class="string"&gt;C:\temp\solopredictor\waitforSPscript.txt&lt;/waitscript&gt;
+      &lt;writefilefolder class="string"&gt;C:\temp\solopredictor\outSP&lt;/writefilefolder&gt;
+      &lt;default_format class="string"&gt;xml&lt;/default_format&gt;
+      &lt;serverfolder class="string" /&gt;
+      &lt;pythonarchivefile class="string"&gt;C:\Users\johndoe\Desktop\pls_toolbox_windows_38.zip&lt;/pythonarchivefile&gt;
+    &lt;/socketserver&gt;    
+    &lt;socketparse&gt;
+      &lt;matchvars class="string"&gt;on&lt;/matchvars&gt;
+      &lt;reducedstats class="string"&gt;on&lt;/reducedstats&gt;
+      &lt;contributions class="string"&gt;passed&lt;/contributions&gt;
+    &lt;/socketparse&gt;
+    &lt;evriscript&gt;
+      &lt;keywordonly class="numeric" size="[1,1]"&gt;1&lt;/keywordonly&gt;
+    &lt;/evriscript&gt;
+    &lt;allowedobjects&gt;
+      &lt;allowed class="cell" size="[1,15]"&gt;
+        &lt;tr&gt;
+          &lt;td class="string"&gt;dataset&lt;/td&gt;
+          &lt;td class="string"&gt;evrigui&lt;/td&gt;
+          &lt;td class="string"&gt;evriarchive&lt;/td&gt;
+          &lt;td class="string"&gt;evriscript&lt;/td&gt;
+          &lt;td class="string"&gt;bwteklaser&lt;/td&gt;
+          &lt;td class="string"&gt;bwtekspecinterface&lt;/td&gt;
+          &lt;td class="string"&gt;bwtekspectrometer&lt;/td&gt;
+          &lt;td class="string"&gt;predictor&lt;/td&gt;
+          &lt;td class="string"&gt;datacache&lt;/td&gt;
+          &lt;td class="string"&gt;usertimer&lt;/td&gt;
+          &lt;td class="string"&gt;resultitem&lt;/td&gt;
+          &lt;td class="string"&gt;evriscript_step&lt;/td&gt;
+          &lt;td class="string"&gt;evridb&lt;/td&gt;
+          &lt;td class="string"&gt;evrimodel&lt;/td&gt;
+          &lt;td class="string"&gt;tcast&lt;/td&gt;
+          &lt;td class="string"&gt;evriauthentication&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/allowed&gt;
+    &lt;/allowedobjects&gt;
+  &lt;/Preferences&gt;
+  &lt;Licensecode class="string"&gt;########-#########-##-####-####&lt;/Licensecode&gt;
+&lt;/Settings&gt;
+</pre>
+<!-- 
+NewPP limit report
+Cached time: 20240929212343
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.040 seconds
+Real time usage: 0.042 seconds
+Preprocessor visited node count: 117/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 3549/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:970-0!canonical and timestamp 20240929212343 and revision id 12236.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Installation_and_Configuration&amp;oldid=12236">https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Installation_and_Configuration&amp;oldid=12236</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 25 March 2024, at 12:04.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

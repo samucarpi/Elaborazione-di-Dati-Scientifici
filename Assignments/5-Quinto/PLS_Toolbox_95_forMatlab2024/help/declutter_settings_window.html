@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Declutter Settings Window - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Declutter_Settings_Window rootpage-Declutter_Settings_Window skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Declutter_Settings_Window"><span class="mw-page-title-main">Declutter Settings Window</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>The <b>Declutter Settings window</b> allows modification of the settings for the Generalized Least Squares Weighting (GLSW), External Parameter Orthgonalization (EPO), and Extended Mixture Model (EMM) filters.
+</p><p>GLSW, EPO, and EMM are <a href="advanced_preprocessing__multivariate_filtering.html" title="Advanced Preprocessing: Multivariate Filtering">"multivariate filters"</a> which identify patterns in the variables of the data which should be down-weighted or removed. Multivariate filters (a.k.a. "covariance filters") are an effective way to remove interfering signal (known as "clutter") from data prior to building a model. This page describes the different options controlled by the settings window. The uses of these filters and the algorithmic details can be found on the <a href="advanced_preprocessing__multivariate_filtering.html" title="Advanced Preprocessing: Multivariate Filtering">Advanced Preprocessing: Multivariate Filtering</a> page and also on the <a href="glsw.html" title="Glsw">the glsw function help page</a>.
+</p><p><a href="" class="image"><img alt="Declutter gui 1.png" src="400px_declutter_gui_1.png" decoding="async" width="400" height="620" /></a>
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Clutter_Source"><span class="tocnumber">1</span> <span class="toctext">Clutter Source</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Algorithm"><span class="tocnumber">2</span> <span class="toctext">Algorithm</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Ignore_Clutter_Mean"><span class="tocnumber">2.1</span> <span class="toctext">Ignore Clutter Mean</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Remove_Grand_Mean_on_Apply"><span class="tocnumber">2.2</span> <span class="toctext">Remove Grand Mean on Apply</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#CV_Checkbox_and_CV_Window"><span class="tocnumber">2.3</span> <span class="toctext">CV Checkbox and CV Window</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Clutter_Source">Clutter Source</span></h3>
+<p>GLSW, EPO, and EMM require identification of "clutter" signal which you want removed from your data. There are four options to identify the clutter source. These options are hidden by default, but can be shown by clicking the "details" button:
+</p>
+<ul><li><b>x-block classes</b>: Used when the data contains classes which define sets of "similar" samples. The filter will down-weight features which make the data diverse within each class. The first class set defined for the x-block rows (samples) will be used to group samples. Class zero will be ignored, but all other classes will be combined and the differences within each class will be used to create the filter.</li>
+<li><b>y-block gradient</b>: Used in regression or classification models when the y-block contains information on which samples are related to each other. When the y-block is "discrete" (a small number of unique values), this filter behaves the same as the "x-block classes" method described above. When the y-block is "continuous" (a range of different values are present with small and large variations between the different samples), the y-variable is used to develop pseudo-groupings of samples in X by comparing the differences in the corresponding y values. This is referred to as the "gradient method" because it utilizes a gradient of the sorted X and y blocks to calculate a covariance matrix. For more information on this method, see <a href="advanced_preprocessing__multivariate_filtering.html" title="Advanced Preprocessing: Multivariate Filtering">the discussion of preprocessing methods</a>.</li>
+<li><b>automatic</b>&#160;: automatically chooses between x-block classes and y-block gradient modes depending on the information available. If a y-block is present (e.g. in regression models), the y-block gradient method is used. Otherwise, x-block classes are used (if present). If neither is present, the entire x-block is used as a whole. This is similar to performing PCA on the x-block and analyzing the residuals only.</li>
+<li><b>external data</b>&#160;: allows use of a user-supplied set of data which should be considered "clutter". All features within this data will be considered when building the filter. The "Load" button allows loading of data or a model from the workspace or a file (to import data, use the workspace browser to import the data into the main workspace first, then load from there.)
+<dl><dd><b>Notes:</b></dd></dl>
+<ul><li>The external data should have the same size as the calibration X-block. If the calibration X-block has a variable axisscale then the loaded external dataset should have the same axisscale.</li>
+<li>If the loaded data is a DataSet object, the Edit button can be used to review and modify the data.</li>
+<li>If a model is loaded, the loadings of that model are extracted and used as the clutter model.</li>
+<li>If a clutter covariance matrix is loaded, it is expected to be a square matrix equal in size to the number of variables in the x-block. Often, the "Ignore Means" option is used when a covariance matrix is loaded.</li>
+<li>Note that the number of variables in the loaded data must match the number of variables in the data to which the filter will be applied.</li></ul></li></ul>
+<ul><li><b>CLS residuals</b>: Also referred to as <b>Gray CLS</b>. Available only when building a CLS model. Allows cross-validating over alpha values for GLSW or over number of PCs for EPO.</li></ul>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>Three algorithms are available:
+</p>
+<ul><li><b>GLSW</b> - Generalized Least Squares Weighting: this algorithm performs a "soft" orthogonalization to the clutter. Essentially, a PCA model is created from the clutter and the variance found is down-weighted.</li></ul>
+<dl><dd>The value for the Clutter threshold (also known as alpha) defines the extent to which the clutter directions are down-weighted. As the threshold gets smaller (e.g. 0.1 to 0.001) the extent of deweighting increases because more variance in the clutter exceedes the threshold. A good initial guess for the threshold is 0.02 but good results will depend on the covariance structure of the clutter and the specific application. It is recommended that a number of different values be investigated using some external cross-validated metric for performance evaluation.</dd></dl>
+<ul><li><b>EPO</b> - External Parameter Orthogonalization: this algorithm performs a "hard" orthogonalization to the clutter. A PCA model is calculated for the clutter and the given number of PCs are extracted. The filter then orthogonalizes (removes) all the variance which matches these PCs. If the selected number of PCs is large, more variance will be removed and the filter may remove variance which is not clutter, but part of the signal of interest. Note that EPO is similar to performing GLSW with a very small alpha value, but not exactly the same because EPO only uses the specified number of PCs whereas GLSW uses a weighted set of many PCs.</li></ul>
+<ul><li><b>EMM / ELS</b> - Extended Mixture Model and Extended Least Squares: this algorithm does a "hard" orthogonalization to all variance in the clutter. This is equivalent to performing EPO and including all factors in the clutter's PCA model. It is often used with external data when all features in that data are known to be interferences.</li></ul>
+<ul><li><b>None</b> - Disables all filtering.</li></ul>
+<p><br />
+</p>
+<h4><span class="mw-headline" id="Ignore_Clutter_Mean">Ignore Clutter Mean</span></h4>
+<p>In addition to the algorithm, the user can select whether or not to <b>Ignore Clutter Mean</b>. This checkbox is generally left ON, to indicate that the variance within each clutter group should be removed and the mean be ignored. If unchecked, the filter will include the offset of each group. This is equivalent to saying the offset in the data is part of the clutter which should be removed.
+</p><p>The means may include both a grand mean of the entire clutter source and group means (if X-block classes are used as the clutter source.) When Ignore Clutter Means is checked, both the grand mean and the individual means are ignored. See the Remove Grand Mean on Apply option below.
+</p>
+<h4><span class="mw-headline" id="Remove_Grand_Mean_on_Apply">Remove Grand Mean on Apply</span></h4>
+<p>If <b>Ignore Clutter Mean</b> is checked (see above), the filter will normally also remove the grand mean from any data to which it is applied. This has the effect of centering the new data to the clutter's center. In some cases (such as when doing CLS models with decluttering) this may not be desired. The <b>Remove Grand Mean on Apply</b> option, when unchecked, will only down-weight or othogonalize to the clutter covariance and <i>not</i> remove the grand mean from the data.
+</p>
+<h4><span class="mw-headline" id="CV_Checkbox_and_CV_Window">CV Checkbox and CV Window</span></h4>
+<p>NOTE: Only available when using MATLAB 2020b or newer.
+</p><p>The CV checkbox and CV Window button become available when building a CLS model and the clutter source is CLS residuals and GLSW or EPO is selected as the algorithm. Selecting the CV checkbox will enable the CV Window button.
+</p><p><a href="" class="image"><img alt="Declutter gui 2 CLS residuals.png" src="400px_declutter_gui_2_cls_residuals.png" decoding="async" width="400" height="620" /></a>
+</p><p>Opening the CV Window will allow setting a range alpha values to cross-validate over for GLSW or setting a range of number of PCs to cross-validate over for EPO. Use the Number of Points to set this range of alpha values. The alpha value range will be logarithmically spaced. To set the range of PCs to cross-validate over for EPO, change the Max PC value to be the desired maximum PC.
+</p>
+<ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="Interface to Cross-Validate over Alphas for GLSW"><img alt="Interface to Cross-Validate over Alphas for GLSW" src="395px_declutter_gui_3_cls_residuals_cross_val_2.png" decoding="async" width="395" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>Interface to Cross-Validate over Alphas for GLSW
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:44px auto;"><a href="" class="image" title="Interface to Cross-Validate over Number of PCs for EPO"><img alt="Interface to Cross-Validate over Number of PCs for EPO" src="400px_declutter_gui_4_cls_residuals_cross_val_epo.png" decoding="async" width="400" height="242" /></a></div></div>
+			<div class="gallerytext">
+<p>Interface to Cross-Validate over Number of PCs for EPO
+</p>
+			</div>
+		</div></li>
+</ul>
+<p>The Plot and Choose button in this window will plot the cross-validation results and will allow selecting the alpha value or PC to use for final model building. This will be a PlotGUI plot where the RMSEC and RMSECV results can be plotted via the Plot Controls window for the different properties of interest. The cross-validate method and parameters used is shown in the figure name at the very top of this figure window. Use the "Choose SINGLE value to keep" button, left most button, to select a single point to be your alpha or PC to use for final model building. Once a value is selected use the green check button to accept the selection and close this plot. Use the "Include All" button, the middle button, to reset the selection and choose a different value. 
+</p><p><a href="" class="image"><img alt="Declutter gui 5 cross val plot.png" src="700px_declutter_gui_5_cross_val_plot.png" decoding="async" width="700" height="416" /></a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930032002
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.028 seconds
+Real time usage: 0.034 seconds
+Preprocessor visited node count: 25/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1753/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:611-0!canonical and timestamp 20240930032002 and revision id 11784.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Declutter_Settings_Window&amp;oldid=11784">https://www.wiki.eigenvector.com/index.php?title=Declutter_Settings_Window&amp;oldid=11784</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 10 January 2023, at 08:25.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

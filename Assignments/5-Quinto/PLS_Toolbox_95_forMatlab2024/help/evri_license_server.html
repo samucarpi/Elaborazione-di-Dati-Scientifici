@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Evri license server - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Evri_license_server rootpage-Evri_license_server skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Evri_license_server"><span class="mw-page-title-main">Evri license server</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Server_Configuration"><span class="tocnumber">2</span> <span class="toctext">Server Configuration</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Choice_of_Computer"><span class="tocnumber">2.1</span> <span class="toctext">Choice of Computer</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Running_Server_as_a_Desktop_Application"><span class="tocnumber">2.2</span> <span class="toctext">Running Server as a Desktop Application</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Running_Server_as_a_Windows_Service"><span class="tocnumber">2.3</span> <span class="toctext">Running Server as a Windows Service</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="#Troubleshooting"><span class="tocnumber">2.3.1</span> <span class="toctext">Troubleshooting</span></a>
+<ul>
+<li class="toclevel-4 tocsection-7"><a href="#Java_not_found"><span class="tocnumber">2.3.1.1</span> <span class="toctext">Java not found</span></a></li>
+<li class="toclevel-4 tocsection-8"><a href="#Address_already_in_use:_JVM_Bind"><span class="tocnumber">2.3.1.2</span> <span class="toctext">Address already in use: JVM_Bind</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="#Running_Server_as_a_Unix/Mac_OS_X/Linux_Daemon"><span class="tocnumber">2.4</span> <span class="toctext">Running Server as a Unix/Mac OS X/Linux Daemon</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Changing_the_Server_Port_Number"><span class="tocnumber">2.5</span> <span class="toctext">Changing the Server Port Number</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Configuring_the_License_Expiration_Time"><span class="tocnumber">2.6</span> <span class="toctext">Configuring the License Expiration Time</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Configuring_Reserved,_Extended-Period_Licenses"><span class="tocnumber">2.7</span> <span class="toctext">Configuring Reserved, Extended-Period Licenses</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#Client_Configuration:_PLS_Toolbox"><span class="tocnumber">3</span> <span class="toctext">Client Configuration: PLS_Toolbox</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="#Simplified_Network_Installation"><span class="tocnumber">3.1</span> <span class="toctext">Simplified Network Installation</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Client_Configuration:_Releasing_Licenses_in_PLS_Toolbox"><span class="tocnumber">3.2</span> <span class="toctext">Client Configuration: Releasing Licenses in PLS_Toolbox</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Changing_the_Server_IP_Address"><span class="tocnumber">3.3</span> <span class="toctext">Changing the Server IP Address</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#Using_Reserved,_Extended-Period_Licenses"><span class="tocnumber">3.4</span> <span class="toctext">Using Reserved, Extended-Period Licenses</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="#Client_Configuration:_Solo"><span class="tocnumber">4</span> <span class="toctext">Client Configuration: Solo</span></a>
+<ul>
+<li class="toclevel-2 tocsection-19"><a href="#Changing_the_Server_IP_Address_2"><span class="tocnumber">4.1</span> <span class="toctext">Changing the Server IP Address</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="#Using_Reserved,_Extended-Period_Licenses_2"><span class="tocnumber">4.2</span> <span class="toctext">Using Reserved, Extended-Period Licenses</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>The EVRI License_Server allows monitoring the number of users operating under a given Eigenvector Research, Inc. (EVRI) license. of PLS_Toolbox or Solo. When operating with this server, individual copies of PLS_Toolbox or Solo are required to contact a network-mounted server in order to operate.
+</p><p>The license system consists of two parts: a server which must reside on a network-accessible computer and a client that runs on the end-user’s computer. All communication between client and server is done over standard TCP/IP sockets. When an individual starts up Solo or PLS_Toolbox, the client application (Solo or MATLAB) contacts the server to request a license. The server, upon receiving this request, first verifies an Access Code to confirm the validity of the request. Once confirmed, the server identifies the number of allowed licenses and the number of currently issued licenses. If any licenses are available, the server issues a license to the user with a fixed timeout period (this defaults to 20 minutes in the current license server, but can be configured). This license is keyed to the individual’s computer and the IP address of that user.
+</p><p><br />For details on installing the license server and installing or updating the PLS_Toolbox or Solo client please see our Quick Start Guide: 
+</p>
+<table cellspacing="0" align="left" style="padding: 3px">
+<tbody><tr style="background: #eef">
+<td style="vertical-align:top; border-top: 1px solid #ccf; border-left: 1px solid #ccf; border-right: 1px solid #ccf; border-bottom: 1px solid #ccf; padding: 1em;">
+<p><a href="license_server_quick_start.html" title="License Server Quick Start"> **Click here to view the "Quick Start" guide**</a>
+</p>
+</td>
+</tr>
+</tbody></table>
+<p>Once a valid license is issued, the client will operate independently of the server until the reissue time passes (set at 10 minutes before the end of the license period). After that time period has passed, the client requests re-issuance of the license. The server will automatically reissue the license to the original client. If for some reason the license server is not reachable (e.g. network outage), the client will warn the user but continue to operate until the full license timeout period has passed (20 minutes). The client will repeat the request for a license periodically over that time. After the license has expired, the client will stop PLS_Toolbox or Solo from operating.
+</p><p>If a given user does not request re-issuance of their license before the license expires (e.g. the user has finished working with the product), the server considers the license use complete and makes it available for another user. Thus, a given license is considered “checked out” for 20 minutes from the last contact with a user. Users can check a license back in manually by either closing Solo, or issuing a special Matlab command (for PLS_Toolbox).
+</p><p><a href="" class="image" title="General Configuration"><img alt="General Configuration" src="500px_licenseserverconfig.png" decoding="async" width="500" height="321" /></a>
+</p>
+<h2><span class="mw-headline" id="Server_Configuration">Server Configuration</span></h2>
+<p>Eigenvector Research, Inc. (EVRI) will provide to you a copy of the EVRI License_Server (requires the  Java Runtime Engine version 1.6 or later) and a license file (evriserverlicense.xml). Most operating systems already contain the necessary files to execute the server application. The server can be run either as a background service with no interface, or as a desktop application with a status window. Follow the directions below as appropriate for your operating system and preferred interface.
+</p>
+<h3><span class="mw-headline" id="Choice_of_Computer">Choice of Computer</span></h3>
+<p>The computer selected to run the license server can not also run the client application (i.e. the Eigenvector product being licensed - PLS_Toolbox, Solo, etc). As such, <b>the computer you select to run the license server must</b>:
+</p>
+<ol><li>Be reachable by network</li>
+<li>Be identified by its network name or by a static (fixed) IP address</li>
+<li>Not be a computer on which you want to run the client application</li></ol>
+<p>Also, this computer must have Java (version 1.6 or later) installed since the license server is a Java program. Java can be Oracle's JVM or other implementation, for example Oracle Open JDK (<a rel="nofollow" class="external text" href="https://jdk.java.net/java-se-ri/11">OpenJDK</a>).
+</p>
+<h3><span class="mw-headline" id="Running_Server_as_a_Desktop_Application">Running Server as a Desktop Application</span></h3>
+<p>The EVRI license server program is contained in the EVRILicenseServer.jar file and only needs Java to be available on the computer in order to run. It can be manually started by double-clicking on the jar file or starting the jar file from a command prompt. When it is started in this manner then a Desktop window appears showing the license server's status.
+</p><p>
+First confirm java 1.6 or newer is installed. </p><pre>java -version</pre>
+<p>Copy the application files onto the computer that will operate as the server (which must be a network accessible computer). Copy the evriserverlicense.xml file into the same folder as the EVRILicenseServer.jar file.
+</p><p>On this computer, either double-click the EVRILicenseServer.jar file, or add it to your system startup folder (operating system dependent location - whatever is appropriate for the OS) to automatically start the server on startup. Starting from the command prompt can be done like this:
+</p>
+<pre>java -jar EVRILicenseServer.jar start</pre>
+<p>Once started, the server can only be stopped by using the Task Manager processes tab (in Windows) or other standard task kill operation (MAC OS X or Linux). EVRI has pre-configured the server so there is no additional configuration necessary.
+</p>
+<h3><span class="mw-headline" id="Running_Server_as_a_Windows_Service">Running Server as a Windows Service</span></h3>
+<p>The sub-folder "service64" in the License Server main folder "EVRILicenseServer" contains the additional tools necessary to run the server as a Windows service which will automatically be started without a user logging in. Please note that whenever the license server is running as a Windows service it does NOT create a Desktop status window.  
+</p><p>Follow these instructions to use the EVRI License Server as a windows service:
+</p>
+<ol><li>Confirm java 1.6 or newer is installed. <pre>java -version</pre></li>
+<li>copy the application files onto the server computer.</li>
+<li>copy the evriserverlicense.xml file into the "service64" sub-folder (for 64-bit computers) or "service" sub-folder (for 32-bit computers). When running as a windows service, the evriserverlicense.xml file <b>must be</b> in this sub-folder, not the top-level application folder.</li>
+<li>run the Install_Service.bat file in the service64 (or service) folder to install the service (this batch file must be run by a user with administrative privileges).</li>
+<li>run the file Start_Service.bat or Stop_Service.bat to start or stop the service, again as a user with administrative privileges. A service named "EVRILicenseService" should appear in your Task Manager's "Services" window with status = Running or Stopped.</li></ol>
+<h4><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h4>
+<p>Errors and status messages will be reported to the log files stored in the C:/temp/ folder by default. To move logs to a different location, edit the service/conf/wrapper.conf file (or service64/conf/wrapper.conf file if using the 64-bit version). You can also modify the logging behavior in this file (maximum length, number of log backups, etc.). 
+</p>
+<h5><span class="mw-headline" id="Java_not_found">Java not found</span></h5>
+<p>One common problem when running Start_Service.bat is that Java cannot be found. If you get an error in the wrapper.log file saying "wrapper.java.command does not appear to be a java binary" or "Unable to execute Java command" then you should modify the wrapper's configuration file (EVRILicenseServer\service64\conf\wrapper.conf, if 64-bit version used) content to change the lines:
+</p>
+<pre> # Java Application
+ wrapper.java.command=java
+</pre>
+<p>to point at your Java executable, for example something like the following, depending on where you install your Java:
+</p>
+<pre> wrapper.java.command=C\Program Files\Java\jrexxxx\bin\java
+</pre>
+<p>where "jrezzz" refers to your specific Java JRE or JDK folder, then run the Start_Service.bat again. 
+</p><p>To uninstall the service, run the Uninstall_Service.bat file.
+</p>
+<h5><span class="mw-headline" id="Address_already_in_use:_JVM_Bind">Address already in use: JVM_Bind</span></h5>
+<p>Users installing the EVRI License Server can sometimes encounter a problem which is reported in the wrapper log file (mentioned above) as follows:
+</p>
+<pre>STATUS | wrapper  | 2020/09/15 08:22:07 | Launching a JVM...
+INFO   | jvm 1    | 2020/09/15 08:22:08 | WrapperManager: Initializing...
+INFO   | jvm 1    | 2020/09/15 08:22:08 |   
+INFO   | jvm 1    | 2020/09/15 08:22:08 | ---------------------------------------------------
+INFO   | jvm 1    | 2020/09/15 08:22:08 |    EVRI License Manager
+INFO   | jvm 1    | 2020/09/15 08:22:08 |    Version 2.5  --  Release July 24, 2012
+INFO   | jvm 1    | 2020/09/15 08:22:08 | ---------------------------------------------------
+INFO   | jvm 1    | 2020/09/15 08:22:08 | Standard License Seats:
+INFO   | jvm 1    | 2020/09/15 08:22:08 | Allowed Seats: 1
+INFO   | jvm 1    | 2020/09/15 08:22:08 | License Period Timeout: 20 minutes
+INFO   | jvm 1    | 2020/09/15 08:22:08 | Access Code: **-****-****
+INFO   | jvm 1    | 2020/09/15 08:22:08 | Port: 2212
+INFO   | jvm 1    | 2020/09/15 08:22:08 | ---------------------------------------------------
+INFO   | jvm 1    | 2020/09/15 08:22:08 | 2020-09-15 08:22:08 Identifying Licenses Previously In Use...
+INFO   | jvm 1    | 2020/09/15 08:22:08 | 2020-09-15 08:22:08 Starting socket server...
+INFO   | jvm 1    | 2020/09/15 08:22:08 | Socket Exception: Address already in use: JVM_Bind
+</pre>
+<p>This means that the license server failed to start because the port 2212 is already being used by another process and is unavailable. This other process may be a left-over licenseserver process from an earlier attempted to start it. You need to find which other process is using port 2212.  You can do this by using a very useful small program available from Microsoft called "TCPview", which you can get it from:
+</p><p><a rel="nofollow" class="external free" href="https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview">https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview</a>
+</p><p>There is no install needed for TCPview, simply run the .exe and follow these steps:
+</p>
+<ol><li>Run the "Stop_service.bat" file to shutdown the service if you had started it.</li>
+<li class="mw-empty-elt"></li>
+<li>Run the TCPview.exe by double-clicking. It will open a window showing columns "Process", "PID", "Local Port", etc. Click on the "Local Port" column header to sort by port number and find the entry 2212. If you recognize the process name as some other important program which is already using port 2212 then you need to configure the License Server to use a different port number as described at <a href="#Changing_the_Server_Port_Number" title="Evri license server"> Changing the Server Port Number</a>). On the otherhand, if the process is named "java.exe" then it is probably from a failed attempt to start the License Server and can be terminated. Click on that row, then right-click and choose "End process...". This will kill that problem process. Usually there would be only one PID which is using local port = 2212 but if there are more than one then kill those too.</li>
+<li class="mw-empty-elt"></li>
+<li>Once TCPview shows no process using the port 2212 then start the License Server again, either by manually double-clicking on the EVRILicenseServer.jar file or as a service by running the "Start_service.bat" file and it should now work properly.</li></ol>
+<h3><span id="Running_Server_as_a_Unix.2FMac_OS_X.2FLinux_Daemon"></span><span class="mw-headline" id="Running_Server_as_a_Unix/Mac_OS_X/Linux_Daemon">Running Server as a Unix/Mac OS X/Linux Daemon</span></h3>
+<p>The sub-folders "<i>daemon_linux</i>" and "<i>daemon_linux64</i>" in the License Server main folder contain the additional tools necessary to run the server as a Linux daemon which will automatically be started without a user logging in. Follow these instructions:
+</p>
+<ol><li>Confirm java 1.6 or newer is installed. <pre>java -version</pre></li>
+<li>Copy the application files AND license files (both zip files) onto the server computer.</li>
+<li>Copy the evriserverlicense.xml file into the <i>daemon_linux</i> sub-folder (for 32-bit computers) or <i>daemon_linux64</i> sub-folder (for 64-bit computers) of the server application (same folder as the <i>Install_Daemon file</i>). When running as a daemon, the <i>evriserverlicense.xml</i> file must be in the appropriate daemon_linux folder, not the top-level application folder. <b>NOTE:</b> If you're reinstalling or moving your License Server be sure to check if you're using a custom port and update your xml files (evriserverlicense.xml and evrilm.xml) appropriately. See <a href="#Changing_the_Server_Port_Number" title="Evri license server">Evri_license_server#Changing_the_Server_Port_Number</a> for more info.</li>
+<li>Run the <i>Install_Daemon</i> script to install the daemon (this batch file must be run by a user with root privileges). <pre>./Install_Daemon</pre></li>
+<li>Start the daemon. <pre>/etc/init.d/EVRILicenseServer start</pre></li></ol>
+<p><b>NOTE:</b> If step 4 produces an error
+</p>
+<dl><dd><tt>"./Install_Daemon: ./DaemonWrapper: not found"</tt></dd>
+<dd>then run the following command to remove some undesirable line ending characters:</dd>
+<dd><tt>sed -i -e 's/\r$//' ./DaemonWrapper</tt></dd>
+<dd>and continue. You may also need to precede the sed command with "sudo".</dd>
+<dd></dd></dl>
+<dl><dd>Also, in order to execute this script and have the daemon operate correctly, you may have to manually set the "execute" bit on all files in the top-level <i>daemon_linux</i> / <i>daemon_linux64</i> folder to "on" using the chmod command inside the <i>daemon_linux</i> folder:</dd></dl>
+<pre>chmod 755 *
+</pre>
+<p>Errors and status messages will be reported to the log files stored in the <i>./tmp</i> folder. To move logs to a different location, edit the <i>daemon_linux/conf/wrapper.conf</i> or <i>daemon_linux64/conf/wrapper.conf</i> file. You can also modify the logging behavior in this file (maximum length, number of log backups, etc.)
+</p><p>To uninstall the daemon, run the <i>Uninstall_Daemon</i> script (as root.)
+</p>
+<pre>./Uninstall_Daemon
+</pre>
+<p>If you have problems, try running the test script:
+</p>
+<pre>./Test_Daemon
+</pre>
+<p>to see if the server will start when run manually.
+</p><p><b>NOTE:</b> If your receive an error regard wrapper libraries you may need to download a wrapper to match the current version of your java. 
+</p>
+<dl><dd>Libraries can be found at Tanuki Software  (<a rel="nofollow" class="external free" href="https://download.tanukisoftware.com/wrapper/3.5.24/">https://download.tanukisoftware.com/wrapper/3.5.24/</a>). A user reported success using the wrapper in wrapper-linux-x86-64-3.5.24-st.tar.gz. You also need the matching .jar files from the lib directory in this archive. Place those in the lib directory of EVRILicenseServer.</dd></dl>
+<h3><span class="mw-headline" id="Changing_the_Server_Port_Number">Changing the Server Port Number</span></h3>
+<p>If the default port number used by the server (2212) is in conflict with another application, the user can modify the port number by editing the evriserverlicense.xml file with a text editor adding the following tag (inside the outer <tt>&lt;license&gt; &lt;/license&gt;</tt> tags):
+</p>
+<pre>&lt;port&gt;2212&lt;/port&gt;</pre>
+<p>The value 2212 can be replaced with any valid port number. Note, however, that the server must be shut down and restarted to register the changes to this file.
+</p><p>Note that any clients of this license server, whether Solo or PLS_Toolbox, will need to have its evrilm.xml file modified to use this new port number. See the "serverport" line which should be changed to use the new port number:
+</p>
+<pre>&lt;serverport class="numeric"&gt;2212&lt;/serverport&gt;</pre>
+<h3><span class="mw-headline" id="Configuring_the_License_Expiration_Time">Configuring the License Expiration Time</span></h3>
+<p>By default, the server issues licenses which expire after 20 minutes if the user does not renew it within that time period. Version 2.1 of the License Server introduced the ability to customize this time period. To make this change, the administrator must edit the evriserverlicense.xml file in a text editor adding the following tag to the file:
+</p>
+<pre>&lt;timeout&gt;time_in_minutes&lt;/timeout&gt;</pre>
+<p>This new tag should appear above the ending <tt>&lt;/license&gt;</tt> tag. The value specified as time_in_minutes must be greater than 10 and will define how long the server will reserve a license for a user without hearing back from that user.
+</p><p>Note that, unless a user explicitly releases a license, the server will reserve that license for the entire timeout time period. As such, it is recommended that long timeout periods be used in conjunction with a procedure to explicitly release a license when done (see Releasing Licenses in PLS_Toolbox in the Client Configuration section of this manual.)
+</p><p>NOTE: Changing of license expiration time is only compatible with PLS_Toolbox and Solo versions 5.0 or later. Contact EVRI for a patch to use this feature with earlier versions (&lt;=4.2).
+</p>
+<h3><span id="Configuring_Reserved.2C_Extended-Period_Licenses"></span><span class="mw-headline" id="Configuring_Reserved,_Extended-Period_Licenses">Configuring Reserved, Extended-Period Licenses</span></h3>
+<p>The license server can also be configured to create a separate pool of licenses which can be checked out for extended periods (or, in general, a period of time different from the standard timeout period described above). Users access these licenses by supplying a separate access code different from the standard access code used to access the standard licenses.
+</p><p>The administrator can specify:
+</p>
+<ol><li>The access code users must use to access the extended licenses</li>
+<li>How many of the total license seats are eligible to be used as extended licenses</li>
+<li>The time period extended licenses are valid for, and</li>
+<li>How many of the total license seats are reserved for extended license use (cannot be checked out as standard licenses)</li></ol>
+<p>To access these features, the following XML code should be added to the evriserverlicense.xml file just before the <tt>&lt;/license&gt;</tt> tag at the end of the file:
+</p>
+<pre>&lt;license&gt;
+
+    …(all EVRI-supplied tags remain here)…
+
+    &lt;extended&gt;
+
+        &lt;accesscode&gt;extended_access_code &lt;/accesscode&gt;
+
+        &lt;allowedseats&gt;number_of_seats&lt;/allowedseats&gt;
+
+        &lt;reservedseats&gt;number_of_seats&lt;/reservedseats&gt;
+
+        &lt;timeout&gt;time_in_minutes&lt;/timeout&gt;
+
+    &lt;/extended&gt;
+
+&lt;/license&gt;</pre>
+<p>Note that these additional tags are enclosed by the <tt>&lt;extended&gt;&lt;/extended&gt;</tt> tag pair indicating that these settings are for the special extended licenses only and that the <tt>&lt;extended&gt;</tt> tags are inside the <tt>&lt;license&gt;</tt> tags.
+</p><p>The <tt>&lt;accesscode&gt;</tt> tag is required to be a non-empty string which the users will use in place of the standard access code (see Client Configuration below) to access this separate extended license pool. The standard access code will still be used to access the standard license pool.
+</p><p>The <tt>&lt;allowedseats&gt;</tt> tag specifies how many of the total allowed license seats (specified by EVRI) can be checked out as extended licenses. This number cannot be greater than the number specified earlier in the file in the main <tt>&lt;allowedseats&gt;</tt> tag.
+</p><p>The <tt>&lt;timeout&gt;</tt> tag specifies the amount of time (in minutes) an extended license is valid for.
+</p><p>The <tt>&lt;reservedseats&gt;</tt> tag is optional and, if specified, defines the number of license seats that can only be checked out as extended licenses. The default value is zero, meaning that all license seats are available as standard licenses.
+</p><p><b>NOTE:</b> Changing of license expiration time is only compatible with PLS_Toolbox and Solo versions 5.0 or later. Contact EVRI for a patch to use this feature with earlier versions (&lt;=4.2).
+</p><p>These settings can be used to limit the total number of licenses in a number of ways. For example, if the basic site license includes a total of eight seats, the following configuration file limits four of the licenses to extended checkout of 24 hours (1440 minutes) but all eight can also be checked out as standard licenses:
+</p>
+<pre>&lt;license&gt;
+
+    …(all EVRI-supplied tags remain here)…
+
+    &lt;allowedseats&gt;8&lt;/allowedseats&gt;     (as supplied by EVRI)
+
+    &lt;extended&gt;
+
+        &lt;accesscode&gt;myaccesscode&lt;/accesscode&gt;
+
+        &lt;allowedseats&gt;4&lt;/allowedseats&gt;
+
+        &lt;timeout&gt;1440&lt;/timeout&gt;
+
+    &lt;/extended&gt;
+
+&lt;/license&gt;</pre>
+<p>Thus the following would be a “map” of the eight licenses and their valid uses:
+</p>
+<table class="wikitable" border="1" cellpadding="2">
+
+<caption>Checkout Map
+</caption>
+<tbody><tr>
+<th></th>
+<th width="20">1</th>
+<th width="20">2</th>
+<th width="20">3</th>
+<th width="20">4</th>
+<th width="20">5</th>
+<th width="20">6</th>
+<th width="20">7</th>
+<th width="20">8
+</th></tr>
+<tr>
+<td>Standard</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x
+</td></tr>
+<tr>
+<td>Extended</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x
+</td></tr></tbody></table>
+<p><br />
+Note that four of the licenses can only be checked out as standard licenses. The other four licenses can be either standard or extended licenses. If <tt>&lt;allowedseats&gt;</tt> in the extended tag segment of the file had been set to “8”, all eight licenses could be checked out as either standard or extended licenses.
+</p><p>The <tt>&lt;reservedseats&gt;</tt> tag forces the server to reserve some licenses for use only as extended licenses. For example, if we add the tag:
+</p>
+<pre>&lt;reservedseats&gt;2&lt;/reservedseats&gt;</pre>
+<p>to the <tt>&lt;extended&gt;</tt> section of the XML file, the server will be forced to reserve two of the eight licenses as extended licenses. Thus four licenses can be only checked out as standard licenses, two can be checked out as only extended licenses, and the other two can be checked out as either. The map of valid uses is shown below:
+</p>
+<table class="wikitable" border="1" cellpadding="2">
+
+<caption>Checkout Map
+</caption>
+<tbody><tr>
+<th></th>
+<th width="20">1</th>
+<th width="20">2</th>
+<th width="20">3</th>
+<th width="20">4</th>
+<th width="20">5</th>
+<th width="20">6</th>
+<th width="20">7</th>
+<th width="20">8
+</th></tr>
+<tr>
+<td>Standard</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td>
+</td></tr>
+<tr>
+<td>Extended</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x
+</td></tr></tbody></table>
+<p><b>NOTE:</b> The total number of allowed seats (set in the main license tag segment of the file) and the main access code cannot be modified by the user. This value is fixed and is specific to the license issued by Eigenvector Research. To change the total number of license seats, contact Eigenvector Research.
+</p><p>In general, the server will handle inappropriate settings by defaulting to the un-modified behavior, but if the settings you have chosen are invalid or the file is not valid XML format, the server will return an error on startup. It is recommended that you make a copy of the original license file supplied by Eigenvector Research in order to recover from such mistakes.
+</p><p>Under no circumstances should the user modify the top-level values for <tt>&lt;accesscode&gt; &lt;configid&gt;</tt> or <tt>&lt;allowedseats&gt;</tt> (the tags at the top level of the <tt>&lt;licenses&gt;</tt> tag, not those in the user-modifiable &lt;extended&gt; tag). Changing these values will cause the server to fail.
+</p>
+<h2><span class="mw-headline" id="Client_Configuration:_PLS_Toolbox">Client Configuration: PLS_Toolbox</span></h2>
+<p>Follow these steps to install and configure PLS_Toolbox for use with the License_Server:
+</p>
+<ol><li>Download the ZIP version of PLS_Toolbox, available from your account on Eigenvector.com.</li>
+<li>Unzip the file onto either a network-accessible drive or a local drive on a given client’s computer.</li>
+<li>EVRI may supply several additional files, including:
+<dl><dd><tt>evrilicense.lic                        -contains the license code for the license</tt></dd>
+<dd><tt>evrilm.xml                             -user-modifiable server configuration</tt></dd>
+<dd><tt>evrinetwork.lic                        -eases network installation</tt> <br /><br />If provided, these files should be copied into the PLS_Toolbox/utilities folder (see notes below regarding evrilm.xml file). <br /><b>NOTE:</b> If you are using a demo version of PLS_Toolbox,  you will require an additional updated file (evriio.p).</dd></dl></li>
+<li>Start MATLAB and change the working directory to the installation folder.</li>
+<li>Enter the command: <pre>evriinstall silent</pre></li>
+<li>If prompted, enter a license code provided by EVRI.</li>
+<li>If prompted, enter the IP address (or other DNS-accessible computer name), the port number (2212, unless otherwise specified by EVRI), and Access Code (supplied by EVRI).<br />This information can also be included in a file named “evrilm.xml” and placed in the PLS_Toolbox/utilities folder. The format for this file is discussed below.</li>
+<li>Verify the correct installation by typing the command<pre>pls test</pre>This should return your serial number and today’s date.</li></ol>
+<h3><span class="mw-headline" id="Simplified_Network_Installation">Simplified Network Installation</span></h3>
+<p>In order to reduce the effort required to install PLS_Toolbox with License_Server on multiple clients, a file named “evrilm.xml” can be created containing the server information. This file, when placed in the PLS_Toolbox/utilities folder will be used for the default server configuration. The file should contain the following XML code:
+</p>
+<pre>&lt;info&gt;
+&lt;serveraddress&gt;''ip_address''&lt;/serveraddress&gt;
+&lt;serverport class="numeric"&gt;2212&lt;/serverport&gt;
+&lt;accesscode&gt;''serial_number''&lt;/accesscode&gt;
+&lt;/info&gt;
+</pre>
+<p>Where ip_address is replaced with the IP address or DNS-resolvable computer name, 2212 is the port address, and serial_number is the supplied Access Code (usually your site license serial number).
+</p><p>If all three files (evrilm.xml, evrilicense.lic, and evrinetwork.lic) are available and stored in the PLS_Toolbox/utilities folder, the installation of PLS_Toolbox on a new client computer can be reduced to simply:
+</p>
+<ol><li>Change the MATLAB working directory to the PLS_Toolbox folder</li>
+<li>Run the command:  evriinstall silent</li>
+<li>Verify operation using: pls test</li></ol>
+<p>If an evrinetwork.lic file has been stored in the utilities folder and PLS_Toolbox and all sub-folders have been added to the Matlab pathdef.m file stored on a server-mounted copy of Matlab, then the above steps will not be necessary. In this case, Matlab will already have PLS_Toolbox on its path when started by any user and users will not have to run any install procedure. To add PLS_Toolbox to the default path, simply start Matlab as an administrator with write privileges for the folder containing pathdef.m.
+</p>
+<h3><span class="mw-headline" id="Client_Configuration:_Releasing_Licenses_in_PLS_Toolbox">Client Configuration: Releasing Licenses in PLS_Toolbox</span></h3>
+<p>By default, PLS_Toolbox does not explicitly release a license back to the server (i.e. mark it as available for use by others) because it is called from within MATLAB and the ending of a session may not be clear. The user can, however, “release” a license when done using it by executing the command:
+</p>
+<pre>pls release</pre>
+<p>This command will tell the server that this user is done using the given license (if any.) This command could also be placed into a file named “finish.m” anywhere on the MATLAB path to automatically release a license when the user closes MATLAB. This feature is of particular use when using longer timeout periods on the license server (see Server Configuration options.)
+</p>
+<h3><span class="mw-headline" id="Changing_the_Server_IP_Address">Changing the Server IP Address</span></h3>
+<p>After PLS_Toolbox has been configured to access the license server, the IP address for the license server can be changed (if, for example, you need to access the license server from outside a firewall) using the following command:
+</p>
+<pre>setpref('EVRI_LM','serveraddress',' <i>aaa.bbb.ccc.ddd</i> ')
+</pre>
+<p>Where <i>aaa.bbb.ccc.ddd</i> is the new IP address. Note that this must be done immediately after starting up Matlab and before any PLS_Toolbox commands are used.
+</p><p>If an <i>evrilm.xml</i> file was used to originally configure PLS_Toolbox to locate the server, you can return to the original server IP address using the command:
+</p>
+<pre>evriclearlicense
+</pre>
+<p>If no <i>evrilm.xml</i> file was used, this command will re-prompt you for a new license code and server information.
+</p>
+<h3><span id="Using_Reserved.2C_Extended-Period_Licenses"></span><span class="mw-headline" id="Using_Reserved,_Extended-Period_Licenses">Using Reserved, Extended-Period Licenses</span></h3>
+<p>If the server has been configured to provide extended-period licenses then PLS_Toolbox on a client computer can access them in any of three ways:
+</p><p>a) use the Workspace Browser menu: "Help &gt; Reset License" then enter new access code
+</p><p>b) use the command: evriclearlicense
+</p><p>c) use the command: setpref('EVRI_LM','accesscode','zzz')
+</p><p>where 'zzz' is the access code for extended-period licenses specified by the administrator, as described above.
+</p>
+<h2><span class="mw-headline" id="Client_Configuration:_Solo">Client Configuration: Solo</span></h2>
+<p>Follow the standard installation instructions for Solo, however, when the license code is requested, enter the specific code provided by EVRI. You will then be prompted to enter the IP address (or other DNS-accessible computer name), the port number (2212, unless otherwise specified by EVRI), and Access Code (supplied by EVRI).*
+</p><p>Once connection to the server is made and the license is verified, Solo will operate as expected. If Solo sits unused for a period of time, you may lose your license on the server and may have to wait for a new license to become available. Leaving Solo open during this time will allow you to pick up your work where you left off.
+</p><p>As with PLS_Toolbox configuration, an evrilm.xml file can be used to define the default server information. This file should reside in the top-level Solo folder. In addition, any valid evrilicense.lic file can be placed in this folder. (Note that PLS_Toolbox and Solo use different evrilicense.lic files so a separate file must be obtained for each product type.)
+</p>
+<h3><span class="mw-headline" id="Changing_the_Server_IP_Address_2">Changing the Server IP Address</span></h3>
+<p>After Solo has been configured to access the license server, the only way to change the IP address for the license server is to use one of the following:
+</p>
+<ul><li>If an <i>evrilm.xml</i> file was used to originally configure Solo to locate the server, modify the file to contain the new IP address and restart Solo.</li></ul>
+<ul><li>If no <i>evrilm.xml</i> file was used, restart Solo and you will be re-prompted for a new license code and server information.</li></ul>
+<h3><span id="Using_Reserved.2C_Extended-Period_Licenses_2"></span><span class="mw-headline" id="Using_Reserved,_Extended-Period_Licenses_2">Using Reserved, Extended-Period Licenses</span></h3>
+<p>If the server has been configured to provide extended-period licenses then Solo on a client computer can access them by:
+</p><p>a) use the Workspace Browser menu: "Help &gt; Reset License" then enter new access code specified by the administrator, as described above.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930012438
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.028 seconds
+Real time usage: 0.031 seconds
+Preprocessor visited node count: 156/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 2688/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:726-0!canonical and timestamp 20240930012438 and revision id 12201.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Evri_license_server&amp;oldid=12201">https://www.wiki.eigenvector.com/index.php?title=Evri_license_server&amp;oldid=12201</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 19 January 2024, at 09:57.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

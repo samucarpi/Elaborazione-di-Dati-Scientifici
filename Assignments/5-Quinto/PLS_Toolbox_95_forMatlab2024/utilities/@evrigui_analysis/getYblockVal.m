@@ -1,0 +1,13 @@
+function out = getYblockVal(obj,parent,varargin)
+%GETYBLOCKVAL Returns current validation Y block data.
+%I/O: .getYblockVal
+
+%Copyright Eigenvector Research, Inc. 2009
+%Licensee shall not re-compile, translate or convert "M-files" contained
+% in PLS_Toolbox for use with any software other than MATLAB®, without
+% written permission from Eigenvector Research, Inc.
+
+error(nargchk(2, 2, nargin))
+
+handles = guidata(parent.handle);
+out = analysis('getobjdata','validation_yblock', handles);

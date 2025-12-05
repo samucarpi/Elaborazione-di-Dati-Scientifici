@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>EigenvectorTools - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-EigenvectorTools rootpage-EigenvectorTools skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=EigenvectorTools"><span class="mw-page-title-main">EigenvectorTools</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Installation"><span class="tocnumber">2</span> <span class="toctext">Installation</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Application_Interface"><span class="tocnumber">3</span> <span class="toctext">Application Interface</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Methods"><span class="tocnumber">3.1</span> <span class="toctext">Methods</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Properties"><span class="tocnumber">3.2</span> <span class="toctext">Properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Examples"><span class="tocnumber">4</span> <span class="toctext">Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#Visual_Basic_with_ETV6"><span class="tocnumber">4.1</span> <span class="toctext">Visual Basic with ETV6</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Visual_Basic_with_ET.NET"><span class="tocnumber">4.2</span> <span class="toctext">Visual Basic with ET.NET</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#MSVC++_with_ET.NET"><span class="tocnumber">4.3</span> <span class="toctext">MSVC++ with ET.NET</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#Troubleshooting"><span class="tocnumber">5</span> <span class="toctext">Troubleshooting</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href=""><span class="tocnumber">5.1</span> <span class="toctext">Dragging EigenvectorTools.dll to RegAsm doesn't register application</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#DllRegisterServer_Failed._Return_Code_0x80004005"><span class="tocnumber">5.2</span> <span class="toctext">DllRegisterServer Failed. Return Code 0x80004005</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Unhandled_Exception:_System.IO.FileNotFoundException"><span class="tocnumber">5.3</span> <span class="toctext">Unhandled Exception: System.IO.FileNotFoundException</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href=""><span class="tocnumber">5.4</span> <span class="toctext">Cannot Find "plstoolbox.dll" or "System.DllNotFoundException" when Starting Solo</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href=""><span class="tocnumber">5.5</span> <span class="toctext">Solo_Predictor Throws: unknown error Error in =&gt; opentoolbox.m at 117</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Setting_Up_Visual_Studio_2019_for_Examples"><span class="tocnumber">5.6</span> <span class="toctext">Setting Up Visual Studio 2019 for Examples</span></a>
+<ul>
+<li class="toclevel-3 tocsection-17"><a href="#C#"><span class="tocnumber">5.6.1</span> <span class="toctext">C#</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="#Release_Notes"><span class="tocnumber">6</span> <span class="toctext">Release Notes</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>NOTE: As of November 2021 (Solo 9.0) EigenvectorTools is transitioning to our <a href="software_development_kit_%28sdk%29.html" title="Software Development Kit (SDK)">Software_Development_Kit_(SDK)</a>. Current versions of Solo and Solo+MIA don't include EigenvectorTools, versions including EigenvectorTools are available by special request. Solo_Predictor does include EigenvectorTools but will transition in near future. 
+</p><p><br />
+The EigenvectorTools suite comprises a number of libraries which can be used on Windows to connect to Eigenvector Research's stand-alone software packages like Solo and Solo_Predictor. There are two versions of these tools:
+</p>
+<ul><li><b>EigenvectorToolsV6&#160;:</b> A standard Version 6 ActiveX object ("ETV6") written for best compatibility with older applications and those not wishing to run with Microsoft's .NET Framework. See the note below regarding limitations when using ETV6 on 64-bit operating systems. <b>IMPORTANT: ETV6 has been removed in newer versions. ETV6 is only available for use in Solo_Predictor versions 3.6.2 and earlier. (32-bit versions only)</b></li></ul>
+<ul><li><b>EigenvectorTools&#160;:</b> A .NET object (referred to as "ET.NET") recommended for any managed code applications built using Microsoft's .NET framework 1.1 or higher (Visual Studio 2003, 2005, or later). Although ET.NET was written with COMInterop (i.e. allowing the .NET object to be accessed like a standard ActiveX object from older, non-managed code) but ETV6 is still the recommended object for use with these older platforms.</li></ul>
+<p>ETV6 and ET.NET both implement nearly identical interfaces into the main Solo application. The details of this interface are given below. ET.NET also includes socket communication and XML parsing tools which may be useful for some applications. These tools are not available in the ETV6 application.
+</p><p><b>Notes for use on 64-bit systems:</b> If you need to use the ETV6 interface on a 64-bit system (for use with an older application, for example), it can only be used with older 32-bit versions of Eigenvector's products. To use this interface with our 64-bit products, you must use the ET.NET version of the interface. Furthermore, a 32-bit and 64-bit version of ET.NET is provided in the distribution. In general, the version used should be matched to the user's calling application (a 64-bit application should use the 64-bit ET.NET; a 32-bit application should use the 32-bit ET.NET). A compatibility table is given below.
+</p>
+<table class="wikitable" border="1">
+<caption>
+</caption>
+<tbody><tr>
+<th></th>
+<th>Solo/Solo_Predictor</th>
+<th>Solo/Solo_Predictor
+</th>
+</tr></tbody><caption>
+</caption>
+<tbody><tr><th></th>
+<th>32-bit</th>
+<th>64-bit
+</th></tr>
+<tr>
+<td><b>32-bit Windows</b></td>
+<td>ETV6 <i>or</i> ET.NET</td>
+<td><i>n/a</i>
+</td></tr>
+<tr>
+<td><b>64-bit Windows</b></td>
+<td>ETV6 <i>or</i> ET.NET*</td>
+<td>ET.NET*
+</td></tr></tbody></table>
+<p>* Either the 32-bit or 64-bit version of ET.NET can be used, but should be matched to the application instancing ET.NET
+</p>
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<ol><li>Download the version of Solo, Solo_Predictor or other stand-alone application which will be controlled by EigenvectorTools from your account at [<a rel="nofollow" class="external text" href="http://download.eigenvector.com">http://download.eigenvector.com</a>]</li>
+<li>Run the stand-alone application installer downloaded in the previous step. <b>NOTE:</b> This installation will include the option to add the product to the Windows system path. This step <b>must</b> be completed for EigenvectorTools to function. If the option is not available or not selected, please see the troubleshooting section. If multiple Eigenvector applications are installed on the same system, only the first one on the system path will be accessible through the EigenvectorTools interface.</li>
+<li>The EigenvectorTools application will be installed along with the stand-alone application and will be found in a folder named "eigenvectortools" under the main application folder. The DLLs referred to below will be in the <tt>eigenvectortools/bin/x86</tt> folder for 32-bit versions of ET and the <tt>eigenvectortools/bin/x64</tt> folder for 64-bit versions of ET. Note that all types of ET tools are shipped with all products, whether or not the main product is the 32- or 64-bit version.</li>
+<li>Using an account with administrative privileges, complete one of the two following steps depending on the version of EigenvectorTools you are installing:
+<ul><li><b>EigenvectorTools</b>: In the folder containing the <tt>EigenvectorTools</tt> application, drag the <tt>EigenvectorTools.dll</tt> to the <tt>regasm.exe</tt> application. Then copy the <tt>EigenvectorTools.dll</tt> into a folder on your system path (such as the Solo or Solo_Predictor folder on your path) or into the folder in which the 3rd party application resides. See the <a href="#Troubleshooting">Troubleshooting</a> section below.</li></ul></li></ol>
+<p>The EigenvectorTools application should now be ready for use. It can be tested by running one of the test applications:
+</p>
+<ul><li><b>CPPExample/socketTester.exe</b> to test <tt>EigenvectorTools</tt> only (not <tt>EigenvectorToolsV6</tt>) - Before running, copy the <tt>EigenvectorTools.dll</tt> into the <tt>CppExample</tt> folder.</li>
+<li><b>VBExample/VBsocketTester.exe</b> to test <tt>EigenvectorTools</tt> or <tt>EigenvectorToolsV6</tt>.</li></ul>
+<p>Please see <a href="#Troubleshooting">Troubleshooting</a> section for assistance with installation and testing errors.
+</p>
+<h2><span class="mw-headline" id="Application_Interface">Application Interface</span></h2>
+<p>The primary object in both versions of EigenvectorTools is an <b>application</b> object. The object's interface implements several start-up properties and several methods. For ET.NET, the base object is instanced by creating a new Eigenvector.application object. Note that the ET.NET version also has two other objects (socketClient and numericParser) which can be instanced using the same namespace (Eigenvector.socketClient and Eigenvector.numericParser).
+</p>
+<h3><span class="mw-headline" id="Methods">Methods</span></h3>
+<table border="1" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>startApp()</tt> 
+</p>
+</td>
+<td>Start up the Solo application. This method should be called after setting any of the desired startup properties listed below and before issuing any sendCommand() calls. Once started, none of the startup properties can be changed.
+<p><b>RETURNS:</b> 0 if start was successful or -1 if the start failed. Error messages from a failed start can be retrieved from the read-only property <i>lastResponse</i>.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>stopApp()</tt> 
+</p>
+</td>
+<td>Stop the Solo application. Note that once stopApp has been called, it cannot be restarted without unloading EigenvectorTools. In general it is recommended that this method be called only when the client application is performing final cleanup before exiting. Note that this method is also automatically called when the application object is destroyed, thus, directly calling this method is usually not needed.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>sendCommand(cmd)</tt> 
+</p>
+</td>
+<td>Send a string command "cmd" to the Solo application. This is the standard way of communicating with the application. The command may be any of the simple object-creation commands described in the <a href="solo_predictor_user_guide.html" title="Solo Predictor User Guide">Solo_Predictor_User_Guide</a> documentation or a command making use of <a href="evrigui_objects.html" title="EVRIGUI Objects">EVRIGUI_Objects</a>. Any textural response from the application is stored in the read-only property <i>lastResponse</i>.
+<p><b>RETURNS:</b> 0 if command was successful, -1 if the command failed due to low-level application error, or -2 if the command was invalid, there was a license error, or other high-level error. In either case, the textural response including any error can be found using the <i>lastResponse</i> property.
+</p>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Properties">Properties</span></h3>
+<table border="1" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+<td valign="top" colspan="2">
+<p><b>General Properties</b>
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>lastResponse</tt>
+</p>
+</td>
+<td><i><b>READ ONLY: </b></i> Returns the string response returned by the server after the last startApp() or sendCommand() call.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>allowedLength</tt><br />        
+<tt>allowedLengthLong</tt>         
+</p>
+</td>
+<td>Maximum string length allowed to be returned in lastResponse. <b>In ET.NET</b>: allowedLength property is a Long integer type and allowedLengthLong is not available. Both set the maximum length of string returned, but allowedLength property is typed as a Short Integer while the allowedLengthLong property is typed a Long Integer. In general, allowedLenghtLong should be used in ETV6 but allowedLength is supported to allow backwards compatibility. Maximum length of string when setting using the Short Integer version of this property is 65535 characters.
+</td></tr>
+<tr>
+<td valign="top" colspan="2">
+<p><b>Start-up Properties - All Products</b>
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>debug</tt><br />
+<tt>debugMode</tt>    
+</p>
+</td>
+<td>Boolean flag indicating if additional startup output should be given. Usually, this output will be written to a file named solo_debug.log in the user's temp directory.
+<p><b>Note:</b> In EigenvectorToolsV6, this property is named debugMode to avoid namespace conflicts.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>licensecode</tt> 
+</p>
+</td>
+<td>String indicating the activation / license code to use with the application. Any previous code will be erased before using this code. If this code is not valid for the given version and product, the application will fail to start.
+<p><b>Note:</b> for Solo_Predictor and other products that <i>require</i> a default.xml file, this property will not be used unless a valid default.xml has been found (see settingsFile property for a method to specify the location of this file). However, the default.xml file does not need to have a valid licensecode in it if this property is set. This is not the case for Solo or Solo+MIA which do not require a default.xml file.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>settingsFile</tt>
+</p>
+</td>
+<td>String indicating an alternative settingsFile to load (instead of the default: default.xml). Also allows specifying location of default.xml when it can't be found automatically by the application.
+<p><b>Note:</b> In Solo and Solo+MIA, the contents of specified file will only be used when an existing setting is not currently specified. Thus, this setting should be used in conjunction with clearSettings property to assure these settings are used.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>addCmd</tt> 
+</p>
+</td>
+<td>String specifying any additional command-line options to pass into the application.
+</td></tr>
+<tr>
+<td valign="top" colspan="2">
+<p><b>Start-up Properties - Solo &amp; Solo+MIA Only</b>
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>automation</tt> 
+</p>
+</td>
+<td>Forces the application to open "silently" with no GUI to start. The application will then wait for commands passed through either the application interface or through the socket interface (unless the socket property is set to false - see below).
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>socket</tt>         
+</p>
+</td>
+<td>Boolean flag indicating if socket connections should be enabled when automation mode is on (see automation property).
+<p>If false, only commands issued directly through application.sendCommand method will be allowed.
+If true, socket connections from other programs and optionally other computers will be allowed.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>gui</tt>
+</p>
+</td>
+<td>Boolean flag indicating if any GUIs should be permitted. If false, application will exit after issuing any other command-line calls.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>clearSettings</tt>
+</p>
+</td>
+<td>
+<p>Boolean flag indicating if the settings file (default.xml or value in settingsFile property) should be re-read. If true, previously saved settings and preferences will be cleared before re-reading settings file. Solo_Predictor never retains settings from session to session.
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>dataFile</tt>
+</p>
+</td>
+<td>String specifying a data file to read in upon initialization of application. This file will be read into the workspace unless a special importer is designated for the file (this is only the case for custom applications)
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Visual_Basic_with_ETV6">Visual Basic with ETV6</span></h3>
+<p>Please see the example code in the supplied eigenvectortools\VBExample\source\frmTCPTest.frm
+</p>
+<h3><span class="mw-headline" id="Visual_Basic_with_ET.NET">Visual Basic with ET.NET</span></h3>
+<p>The above example will work on the ET.NET interface after two changes are made:
+</p>
+<ol><li>You must tell Visual Studio to reference the EigenvectorTools.dll (ET.NET) by selecting "add a reference" option in Visual Studio, then browsing to locate the EigenvectorTools.dll.</li>
+<li>You must make a change in the name used to instance the "solo" object. The exact name change depends on the version of Visual Studio you are using.</li></ol>
+<dl><dd><dl><dd><b>Visual Studio 6:</b> Change the first two lines of code shown above to read:</dd></dl></dd></dl>
+<pre>       Dim solo As EigenvectorTools.application
+       Set solo = New EigenvectorTools.application
+</pre>
+<dl><dd><dl><dd><b>Visual Studio 2003 and later:</b> Change the first two lines of code shown above to read:</dd></dl></dd></dl>
+<pre>       Dim solo As Eigenvector.application
+       Set solo = New Eigenvector.application
+</pre>
+<p>After this, all other references to the "solo" object will be identical. 
+</p>
+<h3><span id="MSVC.2B.2B_with_ET.NET"></span><span class="mw-headline" id="MSVC++_with_ET.NET">MSVC++ with ET.NET</span></h3>
+<p>For applications using Microsoft's Visual C++ and using .NET, the previous example is almost identical to what would be used except for the following code changes:
+</p><p>Replace the line:
+</p>
+<pre>   EigenvectorToolsV6::application *solo = new EigenvectorToolsV6::application;
+</pre>
+<p>with
+</p>
+<pre>   Eigenvector::application *solo = new Eigenvector::application;
+</pre>
+<p>and the line
+</p>
+<pre>   solo-&gt;allowedLengthLong = &amp;lngth;
+</pre>
+<p>with
+</p>
+<pre>   solo-&gt;allowedLength = &amp;lngth;
+</pre>
+<p>See the example in the supplied eigenvectortools\CppExample\source\socketTester\socketTester.cpp, or 
+</p><p>In addition, to instance the ET.NET object, you must add a reference to the EigenvectorTools object in your project in Visual Studio.
+</p>
+<h2><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h2>
+<h3><span id="Dragging_EigenvectorTools.dll_to_RegAsm_doesn.27t_register_application"></span><span class="mw-headline" id="Dragging_EigenvectorTools.dll_to_RegAsm_doesn't_register_application">Dragging EigenvectorTools.dll to RegAsm doesn't register application</span></h3>
+<p>If dragging the EigenvectorTools.dll to the regasm application (to register the ET.NET object) doesn't make the application available, it is possible that the user with which you are trying to perform the action does not have sufficient permissions to register the application. Try using regasm from a command window (run: cmd). You will receive a message similar to:
+</p>
+<dl><dd><b>RegAsm&#160;: error RA0000&#160;: An error occurred while writing the registration information to the registry.</b></dd>
+<dd><b>You must have administrative credentials to perform this task.</b></dd>
+<dd><b>Contact your system administrator for assistance</b></dd></dl>
+<p>You must either use an explicit administrator, or use the "Run as Administrator" option to start a command window (cmd.exe), navigate to the folder which contains EigenvectorTools.dll and use the command:
+</p>
+<pre> regasm EigenvectorTools.dll
+</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="DllRegisterServer_Failed._Return_Code_0x80004005">DllRegisterServer Failed. Return Code 0x80004005</span></h3>
+<p>If you receive the error:
+</p>
+<dl><dd><b>DllRegisterServer in EigenvectorToolsV6.dll Failed. Return Code was: 0x80004005</b></dd></dl>
+<p>when trying to use regsvr32 to register the ETV6 ActiveX, the user you are logged in as does not have sufficient permissions to register the application. You must either use an explicit administrator, or use the "Run as Administrator" option to start a command window (cmd.exe), navigate to the folder which contains EigenvectorToolsV6.dll and use the command:
+</p>
+<pre> regsvr32 EigenvectorToolsV6.dll
+</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Unhandled_Exception:_System.IO.FileNotFoundException">Unhandled Exception: System.IO.FileNotFoundException</span></h3>
+<p>If you receive an error:
+</p>
+<dl><dd><b>Unhandled Exception: System.IO.FileNotFoundException: File or assembly name EigenvectorTools, or one of its dependencies, was not found.</b></dd>
+<dd><b>File name: "EigenvectorTools" at main()</b></dd></dl>
+<p>the problem is most likely that the EigenvectorTools.dll is not in a folder on your system path or in the same folder as the 3rd party application.
+</p><p>It is often easiest to copy the EigenvectorTools.dll into the Solo or Solo_Predictor application folder. To locate this folder, open a DOS Command window and type the command <tt>path</tt>. Look in the displayed path for the folder relating to Solo, for example:
+</p>
+<pre> C:\Program Files\EVRI\Solo\application\app_bin\win32\
+</pre>
+<p>An alternative solution to this problem is to install EigenvectorTools.dll in the GAC (Global Assembly Cache). For more information, see <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/yf1d93sz(v=VS.71).aspx">Microsoft Global Assembly Cache page</a>
+</p><p><br />
+</p>
+<h3><span id="Cannot_Find_.22plstoolbox.dll.22_or_.22System.DllNotFoundException.22_when_Starting_Solo"></span><span class="mw-headline" id="Cannot_Find_&quot;plstoolbox.dll&quot;_or_&quot;System.DllNotFoundException&quot;_when_Starting_Solo">Cannot Find "plstoolbox.dll" or "System.DllNotFoundException" when Starting Solo</span></h3>
+<p>If EigenvectorTools are found and the objects are instanced correctly, but when you attempt to start the application (Solo or Solo_Predictor) via the startApp call, you receive either a message that:
+</p>
+<ul><li><b>"plstoolbox.dll" could not be found</b> (from ETV6) or</li>
+<li><b>"System.DllNotFoundException"</b> (from ET.NET),</li></ul>
+<p>the likely cause is either that the Solo or Solo_Predictor application's binary directory is not on the system path or you are attempting to start the 64-bit version of Solo/Solo_Predictor using ETV6.
+</p>
+<ul><li>Check the system path for the binary directory. The exact location of the binary directory depends on the location of installation. The easiest way to locate this path is to find any of the shortcuts created by the installer and retrieve the properties of that shortcut. It will contain the full path to either a win32 or win64 directory. This is the folder which must be put onto the system path. Typical directories are:</li></ul>
+<pre> C:\Program Files\EVRI\<i>(product name)</i>\application\runtime\win32          (32-bit Solo on a 32-bit system)
+ C:\Program Files (x86)\EVRI\<i>(product name)</i>\application\runtime\win32    (32-bit Solo on a 64-bit system)
+ C:\Program Files\EVRI\<i>(product name)</i>\application\runtime\win64          (all 64-bit Versions)
+</pre>
+<ul><li>The second possible cause of this error is attempting to start a 64-bit version of Solo or Solo_Predictor from ETV6. Only ET.NET can be used to start the 64-bit version of Solo. For more information, see <a href="#Introduction" title="EigenvectorTools">Introduction to Eigenvector Tools</a>. Check which version of Solo you are using and confirm that you are using the compatible EigenvectorTools version (ETV6 or ET.NET).</li></ul>
+<h3><span id="Solo_Predictor_Throws:_unknown_error_Error_in_.3D.3E_opentoolbox.m_at_117"></span><span class="mw-headline" id="Solo_Predictor_Throws:_unknown_error_Error_in_=&gt;_opentoolbox.m_at_117">Solo_Predictor Throws: unknown error Error in =&gt; opentoolbox.m at 117</span></h3>
+<p>If you are attempting to use Solo_Predictor through the EigenvectorTools interface and it either refuses to start (returning an  "unknown error Error in =&gt; opentoolbox.m at 117") or requests a license code via a dialog box, it is probable that the default.xml file cannot be found. When starting Solo_Predictor from another application, it is not always clear which folder the default.xml file should be located in so best practice is to use the "settingsFile" property of the EigenvectorTools object to specify where the default.xml file is located. The file can be a copy of the default.xml file usually located in the main Solo_Predictor program folder and can be stored in your own application's folder.
+</p><p>Also make sure the license code is correctly entered into the default.xml file as described in <a href="solo_predictor_installation_and_configuration.html#License_Code" title="Solo Predictor Installation and Configuration">the Solo_Predictor Configuration page</a>.
+</p>
+<h3><span class="mw-headline" id="Setting_Up_Visual_Studio_2019_for_Examples">Setting Up Visual Studio 2019 for Examples</span></h3>
+<p>Assuming you have installed Solo_Predictor following its installation instructions, for example at: C:\Program Files\EVRI\Solo_Predictor\ (and have edited the default.xml configuration file to include your license code) then you can test communication with Solo_Predictor from .NET languages as shown in the eigenvectortools\CSharpExample\CSharpExample.sin Visual Studio example included with Solo_Predictor and Solo.
+</p>
+<h4><span id="C.23"></span><span class="mw-headline" id="C#">C#</span></h4>
+<ul><li>Open the CSharpExample.sln file with Visual Studio and allow the "upgrade" to take place.</li>
+<li>In the References, remove the existing reference to EigenvectorTools.dll.</li>
+<li>Add a new reference to EigenvectorTools.dll in the SoloP folder (example - C:\Program Files\EVRI\Solo_Predictor\eigenvectortools\bin\x64\EigenvectorTools.dll).</li>
+<li>Run configuration as "Any CPU"</li></ul>
+<p>In the Visual Studio "Solutions Explorer" window open the "TestApp.cs" file by double-clicking. Ensure line 25 of this file is identifying your Solo_Predictor's "default.xml" settings file location. Run this test program to see it create an application object then use the EigenvectorTools methods "startApp()" and "sendCommand()" to start Solo_Predictor and send a simple example command message to it. It this is successful it reads the response "solo.lastResponse", or reports any error. If all goes well you should see a console window open containing something like the following:
+</p>
+<pre>   Starting Application...
+   Status: 0
+   Error Code: 0
+   0.814723686393 0.905791937076 0.126986816294 0.913375856139 0.632359246225
+   
+   Press Enter to end this program.
+</pre>
+<p>This is the response to the simple command included in the code as 
+</p>
+<pre>   "string cmd = ":plain; x='[rand(1,5)]'; x";" 
+</pre>
+<p>but in practice you would send commands as described at:
+<a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction">Script Construction</a>
+See the example at: <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction#Reading_data_and_model_from_file_and_retrieve_results">Retrieve Results</a>. This example would be coded as a command as: 
+</p>
+<pre>   string cmd = ":plain; data = 'C:/datacollector/datafolder/spectrum1.spc'; model = 'C:/modelfolder/mymodel.mat'; pred = data | model; pred.prediction;". 
+</pre>
+<p>For more complicated examples it can be simpler to use the ":include" command as described at <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction#Other_Commands">Other Commands</a>.
+</p>
+<h2><span class="mw-headline" id="Release_Notes">Release Notes</span></h2>
+<p>The following pages describe the release notes for the given version of the EigenvectorTools application:
+</p>
+<ul><li><a href="release_notes_eigenvectortools_2_3.html" title="Release Notes EigenvectorTools 2 3">Version 2.3</a> - released Jan. 2014 / 2.3.1 Jul. 2014</li>
+<li><a href="release_notes_eigenvectortools_2_2.html" title="Release Notes EigenvectorTools 2 2">Version 2.2</a> - released Oct. 2011</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930003520
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.022 seconds
+Real time usage: 0.026 seconds
+Preprocessor visited node count: 67/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:596-0!canonical and timestamp 20240930003520 and revision id 11484.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=EigenvectorTools&amp;oldid=11484">https://www.wiki.eigenvector.com/index.php?title=EigenvectorTools&amp;oldid=11484</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 30 November 2021, at 10:51.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

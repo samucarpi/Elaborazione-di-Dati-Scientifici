@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Exteriorpts - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Exteriorpts rootpage-Exteriorpts skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Exteriorpts"><span class="mw-page-title-main">Exteriorpts</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Optional_Inputs"><span class="tocnumber">3.2</span> <span class="toctext">Optional Inputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Outputs"><span class="tocnumber">3.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Finds pts on the exterior of a normalized data space.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[isel,loads] = exteriorpts(x,ncomp,options)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Given a two-way or higher-order data set (X), the most exterior samples or variables are identified and their indices returned.
+</p><p>For a two-way data set, the data (X) are assumed to be modelable as:
+<tt>X = CS' + E</tt>
+</p><p>The following is how it works. First, note that non-negative data all lie in a multivariate analog of the upper right hand quadrant and that, given sufficient selectivity in the data,  the pure-component spectra (a.k.a. end-members) must lie at the exterior of the data cloud.
+</p>
+<dl><dd>A) First take a 1 norm of all the data which constrains the responses to a  hyper-plane and</dd>
+<dd>B) remove data points with low norm (and most likely to be affected by noise). [see options.minnorm] (An alternative is to add a small offset to all the data to 'push them' towards the center of the data cloud.)</dd></dl>
+<p>At this point the data are transformed from looking like a "snow-cone" with it's point at the origin to looking like a "hyper-pyramid" with the  end-members corresponding to the corners.
+</p>
+<dl><dd>C) Next, the 1-normed data are mean-centered so that the hyper-plane has a center at [0,0,...]. This procedure transforms the problem from finding points on the exterior of a data cloud to finding points at the vertices of a hyper-polygon which is done using the DISTSLCT function (called from EXTERIORPTS).</dd></dl>
+<p>For additional information see Gallagher, NB, Shaver, JM, Martin, EB, Morris, J, Wise, BM, Windig, W, "Curve resolution for images with applications to TOF-SIMS and Raman," <i>Chemo. and Intell. Lab. Sys.</i>, <b>77</b>(1), 105-117 (2003).
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = MxN matrix.</li>
+<li><b>ncomp</b> = number of components to extract.</li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<ul><li><b>options</b> = a standard options structure containing one or more of the fields discussed in the Options section below.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>isel</b> = if selectdim option was non-empty, isel is a vector of the selected indices. Otherwise, isel is a cell array with the indices selected on each mode of the data.</li>
+<li><b>loads</b> = cell array with extracted pts/factors. Modes other than selectdim are determined via projection.</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>options =  a structure array with the following fields:
+</p>
+<ul><li><b>selectdim</b>: [1] mode of the data from which items should be selected (i.e. 1=rows, 2=columns, ...) If empty [], all modes are analyzed and the mode with the largest sum-squared captured value is used.</li>
+<li><b>waitbar</b>: [ 'off' | 'on' | {'auto'} ] governs of waitbar while processing. 'auto' uses waitbar only if multiple modes are being analyzed with nway data.</li>
+<li><b>minnorm</b>: [ 0.03 ] approximate noise level, points with unit area smaller than this (as a fraction of the maximum value in x) are ignored during selection.</li>
+<li><b>usepca</b>: [{'no'}| 'yes' ] governs use of PCA as a pre-filtering step on the data prior to selection.</li>
+<li><b>usennls</b>: [{'no'}| 'yes' ] governs use of non-negative least squares when calculating loadings for other-than-sample modes. Only used when (loads) output is requested.</li>
+<li><b>distmeasure</b>: [ {'Euclidian'} | 'Mahalanobis' ] Governs the type of distance measurement to use. Mahalanobis requires the usepca option to be 'yes'.</li>
+<li><b>samplemode</b>: [ 1 ] mode that contains variance (factors for other modes are normalized to unit 2-norm). Only used when loads output is requested.</li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="als.html" title="Als">als</a>, <a href="distslct.html" title="Distslct">distslct</a>, <a href="mcr.html" title="Mcr">mcr</a>, <a href="parafac.html" title="Parafac">parafac</a>, <a href="purity.html" title="Purity">purity</a>, <a href="purityengine.html" title="Purityengine">purityengine</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930210136
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.008 seconds
+Real time usage: 0.011 seconds
+Preprocessor visited node count: 23/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:761-0!canonical and timestamp 20240930210136 and revision id 6158.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Exteriorpts&amp;oldid=6158">https://www.wiki.eigenvector.com/index.php?title=Exteriorpts&amp;oldid=6158</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 24 May 2016, at 21:48.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,74 @@
+    function __init__(data_source, byte_ordering="little", offset=0);
+        // type; (Union[str, ByteBuffer, bytes], str, int) -> None
+--
+    function byte_ordering(self);
+        // type; () -> str
+--
+    function _get_byte_array_at(offset, size);
+        // type; (int, int) -> bytes
+--
+    function get_byte(self);
+        // type; () -> int
+--
+    function get_byte_at(offset);
+        // type; (int) -> int
+--
+    function get_double(self);
+        // type; () -> double
+--
+    function get_double_at(offset);
+        // type; (int) -> double
+--
+    function get_float(self);
+        // type; () -> float
+--
+    function get_float_at(offset);
+        // type; (int) -> float
+--
+    function get_float_array_at(offset, npts);
+        // type; (int, int) -> List[float]
+--
+    function get_int(is_signed=True);
+        // type; (bool) -> int
+--
+    function get_int_at(offset, is_signed=True);
+        // type; (int, bool) -> int
+--
+    function get_long(is_signed=True);
+        // type; (bool) -> int
+--
+    function get_long_at(index, is_signed=True);
+        // type; (int, bool) -> int
+--
+    function get_short(is_signed=True);
+        // type; (bool) -> int        
+--
+    function get_short_at(offset, is_signed=True);
+        // type; (int, bool) -> int        
+--
+    function get_string(max_bytes=-1, terminator=b'\x00\x00');
+        // type; (int, bytes) -> str
+--
+    function get_ascii_string_at(offset, max_bytes);
+        // type; (int, int) -> str
+--
+    function get_fix_string(length);
+        // type; (int) -> str
+--
+    function get_fix_string_at(offset, length);
+        // type; (int, int) -> str
+--
+    function get_pascal_string(self);
+        // type; () -> str
+--
+    function get_pascal_string_at(offset);
+        // type; (offset) -> str
+--
+    function position(self);
+        // type; () -> int
+--
+    function set_position(new_position);
+        // type; (int) -> ByteBuffer
+--
+    function skip(number_of_bytes);
+        // type; (int) -> ByteBuffer

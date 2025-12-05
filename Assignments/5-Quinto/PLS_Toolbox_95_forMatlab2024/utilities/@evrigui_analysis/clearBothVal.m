@@ -1,0 +1,15 @@
+function out = clearBothVal(obj,parent,varargin)
+%CLEARBOTHVAL Clear both X and Y validation data.
+%I/O: .clearBothVal
+
+%Copyright Eigenvector Research, Inc. 2009
+%Licensee shall not re-compile, translate or convert "M-files" contained
+% in PLS_Toolbox for use with any software other than MATLAB®, without
+% written permission from Eigenvector Research, Inc.
+
+error(nargchk(2, 2, nargin))
+
+handles = guidata(parent.handle);
+analysis('clearboth',handles.analysis, [], handles, 'val')
+
+out = true;

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif; /* Set font family */
+            font-size: 12px;
+            font-weight: bold;
+            word-wrap: break-word;
+            padding: 0px;
+        }
+    </style>
+
+<script type="text/javascript">
+    function updateData(htmlComponent,value,color) {
+        document.body.innerHTML = value;
+        document.body.style.backgroundColor = color;
+    }
+    function setup(htmlComponent) {
+        htmlComponent.addEventListener("DataChanged", function(event) {
+            const data = htmlComponent.Data;
+            updateData(htmlComponent,data[0],data[1]);
+        });
+    }
+</script>
+
+
+</head>
+<body>
+    
+</body>
+</html>

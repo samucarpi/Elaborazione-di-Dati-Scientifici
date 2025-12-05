@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Plot Controls Window Menus - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Plot_Controls_Window_Menus rootpage-Plot_Controls_Window_Menus skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Plot_Controls_Window_Menus"><span class="mw-page-title-main">Plot Controls Window Menus</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#View_Menu"><span class="tocnumber">1</span> <span class="toctext">View Menu</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Plot_Menu"><span class="tocnumber">2</span> <span class="toctext">Plot Menu</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Edit_Menu"><span class="tocnumber">3</span> <span class="toctext">Edit Menu</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#File_Menu"><span class="tocnumber">4</span> <span class="toctext">File Menu</span></a></li>
+</ul>
+</div>
+
+<p>The <a href="plot_controls.html" class="mw-redirect" title="Plot Controls">Plot Controls</a> window has the following menu actions available:
+</p>
+<h3><span class="mw-headline" id="View_Menu">View Menu</span></h3>
+<p>Various options associated with the viewed data are contained in the <b>View</b> menu. The specific options depend on the data being plotted. The <b>View</b> menu options are listed below.
+</p>
+<ul><li><b>Table</b>: Opens a <b>Plotted Data</b> window that lists the numerical values of the plotted data.</li>
+<li><b>Numbers</b>: Displays the index number next to each plotted point.</li>
+<li><b>Labels</b>: Displays available labels next to each plotted point. If no labels are available this option is grayed out.</li>
+<li><b>Classes</b>: Uses available class information to give each plotted point a different symbol. If no class information is available this option is grayed out. The fly-out menu includes any class sets defined in the dataset as well as options:
+<ul><li><b>Outline Class Groups</b> allows drawing of lines to either enclose all samples in a group ("border points") or as a confidence boundary ("confidence ellipse")</li>
+<li><b>Change Symbols</b> allows editing of symbols used for each class. See <a href="set_symbol_styles_window.html" title="Set Symbol Styles Window">Set Symbol Styles Window</a>.</li>
+<li><b>Classes as Overlay</b> shows classes on top of the standard plot type (rather than instead of standard plot type)</li></ul></li>
+<li><b>Excluded Data</b>: Shows any points which have been "excluded" from the data set.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Declutter Labels</b>: Controls the label/number decluttering options. Automatic modes remove labels when they overlap. "Selected Only" removes labels on all points except those which have been selected using the standard selection tools.</li>
+<li><b>Label Angle</b>: Changes the angle of (i.e. rotates) all labels in a plot.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Axis Lines</b>: Places lines through the origin.</li>
+<li><b>Diagonal 1:1 Line</b>: Places a diagonal line up the x = y axis.</li>
+<li><b>Log Scales</b>: Switches axes between log and linear scaling.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Auto y-scale</b>: When enabled, all plotted data items are scaled so that their y-axis values are on a similar scale (that is, they are each baselined and normalized). The different methods for y-scaling include: Sum, Length, Max. In each case, the given property is set equal to 1 for each plotted data item. In addition, if the plot has been zoomed, the y-scaling method is based only on the currently visible data. The scaling can be recalculated for any given zoomed view by selecting "Scale from current zoom".</li>
+<li><b>Auto Contrast</b>: Contrast enhancement for a slice/slab for multivariate images (only available when the data are 3-way or type image).</li></ul>
+<p><br />
+</p>
+<ul><li><b>Duplicate Figure</b>: Creates a duplicate copy of the current figure that is linked to the current figure i.e. if one figure is modified the other automatically changes to reflect the modification. The parent figure will have a "+" next to its name in the figure selection dropdown menu and the child figure will have a "\*".</li>
+<li><b>Spawn Figure</b>: Creates a duplicate copy of the current figure that is not controlled by the <b>Plot Controls</b> toolbar. This is a simple MATLAB figure.</li>
+<li><b>Dock Controls</b>: When checked, the <b>Plot Controls</b> toolbar are "docked" next to the controlled figure.</li>
+<li><b>Settings</b>: Allows the user to modify other view settings.</li></ul>
+<h3><span class="mw-headline" id="Plot_Menu">Plot Menu</span></h3>
+<p>Selects the "mode" in which the current data should be viewed. This can be either a summary of any given mode (Data Summary mode) or one of the standard modes of a data matrix including the rows, columns, or slabs. 
+</p>
+<ul><li><b>Data Summary</b>: Plots all the data, the mean, the standard deviation, or the mean&#160;? the standard deviation. For Variables (columns) or Samples (rows) depending on what is selected in the x-axis.</li>
+<li><b>Rows</b>: Plots the data across rows selecting which rows (usually samples) to view.</li>
+<li><b>Columns</b>: Plots the data down the columns selecting which columns (usually variables) to view.</li>
+<li><b>Slabs</b>: Uses IMAGESC to view a slice/slab of a 3-way array (only available when the data are 3-way).</li></ul>
+<h3><span class="mw-headline" id="Edit_Menu">Edit Menu</span></h3>
+<p>The <b>Edit</b> menu contains various actions relating to selections. The specific actions available depends on the current selection and PLOTGUI mode. The <b>Edit</b> menu options are listed below.
+</p>
+<ul><li><b>Copy Figure</b>: Puts a copy of the figure  on the system clipboard in graphical form.</li>
+<li><b>Copy Plotted Data</b>: Puts a copy of the data used to create the current plot on the system clipboard in textual form.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Select</b> All<b>: Selects all plotted points.</b></li>
+<li><b>Deselect All</b>: Deselects all plotted points.</li>
+<li><b>Select Class</b>: Select all points of a given class or classes in the data (if any classes are defined).</li>
+<li><b>Select Excluded</b>: Selects all points which are currently excluded (see <b>View/Excluded Data</b>).</li>
+<li><b>Selection Mode</b>: Menu used to choose selection mode from the following:
+<ul><li><b>Box</b>: Click and drag a rubber band box around points,</li>
+<li><b>Polygon</b>: Click to mark the corners of a polygon around points and click on the intial point or press [Enter] to close the polygon,</li>
+<li><b>Circle</b>: Click to mark center of a circle, then click to mark the outside edge of the circle,</li>
+<li><b>Ellipse: </b>Click to mark center of an ellipse, click again to mark the minor axis size for the ellipse, then complete the selection by clicking to mark the size and direction of the major axis for the ellipse</li>
+<li><b>Paintbrush</b>: Click and drag to "paint" a selection onto points,</li>
+<li><b>Lasso: </b>Click and drag a free-form line to "ensnare" the points,</li>
+<li><b>Single X</b>: Click to select a single point on the x-axis,</li>
+<li><b>Single Y</b>: Click to select a single point on the y-axis,</li>
+<li><b>X Range</b>: Click and drag to select a range of points on the x-axis,</li>
+<li><b>Y Range</b>: Click and drag to select a range of points on the y-axis, and</li>
+<li><b>Nearest</b>: Click to select the nearest point.</li>
+<li><b> Multiple Nearest</b>: Click to select the nearest point, repeated until the [Enter] key is pressed.</li></ul></li></ul>
+<p><br />
+</p>
+<ul><li><b>Include All</b>: Includes all excluded points (whether or not they are selected).</li>
+<li><b>Exclude Selection</b>: Excludes (soft deletes) the selected points from the data set. See <b>View/Excluded Data</b>.</li>
+<li><b>Include</b> Selection<b>: Includes the selected points in the data set. See </b>View/Excluded Data<b>.</b></li>
+<li><b>Include Only Selection</b>:  Exclude all <i>unselected</i> points from the data set i.e. keep only the selected points.</li>
+<li><b>Info</b> on Selection<b>: Get information on selected point (only available when a single point is selected).</b></li>
+<li><b>Set Class</b>: Set the class of the selected points.</li>
+<li><b>Make Selection Missing</b>: Replaces the selected data with the "missing data" flag NaN (Not a Number). Use this operation with care. It deletes the current data and cannot be undone but provides a way to mark values as unknown for some analyses.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Exclude Plotted Data</b>: Excludes all items currently selected in the y-axis menu for plotting. Note that unlike the other exclusion options in this menu, this and the next two options act on the mode selected in the <b>Plot</b> menu.</li>
+<li><b>Include Plotted Data</b>: Includes all items currently selected in the y-axis menu for plotting.</li>
+<li><b>Include Only Plotted</b>: Includes all items currently selected in the y-axis menu for plotting and only those items (all others are excluded).</li></ul>
+<p><br />
+</p>
+<ul><li><b>Choose all (Y) in Class...</b>: selects for plotting all items in the Y-axis menu which are in a given class. This operation is only available when the current plotted mode does not have classes but the opposing mode does have classes.</li></ul>
+<h3><span class="mw-headline" id="File_Menu">File Menu</span></h3>
+<p>The <b>File</b> menu contains various actions relating to files. The <b>File</b> menu options are listed below.
+</p>
+<ul><li><b>Load Data</b>: Creates an interface for the user to load data into PLOTGUI from the base workspace or a file.</li>
+<li><b>Save Data</b>: Creates an interface for the user to save data from PLOTGUI to the base workspace or a file.</li>
+<li><b>Open in...</b>: Pushes the given dataset into another application such as the DataSet Editor, Analysis, or Trend Tool windows.</li>
+<li><b>Export Figure</b>: Allows exporting the current figure to Various external programs (exporting will not function correctly if the given program is not installed on the computer).</li>
+<li><b>Save Selected Indices</b>: Saves the current selection as a vector of indices. This can be used with the Load Selected Indices command to quickly store and reload different selections.</li>
+<li><b>Load Selected Indices</b>: Load a vector of indices to use as a selection.</li>
+<li><b>Reset Controls</b>: Refreshes Plot Controls. Useful if graphical objects are not correctly aligned.</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930013057
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.009 seconds
+Real time usage: 0.010 seconds
+Preprocessor visited node count: 14/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:918-0!canonical and timestamp 20240930013057 and revision id 7009.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Plot_Controls_Window_Menus&amp;oldid=7009">https://www.wiki.eigenvector.com/index.php?title=Plot_Controls_Window_Menus&amp;oldid=7009</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 20 September 2010, at 16:35.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

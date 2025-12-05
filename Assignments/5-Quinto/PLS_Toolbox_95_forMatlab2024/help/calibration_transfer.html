@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Calibration Transfer - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Calibration_Transfer rootpage-Calibration_Transfer skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Calibration_Transfer"><span class="mw-page-title-main">Calibration Transfer</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#About_Calibration_Transfer"><span class="tocnumber">1</span> <span class="toctext">About Calibration Transfer</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Available_Model_Types"><span class="tocnumber">1.1</span> <span class="toctext">Available Model Types</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="#Building_Models_(PDS_Example)"><span class="tocnumber">2</span> <span class="toctext">Building Models (PDS Example)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Start_the_Interface"><span class="tocnumber">2.1</span> <span class="toctext">Start the Interface</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Load_Data"><span class="tocnumber">2.2</span> <span class="toctext">Load Data</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Select_Preprocessing"><span class="tocnumber">2.3</span> <span class="toctext">Select Preprocessing</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Construct_Model"><span class="tocnumber">2.4</span> <span class="toctext">Construct Model</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Model_Created"><span class="tocnumber">2.5</span> <span class="toctext">Model Created</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#Applying_Model_to_New_Data_(With_the_GUI)"><span class="tocnumber">3</span> <span class="toctext">Applying Model to New Data (With the GUI)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="#From_Calibration_Transfer_Window"><span class="tocnumber">3.1</span> <span class="toctext">From Calibration Transfer Window</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#From_Workspace"><span class="tocnumber">3.2</span> <span class="toctext">From Workspace</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="#Applying_Model_to_New_Data_(Command_Line)"><span class="tocnumber">4</span> <span class="toctext">Applying Model to New Data (Command Line)</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#Model-centric_Calibration_Transfer"><span class="tocnumber">5</span> <span class="toctext">Model-centric Calibration Transfer</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="About_Calibration_Transfer">About Calibration Transfer</span></h2>
+<p>Calibration transfer is useful when collecting data for similar samples on two or more different instruments (or on the same instrument at two or more different points in time). The goal is to create a model to compensate for differences in the instruments that can then be used to eliminate or reduce variation caused by the change in instrument. The following demonstration will show a simple example of creating a Piecewise Direct Standardization (PDS) model on some demonstration data included with PLS_Toolbox/Solo.
+</p>
+<h3><span class="mw-headline" id="Available_Model_Types">Available Model Types</span></h3>
+<ul><li><a href="stdgen.html" title="Stdgen"> Direct Standardization</a></li>
+<li><a href="stdgen.html" title="Stdgen"> Piecewise Direct Standardization</a></li>
+<li><a href="stdgen.html" title="Stdgen"> Double Window Piecewise Direct Standardization</a></li></ul>
+<ul><li><a href="sstcal.html" title="Sstcal"> Spectral Subspace Transformation</a></li>
+<li><a href="glsw.html" title="Glsw"> Generalized Least-Squares Weighting</a></li>
+<li><a href="osccalc.html" title="Osccalc"> Orthogonal Signal Correction</a></li>
+<li><a href="alignmat.html" title="Alignmat"> Alignment of Matrices</a></li></ul>
+<h2><span id="Building_Models_.28PDS_Example.29"></span><span class="mw-headline" id="Building_Models_(PDS_Example)">Building Models (PDS Example)</span></h2>
+<h3><span class="mw-headline" id="Start_the_Interface">Start the Interface</span></h3>
+<p>The easiest way to start the interface is by selecting Calibration Transfer within the Transform leaf in the <b>browse</b> interface:
+</p><p><a href="" class="image" title="Calibration Transfer Leaf"><img alt="Calibration Transfer Leaf" src="170px_calt_leaf.png" decoding="async" width="170" height="121" /></a>
+</p><p><br />
+<a href="" class="image" title="Calibration Transfer Layout"><img alt="Calibration Transfer Layout" src="500px_calt_layout.png" decoding="async" width="500" height="380" /></a>
+</p>
+<h3><span class="mw-headline" id="Load_Data">Load Data</span></h3>
+<p>The general workflow in the GUI is from left to right. The first task when starting is to load raw data. This can be done with the Load button for Instrument 1 and 2. Go to the"dems" folder of PLS_Toolbox/Solo to find "nir_data.mat" and load 'spec1' and 'spec2' respectively. Once both datasets are loaded, you'll notice the Diff Bar located between the Instrument 1/2 panels gives an indication of how different the two datasets are:
+</p><p><a href="" class="image" title="Diff Bar"><img alt="Diff Bar" src="calt_diffbar.png" decoding="async" width="219" height="65" /></a>
+</p>
+<h3><span class="mw-headline" id="Select_Preprocessing">Select Preprocessing</span></h3>
+<p>Next, select preprocessing for the data by clicking the Pre Pro button for Instrument 1 and add Mean Center. This data is quite "clean" so there's no need to consider more extensive preprocessing. Notice that after Preprocessing has been selected for Instrument 1 it is automatically added to Instrument 2. In general it is recommended that the same preprocessing be used for each instrument but Instrument 2 preprocessing can be changed by clicking on its Pre Pro button.
+</p>
+<h3><span class="mw-headline" id="Construct_Model">Construct Model</span></h3>
+<p>Now that the data is ready, it's time to set up the model. In the Model Construction area select Piecewise Direct Standardization (PDS) from the Model Type dropdown menu. Notice that the Window parameter appeared in the Parameters panel with a default value already entered along with a unique default Model Name. Either of these values can be changed by directly editing the value in the text box. For this demonstration we'll try a value of 5 for the Window and change the Model Name to "myPDSmodel".
+</p><p><a href="" class="image" title="Calibration Model PDS"><img alt="Calibration Model PDS" src="calt_modelpds.png" decoding="async" width="352" height="288" /></a>
+</p><p>The Plots button is also enabled and will open a dialog box allowing you to select any available plots to open in PlotGUI. At this point it's possible to plot the raw datasets and the data difference. Click Calculate to create the model.
+</p>
+<h3><span class="mw-headline" id="Model_Created">Model Created</span></h3>
+<p>After a model has been calculated several things happen. The transferred data is added to its respective area, the model and all data (raw and transferred) are "cached" in the Model Cache panel, and additional plots are made available (via the Plots button).
+</p><p><a href="" class="image" title="Calibration Transfer Layout"><img alt="Calibration Transfer Layout" src="500px_calt_modelbuilt.png" decoding="async" width="500" height="383" /></a>
+</p><p>From here you can explore the plots of your data and model, change parameters and create a new mode, or save your model and transferred data for further use. Clicking the View button will "reload" the selected cached model. Clicking the Save button will save the cached items (model, raw data, and transferred data) as a Matlab structure.
+</p>
+<h2><span id="Applying_Model_to_New_Data_.28With_the_GUI.29"></span><span class="mw-headline" id="Applying_Model_to_New_Data_(With_the_GUI)">Applying Model to New Data (With the GUI)</span></h2>
+<h3><span class="mw-headline" id="From_Calibration_Transfer_Window">From Calibration Transfer Window</span></h3>
+<p><a href="" class="image" title="Save Transfer Model"><img alt="Save Transfer Model" src="300px_calt_savemodel.png" decoding="async" width="300" height="216" /></a>
+</p>
+<ol><li>Save the transfer model to the workspace. <b>NOTE:</b> that this is done with the save button in the Model Construction panel and not the Model Cache panel (see above).</li>
+<li>Clear all of the current data and model, File&gt;Clear&gt;Clear All</li>
+<li>Load the new data as Instrument 2.</li>
+<li>Load the model you saved in step 1.</li>
+<li>Click Calculate.</li></ol>
+<h3><span class="mw-headline" id="From_Workspace">From Workspace</span></h3>
+<p><a href="" class="image"><img alt="CaltDND.png" src="caltdnd.png" decoding="async" width="670" height="310" /></a>
+</p>
+<ol><li>Save the transfer model to the workspace. <b>NOTE:</b> that this is done with the save button in the Model Construction panel and not the Model Cache panel (see above).</li>
+<li>In the <a href="browse.html" title="Browse">browse</a> interface, drag and drop the data you wish to apply onto the model save in step 1.</li>
+<li>A dialog box will open where you can name the transferred dataset.</li></ol>
+<p>NOTE: The Calibration Transfer model and data can also be selected together and dropped on the "Calibration Transfer Apply" node. A dialog box will appear same as above asking to name the transferred dataset.
+</p><p><a href="" class="image"><img alt="CalibrationTransferApply.jpg" src="calibrationtransferapply.jpg" decoding="async" width="929" height="691" /></a>
+</p>
+<h2><span id="Applying_Model_to_New_Data_.28Command_Line.29"></span><span class="mw-headline" id="Applying_Model_to_New_Data_(Command_Line)">Applying Model to New Data (Command Line)</span></h2>
+<p>If you have a need to automate model application this can be done using the <a href="caltransfer.html" title="Caltransfer">caltransfer</a> function. The I/O looks similar to:
+</p>
+<pre>x2t = caltransfer(x2,transfermodel,options);</pre>
+<p>Where <b>x2</b> is the Instrument 2 data and <b>x2t</b> is the Instrument 2 transferred data. Also see the <b>caltransferdemo</b> script for more examples.
+</p>
+<h2><span class="mw-headline" id="Model-centric_Calibration_Transfer">Model-centric Calibration Transfer</span></h2>
+<p>If you have a model has been developed on a "primary" instrument and is the basis of creating a "secondary" model that includes a calibration transfer step in the preprocessing structure you may want to try <a href="mccttool.html" title="MCCTTool">  Model-centric Calibration Transfer</a>.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240929210620
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.024 seconds
+Real time usage: 0.030 seconds
+Preprocessor visited node count: 60/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 55/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1012-0!canonical and timestamp 20240929210619 and revision id 11073.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Calibration_Transfer&amp;oldid=11073">https://www.wiki.eigenvector.com/index.php?title=Calibration_Transfer&amp;oldid=11073</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 10 August 2020, at 13:19.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Python configuration - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Python_configuration rootpage-Python_configuration skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Python_configuration"><span class="mw-page-title-main">Python configuration</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Options"><span class="tocnumber">3</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Methods_Required_for_Configuration"><span class="tocnumber">4</span> <span class="toctext">Methods Required for Configuration</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Conda_Solution"><span class="tocnumber">5</span> <span class="toctext">Conda Solution</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href=""><span class="tocnumber">5.1</span> <span class="toctext">What's needed</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#How_to_configure"><span class="tocnumber">5.2</span> <span class="toctext">How to configure</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#Python_configuration_video"><span class="tocnumber">5.2.1</span> <span class="toctext">Python configuration video</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Download_Miniconda3/Anaconda3"><span class="tocnumber">5.2.2</span> <span class="toctext">Download Miniconda3/Anaconda3</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="#Configuration_step_in_MATLAB"><span class="tocnumber">5.2.3</span> <span class="toctext">Configuration step in MATLAB</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="#Configuration_step_in_Solo"><span class="tocnumber">5.2.4</span> <span class="toctext">Configuration step in Solo</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="#Archived_Solution"><span class="tocnumber">6</span> <span class="toctext">Archived Solution</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href=""><span class="tocnumber">6.1</span> <span class="toctext">What's needed</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#How_to_configure_2"><span class="tocnumber">6.2</span> <span class="toctext">How to configure</span></a>
+<ul>
+<li class="toclevel-3 tocsection-15"><a href="#Configuration_step_in_MATLAB_2"><span class="tocnumber">6.2.1</span> <span class="toctext">Configuration step in MATLAB</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="#Configuration_step_in_Solo_2"><span class="tocnumber">6.2.2</span> <span class="toctext">Configuration step in Solo</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-17"><a href="#Testing_configuration"><span class="tocnumber">7</span> <span class="toctext">Testing configuration</span></a>
+<ul>
+<li class="toclevel-2 tocsection-18"><a href="#Test_in_MATLAB"><span class="tocnumber">7.1</span> <span class="toctext">Test in MATLAB</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="#Test_in_Solo"><span class="tocnumber">7.2</span> <span class="toctext">Test in Solo</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-20"><a href="#Undo_configuration"><span class="tocnumber">8</span> <span class="toctext">Undo configuration</span></a>
+<ul>
+<li class="toclevel-2 tocsection-21"><a href="#Undo_in_MATLAB"><span class="tocnumber">8.1</span> <span class="toctext">Undo in MATLAB</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="#Undo_in_Solo"><span class="tocnumber">8.2</span> <span class="toctext">Undo in Solo</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-23"><a href="#Troubleshooting"><span class="tocnumber">9</span> <span class="toctext">Troubleshooting</span></a></li>
+<li class="toclevel-1 tocsection-24"><a href="#See_Also"><span class="tocnumber">10</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Creates a Python virtual environment for PLS_Toolbox, giving access to evrimodel objects that use Python. Applicable for PLS_Toolbox/Solo 9.0 and newer.
+The correct version of Python, and its necessary packages, will be installed or built for you.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>result  = config_pyenv(options);</dd></dl>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><i>options</i> =  a structure array with the following fields:
+</p>
+<ul><li><b>source</b>: [ {'conda'} | 'archived' ], The source of which Python is built and configured for PLS_Toolbox/Solo. When source='conda', a virtual environment is built using Miniconda/Anaconda. If source='archived', then the Python comes from an archived file. This file is available upon request to our helpdesk starting in 9.1.</li></ul>
+<ul><li><b>silent</b>: [ {'no'} | 'yes' ], Governs the level of user-input needed. A dialog box is created asking the user if they would like to continue with the configuration when silent='no'. No dialog box is created when silent='yes'.</li></ul>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Methods_Required_for_Configuration">Methods Required for Configuration</span></h3>
+<p>Below shows a table of the PLS_Toolbox methods that use Python. The table also shows the corresponding Python package used to run each method. Without the proper configuration, access is denied to all of these methods. 
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>PLS_Toolbox Method</th>
+<th>Python Package
+</th></tr>
+<tr>
+<td>TSNE</td>
+<td>Scikit-Learn
+</td></tr>
+<tr>
+<td>UMAP</td>
+<td>Umap-Learn
+</td></tr>
+<tr>
+<td>ANNDL</td>
+<td>Scikit-Learn &amp; Tensorflow
+</td></tr>
+<tr>
+<td>ANNDLDA</td>
+<td>Scikit-Learn &amp; Tensorflow
+</td></tr></tbody></table>
+<p><br />
+<b>Important Note: Python in PLS_Toolbox/Solo for Apple Silicon devices is not fully supported yet. </b>
+</p>
+<h3><span class="mw-headline" id="Conda_Solution">Conda Solution</span></h3>
+<p>Used when <code>options.source='conda'</code>. This is the default method when running <code>config_pyenv</code>. Follow the steps below to create your virtual environment via Miniconda/Anaconda.
+</p><p><br />
+</p>
+<h4><span id="What.27s_needed"></span><span class="mw-headline" id="What's_needed">What's needed</span></h4>
+<ul><li>Either one of Miniconda3 or Anaconda3 (The ability to use Anaconda with PLS_Toolbox is for versions 9.1 and newer)
+<ul><li>Both of these are Python virtual environment management softwares. The management software is what's used to help build and maintain the PLS_Toolbox virtual environment. Instructions to download and install are located below. Miniconda3 is an abbreviated version of Anaconda3 that takes less space but does not have a user interface. Anaconda3 contains more packages and includes a nice interface for interaction, but takes much more space. We recommend Miniconda3 if you are new to either of these softwares. See this link to decide which is best for you: <a rel="nofollow" class="external free" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda">https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda</a>. <b>If you already have either of these, ensure that it has been added to the System Path for the configuration in MATLAB/Solo to work correctly.</b></li></ul></li>
+<li>MATLAB R2020b or newer/ Solo 9.0 or newer
+<ul><li>This requirement allows the use of recent versions of Python and its packages.</li></ul></li>
+<li>Internet connection for Miniconda3/Anaconda3 download and Python configuration</li></ul>
+<p>Note: The configuration can take a couple of minutes to complete. The PLS_Toolbox virtual environment can take between 1-2 GB of space.
+</p><p>A Python virtual environment is a setup denoting the version of Python being used as well as the packages and their versions. Virtual environments are created to organize these setups, and usually are created on a project-to-project basis. This PLS_Toolbox virtual environment is tailored for the user to use the Python methods in the toolbox. <b>It is advised to not modify, add, or delete packages from this environment. We cannot guarantee that the software will work after modifications.</b>
+</p>
+<h4><span class="mw-headline" id="How_to_configure">How to configure</span></h4>
+<p>Configuration requires that Miniconda3/Anaconda3 be properly downloaded and installed following these instructions. Deviation from these instructions can lead to issues when running the configuration or running the Python methods.
+</p><p><br />
+</p>
+<h5><span class="mw-headline" id="Python_configuration_video">Python configuration video</span></h5>
+<ol><li>Using MATLAB: <a rel="nofollow" class="external free" href="https://eigenvector.com/aiovg_videos/python-configuration-for-pls_toolbox/">https://eigenvector.com/aiovg_videos/python-configuration-for-pls_toolbox/</a></li></ol>
+<p><br />
+</p>
+<h5><span id="Download_Miniconda3.2FAnaconda3"></span><span class="mw-headline" id="Download_Miniconda3/Anaconda3">Download Miniconda3/Anaconda3</span></h5>
+<ol><li>If using Miniconda3
+<ol><li>Open a browser and navigate to Miniconda's site: <a rel="nofollow" class="external text" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></li>
+<li>Pick a link pertaining to your machine that explicitly states Miniconda3 in the hyperlink. The particular version associated with each of the installers is not important, any of these should work fine. If running macOS, select the .pkg installer.</li>
+<li>Run the installer, place software you know you have sufficient access to when it prompts you where you would like for it to be located on your machine.</li>
+<li>If asked to add to the System Path, do so. Ignore the message saying that doing this is not recommended.</li></ol></li>
+<li>If using Anaconda3
+<ol><li>Open a browser and navigate to Anaconda's download site: <a rel="nofollow" class="external text" href="https://www.anaconda.com/products/distribution">https://www.anaconda.com/products/distribution</a></li>
+<li>Click <b>Download</b></li>
+<li>Run the installer, place software you know you have sufficient access to when it prompts you where you would like for it to be located on your machine.</li>
+<li>If asked to add to the System Path, do so. Ignore the message saying that doing this is not recommended.</li></ol></li></ol>
+<dl><dd>5. Finish installation.</dd></dl>
+<h5><span class="mw-headline" id="Configuration_step_in_MATLAB">Configuration step in MATLAB</span></h5>
+<p>Once PLS_Toolbox has been installed in MATLAB, launch MATLAB and execute <code>config_pyenv</code> in the Command Window.
+Successful configuration results in the message <code>Your pyenv was configured successfully!</code> on the command line, and subsequent execution of <code>pyenv</code> on the MATLAB command line produces output which should closely resemble what is displayed below
+</p>
+<dl><dd><a href="" class="image"><img alt="Pyenv screenshot.PNG" src="700px_pyenv_screenshot.png" decoding="async" width="700" height="209" /></a></dd></dl>
+<p><br />
+</p>
+<h5><span class="mw-headline" id="Configuration_step_in_Solo">Configuration step in Solo</span></h5>
+<p>Open Solo and configure Python by going to <b>Edit</b>&gt;<b>Options</b>&gt;<b>Python</b>&gt;<b>Configure Python with Conda</b>, like in the screenshot below.
+<a href="" class="image"><img alt="Config solo.png" src="600px_config_solo.png" decoding="async" width="600" height="263" /></a>
+</p><p><br />
+Once completed, there will be a window that prompts a successful configuration if no issues arise:
+</p><p><br />
+<a href="" class="image"><img alt="Pyenvsuccess.png" src="pyenvsuccess.png" decoding="async" width="196" height="73" /></a>
+</p>
+<h3><span class="mw-headline" id="Archived_Solution">Archived Solution</span></h3>
+<p>Used when <code>options.source='archived'</code>. Follow the steps below to create your virtual environment via an archived file provided by our helpdesk.
+</p><p><br />
+</p>
+<h4><span id="What.27s_needed_2"></span><span class="mw-headline" id="What's_needed_2">What's needed</span></h4>
+<p>An archived file with the compressed Python environment. This is only available upon request to our helpdesk at helpdesk@eigenvector.com.
+</p><p>Note: The configuration can take a couple of minutes to complete. The PLS_Toolbox virtual environment can take between 1-2 GB of space.
+</p><p>A Python virtual environment is a setup denoting the version of Python being used as well as the packages and their versions. Virtual environments are created to organize these setups, and usually are created on a project-to-project basis. This PLS_Toolbox virtual environment is tailored for the user to use the Python methods in the toolbox. <b>It is advised to not modify, add, or delete packages from this environment. We cannot guarantee that the software will work after modifications.</b>
+</p><p><br />
+</p>
+<h4><span class="mw-headline" id="How_to_configure_2">How to configure</span></h4>
+<p>No additional software is needed unlike the Conda solution. Just get the archived file from the helpdesk. Once downloaded on your machine, you will have to place it in directory of your choosing. Please choose a directory where you know you have sufficient rights. You will be prompted where this folder is located when running <code>config_pyenv</code>. You will start the configuration by choosing the archive file, which may look similar to what's below (no need to unzip or extract the archived file):
+</p><p><a href="" class="image"><img alt="Pythonarchivedfileselection.png" src="pythonarchivedfileselection.png" decoding="async" width="700" height="377" /></a>
+</p><p>then click <b>Open</b>.
+</p><p><br />
+</p>
+<h5><span class="mw-headline" id="Configuration_step_in_MATLAB_2">Configuration step in MATLAB</span></h5>
+<p>Once PLS_Toolbox has been installed in MATLAB, launch MATLAB and execute the following in the Command Window:
+</p>
+<pre>options = config_pyenv('options');
+options.source = 'archived';
+result = config_pyenv(options);
+</pre>
+<p>Successful configuration results in the message <code>Your pyenv was configured successfully!</code> on the command line, and subsequent execution of <code>pyenv</code> on the MATLAB command line produces output which should closely resemble what is displayed below (archived file was downloaded to folder called <code>archive_env_config</code>.
+</p>
+<dl><dd><a href="" class="image"><img alt="Pyenv screenshot archive.PNG" src="700px_pyenv_screenshot_archive.png" decoding="async" width="700" height="187" /></a></dd></dl>
+<p><br />
+</p>
+<h5><span class="mw-headline" id="Configuration_step_in_Solo_2">Configuration step in Solo</span></h5>
+<p>Open Solo and configure Python by going to <b>Edit</b>&gt;<b>Options</b>&gt;<b>Python</b>&gt;<b>Configure Python with Archived File</b>, like in the screenshot below.
+<a href="" class="image"><img alt="Config solo archive.png" src="600px_config_solo_archive.png" decoding="async" width="600" height="296" /></a>
+</p><p><br />
+Once completed, there will be a window that prompts a successful configuration if no issues arise:
+</p><p><br />
+<a href="" class="image"><img alt="Pyenvsuccess.png" src="pyenvsuccess.png" decoding="async" width="196" height="73" /></a>
+</p>
+<h3><span class="mw-headline" id="Testing_configuration">Testing configuration</span></h3>
+<p>It's important to see that the configuration worked and that there is no unexpected behavior from Python. Follow the testing protocols below.
+</p>
+<h4><span class="mw-headline" id="Test_in_MATLAB">Test in MATLAB</span></h4>
+<p>To make sure that PLS_Toolbox and Python are working correctly, run one of the demo scripts that uses Python:
+</p>
+<ol><li>tsnedemo</li>
+<li>umapdemo</li>
+<li>anndldemo (change line 35 to <code>options.algorithm = 'tensorflow'</code> to use Tensorflow)</li>
+<li>anndldademo (change line 70 to <code>options.algorithm = 'tensorflow'</code> to use Tensorflow)</li></ol>
+<p>If there are issues doing this, see the Troubleshooting section.
+</p>
+<h4><span class="mw-headline" id="Test_in_Solo">Test in Solo</span></h4>
+<p>Open one the Analysis Windows that uses Python and build a model to make sure that Solo and Python are working correctly.
+</p><p>If there are issues doing this, see the Troubleshooting section.
+</p>
+<h3><span class="mw-headline" id="Undo_configuration">Undo configuration</span></h3>
+<p>If there comes a time that a user wants to undo this configuration, the user has two options: delete the PLS_Toolbox virtual environment or delete Miniconda3. See below how to do either of these options.
+<b>Note: Deleting Miniconda3 will remove the PLS_Toolbox virtual environment, as well as any other virtual environments you may have created. Please use with caution.</b>
+</p>
+<h4><span class="mw-headline" id="Undo_in_MATLAB">Undo in MATLAB</span></h4>
+<ul><li>If the user would like to remove just the PLS_Toolbox virtual environment, run the following in the Command Window in MATLAB: <code>undo_config_pyenv</code>.</li>
+<li>If the user would like to remove Miniconda3/Anaconda3 (as well as the PLS_Toolbox virtual environment), run the following in the Command Window in MATLAB:</li></ul>
+<pre>options = undo_config_pyenv('options');
+options.remove_all = 'yes';
+result = undo_config_pyenv(options);
+</pre>
+<h4><span class="mw-headline" id="Undo_in_Solo">Undo in Solo</span></h4>
+<ul><li>If the user would like to remove just the PLS_Toolbox virtual environment (and keep Miniconda3)
+<ul><li>Open Solo and go to <b>Edit</b>&gt;<b>Options</b>&gt;<b>Python</b>&gt;<b>Remove PLS_Toolbox Python Environment</b>.</li></ul></li>
+<li>If the user would like to remove Miniconda3 (as well as the PLS_Toolbox virtual environment)
+<ul><li>Open Solo and go to <b>Edit</b>&gt;<b>Options</b>&gt;<b>Python</b>&gt;<b>Remove Miniconda3/Anaconda3</b>.</li></ul></li></ul>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h3>
+<ul><li>If MATLAB/Solo crashes when trying to run one of these methods:
+<ul><li>From MATLAB
+<ul><li>If the PLS_Toolbox virtual environment is in fact being used, then from MATLAB run <code>check_pyenv</code>. If there are warnings, rerun <code>config_pyenv</code></li></ul></li>
+<li>From Solo
+<ul><li>Click <b>Edit&gt;Options&gt;Python&gt;Check Environment Status</b>. If there are warnings, click <b>Configure Python</b>.</li></ul></li></ul></li>
+<li>If there is an error along the lines of <code>Unable to resolve py.anything_can_be_here</code>
+<ul><li>From MATLAB
+<ul><li>Type <code>pyenv</code> in the Command Window and ensure the PLS_Toolbox is being used.</li>
+<li>If running macOS or Linux, start up a new session of MATLAB and type <code>py.sys.setdlopenflags(py.int(10));</code> in the Command Window, then rerun the method that caused the crash. If the crashing persists, contact our helpdesk at helpdesk@eigenvector.com.</li>
+<li>If the PLS_Toolbox virtual environment is in fact being used, then from MATLAB run <code>check_pyenv</code>. If there are warnings, rerun <code>config_pyenv</code></li></ul></li>
+<li>From Solo
+<ul><li>Click <b>Edit&gt;Options&gt;Python&gt;Check Environment Status</b>. If there are warnings, click <b>Configure Python</b>.</li></ul></li></ul></li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="anndl.html" title="Anndl">anndl</a>, <a href="anndlda.html" title="Anndlda">anndlda</a>, <a href="tsne.html" title="Tsne">tsne</a>, <a href="umap.html" title="Umap">umap</a>, <a href="python.html" title="Python">python</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205539
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.038 seconds
+Real time usage: 0.045 seconds
+Preprocessor visited node count: 88/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 225/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1743-0!canonical and timestamp 20240930205539 and revision id 11938.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Python_configuration&amp;oldid=11938">https://www.wiki.eigenvector.com/index.php?title=Python_configuration&amp;oldid=11938</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 28 August 2023, at 10:17.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

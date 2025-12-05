@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>SoloManager - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-SoloManager rootpage-SoloManager skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=SoloManager"><span class="mw-page-title-main">SoloManager</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>This page describes the SoloManager program and its usage
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Description_of_components"><span class="tocnumber">2</span> <span class="toctext">Description of components</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#SoloManager.jar_file"><span class="tocnumber">2.1</span> <span class="toctext">SoloManager.jar file</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#SoloManager_configuration_file"><span class="tocnumber">2.2</span> <span class="toctext">SoloManager configuration file</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Target_program"><span class="tocnumber">2.3</span> <span class="toctext">Target program</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Wrapper_service_(optional)"><span class="tocnumber">2.4</span> <span class="toctext">Wrapper service (optional)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Relationships_and_processing_sequence"><span class="tocnumber">3</span> <span class="toctext">Relationships and processing sequence</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Typical_process_flow"><span class="tocnumber">4</span> <span class="toctext">Typical process flow</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Dependencies"><span class="tocnumber">5</span> <span class="toctext">Dependencies</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Configuration_File"><span class="tocnumber">6</span> <span class="toctext">Configuration File</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Starting_SoloManager_Manually"><span class="tocnumber">7</span> <span class="toctext">Starting SoloManager Manually</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#Starting_SoloManager_Automatically"><span class="tocnumber">8</span> <span class="toctext">Starting SoloManager Automatically</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="#Running_SoloManager_as_a_Windows_Service"><span class="tocnumber">8.1</span> <span class="toctext">Running SoloManager as a Windows Service</span></a>
+<ul>
+<li class="toclevel-3 tocsection-14"><a href="#Troubleshooting_Windows_Service_Problems"><span class="tocnumber">8.1.1</span> <span class="toctext">Troubleshooting Windows Service Problems</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-15"><a href="#Running_SoloManager_as_a_Unix/Linux_Daemon"><span class="tocnumber">8.2</span> <span class="toctext">Running SoloManager as a Unix/Linux Daemon</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#Additional_SoloManager_Troubleshooting_Steps"><span class="tocnumber">9</span> <span class="toctext">Additional SoloManager Troubleshooting Steps</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>The purpose of SoloManager is to start a target program locally, for example Solo_Peredictor, and to then continuously monitor 
+the target program's availability and restart it if necessary. The target program responds to tcp/ip queries on a specified port if it is 
+operating normally.
+If the target program becomes unresponsive for for a specified 
+period of time then the SoloManager can terminate it and restart it, and/or optionally reboot the host computer entirely. 
+Many aspects of the SoloManager program can be configured by specifying values in the SoloManager.ini text file.
+</p><p><br />
+<i>Note: The configuration files are contained in a folder called 'solomonitor', this is due to historical reasons. We apologize for any confusion this may have caused.</i>
+</p>
+<h2><span class="mw-headline" id="Description_of_components">Description of components</span></h2>
+<h3><span class="mw-headline" id="SoloManager.jar_file">SoloManager.jar file</span></h3>
+<p>This contains the SoloManager program. It also contains all necessary Java
+library files.
+</p>
+<h3><span class="mw-headline" id="SoloManager_configuration_file">SoloManager configuration file</span></h3>
+<p>The SoloManager.ini file contains configuration details specifying how the SoloManager operates. See the example configuration file listed below.
+</p>
+<h3><span class="mw-headline" id="Target_program">Target program</span></h3>
+<p>This is an the program we wish to monitor and to ensure is always available. It will usually be Solo_Predictor. It must expose a TCP port and respond to socket queries on that port.
+</p>
+<h3><span id="Wrapper_service_.28optional.29"></span><span class="mw-headline" id="Wrapper_service_(optional)">Wrapper service (optional)</span></h3>
+<p>This is an optional component which will start SoloManager whenever the host computer is booted up. It is described in the sections below about starting SoloManager as a Service or Daemon.
+</p>
+<h2><span class="mw-headline" id="Relationships_and_processing_sequence">Relationships and processing sequence</span></h2>
+<p>These components are related as shown in the SoloManager flowchart.
+</p><p><a href="" class="image"><img alt="Flowchart.png" src="flowchart.png" decoding="async" width="672" height="524" /></a>
+</p>
+<h2><span class="mw-headline" id="Typical_process_flow">Typical process flow</span></h2>
+<p>The SoloManager is typically started automatically when the host computer is booted up, usually via the <a href="#Starting_SoloManager_Automatically">Service and Daemon Wrapper</a>.
+</p><p>Once started, the SoloManager begins by reading in values for all configurable parameters from the SoloManager.ini file. This file can be edited by the user to specify their preferred settings but it must be located in the same directory as the SoloManager jar file. This is where the user specified the name of the target executable which SoloManager will
+start and monitor, for example.
+</p><p>SoloManager then begins its unending loop where it checks the status of the target program. SoloManager creates a socket connection to the target program and sends a query. If the target program is alive it sends a response which must match what SoloManager is expecting.
+</p><p>SoloManager checks the Target program is alive by: 
+</p>
+<ol><li>opening a socket on the target program's port</li>
+<li>Sending the parameter "msgToSocket" to the socket and verifying that the first line returned from the socket equals the parameter "expectedResponse".</li></ol>
+<dl><dd>If the response is not valid SoloManager will repeat this check up to "fastFailCountLimit" times with a pause of "FastQueryIntervalSeconds" seconds.</dd>
+<dd>If the response is valid the check is complete with result success.</dd></dl>
+<p>If the target check was successful then the failure counter is reset to zero and the loop repeats after a specified pause period of
+"SlowQueryIntervalSeconds" seconds.
+If the target check was not successful then the failure counter is incremented. The loop continues until this counter reaches a 
+specified "nResponseRestart" counter value, whereupon SoloManager issues a command to restart the the target program and continue with
+the loop. If the target program restarts then the next check will be successful so the loop continues normally.
+</p><p>If the restart command does not succeed in restarting the target program then the target checks will continue failing and 
+the failure counter incrementing until it eventually attains the specified "nResponseReboot" counter value. At this point SoloManager 
+issues a command to reboot the host computer and the entire process begins again.
+</p><p>During these operations SoloManager writes status information to a log file and optionally can send e-mail to report events.
+The log file will be located in the directory specified by "outdir". Its size is limited to the last "logFileMsgCapacity" log messages.
+E-mailed alerts are optional and are enabled by setting "enableEmailing" = true. In this case e-mail messages will be sent to the specified user whenever:
+</p>
+<ol><li>The SoloManager program starts.</li>
+<li>SoloManager is about to issue a restart command for the target program.</li>
+<li>SoloManager is about to issue a reboot command to the host computer's operating system.</li></ol>
+<h2><span class="mw-headline" id="Dependencies">Dependencies</span></h2>
+<p>SoloManager requires the following:
+</p>
+<ol><li>Java version 1.8 or later is available on the host computer. Any implementation of Java 1.8 or later can be downloaded, for example, from <a rel="nofollow" class="external free" href="https://jdk.java.net/nn/">https://jdk.java.net/nn/</a>, where "nn" is a version number. Expand the downloaded .zip file and copy the contained folder, for example "jdk-21.0.2", to wherever you want to keep it, such as: "C:\tmp\jdk-21.0.2". Then add the location of this folder's "bin" folder to your system PATH environmental variable: "C:\tmp\jdk-21.0.2\bin". Now test Java is available by opening a new cmd terminal and running "java -version", which should return the version number.</li>
+<li>It must be able to write to a log file on the filesystem.</li>
+<li>It must be able to issue a system reboot command if SoloManager.ini allows rebooting (command can be defined within the configuration file).</li>
+<li>Operating system may be any of: Linux, Windows, or MAC</li></ol>
+<h2><span class="mw-headline" id="Configuration_File">Configuration File</span></h2>
+<p>The SoloManager.ini configuration file will almost always need to be modified for the individual application and installation settings. An example file is included below, but a few key settings to modify include:
+</p>
+<ul><li><b>executableName</b> Name of the program to run (usually either Solo.exe or Solo_Predictor.exe.)</li>
+<li><b>startExecutableCommandPre</b> Full path to the program listed as executableName (unless the program's folder has been added to the system path by the installer.)</li>
+<li><b>startExecutableCommandPost</b> Any command parameters which should be appended to the executable when it is invoked.</li>
+<li><b>outdir</b> Specifies the folder which should contain the log files. By default these will be written to the same folder as the configuration file, but another file may be preferable if the user does not have read/write permissions to that folder. PLEASE ensure that any folders included in the outdir path do exist.</li>
+<li><b>maxTargetRunDurationHours</b> The target will be stopped and restarted every maxTargetRunDurationHours if this is a positive number. It has no effect if it is not a positive number.</li>
+<li><b>nResponseRestart</b> and <b>nResponseReboot</b> indicates how many target check failures must occur before the application is restarted and/or the system is rebooted (respectively). If the Target Application fails after starting successfully, it will be detected by the next normal check, which occur every slowQueryIntervalSeconds seconds. When a target check fails a restart is invoked after (fastQueryIntervalSeconds+1)*fastFailCountLimit*nResponseRestart seconds. If the restart attempts fail then a system reboot is invoked after (fastQueryIntervalSeconds+1)*fastFailCountLimit*nResponseRboot seconds. Thus the worst case total elapsed time, in seconds, from the target failing until an action occurs can be roughly calculated by:</li></ul>
+<pre>ResponseTime = slowQueryIntervalSeconds + (fastQueryIntervalSeconds+1)*fastFailCountLimit*nResponse____
+</pre>
+<p><br />
+The settings in the configuration file represent likely minimum settings. If longer delays are acceptable before a response, increase the fastQueryIntervalSeconds and/or the nResponse___ settings.
+</p>
+<pre>--------------------------------------------------------------------------
+------------ start: Example SoloManager.ini configuration file -----------
+# default values for the SoloManager
+#
+# Period to pause when fast and slow polling the executable
+fastQueryIntervalSeconds = 2
+slowQueryIntervalSeconds = 6
+#
+# How many times to poll when getting fail result before escalating the response level
+fastFailCountLimit = 2
+# The initial fastFailCountLimit is usually larger, to allow time for target system startup
+startFastFailCountLimit = 15
+#
+# How many fast cycles should occur with fails before applying response for level 1, 2, etc.
+# Note: set to zero or a negative integer to suppress the response action from occurring
+#nResponse1
+nResponseRestart = 1
+# nResponse2. A value of -1 means the system will not be rebooted.
+nResponseReboot = -1
+#
+# maxTargetRunDurationHours. Non-positive value disables this feature.
+# Positive value must be greater than 0.05 (hours)
+maxTargetRunDurationHours = -1
+#
+# executable details
+executableName = solo_predictor.exe
+startExecutableCommandPre = C:\\Program Files\\EVRI\\Solo_Predictor_43\\application\\
+startExecutableCommandPost = -loadsettings \\\"C:\\Program Files\\EVRI\\Solo_Predictor_43\\application\\default.xml\\\"
+stopExecutableCommandPre = taskkill /F /IM 
+stopExecutableCommandPost = 
+#
+# reboot
+rebootCommandPre =
+rebootCommandPost =
+rebootCommand = shutdown
+#
+# executable socket details
+serverIP = 127.0.0.1
+serverPort = 2211
+#
+# log file capacity
+logFileMsgCapacity = 6000
+#
+# Output directory. DO NOT add surrounding quotes. Verify any folders used actually exist.
+outdir = C:\\temp
+# Linux: use path like:
+# outdir = \\tmp
+#
+# must be true or false, case insensitive:
+enableEmailing        = false
+#
+# mailserver
+
+mailServer            = mail.eigenvector.com
+
+mailServerPort        = 587
+mailUsername          = USERNAME@eigenvector.com
+mailPassword          = PASSWORD
+# Note: mail Addresses cannot include spaces and must be well-formed addresses
+mailRecepientAddress  = SOMEONE@gmail.com
+# Use something which will be a valid e-mail address:
+mailSenderAddress     = monitor@solopredictor.com
+#
+//---------- start: Example SoloManager.ini configuration file -----------
+</pre>
+<h2><span class="mw-headline" id="Starting_SoloManager_Manually">Starting SoloManager Manually</span></h2>
+<p>SoloManager is described in the context of Solo_Predictor since this is where it is most commonly used. The solomanager.jar and SoloManager.ini files are supplied in the "solomonitor" folder located in the Solo_Predictor install folder which contains Solo_Predictor.exe, for example ...\Solo_Predictor_43\application\solomonitor\.
+</p><p>SoloManager can be started by double-clicking on the solomanager.jar file or at the command line by running "java -jar solomanager.jar" (after changing directory to the solomanager.jar file's folder). SoloManager will expects to find the SoloManager.ini configuration file to be located in the folder where it is launched from.
+</p>
+<h2><span class="mw-headline" id="Starting_SoloManager_Automatically">Starting SoloManager Automatically</span></h2>
+<p>SoloManager is most useful when run automatically by an operating system. This will start the Target Application in the background. The following describes how to install SoloManager as a service (Windows) or daemon (Linux).
+</p>
+<h3><span class="mw-headline" id="Running_SoloManager_as_a_Windows_Service">Running SoloManager as a Windows Service</span></h3>
+<p>The <i>service64</i> folder in the Solo_Predictor_xx\application\solomonitor\ folder contains the tools necessary to run SoloManager as a Windows service. This will automatically start the application without a user logging in. Follow these instructions to install SoloManager as a Windows service:
+</p><p>Configure solomanager.ini as needed for the intended behavior. Please ensure that:
+</p>
+<ol><li>The startExecutableCommandPre and startExecutableCommandPost fields have the correct path for the Solo_Predictor target</li>
+<li>The correct serverIP and serverPort settings which match what Solo_Predictor is using (as specified in the Solo_Predictor settingsfile, default.xml)</li>
+<li>Copy solomanager.ini into the "service64" folder. This copy of solomanager.ini will be used by the service.</li>
+<li>Run the Install_Service.bat file in the "service64" folder to install the service (this batch file must be run by a user with administrative privileges)</li>
+<li>Run the Start_Service.bat file in the "service64" folder to start the service (this batch file must be run by a user with administrative privileges)</li></ol>
+<p>Note:  different versions of Windows have differing levels of user access control. To run an application in an administrative mode, you will have to right click on the application icon and select "Run as an administrator".
+</p><p>To workaround the issue, you will need to open a command window as an Administrator. To do so, click on Start and search for "cmd".  Right-click on "cmd.exe"  and select the option "Run as Administrator".  From this command window, you will be able to run all of the necessary batch files at administrative level.
+</p>
+<h4><span class="mw-headline" id="Troubleshooting_Windows_Service_Problems">Troubleshooting Windows Service Problems</span></h4>
+<ul><li>Several of the default configuration files expect the folder <i>C:/temp</i> to exist for logging purposes. This is used by default in SoloManager.ini for the "outdir" variable, and in service64\conf\wrapper.conf for the "wrapper.logfile" variable. If the folders for this path do not exist you may receive "Null Pointer Exception" errors from the SoloManager application. Either modify the paths used in the <i>service.conf</i> and/or <i>solomanager.ini</i> files <b>or</b> create the folder as needed.</li></ul>
+<ul><li>An error in the log saying that Java could not be found usually means that the service was unable to locate java in the standard Solo_Predictor folder. If encountered, edit the <i>service/conf/service.conf</i> file and locate the "wrapper.java.command" property. The usual value for this property is:</li></ul>
+<pre>  C:/Program Files/EVRI/Solo_Predictor/application/sys/java/jre/win64/jre/bin/java
+</pre>
+<dl><dd><dl><dd>which is the default Solo_Predictor sub-folder in which the 64-bit version of Java is located. If Solo_Predictor is installed in a location other than the default folder, or you are using the 32-bit version of Solo_Predictor, change this value to reflect the correct location. For 32-bit Solo_Predictor, replace "win64" with "win32".</dd></dl></dd></dl>
+<dl><dd><dl><dd>An alternative solution to the above issue is to execute the service with the credentials of a specific user that has a full copy of Java installed. To resolve this issue, go to the windows "Services" control panel, locate the EVRI SoloManager service, double-click the service and change the "Log On" properties to a specified user.</dd></dl></dd></dl>
+<ul><li>If you have problems, try running the test script:</li></ul>
+<pre> Test_Service
+</pre>
+<dl><dd><dl><dd>to see if the server will start when run manually. Errors from this script can be used to adjust the service.conf file.</dd></dl></dd></dl>
+<ul><li>To uninstall the service, run the Uninstall_Service.bat file (as an administrator.)</li></ul>
+<h3><span id="Running_SoloManager_as_a_Unix.2FLinux_Daemon"></span><span class="mw-headline" id="Running_SoloManager_as_a_Unix/Linux_Daemon">Running SoloManager as a Unix/Linux Daemon</span></h3>
+<p>The <i>daemon_linux</i> folder in the SoloManager main folder contains the tools necessary to run SoloManager as a Linux daemon. This will automatically start the application without a user logging in. Follow these instructions to install SoloManager as a Linux Daemon:
+</p>
+<ol><li>Copy the application files onto the computer on which the application is to be run.</li>
+<li>Configure solomanager.ini as needed for the intended behavior.</li>
+<li>Copy solomanager.ini into the <i>daemon_linux</i> folder. This copy of solomanager.ini will be used by the daemon.</li>
+<li>Run the <i>Install_Daemon</i> script to install the daemon (this batch file must be run by a user with root privileges).</li></ol>
+<pre>./Install_Service
+</pre>
+<p><b>NOTE:</b> In order to execute this script and have the daemon operate correctly, you may have to manually set the "execute" bit on all files in the top-level <i>daemon_linux</i> folder to "on" using the chmod command inside the <i>daemon_linux</i> folder:
+</p>
+<pre>chmod 755 *
+</pre>
+<p>Errors and status messages will be reported to the log files stored in the <i>daemon_linux/logs</i> folder. To move logs to a different location, edit the <i>daemon_linux/conf/wrapper.conf</i> file. You can also modify the logging behavior in this file (maximum length, number of log backups, etc.)
+</p><p>To uninstall the daemon, run the <i>Uninstall_Daemon</i> script (as root.)
+</p>
+<pre>./Uninstall_Daemon
+</pre>
+<p>If you have problems, try running the test script:
+</p>
+<pre>./Test_Daemon
+</pre>
+<p>to see if the server will start when run manually.
+</p>
+<h2><span class="mw-headline" id="Additional_SoloManager_Troubleshooting_Steps">Additional SoloManager Troubleshooting Steps</span></h2>
+<p>In case of problems it is helpful to start SoloManager manually, to verify that it can start Solo_Predictor. 
+Check that:
+</p>
+<ul><li>1. your Solo_Predictor's solomonitor\SoloManager.ini is identifying the location of:
+<ul><li>A) your Solo_Predictor executable. See the steps and example SoloManager.ini file above. In particular, check that "startExecutableCommandPre" and "executableName" identify your Solo_Predictor executable.</li>
+<li>B) the SoloManager log file, <i>SoloManagerLog.txt</i>, will be created in the folder identified in the SoloManager.ini at the line "outdir". This is very useful for identifying the cause of any problems. Make sure the identified folder exists.</li>
+<li>C) "serverIP" and "serverPort" are correct for your Solo_Predictor (check its default.xml file).</li>
+<li>D) Be sure to leave "nResponseReboot" = -1 to prevent SoloManager rebooting your computer, until you are ready to give it that ability.</li></ul></li></ul>
+<ul><li>2. Check that java is identified in your service/conf/service.conf file​, as described in the third bullet-point under "Troubleshooting_Windows_Service_Problems​" above.</li></ul>
+<ul><li>3. Now try starting SoloManager manually by double-clicking on the SoloManager.jar file. This should start Solo_Predictor for you and keep it running. So you should see the Solo_Predictor start-up splash screen appear and Solo_Predictor run. If it does not start successfully then examine the contents of the "SoloManagerLog.txt" file in the folder you specified for "outdir".</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930012351
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.017 seconds
+Real time usage: 0.020 seconds
+Preprocessor visited node count: 55/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 2242/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:756-0!canonical and timestamp 20240930012351 and revision id 12227.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=SoloManager&amp;oldid=12227">https://www.wiki.eigenvector.com/index.php?title=SoloManager&amp;oldid=12227</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 21 March 2024, at 12:23.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Crossval - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+<link rel="canonical" href="https://www.wiki.eigenvector.com/index.php?title=Crossval"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Crossval rootpage-Crossval skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Ncrossval"><span class="mw-page-title-main">Crossval</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"><span class="mw-redirectedfrom">(Redirected from <a href="" class="mw-redirect" title="Ncrossval">Ncrossval</a>)</span></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">4.1</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Examples"><span class="tocnumber">5</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p><a href="using_cross_validation.html" title="Using Cross-Validation"> Cross-validation</a> for PCA, PLS, PCR, MLR, ANN, CLS, KNN, LWR, SVM, PLSDA, SVMDA, NPLS, MPCA, or any regression vector based method.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>results = crossval(x,y,rm,cvi,ncomp,<i>options</i>)</dd>
+<dd>model = crossval(x,y,model,cvi,ncomp,<i>options</i>)</dd>
+<dd>[press,cumpress,rmsecv,rmsec,cvpred,misclassed] = crossval(x,y,rm,cvi,ncomp,<i>options</i>)</dd></dl>
+<p>The output is either a structure/model or a variable list depending on the value of the 'structureoutput' option. Use option structureoutput = 'no' to get the list output. Default = 'yes', where crossval returns a structure (or updated model if the third input parameter is a model).
+</p><p>Note, using 
+</p>
+<dl><dd>model = crossval(x,y,model,cvi,ncomp,<i>options</i>)</dd></dl>
+<p>can give the same RMSEC and RMSECV results as seen in the Analysis window but requires setting 'options' field 'preprocessing' from the model's preprocessing. Also, for PCA models requires setting option for 'pcacvi' = {'loo'} or {'con', 10} if there are 25 or fewer included variables or not, respectively. (During cros-validation for PCA the 'pcacvi' option governs breaking the X-block data into groups of variables which are used to estimate X for a "test" variables group in turn, thus estimating X for all variables. The residuals associated with this X estimate are used to calculate RMSECV in the case of PCA models).
+It is preferable instead to use the <a href="evrimodel.html" title="Evrimodel">Evrimodel</a> .crossvalidate method instead as this method handles these details:
+</p>
+<dl><dd>model = model.crossvalidate(x,cvi)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>CROSSVAL performs cross-validation for linear regression (PCR, PLS, MLR, CorrelationPCR, and Locally Weighted Regression) and principal components analysis (PCA). Inputs are the <i>M</i>by<i>N</i> predictor variable matrix (x), predicted variable (y) [ (y) is empty [ ] for rm = 'pca' ], regression method (rm), cross-validation method (cvi), and maximum number of latent variables / components (ncomp).
+</p><p>The third parameter can represent the regression method (rm), which can be any of the following:
+</p>
+<dl><dd>rm  = 'pca'  performs cross-validation for PCA (see PCA)</dd>
+<dd>rm  = 'mlr'  performs cross-validation for MLR</dd>
+<dd>rm  = 'pcr'  performs cross-validation for PCR (see PCR)</dd>
+<dd>rm  = 'nip'  performs cross-validation for PLS using NIPALS</dd>
+<dd>rm  = 'sim'  or 'pls' performs cross-validation for PLS using SIMPLS (see PLS)</dd>
+<dd>rm  = 'correlationpcr'  performs cross-validation for CorrelationPCR</dd>
+<dd>rm  = 'lwr'  performs cross-validation for Locally Weighted Regression (see LWRPRED).</dd>
+<dd>rm  = 'cls'  performs cross-validation for CLS</dd></dl>
+<p>The third parameter can also be a previously build model. In this case crossval uses the model's regression method and returns the model with its cross-validation related fields updated (for example, model.detail.rmsecv). Note that crossval always uses the include fields from input x and y, and does not use the include fields used when building the model. The pre-processing used is taken from the input options' preprocessing. If there are 5 or fewer input parameters and a model is passed in then the preprocessing is taken from that used in the model.
+</p><p>The cross-validation method (cvi) can be
+</p>
+<dl><dd>cvi = {method splits iterations}, a cell array containing one of the cross-validation methods (method) below with the appropriate parameters (split) and (iterations). Where "splits" is the number of subsets to split the data into and "iterations" is the number of replicates to perform on each split. The replicate results are averaged before being used in the final results (RMSECV, cv pred, and misclassification rates).</dd></dl>
+<dl><dd>cvi = a vector representing user-defined cross-validation groups.</dd></dl>
+<p>The cross-validation method (method) can be any one of the following. For more information on choosing a cross-validation method, see <a href="using_cross_validation.html" title="Using Cross-Validation">Using Cross-Validation</a>.
+</p>
+<dl><dd>cvi = {'loo'}&#160;:  leave one out cross-validation (each sample left out on its own; inputs (splits) and (iterations) are not used</dd></dl>
+<dl><dd>cvi = {'vet' (splits)}&#160;:  venetian blinds cross-validation for (splits) subsets. Each subset includes every splits-th sample. For example, if splits = 3 the first subset uses rows 1:3:end, the second uses 2:3:end and the third subset uses 3:3:end.</dd>
+<dd>cvi = {'vet' (splits) (blindsize)} randomly moves the starting point for the first (and subsequent) blocks. Where 'vet' means venetian blinds (split data into "splits" groups leaving out "blindsize" samples at a time - when blindsize is 1 (one), this leaves out every n'th sample. "splits" defines the number of groups to split the data into and "blindsize" defines the number of samples to include in each blind.
+<dl><dd>For example, splits=4 and blindsize=2 means split the data into groups of 4 taking 2 samples for each group at a time. Several examples:</dd></dl></dd></dl>
+ <pre>splits   blindsize   grouping (same #s left out together)
+   4         1         1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4...
+   4         2         1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4...
+   2         5         1 1 1 1 1 2 2 2 2 2 1 1 1 1 1 2...</pre>
+<dl><dd>cvi = {'con' (splits)} contiguous blocks cross-validation for (splits) subsets.</dd>
+<dd>cvi = {'con' (splits) (iter)} randomly moves the starting point for the first (and subsequent) blocks. E.g.m cvi = {'con' 5}; for 5 contiguous blocks (one iteration).</dd></dl>
+<dl><dd>rnd&#160;: {'rnd' (splits) (iter)} random subset selected cross-validation for (splits) subsets and (iter) iterations [number of replicate splits to perform].</dd></dl>
+<dl><dd>cvi = a <i>M</i> element vector with integer elements allowing user defined subsets. (cvi) is a vector with the same number of elements as x has rows i.e., length(cvi) = size(x,1). Each cvi(i) is defined as:
+<dl><dd>cvi(i) = -2  the sample is always in the test set.</dd>
+<dd>cvi(i) = -1  the sample is always in the calibration set,</dd>
+<dd>cvi(i) =  0  the sample is always never used, and</dd>
+<dd>cvi(i) =  1,2,3... defines each test subset.</dd></dl></dd></dl>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>Optional input <i>options</i> is an options structure containing the following fields:
+</p>
+<ul><li><b>display</b>&#160;: [ 'off' | {'on'} ] Governs output to command window.</li>
+<li><b>plots</b>&#160;: [ 'none' | {'final'} ] Governs plotting.</li>
+<li><b>waitbartrigger</b>&#160;: [15] Governs display of waitbar. If a given crossval run is expected to take longer than this many seconds, a waitbar will be presented to the user. Set to "inf" to disable the waitbar entirely.</li>
+<li><b>preprocessing</b>&#160;: an integer or cell array used to control preprocessing. Default is mean centering: preprocessing = 1. (preprocessing) can be input in two ways:</li></ul>
+<dl><dd><dl><dd>preprocessing = [ integer ]
+<dl><dd>preprocessing = 0: uses no preprocessing</dd>
+<dd>preprocessing = 1: uses mean centering {default}</dd>
+<dd>preprocessing = 2: uses autoscaling.</dd></dl></dd>
+<dd>preprocessing = {xp yp}, is a cell array containing a preprocessing structure(s) for the X- and Y-blocks respectively (see PREPROCESS). For example:
+<dl><dd>preprocessing = {xp [ ]} is used for PCA.</dd>
+<dd>preprocessing = {xp yp} is used to preprocess the X- and Y-blocks respectively.</dd></dl></dd></dl></dd></dl>
+<ul><li><b>testx</b>&#160;: [] Use to provide a separate validation X-block from which an RMSEP will be calculated for each number of components in the model. Must be supplied with option testy. Only functional for 2-way regression methods.</li>
+<li><b>testy</b>&#160;: [] Use to provide a separate validation Y-block for use with option testx (see above).</li>
+<li><b>discrim</b>&#160;: [ {'no'} | 'yes' ] Force cross-validation in "discriminant analysis" mode. Returns average misclassification rate and returns misclassed output. Also triggered by y being logical.</li>
+<li><b>threshold</b>&#160;: [ ] Alternative PLSDA threshold level {default = [ ] = automatic}.</li>
+<li><b>prior</b>&#160;: [ ] Used with PLSDA only. Vector of fractional prior probabilities. This is the probability (0 to 1) of observing a "1" for each column of y (i.e.m each class). E.g., [0.25 0.50] defines that only 25% and 50% of future samples will likely be "true" for the classes identified by columns 1 and 2 of the Y-block. [ ] (Empty) = equal priors.</li></ul>
+<ul><li><b>structureoutput</b>: [ {'no'} | 'yes' ] Governs output variables. 'Yes' returns a structure instead of individual variables. 'Yes' is default if only one output is requested.</li></ul>
+<ul><li><b>jackknife</b>: [ {'no'} | 'yes' ] Governs storing of jackknifed regression vectors. Jack-knifing may slow performance significantly or cause out-of-memory errors when both x and y blocks have many variables.</li></ul>
+<ul><li><b>rmsec</b>: [ 'no' | {'yes'} ] Governs calculation of RMSEC. When set to 'no', calculation of "all variables" model is skipped (unless specifically required for plots or requested with multiple outputs)</li></ul>
+<ul><li><b>permutation</b>&#160;: [ {'no'} | 'yes' ] Performs permutation test instead of simple cross-validation. This calls the permutetest function with the same inputs as provided to cross-validation.</li></ul>
+<ul><li><b>pcacvi</b>: {'loo'} Cell describing how PCA cross-validation should perform variable replacement. Variable replacement options are similar to cross-validation CVI options and include:</li></ul>
+<dl><dd><b>{'loo'}</b> leave one variable out at a time</dd></dl>
+<dl><dd><b>{'con'</b> splits} contiguous blocks (total of splits groups)</dd></dl>
+<dl><dd><b>{'vet'</b> splits} venetian blinds (every n'th variable), or</dd></dl>
+<dl><dd><b>{'rnd'</b> splits} random subsets (note: no iterations)</dd></dl>
+<ul><li><b>fastpca</b>: [ 'off' | {'auto'} ] Governs use of "fast" PCA Cross-validation algorithm. 'off' never uses fast algorithm,  'auto' uses fast algorithm when other options permit. Fast  pca can only be used with pcacvi set to 'loo'</li></ul>
+<ul><li><b>lwr</b>: Sub-structure of options to use for locally-weighted regression cross-validation. Most of these options are used as defined in the LWRPRED function (see LWRPRED for more details) but there are two additional options defined for cross-validation:
+<dl><dd><b>lwr.minimumpts</b>&#160;: [20] the minimum number of points (samples) to use in any LWR sub-model.</dd></dl></li></ul>
+<ul><li><dl><dd><b>lwr.ptsperterm</b>&#160;: [20] the number of points to use per term (LV) in the LWR model. For example, when set to 20, 20 samples will be use for a 1 LV model, 40 samples will be used for a 2 LV model, etc. If set to zero, the number of points defined by lwr.minimumpts will be used for all models - that is, the number of samples used will be independent from the number of LVs in the model.</dd></dl></li></ul>
+<dl><dd>In all cases, the number of samples in an individual test set will be the upper limit of samples to include in any LWR prediction.</dd></dl>
+<ul><li><b>weights</b>: [ 'hist' | [vector] ]  governs sample weighting for PLS regression method ONLY. If set to the string 'hist', y-block histogram weighting is done on the samples. If set to a vector, the vector must be equal in length to the number of samples in the y block and each element is used as a weight for the corresponding sample. If empty, no sample weighting is done.</li></ul>
+<ul><li><b>weightsvect</b>: [ ] Used only with custom weights. The vector specified must be equal in length to the number of samples in the y block and each element is used as a weight for the corresponding sample. If empty, no sample weighting is done.</li></ul>
+<ul><li><b>rmoptions</b>: Sub-structure of regression method options to specify what options should be passed directly to the function specified by the regression method.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>press</b>&#160;: predictive residual error sum of squares PRESS for each subset (subsets are rows of this matrix, number of components are columns). Note that for multivariate (y) the output (press) is grouped by output variable, i.e., all of the PRESS values for the first Y-variable are followed by all of the PRESS values for the second Y-variable, etc.</li></ul>
+<ul><li><b>cumpress</b>&#160;: cumulative PRESS (sum of columns of press).</li></ul>
+<ul><li><b>rmsecv</b>&#160;: root mean square error of cross-validation.</li></ul>
+<ul><li><b>rmsec</b>&#160;: root mean square error of calibration.</li></ul>
+<ul><li><b>cvpred</b>&#160;: cross-validation Y-predictions (regression methods only). If cross-validation method was random cvi = {'rnd' (splits) (iter)}, this is the average prediction of all replicates.</li></ul>
+<ul><li><b>misclassed</b>&#160;: fractional misclassifications for each class (valid for regression methods only and only when input (y) is class logical, (i.e., discrete-value) vector. Each cell of this array contains the fractional misclassification rates for a given class in the data. The columns of the matrix in a cell corresponds to the number of latent variables in the model. The first row of the matrix is the false positive rate and the second row is the false negative rate.</li></ul>
+<ul><li><b>reg</b>&#160;: jack-knifed regression vectors from each sub-set. This will be size [ncomp*<i>Ny</i> by <i>Nx</i> by (splits)] such that reg(1,:,:) will be the regression vectors for 1 component model of the first column of (y) for all subsets [a 1 by <i>Nx</i> by (splits) matrix]. Use SQUEEZE to reduce to an <i>Nx</i> by (splits) matrix. [note: options.jackknife must be 'yes' to use (reg)].</li></ul>
+<dl><dd>If y has more than one column (i.e. multivariate y) then the rows of reg are ordered grouped by number of latent variables. The regression vectors for each y-column are given for the one-factor models (lv=1) followed by the regression vectors for each y-column for the two-factor models (lv=2), etc:
+<dl><dd>1 LV, y-column 1</dd>
+<dd>1 LV, y-column 2</dd>
+<dd>...</dd>
+<dd>2 LVs, y-column 1</dd>
+<dd>2 LVs, y-column 2</dd>
+<dd>...</dd>
+<dd>ncomp LVs, y-column 1</dd>
+<dd>ncomp LVs, y-column 2</dd>
+<dd>...</dd></dl></dd></dl>
+<p>If options.structureoutput = 'yes', a single output (results) will return all the above outputs as fields in a structure array. If options.rmsec = 'no', then RMSEC is not returned (provides faster iterative calculation).
+</p><p>When (options.plots) is not 'none' plots both RMSECV and RMSEC are plotted.
+</p>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<pre>[press,cumpress] = crossval(x,y,'nip',{'loo'},10);
+
+[press,cumpress] = crossval(x,y,'pcr',{'vet',3},10);
+[press,cumpress] = crossval(x,y,'nip',{'con',5},10);
+[press,cumpress] = crossval(x,y,'sim',{'rnd',3,20},10);
+res = crossval(x,y,'sim',{'rnd',3,20},10);
+
+pre = {preprocess('autoscale') preprocess('autoscale')};
+opts.preprocessing = pre;
+opts.plots = 'none';
+[press,cumpress] = crossval(x,y,'sim',{'rnd',3,20},10,opts);
+res = crossval(x,y,'sim',{'rnd',3,20},10,opts);
+
+[press,cumpress] = crossval(x,[],'pca',{'loo'},10);
+[press,cumpress] = crossval(x,[],'pca',{'vet',3},10);
+res = crossval(x,[],'pca',{'con',5},10);</pre>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="using_cross_validation.html" title="Using Cross-Validation">Using_Cross-Validation</a>, <a href="pca.html" title="Pca">pca</a>, <a href="pcr.html" title="Pcr">pcr</a>, <a href="pls.html" title="Pls">pls</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="encodemethod.html" title="Encodemethod">encodemethod</a>, <a href="evrimodel.html" title="Evrimodel">Evrimodel</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930010033
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.012 seconds
+Real time usage: 0.014 seconds
+Preprocessor visited node count: 33/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 871/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:68-0!canonical and timestamp 20240930010033 and revision id 12207.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Crossval&amp;oldid=12207">https://www.wiki.eigenvector.com/index.php?title=Crossval&amp;oldid=12207</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href="crossval.html"><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 22 February 2024, at 16:49.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

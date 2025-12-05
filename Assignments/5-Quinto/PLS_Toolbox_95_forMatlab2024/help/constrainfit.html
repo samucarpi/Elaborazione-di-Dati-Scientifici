@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Constrainfit - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Constrainfit rootpage-Constrainfit skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Constrainfit"><span class="mw-page-title-main">Constrainfit</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Optional_Inputs"><span class="tocnumber">3.2</span> <span class="toctext">Optional Inputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Outputs"><span class="tocnumber">3.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Examples"><span class="tocnumber">5</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Notes"><span class="tocnumber">6</span> <span class="toctext">Notes</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Finds <b>A</b> minimizing ||X-A*B'|| subject to constraints, given the small matrices (<b>X</b> ' <b>B</b>) and (<b>B</b> ' <b>B</b>)
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[A,diagnostics]=constrainfit(XB,BtB,Aold,options); &#160;% Constrained</dd>
+<dd>[A,diagnostics]=constrainfit(XB,BtB,Aold); &#160;% Unconstrained</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>CONSTRAINFIT solves the least squares problem behind bilinear, trilinear and other multilinear models. Assuming a model <b>X</b> = <b>A</b>*<b>B</b> ' and assuming that <b>X</b> and <b>B</b> are known, the least squares estimate of <b>A</b> is obtained. Rather than using <b>X</b> and <b>B</b> this algorithm uses the cross product matrices (<b>X</b> ' <b>B</b>) and (<b>B</b> ' <b>B</b>) which are generally smaller and less memory-demanding especially in multi-way models.
+</p><p>CONSTRAINFIT can do a number of general types of regression problems such as nonnegativity-constrained regression, regression with column-orthogonality of <b>A</b> etc. These constraints are simply set in the option field 'type', e.g. option.type='nonnegativity'. Thus, for most problems, only the 'type' field needs to be set. CONSTRAINFIT will provide a least squares solution to most of these problems.
+</p><p>CONSTRAINFIT can also find <b>A</b> subject to different constraints on different columns. In this case, the update of <b>A</b> will be an improvement of the initially provided estimate <b>Aold</b> though not necessarilly the least squares solution. As CONSTRAINFIT is used inside iterative algorithms, an improvement is sufficient to guarantee overall convergence.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>XB</b> = The matrix <b>X</b> ' <b>B</b>.</li>
+<li><b>BtB</b> = The matrix <b>B</b> ' <b>B</b>.</li>
+<li><b>Aold</b> = An initial estimate of <b>A</b>.</li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<ul><li><b>options</b> = provides definitions for which type of constraint to impose.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>A</b> = The improved estimate of <b>A</b>.</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>options =  a structure array with the following fields:
+</p>
+<ul><li><b>type</b>: [ {'unconstrained'} | 'nonnegativity' | 'unimodality' | 'orthogonality' | 'columnorthogonal' | 'equality' | 'exponential' | 'rightprod' | 'columnwise']</li></ul>
+<dl><dd><dl><dd><dl><dd>provides quick access to most important settings</dd>
+<dd>'<b>unconstrained'</b>   - do unconstrained fit of <b>A</b></dd>
+<dd>'<b>nonnegativity'</b>   - <b>A</b> is all nonnegative</dd>
+<dd>'<b>unimodality'</b>     - <b>A</b> has unimodal columns <i>and</i> is nonnegative</dd>
+<dd>'<b>unimodality_nonon'</b>   - <b>A</b> has unimodal columns</dd>
+<dd>'<b>orthogonality'</b>   - <b>A</b> is orthogonal (<b>A</b> ' <b>A</b> = <b>I</b>)</dd>
+<dd>'<b>columnorthogonal'</b>- <b>A</b> has orthogonal columns (<b>A</b> ' <b>A</b> = diagonal)</dd>
+<dd>'<b>equality'</b>        - columns in <b>A</b> are subject to equality constraints. Useful for e.g. imposing closure (see settings under options.equality below)</dd>
+<dd>'<b>exponential'</b>     - Columns are mono-exponentials</dd>
+<dd>'<b>rightprod'</b>       - Fitting <b>A</b> subject to being of the form <b>F*D</b>, where <b>D</b> is predefined (must be set in options.advanced.linearconstraints.matrix). if imposed then columnwise constraints (see below) are applied to the columns of <b>F</b> rather than <b>A</b>. Hence options.columnconstraints must be set appropriately.</dd>
+<dd>'<b>L1 penalty'</b>       - A is estimated using a constraint that A should be sparse - (the higher options.L1.penalty, the sparser A will be). Note: A is also constrained to be nonnegative.</dd></dl></dd></dl></dd></dl>
+<dl><dd><dl><dd><dl><dd>'<b>columnwise'</b>      - A has other constraints than the above. These have to be defined in options.columnconstraints (see below).</dd></dl></dd></dl></dd></dl>
+<ul><li><b>columnconstraints</b>: cell where element f defines constraints on column f (only applicable if options.type = 'columnwise').</li></ul>
+<dl><dd><dl><dd><dl><dd>columnconstraints is a cell vector {f1,f2,f3, ... fF}. Each element f1, f2, etc. corresponds to one column of A. f1 defines constraints on the first column of A etc. Each constraint on a column is defined by a number. For example if f1 is 1, then nonnegativity is imposed on the first column (see definitions below). If f1 = [1 4], then first nonnegativity is imposed and then smoothness. The following constraints are available on individual columns</dd>
+<dd>a = 0&#160;: Unconstrained</dd>
+<dd>a = 1&#160;: Nonnegativity</dd>
+<dd>a = 2&#160;: Unimodality</dd>
+<dd>a = 3&#160;: Inequality (every element &gt;= scalar). Scalar has to be in options.inequality.scalar. This is a vector of size F, one scalar for each factor</dd>
+<dd>a = 4&#160;: Smoothness. options.smoothness.operator can be used to hold operator (for speeding up. Won't have to be estimated each time. options.smoothness.alpha (0&lt;alpha&lt;1). Setting to zero means no smoothness while setting to 1 means high degree of smoothness.</dd>
+<dd>a = 5&#160;: Fixed elements. The elements that are fixed are defined in options.fixed.</dd>
+<dd>a = 6&#160;: Not applicable</dd>
+<dd>a = 7&#160;: Approximate unimodality. See options.unimodality.weight</dd>
+<dd>a = 8&#160;: Normalize the loading vectors to norm one</dd>
+<dd>a = 20: Functional constraint. Using simple pre- or userdefined functions, any functional constraint can be imposed on individual columns. For example, that one column is exponential. Functional constraints require that a function is written (type HELP FITGAUSS for an example).</dd></dl></dd></dl></dd></dl>
+<dl><dd><dl><dd><b>Example:</b> Fitting the second loading vector as being Gaussian:</dd></dl></dd></dl>
+<pre>    NumberFactors=3;
+    options.functional=cell(NumberFactors,1);
+    ToFix = 2;&#160;% This constraint is for the second column
+    options.functional{ToFix}.functionhandle = @fitgauss;
+   &#160;% Define starting parameters
+    center = 100;width = 100;height = .1;
+    options.functional{ToFix}.parameters = [center width height];
+    options.functional{ToFix}.additional=[];&#160;% no additional input
+</pre>
+<p>When a column has more than one constraint these are generally imposed sequentially starting with the first one in options.columnconstraint. For most constraints, the order of constraints will not be important. Advise is to input constraints with smaller numbers first.
+</p>
+<ul><li><b>inequality</b>&#160;: Defines a cutoff. If inequality is defined in columnwise constraints, all elements of that column will be &gt; options.inequality.scalar. Thus, when set to zero, nonnegativity is imposed.</li>
+<li><b>nonnegativity</b>: defines which algorithm to use for imposing nonnegativity when options.type = 'nonnegativity'. If set to 0, the default NNLS algorithm is used. If set to 1, a faster columnwise update is used which only improves the current least squares fit, if set to 2, an ad hoc approach is used where <b>A</b> is estimated in a least squares sense and then negative numbers are set to zero. This will not provide a well-defined solution in terms of the least squares loss function. If set to 3, the NMF algorithm is used. This requires that all elements of the data array are nonnegative in order to work properly.</li>
+<li><b>smoothness</b>: defines how much smoothness is imposed when smoothness is imposed as a columnconstraint. smoothness.alpha is a number between 0 (no smoothness) and 1 (full smoothness)</li>
+<li><b>fixed</b>: options.fixed.values is a matrix of the same size as the loading matrix (<b>A</b>) with the actual numbers to be fixed in the positions corresponding to the position in A. The remaining positions must be NaN. The degree to which elements are fixed is set in options.fixed.weight (0&lt;weight&lt;1). Zero means not imposed whereas one means completely fixed.</li>
+<li><b>advanced</b>: In the field advanced.linearconstraints, settings for options.type = 'rightprod' are set. If <b>A</b> is IxF, then linearconstraint.matrix must be and SxF matrix <b>D'</b>. <b>A</b> is then found as <b>F*D</b>. E.g. if <b>A</b> has three columns, set the predefined matrix D = [1 1 0; 0 0 1], then the first and second of the three columns in A will be identical (F*D where F is to be estimated).</li>
+<li><b>equality</b>: Settings for using options.type = 'equality'. Two fields are held in equality, C and d. When imposed, CONSTRAINFIT solves for loading matrix A subject to A(i,:)*C' = d for all i. Hence if you want to impose closure and have three factors, set C=[1 1 1] and d=1.</li>
+<li><b>unimodality</b>: Set weight in options.unimodality.weight. weight==1: exact unimodality. weight==0: no unimodality</li>
+<li><b>functional</b>: For functional constrains (see above)</li></ul>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<p><b>Setting global constraints on A</b>
+</p>
+<pre> opt = constrainfit('options');
+ opt.type='nonnegativity';
+ [A]=constrainfit(XB,BtB,Aold,opt);&#160;% Nonnegative
+</pre>
+<p><b>Setting constraints on just one column of A</b>
+</p>
+<pre> opt = constrainfit('options');
+ opt.type='columnwise';
+ opt.columnconstraints={0;2;0};&#160;% If three columns
+ [A]=constrainfit(XB,BtB,Aold,opt);&#160;% Second column unimodal
+</pre>
+<pre>% Make a noisy dataset such that PARAFAC gives noisy loadings
+load aminoacids
+x = X.data;
+x = x+randn(size(x))*100;
+
+% define parafac options
+op=parafac('options');
+
+% set constraints in second mode to be defined columnwise
+op.constraints{2}.type='columnwise';
+
+% Define that first column is smooth, second and third unconstrained
+op.constraints{2}.columnconstraints={4 0 0};
+
+% Fit model
+model = parafac(x,3,op);
+</pre>
+<p>Note how the first loading in the second mode is more smooth than the rest. If needed smoothness can be turned up (to one) and down (to zero) using op.constraints{2}.smoothness.alpha=0.6
+</p>
+<h3><span class="mw-headline" id="Notes">Notes</span></h3>
+<ul><li>When attempting to use the fixed constraint with non-negativity or unimodality,  use the .fixed and .columnconstraints. Meaning, use constraints{n,1}.fixed.values, and add values ( as a cell array) in constraints{n,1}.columnconstraints using valid columnconstraint values as described above.</li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="parafac.html" title="Parafac">parafac</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205951
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.012 seconds
+Real time usage: 0.014 seconds
+Preprocessor visited node count: 39/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 829/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:500-0!canonical and timestamp 20240930205951 and revision id 11230.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Constrainfit&amp;oldid=11230">https://www.wiki.eigenvector.com/index.php?title=Constrainfit&amp;oldid=11230</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 3 February 2021, at 02:04.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

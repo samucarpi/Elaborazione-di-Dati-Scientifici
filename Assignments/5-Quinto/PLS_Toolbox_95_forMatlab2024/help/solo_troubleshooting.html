@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Solo Troubleshooting - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Solo_Troubleshooting rootpage-Solo_Troubleshooting skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Solo_Troubleshooting"><span class="mw-page-title-main">Solo Troubleshooting</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>The following sections may be of assistance if you are having problems with Solo.
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Downloading_Problems"><span class="tocnumber">1</span> <span class="toctext">Downloading Problems</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Installation_/_Starting_Problems"><span class="tocnumber">2</span> <span class="toctext">Installation / Starting Problems</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#General"><span class="tocnumber">2.1</span> <span class="toctext">General</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#Manually_Installing_the_MATLAB_Compiler_Runtime_(MCR)"><span class="tocnumber">2.1.1</span> <span class="toctext">Manually Installing the MATLAB Compiler Runtime (MCR)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-5"><a href="#Windows"><span class="tocnumber">2.2</span> <span class="toctext">Windows</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="#Fail_to_Install"><span class="tocnumber">2.2.1</span> <span class="toctext">Fail to Install</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#Fail_to_Start"><span class="tocnumber">2.2.2</span> <span class="toctext">Fail to Start</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="#Fail_to_Initialize"><span class="tocnumber">2.2.3</span> <span class="toctext">Fail to Initialize</span></a>
+<ul>
+<li class="toclevel-4 tocsection-9"><a href="#32-Bit_Windows"><span class="tocnumber">2.2.3.1</span> <span class="toctext">32-Bit Windows</span></a></li>
+<li class="toclevel-4 tocsection-10"><a href="#64-Bit_Windows"><span class="tocnumber">2.2.3.2</span> <span class="toctext">64-Bit Windows</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-11"><a href="#Failure_to_complete_installation/running_Solo+Mia_or_Solo+Model_Exporter_for_the_first_time"><span class="tocnumber">2.2.4</span> <span class="toctext">Failure to complete installation/running Solo+Mia or Solo+Model_Exporter for the first time</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="#Not_Responding"><span class="tocnumber">2.2.5</span> <span class="toctext">Not Responding</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="#WRAPPER_WIN64_Has_Stopped_Working_(Windows_Only)"><span class="tocnumber">2.2.6</span> <span class="toctext">WRAPPER_WIN64 Has Stopped Working (Windows Only)</span></a>
+<ul>
+<li class="toclevel-4 tocsection-14"><a href="#wrapper_win64_has_stopped_working_-_Missing_library_file_case"><span class="tocnumber">2.2.6.1</span> <span class="toctext">wrapper_win64 has stopped working - Missing library file case</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-15"><a href="#Changes_Not_Being_Recognized"><span class="tocnumber">2.2.7</span> <span class="toctext">Changes Not Being Recognized</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-16"><a href="#Mac"><span class="tocnumber">2.3</span> <span class="toctext">Mac</span></a>
+<ul>
+<li class="toclevel-3 tocsection-17"><a href="#Invalid_License._Cannot_start_due_to_license_error._Expired_-_Error_using_save."><span class="tocnumber">2.3.1</span> <span class="toctext">Invalid License. Cannot start due to license error. Expired - Error using save.</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href=""><span class="tocnumber">2.3.2</span> <span class="toctext">Can't See Menus With Dark Mode</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="#Can_Only_Start_from_Terminal_with_sudo"><span class="tocnumber">2.3.3</span> <span class="toctext">Can Only Start from Terminal with sudo</span></a></li>
+<li class="toclevel-3 tocsection-20"><a href="#Cannot_Execute"><span class="tocnumber">2.3.4</span> <span class="toctext">Cannot Execute</span></a></li>
+<li class="toclevel-3 tocsection-21"><a href="#The_Disk_has_been_Damaged_Or_Warning_About_Unidentified_Developer"><span class="tocnumber">2.3.5</span> <span class="toctext">The Disk has been Damaged Or Warning About Unidentified Developer</span></a></li>
+<li class="toclevel-3 tocsection-22"><a href="#Starting_From_Command_Prompt"><span class="tocnumber">2.3.6</span> <span class="toctext">Starting From Command Prompt</span></a></li>
+<li class="toclevel-3 tocsection-23"><a href="#Older_Versions"><span class="tocnumber">2.3.7</span> <span class="toctext">Older Versions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-24"><a href="#LINUX"><span class="tocnumber">2.4</span> <span class="toctext">LINUX</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-25"><a href=""><span class="tocnumber">3</span> <span class="toctext">Problems loading HORIBA  '.l6s', '.l6m', '.ngc', '.tvf', '.ngs', or '.tsf' files</span></a></li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Downloading_Problems">Downloading Problems</span></h1>
+<ul><li>If you have trouble downloading Solo, make sure you're using a current version of a web browser with packet checking. We suggest the latest version of Firefox or Google Chrome:</li></ul>
+<dl><dd><dl><dd><a rel="nofollow" class="external text" href="http://www.mozilla.com/en-US/firefox">http://www.mozilla.com/en-US/firefox/</a></dd></dl></dd></dl>
+<dl><dd><dl><dd><a rel="nofollow" class="external text" href="https://www.google.com/chrome/">https://www.google.com/chrome/</a></dd></dl></dd></dl>
+<ul><li>If your company firewall is set to refuse download of EXE (or similar) files, use the checkbox marked:<pre> Use obfuscated file extension (avoids some firewall issues)</pre></li></ul>
+<dl><dd><dl><dd>on the Download page where you are choosing the file format to download. The file you download will have some portion of the file extension changed to an underscore (e.g. _xe instead of exe, or _ip instead of zip.) This will allow the file to pass through most firewalls unfiltered. Once the download is complete, you can change the file extension to the expected one (listed on the download page) and run the installer.</dd></dl></dd></dl>
+<h1><span id="Installation_.2F_Starting_Problems"></span><span class="mw-headline" id="Installation_/_Starting_Problems">Installation / Starting Problems</span></h1>
+<h2><span class="mw-headline" id="General">General</span></h2>
+<h3><span id="Manually_Installing_the_MATLAB_Compiler_Runtime_.28MCR.29"></span><span class="mw-headline" id="Manually_Installing_the_MATLAB_Compiler_Runtime_(MCR)">Manually Installing the MATLAB Compiler Runtime (MCR)</span></h3>
+<p>In some cases, for Solo based products, the MATLAB MCR needs to be downloaded directly from <a rel="nofollow" class="external text" href="https://www.mathworks.com/products/compiler/matlab-runtime.html">The Mathworks website</a> and installed manually. Identify the MCR version from the <a href="release_notes_pls_toolbox_and_solo.html#Version_Inter-compatibility" title="Release Notes PLS Toolbox and Solo">release notes</a>. As of Solo 9.0 the version is 2020b but this will change in the future. 
+</p>
+<ul><li>Download and install the MCR.</li>
+<li>Run the Solo installer, it will automatically detect the MCR.</li></ul>
+<p>If the correct MCR is installed but an error message asking to "install the correct version" of the MCR you may need to <a rel="nofollow" class="external text" href="https://www.mathworks.com/matlabcentral/answers/343074-why-do-i-receive-could-not-find-version-x-x-of-the-matlab-runtime-when-running-my-compiled-app-al">add the MCR location to your Windows path </a>.
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="Windows">Windows</span></h2>
+<h3><span class="mw-headline" id="Fail_to_Install">Fail to Install</span></h3>
+<p>Any error messages with "NSIS Error" indicate the installer did not download completely. In this case try downloading the installer again and check the downloaded .exe file size with the size described on the download page as a check.
+</p>
+<h3><span class="mw-headline" id="Fail_to_Start">Fail to Start</span></h3>
+<p>If you installed using the "Update Only" version of the installer and Solo/Solo_Predictor does not start the first time, ending abruptly with a "wrapper_win64" error message, please try installing using the "Full installer" version of the installer. Both installer versions are available from your download page.
+</p>
+<h3><span class="mw-headline" id="Fail_to_Initialize">Fail to Initialize</span></h3>
+<ul><li>If Solo doesn't start correctly and/or you receive an error similar to:</li></ul>
+<dl><dd><b>"The application failed to initialize properly (0xc0000135)..."</b>, or</dd>
+<dd><b>"The application failed to initialize properly (0xc0150002)..."</b> (or similar numerical code), or</dd>
+<dd><b>"This application has failed to start because the application configuration is incorrect.  Reinstalling the application may fix this problem."</b> or</dd>
+<dd><b>"The application has failed to start because its side-by-side configuration is incorrect."</b></dd></dl>
+<p>This generally implies a library is missing or corrupt on your system. Use the following links to install the appropriate library for your operating system and Solo version. For other situations, contact Eigenvector at <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>
+</p>
+<h4><span class="mw-headline" id="32-Bit_Windows">32-Bit Windows</span></h4>
+<p><b>Solo 6.3 and later</b>
+</p>
+<dl><dd><ul><li><a rel="nofollow" class="external text" href="http://software.eigenvector.com/libraries/VS_2005/win32/vcredist_x86.exe">MVC 2005 SP1 Redistributable Package (VCREDIST_x86.exe)</a></li></ul></dd>
+<dd>(If Solo still does not start, follow the directions for older versions, below.)</dd></dl>
+<p><b>Solo 6.2 and earlier</b>
+</p>
+<dl><dd><ul><li><a rel="nofollow" class="external text" href="http://www.microsoft.com/downloads/details.aspx?FamilyId=262D25E3-F589-4842-8157-034D1E7CF3A3&amp;displaylang=en">The .NET 1.1 package for 32-bit windows (x86)</a></li></ul></dd></dl>
+<h4><span class="mw-headline" id="64-Bit_Windows">64-Bit Windows</span></h4>
+<dl><dd><ul><li><a rel="nofollow" class="external text" href="http://software.eigenvector.com/libraries/VS_2005/win64/vcredist_x64.exe">MVC 2005 SP1 Redistributable Package (VCREDIST_x64.exe)</a></li>
+<li><a rel="nofollow" class="external text" href="http://software.eigenvector.com/libraries/VS_2008/win64/vcredist_x64.exe">MVC 2008 Redistributable Package (VCREDIST_x64.exe)</a></li></ul></dd>
+<dd>(The 2008 redistributable package must be installed in order to use the Horiba file importer)
+<ul><li><a rel="nofollow" class="external text" href="https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe">MVC 2010 Service Pack 1 Redistributable Package MFC Security Update (VCREDIST_x64.exe)</a></li></ul></dd></dl>
+<h3><span id="Failure_to_complete_installation.2Frunning_Solo.2BMia_or_Solo.2BModel_Exporter_for_the_first_time"></span><span class="mw-headline" id="Failure_to_complete_installation/running_Solo+Mia_or_Solo+Model_Exporter_for_the_first_time">Failure to complete installation/running Solo+Mia or Solo+Model_Exporter for the first time</span></h3>
+<p>If an error window titled 'Solo Runtime Error' appears with the message (or similar):
+"Error using figure UIJ_AreThereWindowShowsPending - timeout waiting for window to show up".
+There is a known issue with Matlab version R2014a (or later) where use of unsupported characters in the installation path causes the program to fail when started. This problem similarly affects EVRI product builds made using Matlab R2014a or later. For example, a "+" character in the installation path will cause the Solo/Solo+MIA/Solo+Model_Exporter to fail when started.
+</p>
+<ul><li>Make sure only supported characters are used when naming the installation folder: alphanumeric &amp; the characters "-", "_", " ", "/", ".".</li></ul>
+<dl><dd><dl><dd>Examples of acceptable installation paths are: "C:\Program Files\EVRI\Solo_Model_Exporter", or "C:\Program Files\EVRI\Solo_MIA".</dd></dl></dd></dl>
+<h3><span class="mw-headline" id="Not_Responding">Not Responding</span></h3>
+<p>Try starting Solo using the "Solo_debug" shortcut which is located in the main C:/Program Files/EVRI/Solo folder. If this gives no different result, try rebooting the computer (to assure all libraries have been registered.)
+</p><p>For versions 9.0 and newer open the Solo application with the "-debug" flag. For Windows, open a command prompt, navigate to the "application" folder of the product, and run the exe with the input.
+</p><p><code>C:\Program Files\EVRI\Solo_931\application&gt; .\Solo.exe -debug</code>
+</p><p>NOTE: Any debug information will be output to the "solo_log" file in the user Temp folder (C:\Users\{username}\AppData\Local\Temp). Check this file for more information.
+</p>
+<h3><span id="WRAPPER_WIN64_Has_Stopped_Working_.28Windows_Only.29"></span><span class="mw-headline" id="WRAPPER_WIN64_Has_Stopped_Working_(Windows_Only)">WRAPPER_WIN64 Has Stopped Working (Windows Only)</span></h3>
+<p>This is a general error indicating a whole program crash. There can be several reasons of such a crash and it can be difficult to narrow down the cause because the crash often does not include any useful information about the error.
+</p>
+<ol><li>Be sure Solo has been installed "as administrator" and that you've started Solo the first time as an administrator. Starting Solo the first time completes the installation process.</li>
+<li>Try running in "Solo_debug" as described above. If an error is raised at the console send it to <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>.</li>
+<li>Check disk space, if there is insufficient disk space this error can occur.</li>
+<li>Check system locale settings. Try changing them to US if they are set to something else.</li>
+<li>Look into your AppData folder for a Matlab dump (.dmp) file and send it to <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>:  (%userprofile%\AppData\local\)</li></ol>
+<h4><span class="mw-headline" id="wrapper_win64_has_stopped_working_-_Missing_library_file_case">wrapper_win64 has stopped working - Missing library file case</span></h4>
+<p>If the "wrapper_win64 has stopped working" error message appears, especially if it includes details mentioning "System.DllNotFoundException", then it is likely that your computer is missing a necessary system library file. This is often resolved by installing a newer version of The Microsoft Visual C++ Redistributable file. The year 2010 version for 64-bit Windows is available from the Microsoft Download Center, at:
+</p><p><a rel="nofollow" class="external free" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632">https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632</a>
+</p><p>The 32-bit version is at: 
+</p><p><a rel="nofollow" class="external free" href="https://www.microsoft.com/en-us/download/details.aspx?id=5555">https://www.microsoft.com/en-us/download/details.aspx?id=5555</a>
+</p><p>Before you download and run this installer can you check in your Control Panel's "Programs and Feature" view to check that it is not already installed. This will list all Microsoft Visual C++ Redistributable versions you have. The 64-bit versions name includes "x64" while 32-bit versions include "x86". If you are installing 32-bit Solo then you would need the 32-bit version of the Redistributable.
+</p>
+<h3><span class="mw-headline" id="Changes_Not_Being_Recognized">Changes Not Being Recognized</span></h3>
+<p>Changes to license files, initialization files, or default.xml (Solo_Predictor only) are not being recognized. This can happen if copies of these files are being made to the VirtualStore. See this <a rel="nofollow" class="external text" href="http://www.eigenvector.com/faq/index.php?id=141">FAQ</a> for more information. You may update or remove the copy to get the changes recognized.
+</p>
+<h2><span class="mw-headline" id="Mac">Mac</span></h2>
+<h3><span class="mw-headline" id="Invalid_License._Cannot_start_due_to_license_error._Expired_-_Error_using_save.">Invalid License. Cannot start due to license error. Expired - Error using save.</span></h3>
+<p>If you get an error message that looks like:
+</p><p><a href="" class="image"><img alt="Cannot start due to license error annotated.png" src="600px_cannot_start_due_to_license_error_annotated.png" decoding="async" width="600" height="249" /></a>
+</p><p>please see this FAQ page <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Faq_error_cannot_start_license_error">here</a>
+</p>
+<h3><span id="Can.27t_See_Menus_With_Dark_Mode"></span><span class="mw-headline" id="Can't_See_Menus_With_Dark_Mode">Can't See Menus With Dark Mode</span></h3>
+<p>Solo is not compatible with Dark Mode on Macs. You should force the system to use Light Mode for the app. Use the following command at the Terminal:
+</p>
+<pre>defaults write Solo NSRequiresAquaSystemAppearance -bool yes</pre>
+<p>For Solo+MIA: 
+</p>
+<pre>defaults write Solo_MIA NSRequiresAquaSystemAppearance -bool yes</pre>
+<h3><span class="mw-headline" id="Can_Only_Start_from_Terminal_with_sudo">Can Only Start from Terminal with sudo</span></h3>
+<p>If you install Solo under a different user you may need to change the owner of the be the intended user with the chown command:
+</p>
+<pre>$sudo chown -R barry /Applications/Solo_MIA.app/</pre>
+<h3><span class="mw-headline" id="Cannot_Execute">Cannot Execute</span></h3>
+<p>For macOS Catalina encountering "Cannot Execute..." or "Missing File..." error message. You may need to adjust permissions of the app to make it executable from the Terminal with the following command:
+</p>
+<pre>$sudo chmod +x /Applications/Solo.app/Contents/MacOS/Solo /Applications/Solo.app/Contents/MacOS/applauncher /Applications/Solo.app/Contents/MacOS/prelaunch</pre>
+<pre>$sudo chmod +x /Applications/Solo_MIA.app/Contents/MacOS/Solo_MIA /Applications/Solo_MIA.app/Contents/MacOS/applauncher /Applications/Solo_MIA.app/Contents/MacOS/prelaunch</pre>
+<h3><span class="mw-headline" id="The_Disk_has_been_Damaged_Or_Warning_About_Unidentified_Developer">The Disk has been Damaged Or Warning About Unidentified Developer</span></h3>
+<p><b>"The Disk has been Damaged", "OSStatus error 100030" or "OSStatus error -67049"</b> These problems are caused by the Mac Gatekeeper technology. 
+</p><p>For <b><u>MacOS Sierra and newer</u></b> follow these <a rel="nofollow" class="external text" href="https://www.tekrevue.com/tip/gatekeeper-macos-sierra/">steps</a> or <a rel="nofollow" class="external text" href="https://support.apple.com/en-us/HT202491">these steps from Apple support</a>
+</p>
+<dl><dd><ul><li>To disable Gatekeeper (i.e., set it to install from “Anywhere”) from the command line, open a new Terminal window then enter the following command:</li></ul>
+<dl><dd><pre>$ sudo spctl --master-disable</pre></dd></dl>
+<ul><li>To re-enable Gatekeeper enter the following command:</li></ul>
+<dl><dd><pre>$ sudo spctl --master-enable</pre></dd></dl></dd></dl>
+<p>For older versions of OS X perform the following:
+</p>
+<ol><li>Open System Preferences: Security and Privacy: General</li>
+<li>Unlock the lock to make changes</li>
+<li>Select "Anywhere" from "Allow applications downloaded from"</li>
+<li>Now start Solo</li>
+<li>If it starts, try restarting the computer and confirm Solo continues to start.</li>
+<li>Open System Preferences: Security and Privacy: General</li>
+<li>Unlock the lock to make changes</li>
+<li>Change the setting back to "Mac App Store and Identified developers"</li></ol>
+<h3><span class="mw-headline" id="Starting_From_Command_Prompt">Starting From Command Prompt</span></h3>
+<p>Assuming you have Solo/Solo+MIA installed in the Applications folder the program can be started using the following command executed at the command line (Mac Terminal).
+</p>
+<pre>$ /Applications/Solo.app/Contents/Resources/run_program.sh /Applications/Solo.app/Contents/Resources/mcr/</pre>
+<pre>$ /Applications/Solo_MIA.app/Contents/Resources/run_program.sh /Applications/Solo_MIA.app/Contents/Resources/mcr/</pre>
+<p>In some cases this can output useful error messages to help troubleshoot.
+</p>
+<h3><span class="mw-headline" id="Older_Versions">Older Versions</span></h3>
+<p><b>Max OS X prior to 10.7</b> For problems installing <u><b>Solo/Solo+MIA 7.5 and earlier</b></u>, send answers to the following four questions to <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a>
+</p>
+<ul><li>Is X11 installed? The version of MATLAB we use to build Solo requires the X11 window system to be installed. X11 is totally separate from OS X. X11 <a rel="nofollow" class="external text" href="http://support.apple.com/kb/HT5293">used to be distributed by Apple</a> as a part of their developer tools but is no longer included. You need to download and install it from the <a rel="nofollow" class="external text" href="http://xquartz.macosforge.org/trac">XQuartz</a> project.</li>
+<li>Does the X11 application launch?</li>
+<li>In addition to the X11 application, do any additional icons show up in the Dock after attempting to launch?</li>
+<li>Is the CPU in your Mac computer of the Intel architecture, rather than PowerPC?</li></ul>
+<h2><span class="mw-headline" id="LINUX">LINUX</span></h2>
+<ul><li><b>Cannot open libXp.so.6 Error</b>: If you receive the error: "<tt>Exception: Fatal error loading library .../bin/glnxa64/libmwmclmcr.so Error: libXp.so.6: cannot open shared object file: No such file or directory</tt>" Try installing the libxp-dev package:
+<dl><dd><pre>apt-get install libxp6 libxp-dev</pre></dd>
+<dd>-or-</dd>
+<dd><pre>yum install libXp libXp-devel</pre></dd></dl></li></ul>
+<ul><li><b>SELinux Error</b>: If when starting Solo on Red Hat Linux you get this message: <b>"SELinux is preventing .../EVRI_lib from performing execstack access on a process"</b>, then the SELinux security application is preventing Solo (or another stand-alone application) from running parts of its library.To fix this, set the current directory to be the folder where the 'EVRI_lib' file resides (usually the top-level Solo, Solo_Predictor, or Solo+MIA folder) and use the command:
+<dl><dd><pre> chcon -t execmem_exec_t EVRI_lib</pre></dd>
+<dd>Running this command will usually require you to be logged in as root or to use "sudo".</dd></dl></li></ul>
+<ul><li><b>./Solo will not start for the first time</b>: If attempting to start Solo on Linux (./Solo command) for the first time fails, try running the run_EVRI_lib.sh script using the command:
+<dl><dd>./run_EVRI_lib.sh</dd></dl></li></ul>
+<ul><li><b>If ./run_EVRI_lib.sh does not work</b> you may also need to specify the MCR folder when running run_EVRI_lib.sh. When you unZip/unTar solo.tar.gz64 file into a target folder, an MCR folder should have been unpacked as well ("v83" for Solo v8.2). You may specify the folder location using either relative path or absolute path (in this case the target folder was /home/solo):
+<dl><dd>./run_EVRI_lib.sh ../v83</dd>
+<dd>./run_EVRI_lib.sh /home/solo/v83</dd></dl></li></ul>
+<h1><span id="Problems_loading_HORIBA_.27.l6s.27.2C_.27.l6m.27.2C_.27.ngc.27.2C_.27.tvf.27.2C_.27.ngs.27.2C_or_.27.tsf.27_files"></span><span class="mw-headline" id="Problems_loading_HORIBA_'.l6s',_'.l6m',_'.ngc',_'.tvf',_'.ngs',_or_'.tsf'_files">Problems loading HORIBA  '.l6s', '.l6m', '.ngc', '.tvf', '.ngs', or '.tsf' files</span></h1>
+<p>If you encounter errors when trying to load Hoiba  '.l6s', '.l6m', '.ngc', '.tvf', '.ngs', or '.tsf' files on 64-bit Solo/Solo+MIA you may be missing a needed Microsoft library file. When you first try to load one of these Horiba file types using Solo/Solo+MIA you are prompted to install HORIBA ActiveX. If this fails to install and you continue getting errors when you try to import HORIBA files you may be missing the Microsoft 2008 Visual C++ Redistributable library file. The 2008 redistributable package available from Microsoft at:
+</p>
+<dl><dd><ul><li><a rel="nofollow" class="external text" href="https://www.microsoft.com/en-us/download/details.aspx?id=15336">MVC 2008 Redistributable Package (VCREDIST_x64.exe)</a></li>
+<li><a rel="nofollow" class="external text" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=29">MVC 2008 Redistributable Package (VCREDIST_x86.exe)</a></li></ul></dd></dl>
+<p>or from Eigenvector at:
+</p>
+<dl><dd><ul><li><a rel="nofollow" class="external text" href="http://software.eigenvector.com/libraries/VS_2008/win64/vcredist_x64.exe">MVC 2008 Redistributable Package (VCREDIST_x64.exe)</a></li></ul></dd></dl>
+<p>The 2008 redistributable package must be installed in order to use the Horiba 64-bit file importer.
+This link lets you download an executable "vcredist_x64.exe" to your computer. You should then run it by right-clicking on it and choosing "Run as Administrator". It takes a few seconds to complete. It might present you with a window with two choices, "Repair" or "Uninstall" (you should choose "Repair"). You should be able to import these files using Solo/Solo+MIA on your computer after installing this.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930174516
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.025 seconds
+Real time usage: 0.031 seconds
+Preprocessor visited node count: 142/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1070/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:773-0!canonical and timestamp 20240930174516 and revision id 12271.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Troubleshooting&amp;oldid=12271">https://www.wiki.eigenvector.com/index.php?title=Solo_Troubleshooting&amp;oldid=12271</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 8 August 2024, at 13:45.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

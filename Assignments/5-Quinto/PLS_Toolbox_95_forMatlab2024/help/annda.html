@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Annda - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Annda rootpage-Annda skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Annda"><span class="mw-page-title-main">Annda</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a>
+<ul>
+<li class="toclevel-3 tocsection-6"><a href="#Calculation_of_Class_Probabilities"><span class="tocnumber">3.2.1</span> <span class="toctext">Calculation of Class Probabilities</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-7"><a href="#Training_Termination"><span class="tocnumber">3.3</span> <span class="toctext">Training Termination</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Cross-validation"><span class="tocnumber">3.4</span> <span class="toctext">Cross-validation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#‘BPN’_ANNDA"><span class="tocnumber">5</span> <span class="toctext">‘BPN’ ANNDA</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="#Implementation_Details"><span class="tocnumber">5.1</span> <span class="toctext">Implementation Details</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Algorithm_parameters:_learncycles_and_learnrate"><span class="tocnumber">5.2</span> <span class="toctext">Algorithm parameters: learncycles and learnrate</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#Summary_of_model_building_speed-up_settings"><span class="tocnumber">6</span> <span class="toctext">Summary of model building speed-up settings</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Predictions based on Artificial Neural Network (ANNDA) classification models.
+ANNDA Artificial Neural Network for classification. Use ANN for Artificial Neural Network regression (<a href="ann.html" title="Ann">Ann</a>).
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>annda  - Launches an Analysis window with ANNDA as the selected method.</dd>
+<dd>[model] = annda(x, opts);</dd>
+<dd>[model] = annda(x,y,options);</dd>
+<dd>[model] = annda(x,y, nhid, options);</dd>
+<dd>[pred]  = annda(x,model,options);</dd>
+<dd>[valid] = annda(x,model,options);</dd>
+<dd>[valid] = annda(x,y,model,options);</dd></dl>
+<p>Please note that the recommended way to build and apply an ANNDA model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>. 
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Build an ANNDA model from input dataset X, or input X and Y if classes are in Y, using the specified number of layers and layer nodes. 
+Alternatively, if a model is passed in ANNDA makes a prediction for an input test X block. The ANNDA model 
+contains quantities (weights etc) calculated from the calibration data. When a model structure is passed in 
+to ANNDA then these weights do not need to be calculated. 
+</p><p>ANNDA is implemented using 'BPN', a feedforward ANN using backpropagation training and is implemented in Matlab.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block (predictor block) class "double" or "dataset", containing numeric values,</li>
+<li><b>y</b> = Y-block (optional) class "double" sample class values,</li>
+<li><b>nhid</b> = number of nodes in a single hidden layer ANN, or vector of two two numbers, indicating a two hidden layer ANN, representing the number of nodes in the two hidden layers. (this takes precedence over options nhid1 and nhid2),</li>
+<li><b>model</b> = previously generated model (when applying model to new data).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard model structure model with the following fields (see <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a>):
+<ul><li><b>modeltype</b>: 'ANNDA',</li>
+<li><b>datasource</b>: structure array with information about input data,</li>
+<li><b>date</b>: date of creation,</li>
+<li><b>time</b>: time of creation,</li>
+<li><b>info</b>: additional model information,</li>
+<li><b>pred</b>: 2 element cell array with
+<ul><li>model predictions for each input block (when options.blockdetail='normal' x-block predictions are not saved and this will be an empty array)</li></ul></li>
+<li><b>detail</b>: sub-structure with additional model details and results, including:
+<ul><li>model.detail.ann.W: Structure containing details of the ANN, including the ANN type, number of hidden layers and the weights.</li></ul></li></ul></li></ul>
+<ul><li><b>pred</b> a structure, similar to <b>model</b> for the new data.</li></ul>
+<h5><span class="mw-headline" id="Calculation_of_Class_Probabilities">Calculation of Class Probabilities</span></h5>
+<p>The raw predictions from the ANN model are values ideally close to zero or one. A value closer to zero indicates the new sample is NOT in the modeled class; a value of one indicates a sample is in the modeled class. The distribution of the calibration sample predictions are modeled as Gaussians and used to provide a probability of the sample being in each class based on the raw prediction values. Please see this description of <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Plsda#Probability-based_Predictions">converting raw ANN outputs into class probabilities</a>. The raw prediction values are in model.pred{2} and the classification probabilities are in model.detail.classification and model.detail.cvclassification.
+</p>
+<h4><span class="mw-headline" id="Training_Termination">Training Termination</span></h4>
+<p>The ANN is trained on a calibration dataset to minimize prediction error, RMSEC. It is important to not over-train, however, so some some criteria for ending training are needed.
+</p><p>BPN determines the optimal number of learning iteration cycles by selecting the minumum RMSECV based on the calibration data over a range of learning iterations values (1 to options.learncycles). The cross-validation used is determined by option cvi, or else by cvmethod. If neither of these are specified then the minumum RMSEP using a single subset of samples from a 5-fold random split of the calibration data is used. This RMSECV value is based on pre-processed, scaled values and so it is not saved in the model.rmsecv field. Apply cross-validation (see below) to add this information to the model.
+Note these RMSE values refer to the internal preprocessed and scaled y values.
+</p>
+<h4><span class="mw-headline" id="Cross-validation">Cross-validation</span></h4>
+<p>Cross-validation can be applied to ANNDA when using either the ANNDA Analysis window or the command line. 
+</p><p>From the Analysis window specify the cross-validation method in the usual way (clicking on the model icon's red check-mark, or the "Choose Cross-Validation" link in the flowchart). 
+</p><p>From the command line use the model.crossvalidate method to add crossvalidation information to an existing model. For example, from the anndademo.m function:
+</p>
+<pre>  model = model.crossvalidate(arch, {'vet' 6 1}, 10);
+</pre>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>options = a structure array with the following fields:
+</p>
+<ul><li><b>display</b>&#160;: [ 'off' |{'on'}] Governs display</li>
+<li><b>plots</b>: [ {'none'} | 'final' ] governs plotting of results.</li>
+<li><b>blockdetails</b>&#160;: [ {'standard'} | 'all' ] extent of detail included in model. 'standard' keeps only y-block, 'all' keeps both x- and y- blocks.</li>
+<li><b>waitbar</b>&#160;: [ 'off' |{'auto'}| 'on' ] governs use of waitbar during analysis. 'auto' shows waitbar if delay will likely be longer than a reasonable waiting period.</li>
+<li><b>algorithm</b>&#160;: [{'bpn'}] ANN implementation to use.</li>
+<li><b>nhid1</b>&#160;: [{2}] Number of nodes in first hidden layer.</li>
+<li><b>nhid2</b>&#160;: [{0}] Number of nodes in second hidden layer.</li>
+<li><b>learnrate</b>&#160;: [0.125] ANN backpropagation learning rate (bpn only).</li>
+<li><b>learncycles</b>&#160;: [20] Number of ANN learning iterations (bpn only).</li>
+<li><b>preprocessing</b>: {[] []} preprocessing structures for x and y blocks (see PREPROCESS).</li>
+<li><b>compression</b>: [{'none'}| 'pca' | 'pls' ] type of data compression to perform on the x-block prior to calculaing or applying the ANNDA model. 'pca' uses a simple PCA model to compress the information. 'pls' uses a pls model. Compression can make the ANNDA more stable and less prone to overfitting.</li>
+<li><b>compressncomp</b>: [1] Number of latent variables (or principal components to include in the compression model.</li>
+<li><b>compressmd</b>: [{'yes'} | 'no'] Use Mahalnobis Distance corrected.</li>
+<li><b>cvmethod</b>&#160;: [{'con'} | 'vet' | 'loo' | 'rnd'] CV method, OR [] for Kennard-Stone single split.</li>
+<li><b>cvsplits</b>&#160;: [{5}] Number of CV subsets.</li>
+<li><b>cvi</b>&#160;: <i>M</i> element vector with integer elements allowing user defined subsets. (cvi) is a vector with the same number of elements as x has rows i.e., length(cvi) = size(x,1). Each cvi(i) is defined as:</li></ul>
+<dl><dd><dl><dd>cvi(i) = -2  the sample is always in the test set.</dd>
+<dd>cvi(i) = -1  the sample is always in the calibration set,</dd>
+<dd>cvi(i) =  0  the sample is always never used, and</dd>
+<dd>cvi(i) =  1,2,3... defines each test subset.</dd></dl></dd></dl>
+<ul><li><b>activationfunction</b>&#160;: For the default algorithm, 'bpn', this option uses a 'sigmoid' activation function, f(x) = 1/(1+exp(-x)). For the 'encog' algorithm this activationfunction option has two choices, 'tanh' as default, or 'sigmoid'.</li>
+<li><b>random_state</b>&#160;: [1] Random seed number. Set this to a number for reproducibility.</li></ul>
+<h3><span id=".E2.80.98BPN.E2.80.99_ANNDA"></span><span class="mw-headline" id="‘BPN’_ANNDA">‘BPN’ ANNDA</span></h3>
+<h4><span class="mw-headline" id="Implementation_Details">Implementation Details</span></h4>
+<p>The “BPN” implementation of ANNDA is a conventional feedforward back-propagation neural network where the weights are updated, or ‘trained’, so as to reduce the magnitude of the prediction error, except that the gradient-descent method of updating the weights is different from the usual “delta rule” approach. In the traditional delta-rule method the weights are changed at each increment of training time by a constant fraction of the contributing error gradient terms, leading to a reduced prediction error. In this “BPN” implementation the search for optimal weights by gradient-descent is treated as a continuous system, rather than incremental. The evolution of the weights with respect to training time is solved as a set of differential equations using a solver appropriate for systems where the solution (weights) may involve very different timescales. Most weights evolve slowly towards their final values but some weights may have periods of faster change. A reference paper for the BPN implementation is:
+</p><p>Owens A J and Filkin D L 1989 Efficient training of the back propagation network by solving a system of stiff
+ordinary differential equations Proc. Int. Joint Conf. on Neural Networks vol II (IEEE Press) pp 381–6.
+</p>
+<h4><span class="mw-headline" id="Algorithm_parameters:_learncycles_and_learnrate">Algorithm parameters: learncycles and learnrate</span></h4>
+<p>This BPN technique results in much faster training that with the traditional delta-rule approach. The training is governed by two parameters, ‘learncycles’ and ‘learnrate’. The learnrate parameter specifies the training time duration of the first learncycle. Each subsequent learncycle’s time duration is twice the previous learncycle’s duration. The performance of the ANN is evaluated at the end of each learncycle interval by calculating the cross-validation prediction error, RMSECV. The RMSECV initially decreases rapidly with training time but eventually starts to increase again as the ANN begins to overfit the data. The number of training cycles which yields the minimum RMSECV therefore provides an estimate of the optimal ANN training duration, for the given learnrate value.  The ANN model contains these RMSECV values in model.detail.ann.rmsecviter, and the optimal, minimum RMSECV occurs at index model.detail.ann.niter, which will be smaller than or equal to the learncycles value. It is useful to check rmsecviter to see if a minimum RMSECV has been attained, but also to see if you are using too many learn cycles. Reducing the number of learncycles can significantly speed up ANN training.
+Note, the model.detail.ann.rmsecviter values are only used to pick the optimal number of learncycles. These rmsecviter values are calculated using scaled y and should not be compared to the reported RMSEC, RMSECV or RMSEP.
+</p>
+<h3><span class="mw-headline" id="Summary_of_model_building_speed-up_settings">Summary of model building speed-up settings</span></h3>
+<p>The time required to build ANNDA models using the 'BPN' method increases significantly when using training datasets having more than about a thousand samples or variables. Some tips on speeding up ANNDA model building include the following:
+</p><p>From the Analysis window:
+</p><p>1. Turning CV off or using a small number of CV splits.
+</p><p>2. Don't use 2 hidden layers. This is very slow.
+</p><p>From the command line:
+</p><p>1.  Initially build ANNDA without cross-validation so as to decide on values for learnrate and learncycles by examining where the minimum value of model.detail.ann.rmscviter occurs versus learncycles. Note this uses a single-split CV to estimate rmsecv when the ANNDA cross-validation is set as "None". It is inefficient to use a larger than necessary value for option "learncycles".
+</p><p>2.  Determine the number of hidden layer nodes to use by building a range of models with different number of nodes, nhid1, nhid2. It is best to use a simple cross-validation at this stage, with a small number of splits and iterations at this survey stage.
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="ann.html" title="Ann">ann</a>, <a href="analysis.html" title="Analysis">analysis</a>, <a href="crossval.html" title="Crossval">crossval</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930045008
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.012 seconds
+Real time usage: 0.015 seconds
+Preprocessor visited node count: 44/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1694-0!canonical and timestamp 20240930045008 and revision id 12167.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Annda&amp;oldid=12167">https://www.wiki.eigenvector.com/index.php?title=Annda&amp;oldid=12167</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 11 December 2023, at 13:44.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

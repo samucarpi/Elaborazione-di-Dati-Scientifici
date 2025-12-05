@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Sample Classification Predictions - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Sample_Classification_Predictions rootpage-Sample_Classification_Predictions skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Sample_Classification_Predictions"><span class="mw-page-title-main">Sample Classification Predictions</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Overview"><span class="tocnumber">1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Class_Pred_Strict"><span class="tocnumber">2</span> <span class="toctext">Class Pred Strict</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Class_Pred_Most_Probable"><span class="tocnumber">3</span> <span class="toctext">Class Pred Most Probable</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href=""><span class="tocnumber">4</span> <span class="toctext">Class Pred Probability &lt;ClassID&gt;</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href=""><span class="tocnumber">5</span> <span class="toctext">Class Pred Member &lt;ClassID&gt;</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Class_Pred_Member_-_unassigned"><span class="tocnumber">6</span> <span class="toctext">Class Pred Member - unassigned</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Class_Pred_Member_-_multiple"><span class="tocnumber">7</span> <span class="toctext">Class Pred Member - multiple</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Misclassified"><span class="tocnumber">8</span> <span class="toctext">Misclassified</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Relation_to_model.classification"><span class="tocnumber">9</span> <span class="toctext">Relation to model.classification</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Example_of_Classification_Predictions"><span class="tocnumber">10</span> <span class="toctext">Example of Classification Predictions</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Class_Probability_Calculation"><span class="tocnumber">11</span> <span class="toctext">Class Probability Calculation</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="#PLSDA_(and_LREGDA,_ANNDA,_ANNDLDA)"><span class="tocnumber">11.1</span> <span class="toctext">PLSDA (and LREGDA, ANNDA, ANNDLDA)</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#SVMDA"><span class="tocnumber">11.2</span> <span class="toctext">SVMDA</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#KNN"><span class="tocnumber">11.3</span> <span class="toctext">KNN</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#SIMCA"><span class="tocnumber">11.4</span> <span class="toctext">SIMCA</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Overview">Overview</span></h3>
+<p>This page describes viewing sample class predictions using the Scores Plot. In addition, an overall summary of the classification results can be seen from viewing the <a href="confusionmatrix.html" title="Confusionmatrix"> Confusion Matrix and Table</a> available from the toolbar icon. These class predictions are based on predicted class probabilities for samples. 
+</p><p>Viewing classification results for samples can be done through the Scores Plot for a PLSDA, SVMDA, KNN or SIMCA model. If the model has been applied to test data, predictions will also be available for those samples. The predictions for the calibration data are "self-predictions" (predictions for the model on the calibration data itself.)
+</p><p>Results can be viewed as a plot using the Plot Scores toolbar button in Analysis (or the <a href="plotscores.html" title="Plotscores">plotscores</a> command at the command line) and can be viewed as a table by selecting File &gt; Edit Data from the Plot Controls window while viewing a scores plot, or by using the Edit Data toolbar button on the scores plot itself.
+</p><p>The predictions available are based on various classification rules, including the following (all rules are described in detail after the list)&#160;:
+</p>
+<ul><li><b>Class Pred Strict</b> - Numerical class assignment based on strict assignment rules.</li>
+<li><b>Class Pred Most Probable</b> - Numerical class assignment based on most probable class rules.</li>
+<li><b>Class Pred Probability &lt;ClassID&gt;</b> - Probability that the sample belongs to a specific class &lt;ClassID&gt;.</li>
+<li><b>Class Pred Member &lt;ClassID&gt;</b> - Logical (true/false) class assignment to a specific class &lt;ClassID&gt; based on strict multiple-class assignment rules.</li>
+<li><b>Class Pred Member - unassigned</b> - Logical (true/false) class assignment indicating when no class could be assigned to a sample.</li>
+<li><b>Class Pred Member - multiple</b> - Logical (true/false) class assignment indicating when sample belongs to more than one class based on strict multiple-class assignment rules.</li>
+<li><b>Misclassified</b> - Logical (true/false) indicating when the strict classification does not match the known "measured" class assignment.</li></ul>
+<p>While viewing a plot, the Plot Controls window allows selection and viewing of the different rule predictions. For example, setting the Plot Controls X selection to "Sample Number" and the Y selection to "Class Pred Most Probable" will show the most probable class for each sample in the Scores Plot. This is displayed as the numerical class number (for reference, this is the same number viewable in the class lookup table, if the model was built from a DataSet with classes). When selected, the Y axis ranges over all possible class numbers and a sample determined to belong to class = 2 would be shown at (x,y) = (sample number, 2).
+</p><p>If viewing the table of results, the columns of the table will be the different classification results and the rows the different samples. Note that this information is also available in the model or prediction structure itself in the field "classifications", as described in the <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a> page.
+</p>
+<h3><span class="mw-headline" id="Class_Pred_Strict">Class Pred Strict</span></h3>
+<p>Strict class predictions are based on the rule that each sample belongs to a class if the probability is greater than a specified threshold probability value for one and only one class. If no class has a probability greater than the threshold, or if more than one class has a probability exceeding it, then the sample is assigned to class zero (0) indicating no class could be assigned. These predictions provide the most safety in class assignment. If there is too large an uncertainty of a sample being a member of a class, or if the sample appears to be in more than one class, these predictions will indicate that. If samples are expected to belong to more than one class, use the <b>Class Pred Member</b> predictions (described below). The threshold value is specified for classification methods by the option <i>strictthreshold</i>, with a default value of 0.5.
+</p><p>Use strict class predictions if you need to see a class assignment for each sample where the model is confident the sample belongs to this class and to this class only.
+</p>
+<h3><span class="mw-headline" id="Class_Pred_Most_Probable">Class Pred Most Probable</span></h3>
+<p>Most probable predictions are based on choosing the class that has the highest probability regardless of the magnitude of that probability. Note this differs from Strict class predictions because if more than one class has &gt; 0.50 probability, the highest probability will "win" the sample. Likewise, if all probabilities are below 0.50, the largest probability still "wins".
+</p><p>Use these predictions if you need to see a single class assignment for each sample and are not concerned with the absolute probability of the classes. This might be the case when a model has been built on only a few example samples for each class, when samples have been pre-screened as being in one of the classes modeled, or when "no class" has no meaning.
+</p><p>There is always a most likely class for a sample to belong to but it is possible that the sample is not well modeled and has low probabilities for all classes. Or it is possible that two classes are similar and a sample belonging to one of them will also have a high predicted probability of belonging to the second class. In these situations it may be more useful to use the Strict class predictions.
+</p>
+<h3><span id="Class_Pred_Probability_.3CClassID.3E"></span><span class="mw-headline" id="Class_Pred_Probability_&lt;ClassID&gt;">Class Pred Probability &lt;ClassID&gt;</span></h3>
+<p>The predicted probability that a sample belongs to a particular class is a method-dependent calculation as described in <a href="#Class_Probability_Calculation" title="Sample Classification Predictions">Class Probability Calculation</a>, but in general is calculated such that a sample belonging to this class will have value closer to 1. Otherwise, it will be closer to 0. There will be a separate probability calculated for each class, and the class will be named in the description. For example the class named &lt;ClassID&gt;, is available under the label "Class Pred Probability &lt;ClassID&gt;".
+</p><p>These predictions are useful when you need to report a confidence of assignment or need to derive special rules for class assignment.
+</p>
+<h3><span id="Class_Pred_Member_.3CClassID.3E"></span><span class="mw-headline" id="Class_Pred_Member_&lt;ClassID&gt;">Class Pred Member &lt;ClassID&gt;</span></h3>
+<p>Class member predictions are reported as true/false for each class (&lt;ClassID&gt;) and are similar to the strict class predictions described earlier. A sample will be indicated as a member of a class if and only if the predicted probability for the given class is &gt; 0.50. However, there is no restriction that a sample be assigned to one and only one class. As a result, a sample may be a member of more than one class if each class's probability is &gt; 0.50.
+</p><p>These predictions should be used when an analysis permits a sample to belong to more than one class, or to no classes. That is, when the classes being predicted are not exclusionary for each other. For example, a model that reports both the water solubility of a compound (is or is not water soluble), and whether or not that compound is organic (organic vs. inorganic) should allow all combinations of both organic/inorganic and soluble/insoluble without exclusion.
+</p>
+<h3><span class="mw-headline" id="Class_Pred_Member_-_unassigned">Class Pred Member - unassigned</span></h3>
+<p>The predictions for "Class Pred Member - unassigned" identify samples which were not assigned to any class because no predicted probability was greater than 0.5.
+</p>
+<h3><span class="mw-headline" id="Class_Pred_Member_-_multiple">Class Pred Member - multiple</span></h3>
+<p>The predictions for "Class Pred Member - multiple" identify samples which were assigned to more than one class with predicted probability was greater than 0.5.
+</p>
+<h3><span class="mw-headline" id="Misclassified">Misclassified</span></h3>
+<p>Misclassified predictions identify samples where the predicted "Class Pred Strict" does not agree with the sample's actual class.
+For SIMCA and PLSDA the actual class could include more than one class and the sample is misclassified if its "Class Pred Member &lt;ClassID&gt;" do not correctly predict the actual class(es). If the sample's actual class is unknown then the sample will not be identified as as misclassified.
+</p>
+<h3><span class="mw-headline" id="Relation_to_model.classification">Relation to model.classification</span></h3>
+<p>These classification prediction fields are described in the <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a> page, which identifies
+</p>
+<dl><dd>Class Pred Strict = model.classification.inclass</dd>
+<dd>Class Pred Most Probable = model.classification.mostprobable</dd>
+<dd>Class Pred Probability &lt;ClassID&gt; = model.classification.probability, column &lt;ClassID&gt;</dd>
+<dd>Class Pred Member &lt;ClassID&gt; = model.classification.inclasses, column &lt;ClassID&gt; based on the strict threshold value used when the model was generated</dd></dl>
+<h3><span class="mw-headline" id="Example_of_Classification_Predictions">Example of Classification Predictions</span></h3>
+<p>Shown below is an example Scores Plot from PLSDA run on the arch dataset. In the Plot Controls window (on left) are shown some of the classification predictions which may be plotted. The X menu is set to "Sample" and the Y menu is set to "Misclassified". The Scores Plot shows that all X samples have value 0 (NOT misclassified) except for one sample, the 16th, which has value 1, indicating it is misclassified. Looking at the "Class Pred Most Probable" predictions shows this sample is correctly predicted as belonging to class 2 ("BL"). Looking at "Class Member Pred K" and "Class Member Pred BL" both show sample 16 belonging, meaning that sample 16 belongs to each of these classes with probability &gt; 0.5. Sample 16 actually only belongs to class "BL", however, as shown by Y="Class Measured 2 (BL)", and therefore it is considered to be misclassified. Note that none of the unknown class samples (samples 64-75) are marked as misclassified.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 841px;">
+		<li class="gallerybox" style="width: 833px"><div style="width: 833px">
+			<div class="thumb" style="width: 828px;"><div style="margin:42.5px auto;"><a href="" class="image" title="Scores Plot (right) and its Plot Controls (left) for PLSDA on arch dataset."><img alt="Scores Plot (right) and its Plot Controls (left) for PLSDA on arch dataset." src="798px_scoresplot_classification.png" decoding="async" width="798" height="492" /></a></div></div>
+			<div class="gallerytext">
+<p>Scores Plot (right) and its Plot Controls (left) for PLSDA on arch dataset.
+</p>
+			</div>
+		</div></li>
+</ul>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Class_Probability_Calculation">Class Probability Calculation</span></h3>
+<p>Calculating the probability that a sample belongs to each possible class is done differently for each of the classifier methods, PLSDA, SVMDA, KNN, and SIMCA. These methods are described here. In all cases the class probabilities are saved as model.classification.probability, an nsamples x nclasses array. The columns are the classes, in order as given in model.classification.classnums (also see model.classification.classids).
+</p>
+<h4><span id="PLSDA_.28and_LREGDA.2C_ANNDA.2C_ANNDLDA.29"></span><span class="mw-headline" id="PLSDA_(and_LREGDA,_ANNDA,_ANNDLDA)">PLSDA (and LREGDA, ANNDA, ANNDLDA)</span></h4>
+<p>PLSDA calculates the probability of each sample belonging to each possible class. The calculation of probabilities for a particular class ‘A’ involves examining the predicted y values from the PLSDA model for all samples, then fitting a Gaussian distribution to the predictions for class ‘A’ samples and another Gaussian distribution to all samples which are not class ‘A’. The class ‘A’  probability distribution function then gives the probability of any sample belonging to class ‘A’ from its predicted y value. This method is described in more detail at&#160;: 
+<a rel="nofollow" class="external text" href="">| How is the prediction probability and threshold calculated for PLSDA?</a>.
+</p><p>This is done for each possible class in turn and the results are saved in PLSDA models as model.detail.predprobability.
+</p><p>Side Note: The predicted y values used in these binary classification problems for "class A" versus "not class A" can be viewed in the Scores Plot where they are listed in the Plot Controls as "Y Predicted 1 (class 1 name)", "Y Predicted 2 (class 2 name)", etc. It is useful to view these plotted against "Sample" for example. The discriminant threshold value value is also plotted in these plots (see the link above for more details). The threshold values for these class binary classification problems are stored in model.detail.threshold, one value per class.
+</p>
+<h4><span class="mw-headline" id="SVMDA">SVMDA</span></h4>
+<p>The LIBSVM library calculates the probabilities of each sample belonging to each possible class if the "Probability Estimates" option is enabled (default setting) in the SVMDA analysis window (or if the probabilityestimates option is set equal to 1 (default value) in command line usage). The method is explained in <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">[1]</a>, section 8, "Probability Estimates". The method first calculates one-against-one pairwise class probabilities as a function of decision value, using the training data. The class probabilites are then found as an optimization problem using these k*(k-1)/2 pairwise probabilities (assuming there are k classes).
+</p>
+<h4><span class="mw-headline" id="KNN">KNN</span></h4>
+<p>KNN models include the probabilities of each sample belonging to each possible class in the model.classification.probability field.   The probability that a sample belongs to class ‘A’ is calculated as the the fraction of nearest-neighbors which have that particular class.
+</p>
+<h4><span class="mw-headline" id="SIMCA">SIMCA</span></h4>
+<p>SIMCA calculates the probability of each sample belonging to each possible submodel class or class group. The calculation of a sample's probability of belonging to a particular submodel class, say class 'A', involves examining the Q and/or T^2 statistics for the sample in that sub-model. This is done for each possible class and the results are saved in the SIMCA model as model.classification.probability.
+</p><p>The calculation of class probability for a sample is done based on the "rule" option in the SIMCA model, the Q and/or T^2 for the sample, and an estimation of the T^2 and Q distributions from the calibration data.
+</p><p>First, the confidence level corresponding to the sample's observed Q and/or T^2 is estimated from the distributions in the calibration data. Next, one of two methods are used to calculate probability:
+</p>
+<ul><li><b>For decision rules "Q", "T2", or "Both":</b> the confidence limits estimated for the Q and T^2 statistics are both converted into probabilities using:</li></ul>
+<pre> class_probability = (1-C)/(1-D)*0.50.
+</pre>
+<dl><dd><dl><dd>where <tt>C</tt> is the confidence level determined from either of the statistics and <tt>D</tt> is the decision limit threshold defined in the SIMCA model's options (options.rule.limit.t2 or options.rule.limit.q). Thus, a sample which has a confidence level determined to be at the decision limit will be assigned a probability of 50%. If the "Q" or "T2" rules are use, the corresponding probability is reported. If the "Both" rule is used, the lower probability calculated from the Q and T^2 statistics is reported.</dd></dl></dd></dl>
+<ul><li><b>For decision rule "combined":</b> the combined statistic, defined as: <tt>sqrt( (Q)^2 + (T^2)^2 )</tt>, is used along with the empirically-determined distribution of confidence levels from Q and T^2 to interpolate a probability. In this case, a confidence level of 2D-1 (e.g. which would be =0.9 when D=0.95) is assigned 100% probability and a confidence level of 0.999 (or (D+1)/2, whichever is larger) is assigned as 0% probability.</li></ul>
+<dl><dd><dl><dd>For example, with decision limit threshold at 0.95 (= 50% probability), a confidence level of 0.98 corresponds to an in-class probability of 20% whereas a confidence level of 0.92 corresponds to a 70% in-class probability.</dd></dl></dd></dl>
+<!-- 
+NewPP limit report
+Cached time: 20240930092417
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.024 seconds
+Real time usage: 0.029 seconds
+Preprocessor visited node count: 56/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 810/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1099-0!canonical and timestamp 20240930092417 and revision id 12251.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Sample_Classification_Predictions&amp;oldid=12251">https://www.wiki.eigenvector.com/index.php?title=Sample_Classification_Predictions&amp;oldid=12251</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 23 April 2024, at 09:30.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

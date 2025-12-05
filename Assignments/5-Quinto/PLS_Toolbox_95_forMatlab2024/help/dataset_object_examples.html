@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>DataSet Object Examples - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-DataSet_Object_Examples rootpage-DataSet_Object_Examples skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=DataSet_Object_Examples"><span class="mw-page-title-main">DataSet Object Examples</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#DataSet_Object_Tour"><span class="tocnumber">1</span> <span class="toctext">DataSet Object Tour</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Creating_A_DataSet_Object"><span class="tocnumber">2</span> <span class="toctext">Creating A DataSet Object</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Indexing_Into_DataSets"><span class="tocnumber">2.1</span> <span class="toctext">Indexing Into DataSets</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Indexing_using_Labels_and_Classes"><span class="tocnumber">2.2</span> <span class="toctext">Indexing using Labels and Classes</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Indexing_with_Class_or_Label_Set_Names"><span class="tocnumber">2.3</span> <span class="toctext">Indexing with Class or Label Set Names</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Using_the_Class_Lookup_Table"><span class="tocnumber">3</span> <span class="toctext">Using the Class Lookup Table</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#Extracting_the_Table"><span class="tocnumber">3.1</span> <span class="toctext">Extracting the Table</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Direct_Access"><span class="tocnumber">3.2</span> <span class="toctext">Direct Access</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Extracting_a_Class"><span class="tocnumber">3.3</span> <span class="toctext">Extracting a Class</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#Using_Image_DataSets"><span class="tocnumber">4</span> <span class="toctext">Using Image DataSets</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="DataSet_Object_Tour">DataSet Object Tour</span></h2>
+<p>Perhaps the best way to understand how DSOs work is to examine a couple of them. Several data sets are included with PLS_Toolbox, and all of them are in the form of DSOs. We will start with the smallest one, the Wine data set. Clear the MATLAB workspace (save anything important first!) and at the command line type:
+</p>
+<pre>&gt;&gt; load wine
+&gt;&gt; whos
+  Name       Size                   Bytes  Class
+
+  wine      10x5                     6050  dataset object
+
+Grand total is 920 elements using 6050 bytes</pre>
+<p>We have now loaded the Wine data set. When the <tt>whos</tt> command is used, we see that there is a single variable in the workspace, wine, of Class dataset object, with a data field that is 10 by 5. We can look at the contents of wine by typing:
+</p>
+<pre>&gt;&gt; wine
+ 
+wine = 
+       name: Wine
+       type: data
+     author: B.M. Wise
+       date: 14-May-2001 13:47:54
+    moddate: 06-Jun-2001 10:27:24
+       data: 10x5 [double]
+      label: {2x1} [array (char)]
+               Mode 1  [Country: 10x6] 
+               Mode 2  [Variable: 5x6] 
+  axisscale: {2x1} [vector (real)]
+               Mode 1  [: ] 
+               Mode 2  [: ] 
+      title: {2x1} [vector (char)]
+               Mode 1  [: 'Country']  
+               Mode 2  [: 'Variable'] 
+class: {2x1} [vector (integer)]
+               Mode 1  [: ] 
+               Mode 2  [: ] 
+    include: {2x1} [vector (integer)]
+               Mode 1  [: 1x10] 
+               Mode 2  [: 1x5]  
+description: Wine, beer, and liquor consumption (gal/yr), life
+             life expectancy (years), and heart disease rate  
+             (cases/100,000/yr) for 10 countries.            
+    history: {1x1 cell} [array (char)]
+   userdata: </pre>
+<p>From this we see that the name of the data is Wine and that the type is “data.” Other types are also possible, such as “image” and “batch.” The author is listed, followed by the creation date and last-modified date. The next field, data, contains the actual data table. These data, or the data from any DSO field, can be extracted from the DSO just as they would be from a conventional structure array (type <tt>help struct</tt> or refer to the Examining a Structure Array section of Chapter 2 for help) using <tt>DSOname.fieldname</tt> syntax. For instance:
+</p>
+<pre>&gt;&gt; wine.data
+
+ans =
+
+    2.5000   63.5000   40.1000   78.0000   61.1000
+    0.9000   58.0000   25.1000   78.0000   94.1000
+    1.7000   46.0000   65.0000   78.0000  106.4000
+    1.2000   15.7000  102.1000   78.0000  173.0000
+    1.5000   12.2000  100.0000   77.0000  199.7000
+    2.0000    8.9000   87.8000   76.0000  176.0000
+    3.8000    2.7000   17.1000   69.0000  373.6000
+    1.0000    1.7000  140.0000   73.0000  283.7000
+    2.1000    1.0000   55.0000   79.0000   34.7000
+    0.8000    0.2000   50.4000   73.0000   36.4000</pre>
+<p>The labels can be extracted in a similar manner:
+</p>
+<pre>&gt;&gt; wine.label
+
+ans =
+
+  [10x6] char
+  [ 5x6] char
+</pre>
+<p>Note that <tt>ans</tt> is a cell array, i.e., the labels for each mode of the array are stored in a cell that is indexed to that mode. Thus, the labels for mode 1, the data set rows, can be extracted with:
+</p>
+<pre>&gt;&gt; wine.label{1}
+
+ans =
+
+France
+Italy 
+Switz 
+Austra
+Brit  
+U.S.A.
+Russia
+Czech 
+Japan 
+Mexico
+</pre>
+<p>Note that curly brackets, {}, are used to index into cell arrays (type help cell for more information on cell arrays). In a similar way the labels for mode 2, the data set columns, can be extracted by executing:
+</p>
+<pre>&gt;&gt; wine.label{2}
+
+ans =
+
+Liquor
+Wine  
+Beer  
+LifeEx
+HeartD
+</pre>
+<p>Other fields in the DSO include <tt>.axisscale</tt> (e.g., time or wavelength scale), <tt>.title</tt> (titles for the axes), and <tt>.class</tt> (e.g., class variables for samples). Note that a typical data set will not have all of the available fields filled. The Wine data set does not have axis scales, for instance, nor class variables.
+</p><p>DSOs also allow for multiple sets of many of these fields; for instance, you may store more than one set of labels for a particular mode. Most GUI tools including Analysis, PlotGUI and the DataSet Editor support multiple sets but there are some rare situations where their use has not yet been fully implemented. GUIs allow limited support of multiple sets; axis scales and titles are not yet completely supported in the main Analysis GUI.
+</p><p>The user is encouraged to explore more of the DSOs included with PLS_Toolbox. For an example with axis scales, please see <tt>spec1</tt> in the <tt>nir_data.mat</tt> file. For an example with class variables, please see arch in the <tt>arch.mat</tt> file.
+</p><p><br />
+</p>
+<h2><span class="mw-headline" id="Creating_A_DataSet_Object">Creating A DataSet Object</span></h2>
+<p>The following shows an example using the 'wine' data set in the PLS_Toolbox. Other examples can be found in the <tt>datasetdemo.m</tt> script.
+</p><p>The first step in the example is to create raw data from the 'wine' data set and examine the variables. The MATLAB commands are:
+</p>
+<pre>&gt;&gt; load wine
+&gt;&gt; dat   = wine.data;
+&gt;&gt; names = wine.label{1};
+&gt;&gt; var   = wine.label{2};
+&gt;&gt; whos
+  Name        Size            Bytes  Class      Attributes
+
+  dat        10x5               400  double              
+  names      10x6               120  char                
+  var         5x6                60  char                
+  wine       10x5             12156  dataset  
+</pre>
+<p>The variable '<tt>dat</tt>' contains the data array corresponding to the 5 variables wine, beer, and liquor consumption, life expectancy, and heart disease for 10 samples (countries).
+</p><p>The country names are contained in the variable '<tt>names</tt>' and the variable names are contained in '<tt>vars</tt>'. The next step creates a <tt>DataSet</tt> object, gives it a name, authorship, and description.
+</p>
+<pre>»wined = dataset(dat);
+»wined.name = 'Wine';
+»wined.author = 'A.E. Newman';
+»wined.description= ...
+{'Wine, beer, and liquor consumption (gal/yr)',...
+'life expectancy (years), and heart disease rate', ...
+'(cases/100,/yr) for 10 countries.'};
+»wined.label{1} = names;
+»wined.label{2} = vars;</pre>
+<p>Additional assignments can also be made. Here the label for the first mode (rows) is shown explicitly next to the data array (like sample labels). Also, titles, axis, and titles are assigned.
+</p>
+<pre>»wined.labelname{1} = 'Countries';
+»wined.label{1} = ...
+{'France' ...
+'Italy', ...
+'Switz', ...
+'Austra', ...
+...
+'Mexico'};
+»wined.title{1} = 'Country';
+»wined.class{1} = [1 1 1 2 3];
+»wined.classname{1} = 'Continent';
+»wined.axisscale{1} = 1:5;
+»wined.axisscalename{1} = 'Country Number';</pre>
+<p>Additional assignments can also be made for mode 2. Here the label for the second mode (columns) is shown explicitly above the data array (like column headings). Also, titles, axis, and titles are assigned.
+</p>
+<pre>»wined.labelname{2} = 'Variables';
+»wined.label{2} = ...
+{'Liquor','Wine','Beer','LifeExp','HeartD'};</pre>
+<p>If the data matrix is N-way the assignment process can be extended to Mode 3, Mode 4, ... Mode N. It can also be extended to using multiple sets of labels and axis scales <i>e.g.</i>
+</p>
+<pre>»wined.labelname{2,2} = 'Alcohol Content and Quality';
+»wined.label{2,2} = {'high','medium','low','good','bad'};</pre>
+<p>An individual label can be replaced by further indexing into a given label set using curly braces followed by the string replacement:
+</p>
+<pre>»wined.label{2,2}{4} = 'excellent';</pre>
+<h3><span class="mw-headline" id="Indexing_Into_DataSets">Indexing Into DataSets</span></h3>
+<p>Sub-portions of the <tt>DataSet</tt> can be retrieved by indexing into the main <tt>DataSet</tt> object. For example, here the first three columns ('Liquor', 'Wine', and 'Beer') are extracted into a new <tt>DataSet</tt> named "alcohol":
+</p>
+<pre>»alcohol = wined(:,1:3);</pre>
+<p>Additionally, any field in the <tt>DataSet</tt> can also be indexed into directly. Here the second country name is pulled out of the labels by extracting the entire second row of the mode 1 labels:
+</p>
+<pre>»country2 = wined.label{1}(2,:);</pre>
+<h3><span class="mw-headline" id="Indexing_using_Labels_and_Classes">Indexing using Labels and Classes</span></h3>
+<p>A shortcut to extract a subset of a <tt>DataSet</tt> is to index into the main <tt>DataSet</tt> object using labels and/or classes for the requested item(s). For example, to extract a DataSet containing only the Liquor values, you could use:
+</p>
+<pre>»alcohol = wined.liquor;</pre>
+<p>Note that the upper-case characters in the label do not matter. If the label or class starts with a number of contains any non-alphanumeric characters, you must enclose the label in parenthesis and quotes:
+</p>
+<pre>»alcohol = wined.('liquor');</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Indexing_with_Class_or_Label_Set_Names">Indexing with Class or Label Set Names</span></h3>
+<p>Class and label information can be extracted using the the "set name" and dot notation.
+</p>
+<pre>mylabels = wine.Country
+mylabels =
+France
+Italy
+Switz
+Austra
+Brit
+U.S.A.
+Russia
+Czech
+Japan
+Mexico
+</pre>
+<p>Note that class names will be checked first, before label names.
+</p>
+<h2><span class="mw-headline" id="Using_the_Class_Lookup_Table">Using the Class Lookup Table</span></h2>
+<p>Classes in a <tt>DataSet</tt> are stored as numeric values (in the <b>.class</b> field). Each numeric value and be associated with a text value using the <b>classlookup</b> field. This field contains a simple nx2 table with numeric values in the first column and string values in the second. For example, the <i>arch</i> dataset has a classlookkup table for elements:
+</p>
+<pre>&gt;&gt; load arch
+&gt;&gt; arch.classlookup{1,1}
+ans = 
+    [0]    'Class 0'
+    [1]    'K'      
+    [2]    'BL'     
+    [3]    'SH'     
+    [4]    'AN'   </pre>
+<p><br />
+There are two basic ways to alter a classlookup table, by extracting the table or directly accessing the table. 
+</p>
+<h3><span class="mw-headline" id="Extracting_the_Table">Extracting the Table</span></h3>
+<p>Extracting the table can be useful if you need to perform several changes:
+</p>
+<pre>a  = arch.classlookup{1};
+a{3,2} = 'YYY';
+a{4,2} = 'ZZZ';
+arch.classlookup{1} = a;
+arch.classlookup{1}
+ans =
+   [0]    'Class 0'
+   [1]    'K'
+   [2]    'YYY'
+   [3]    'ZZZ'
+   [4]    'AN'
+</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Direct_Access">Direct Access</span></h3>
+<p>If you just need to change a single value (or a small number of values) you can directly access the lookup table using <b>.assignstr</b> and <b>.assignval</b> fields. For example, the change class 0 of <tt>arch</tt> from "Class 0" to "Unknown":
+</p>
+<pre>arch.classlookup{1}.assignstr = {0 'Unknown'}
+&gt;&gt; arch.classlookup{1}
+
+ans =
+
+   [0]    'Unknown'
+   [1]    'K'
+   [2]    'BL'
+   [3]    'SH'
+   [4]    'AN'
+</pre>
+<p>Then, to change the numeric value of "Unknown" from 0 to 6:
+</p>
+<pre>&gt;&gt; arch.classlookup{1}
+arch.classlookup{1}.assignval = {6 'Unknown'}
+ans =
+
+   [0]    'Class 0'
+   [1]    'K'
+   [2]    'BL'
+   [3]    'SH'
+   [4]    'AN'
+   [6]    'Unknown'</pre>
+<h3><span class="mw-headline" id="Extracting_a_Class">Extracting a Class</span></h3>
+<p>In releases after version 8.2 of PLS_Toolbox/Solo, subsets can be extracted based on class names:
+</p>
+<pre>&gt;&gt; mysubset = mydataset('myclass'); </pre>
+<p>Where <i>mydataset</i> is a dataset which contains samples belonging to the designated classname <i>myclass</i>, and <i>mysubset</i> contains a new dataset of samples from <i>mydataset</i> which are members of <i>myclass</i> exclusively.
+</p><p>Moreover, it is also possible to extract only the samples marked as include via adding <b>.include</b>:
+</p>
+<pre>&gt;&gt; subset = dataset('myclass').include; </pre>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Using_Image_DataSets">Using Image DataSets</span></h2>
+<p>The DataSet Object contains functionality for handling image data. In image DataSet objects, the .data field contains "unfolded" image data. Image data is usually contained in a 2nd or higher-order matrix in which several modes are used to describe a spatial relationship between pieces of information. For example, many standard JPEG images are three-way images of size M x N x 3. The first two dimensions are the spatial dimensions in that the actual image is M pixels high by N pixels wide. The third dimension is the wavelength dimension and, in this case, contains 3 slabs – one for each of the Red, Green, Blue image components.
+</p><p>Working with such image data in DataSet objects is made easier by unfolding such multi-way images so that all the spatial modes are stacked on top of each other in a single mode. Unfolding is done so that all the spatial information is contained in a single mode and can be handled together – often so that each pixel can be analyzed as an individual sample (or even sometimes as variables). Individual pixels in an unfolded image are independent and can be individually included and excluded (see .include field) or assigned particular classes (see .class field), for example. In the case of the JPEG mentioned above, the unfolded image would be stored as an (MN) x 3 matrix where the first mode was M times N elements (i.e. pixels) in size.
+</p><p>The .imagemode field contains a scalar value indicating which mode of the .data field contains the spatial information. In the JPEG example, .imagemode would be 1 (one). Similarly the .imagesize field contains a vector describing the original size of the spatial mode before unfolding. The JPEG example would contain the two-element vector: [M N] Note: that .imagesize contains only the size of the image mode, not the entire data matrix. Note that the product of the .imagesize field must be equal to the size of the .imagemode mode of the .data field. That is, the number of pixels contained in the spatial mode of the data must be appropriate that it can be reshaped into a matrix of size .imagesize. See the .foldedsize field for the size of entire folded matrix.
+</p><p>The .imagedata field is a special read-only field which returns the contents of the .data field refolded back into the original image-sized matrix. In the JPEG example, the .data field would return a matrix of size (MN) x 3 (the unfolded image) but the .imagedata field would return the original M x N x 3 matrix. Any changes you make to the contents of the .data field will automatically be reflected in the contents returned by .imagedata. .imagedata, however, can not be written to.
+</p><p>The following example uses functions found in <a href="mia_toolbox_user_guide.html" title="MIA Toolbox User Guide"> MIA_Toolbox</a>.
+</p><p>Build an image dataset from the demonstration data "EchoRidgeClouds.jpeg" included with MIA_Toolbox.
+</p>
+<pre>&gt;&gt; dat = imread('EchoRidgeClouds.jpeg','jpeg');
+size(dat)
+ans =
+   768   512     3
+&gt;&gt; imgdso = buildimage(dat, [1 2], 1)
+ 
+imgdso = 
+       name: 
+       type: image
+     author: 
+       date: 08-Sep-2009 21:21:13
+    moddate: 08-Sep-2009 21:21:13
+       data: 393216x3 [double]
+  imagesize: 768x512
+  imagemode: 1
+      label: {2x1} [array (char)]
+               Mode 1  [: ] 
+               Mode 2  [: ] 
+  axisscale: {2x1} [vector (real)]
+               Mode 1  [: ] (none) 
+               Mode 2  [: ] (none) 
+      title: {2x1} [vector (char)]
+               Mode 1  [: ] 
+               Mode 2  [: ] 
+      class: {2x1} [vector (double)]
+               Mode 1  [: ] 
+               Mode 2  [: ] 
+    classid: {2x1} [cell of strings]
+    include: {2x1} [vector (integer)]
+               Mode 1  [: 1x393216] 
+               Mode 2  [: 1x3]      
+description:
+    history: {1x1 cell} [array (char)]
+   userdata: </pre>
+<p>Now we can look at the size of data returned by each field:
+</p>
+<pre>&gt;&gt; mydata = imgdso.data;
+&gt;&gt; myimage = imgdso.imagedata;
+&gt;&gt; whos
+  Name              Size                  Bytes  Class      Attributes
+
+  dat             768x512x3             1179648  uint8                
+  imgdso       393216x3                12591234  dataset              
+  mydata       393216x3                 9437184  double               
+  myimage         768x512x3             9437184  double     
+</pre>
+<p>Notice the image data is returned as double. If we were to use the <tt>imagesc</tt> function in Matlab, we'd need to convert the data to uint8 before plotting. There are several image reading functions that return data in an image type DSO. When plotting image DSOs, plotgui will default to using the image (folded data) when appropriate.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930095505
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.013 seconds
+Real time usage: 0.026 seconds
+Preprocessor visited node count: 151/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 5759/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:475-0!canonical and timestamp 20240930095505 and revision id 3932.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=DataSet_Object_Examples&amp;oldid=3932">https://www.wiki.eigenvector.com/index.php?title=DataSet_Object_Examples&amp;oldid=3932</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 18 April 2017, at 11:20.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

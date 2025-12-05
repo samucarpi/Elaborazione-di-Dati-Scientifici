@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Svm - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Svm rootpage-Svm skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Svm"><span class="mw-page-title-main">Svm</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Algorithm"><span class="tocnumber">5</span> <span class="toctext">Algorithm</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#Model_building_performance"><span class="tocnumber">5.1</span> <span class="toctext">Model building performance</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#epsilon-SVR_and_nu-SVR"><span class="tocnumber">5.2</span> <span class="toctext">epsilon-SVR and nu-SVR</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#SVM_Parameters"><span class="tocnumber">5.3</span> <span class="toctext">SVM Parameters</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>SVM Support Vector Machine (LIBSVM) for regression. Use SVMDA for SVM classification (<a href="svmda.html" title="Svmda">Svmda</a>). Please also look at the <a href="svmda.html" title="Svmda">Svmda</a> page since it has more detailed information much of which also applies to SVM for regression.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>model = svm(x,y,options);          %identifies model (calibration step).</dd>
+<dd>pred = svm(x,model,options);      %makes predictions with a new X-block</dd>
+<dd>pred = svm(x,y,model,options);    %performs a "test" call with a new X-block and known y-values</dd>
+<dd>svm&#160;% Launches an Analysis window with SVM as the selected method.</dd></dl>
+<p>Please note that the recommended way to build and apply a SVM model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>. 
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>The SVM function or analysis method performs calibration and application of Support Vector Machine (SVM) regression models. SVM models can be used for regression problems. The model consists of a number of support vectors (essentially samples selected from the calibration set) and non-linear model coefficients which define the non-linear mapping of variables in the input x-block. The model allows prediction of the continuous y-block variable. It is recommended that classification be done through the svmda function.
+</p><p>Svm is implemented using the LIBSVM package which provides both epsilon-support vector regression (epsilon-SVR) and nu-support vector regression (nu-SVR). Linear and Gaussian Radial Basis Function kernel types are supported by this function.
+</p><p>Note: Calling svm with no inputs starts the graphical user interface (GUI) for this analysis method. 
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block (predictor block) class "double" or "dataset", containing numeric values,</li>
+<li><b>y</b> = Y-block (predicted block) class "double" or "dataset", containing numeric values,</li>
+<li><b>model</b> = previously generated model (when applying model to new data).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard model structure model with the following fields (see <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a>):
+<ul><li><b>modeltype</b>: 'SVM',</li>
+<li><b>datasource</b>: structure array with information about input data,</li>
+<li><b>date</b>: date of creation,</li>
+<li><b>time</b>: time of creation,</li>
+<li><b>info</b>: additional model information,</li>
+<li><b>pred</b>: 2 element cell array with
+<ul><li>model predictions for each input block (when options.blockdetail='normal' x-block predictions are not saved and this will be an empty array)</li></ul></li>
+<li><b>detail</b>: sub-structure with additional model details and results, including:
+<ul><li>model.detail.svm.model: Matlab version of the libsvm svm_model (Java). Note that the number of support vectors used is given by model.detai.svm.model.l. It is useful to check this because it can indicate overfitting if most of the calibration samples are used as support vectors, or can indicate problems fitting a model if there are no support vectors (and all prediction values will equal a constant value, a weighted mean).</li>
+<li>model.detail.svm.cvscan: Results of CV parameter scan</li>
+<li>model.detail.svm.svindices: Indices of X-block samples which are support vectors.</li></ul></li></ul></li></ul>
+<ul><li><b>pred</b> a structure, similar to <b>model</b> for the new data.</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><i>options</i> =  a structure array with the following fields:
+</p>
+<ul><li><b>display</b>: [ 'off' | {'on'} ], governs level of display to command window,</li>
+<li><b>plots</b> [ 'none' | {'final'} ], governs level of plotting,</li>
+<li><b>preprocessing</b>: {[] []}  preprocessing structures for x and y blocks (see PREPROCESS).</li>
+<li><b>compression</b>: [{'none'}| 'pca' | 'pls' ] type of data compression to perform on the x-block prior to calculaing or applying the SVM model. 'pca' uses a simple PCA model to compress the information. 'pls' uses either a pls or plsda model (depending on the svmtype). Compression can make the SVM more stable and less prone to overfitting.</li>
+<li><b>compressncomp</b>: [1]  Number of latent variables (or principal components to include in the compression model.</li>
+<li><b>blockdetails</b>: [ {'standard'} | 'all' ], extent of predictions and residuals included in model, 'standard' = only y-block, 'all' x- and y-blocks.</li>
+<li><b>algorithm</b>: [ 'libsvm' ] algorithm to use. libsvm is default and currently only option.</li>
+<li><b>kerneltype</b>: [ 'linear' | {'rbf'} ], SVM kernel to use. 'rbf' is default.</li>
+<li><b>svmtype</b>: [ {'epsilon-svr'} | 'nu-svr' ] Type of SVM to apply. The default is 'epsilon-svr' for regression.</li>
+<li><b>probabilityestimates</b>: [0| {1} ], whether to train the SVR model for probability estimates, 0 or 1 (default 1)"</li></ul>
+<ul><li><b>cvtimelimit</b>: Set a time limit (seconds) on individual cross-validation sub-calculation when searching over supplied SVM parameter ranges for optimal parameters. Only relevant if parameter ranges are used for SVM parameters such as cost, epsilon, gamma or nu. Default is 10;</li>
+<li><b>splits</b>: Number of subsets to divide data into when applying n-fold cross validation. Default is 5. This option is only used when the "cvi" option is empty.</li>
+<li><b>cvi</b>: {{}} Standard cross-validation cell (see crossval) defining a split method, number of splits, and number of iterations. This cross-validation is use both for parameter optimization and for error estimate on the final selected parameter values. If empty (the default), then random cross-validation is done based on the "splits" option.</li></ul>
+<ul><li><b>gamma</b>: Value(s) to use for LIBSVM kernel gamma parameter. Default is 15 values from 10^-6 to 10, spaced uniformly in log.</li>
+<li><b>cost</b>: Value(s) to use for LIBSVM 'c' parameter. Default is 11 values from 10^-3 to 100, spaced uniformly in log.</li>
+<li><b>epsilon</b>: Value(s) to use for LIBSVM 'p' parameter (epsilon in loss function). Default is the set of values [1.0, 0.1, 0.01].</li>
+<li><b>nu</b>: Value(s) to use for LIBSVM 'n' parameter (nu of nu-SVC, and nu-SVR). Default is the set of values [0.2, 0.5, 0.8].</li>
+<li><b>random_state</b>&#160;: [1] Random seed number. Set this to a number for reproducibility.</li></ul>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>Svm uses the LIBSVM implementation using the user-specified values for the LIBSVM parameters (see <i>options</i> above). See <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">[1]</a> for further details of these options. 
+</p><p>The default SVM parameters cost, epsilon, nu and gamma have value ranges rather than single values. This svm function uses a search over the grid of appropriate parameters using cross-validation to select the optimal SVM parameter values and builds an SVM model using those values. This is the recommended usage. The user can avoid this grid-search by passing in single values for these parameters, however. If you are using the command line SVM function to build a model then the optimal SVM parameters are shown in model.detail.svm.cvscan.best. If you are using the graphical Analysis SVM then the optimal parameters are reported in the summary window which is shown when you mouse-over the model icon, once the model is built.
+</p>
+<h4><span class="mw-headline" id="Model_building_performance">Model building performance</span></h4>
+<p>Building a single SVM model can sometimes be slow, especially if the calibration dataset is large. Using ranges for the SVM parameters to search for the optimal parameter combination increases the final model building time significantly. If cross-validation is used the calculation is again increased, possibly dramatically if the number of CV subsets is large. Some suggestions for faster SVM building include: 
+</p>
+<dl><dd>1) Turning CV off ("none") during preliminary analyses. This is MUCH faster and cross-validation is still performed using a default "Random Subsets" with 5 data splits and 1 iteration,</dd>
+<dd>2) Using a coarse grid of SVM parameter values to search over for optimal values,</dd>
+<dd>3) Choosing the CV method carefully, at least initially. For example, use "Random Subsets" with a small number of data splits (e.g. 5) and a small "Number of Iterations" (e.g. 1).</dd>
+<dd>4) Using the compression option if the number of variables is large.</dd></dl>
+<h4><span class="mw-headline" id="epsilon-SVR_and_nu-SVR">epsilon-SVR and nu-SVR</span></h4>
+<p>There are two commonly used versions of SVM regression, 'epsilon-SVR' and 'nu-SVR'. The original SVM formulations for Regression (SVR) used parameters C [0, inf) and epsilon[0, inf) to apply a penalty to the optimization for points which were not correctly predicted.  An alternative version of both SVM regression was later developed where the epsilon penalty parameter was replaced by an alternative parameter, nu [0,1], which applies a slightly different penalty. The main motivation for the nu versions of SVM is that it has a has a more meaningful interpretation. This is because nu represents an upper bound on the fraction of training samples which are errors (badly predicted) and a lower bound on the fraction of samples which are support vectors. Some users feel nu is more intuitive to use than C or epsilon.
+Epsilon or nu are just different versions of the penalty parameter. The same optimization problem is solved in either case. Thus it should not matter which form of SVM you use, epsilon or nu. PLS_Toolbox uses epsilon since this was the original formulation and is the most commonly used form. For more details on 'nu' SVM regression see <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/newsvr.pdf">[2]</a>
+</p><p>The user must provide parameters (or parameter ranges) for SVM regression as:
+</p>
+<dl><dd><ul><li>'epsilon-SVR':</li></ul>
+<dl><dd><b>epsilon</b>,<b>C</b>,  (using linear kernel), or</dd>
+<dd><b>epsilon</b>,<b>C</b>, <b>gamma</b> (using radial basis function kernel),</dd></dl></dd></dl>
+<dl><dd><ul><li>'nu-SVR':</li></ul>
+<dl><dd><b>nu</b>, <b>C</b>,    (using linear kernel), or</dd>
+<dd><b>nu</b>, <b>C</b>, <b>gamma</b> (using radial basis function kernel),</dd></dl></dd></dl>
+<h4><span class="mw-headline" id="SVM_Parameters">SVM Parameters</span></h4>
+<ul><li><b>cost</b>: Cost [0 -&gt;inf] represents the penalty associated with errors larger than epsilon. Increasing cost value causes closer fitting to the calibration/training data.</li>
+<li><b>gamma</b>: Kernel <i>gamma</i> parameter controls the shape of the separating hyperplane. Increasing gamma usually increases number of support vectors.</li>
+<li><b>epsilon</b>: In training the regression function there is no penalty associated with points which are predicted within distance epsilon from the actual value. Decreasing epsilon forces closer fitting to the calibration/training data.</li>
+<li><b>nu</b>: Nu (0 -&gt; 1] indicates a lower bound on the number of support  vectors to use, given as a fraction of total calibration samples, and an upper bound on the fraction of training samples which are errors (poorly predicted).</li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="ann.html" title="Ann">ann</a>, <a href="mlr.html" title="Mlr">mlr</a>, <a href="lwr.html" title="Lwr">lwr</a>, <a href="pls.html" title="Pls">pls</a>, <a href="pcr.html" title="Pcr">pcr</a>, <a href="svmda.html" title="Svmda">svmda</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930124642
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.012 seconds
+Real time usage: 0.015 seconds
+Preprocessor visited node count: 39/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:729-0!canonical and timestamp 20240930124642 and revision id 12150.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Svm&amp;oldid=12150">https://www.wiki.eigenvector.com/index.php?title=Svm&amp;oldid=12150</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 8 December 2023, at 11:29.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

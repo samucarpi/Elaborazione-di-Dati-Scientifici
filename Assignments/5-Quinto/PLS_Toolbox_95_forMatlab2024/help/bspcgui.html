@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Bspcgui - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Bspcgui rootpage-Bspcgui skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Bspcgui"><span class="mw-page-title-main">Bspcgui</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Getting_Started"><span class="tocnumber">2</span> <span class="toctext">Getting Started</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Model_Types"><span class="tocnumber">2.1</span> <span class="toctext">Model Types</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#Batch_Processor_Window"><span class="tocnumber">3</span> <span class="toctext">Batch Processor Window</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#Start"><span class="tocnumber">3.1</span> <span class="toctext">Start</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Batch"><span class="tocnumber">3.2</span> <span class="toctext">Batch</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Steps"><span class="tocnumber">3.3</span> <span class="toctext">Steps</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#Manually_Selecting_Steps"><span class="tocnumber">3.3.1</span> <span class="toctext">Manually Selecting Steps</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Selected_Steps_Menu"><span class="tocnumber">3.3.2</span> <span class="toctext">Selected Steps Menu</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-10"><a href="#Align"><span class="tocnumber">3.4</span> <span class="toctext">Align</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Summarize"><span class="tocnumber">3.5</span> <span class="toctext">Summarize</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Finish"><span class="tocnumber">3.6</span> <span class="toctext">Finish</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Introduction">Introduction</span></h1>
+<p>Batch Statistical Process Control (BSPC) is the analysis of process data as a function of both correlation among the measured variables and correlation in time (also known as the batch trajectory). The data is subdivided into "batches" (experiments) each of which may be further subdivided into "Steps" (sub-divisions of batch indicating processing segments or other divisions of batches). BSPC goes by many names, process monitoring, fault detection, and anomaly detection, to name a few. Methods generally rely on a model that describes normal and/or desirable operation. Often much is learned about the process from simply the creation of a model. Given a process model, future operating data can be compared to the model to determine if the process condition is nominal.
+</p><p>The BSPC interface is available in Solo or the PLS_Toolbox browser window in the "Analysis Tools" panel under the "TRANSFORM" label as "Batch Processor". This interface prompts the user to select a type of analysis method they want to do, then guides the user through the steps necessary to use that method including:
+</p>
+<ol><li>Importing and organizing the batch data</li>
+<li>Assuring the batch and step labels (if desired) are assigned</li>
+<li>Aligning the time axes of the batches (if needed for the specific analysis method)</li>
+<li>Choosing other data manipulation settings as needed for the method</li>
+<li>Rearranging the data to the appropriate format for the specific analysis method using the <a href="batchfold.html" title="Batchfold">batchfold</a> function</li></ol>
+<h1><span class="mw-headline" id="Getting_Started">Getting Started</span></h1>
+<p>Data is derived directly from process data with the goal being to summarize high-dimensional data with a handful of factors that capture important directions in the data. Success is highly dependent upon the quantity and quality of process data.
+</p><p>Raw data is presumed to be in a 2 dimensional DataSet with rows being samples in time and columns being variables.
+</p><p><a href="" class="image" title="Data Configuration"><img alt="Data Configuration" src="200px_bspc_data_config.png" decoding="async" width="200" height="350" /></a>
+</p>
+<h3><span class="mw-headline" id="Model_Types">Model Types</span></h3>
+<p>The following describes the model types available as targets of the BSPC processing. The dimensions of the resulting processed data and other considerations are listed along with a brief description of the unique characteristics of the model type.
+</p>
+<table class="wikitable" border="1">
+<caption>BSPC Model Types
+</caption>
+<tbody><tr>
+<th>Model</th>
+<th>Modes (Dimensions)</th>
+<th>Equal Length Batches</th>
+<th>Steps Aligned</th>
+<th>Data Shape</th>
+<th>Model Comments
+</th></tr>
+<tr>
+<td>Summary PCA</td>
+<td>2</td>
+<td>No</td>
+<td>No</td>
+<td>Batch x (Step/Summary)</td>
+<td>PCA on statistics summarizing the change in measured variables over the batch progress. Less sensitive to specific batch trajectory.
+</td></tr>
+<tr>
+<td><a href="batchmaturity.html" title="Batchmaturity">Batch Maturity</a></td>
+<td>2</td>
+<td>No</td>
+<td>No</td>
+<td>(Batch/Step) x Variable, Can have Y-Block to indicate maturity</td>
+<td>PCA with heterogeneous confidence limits based on percent progression through batch.
+</td></tr>
+<tr>
+<td><a href="mpca.html" title="Mpca">MPCA</a></td>
+<td>3</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Time (step) x Variable x Batch</td>
+<td>Multiway PCA - captures correlation between variables and their changes through time (trajectory). Very sensitive to trajectory differences.
+</td></tr>
+<tr>
+<td><a href="parafac.html" title="Parafac">PARAFAC</a></td>
+<td>3</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Batch x Variable x Time (step)</td>
+<td>Parallel Factor Analysis (multiway). Imposes stronger expectation of similarity between variable trajectories than MPCA.
+</td></tr>
+<tr>
+<td>Summary PARAFAC</td>
+<td>3</td>
+<td>No</td>
+<td>No</td>
+<td>Batch x Step x Summary</td>
+<td>PARAFAC on summary statistics of variables over time. Less sensitive to specific batch trajectory, imposes expectation of correlation between steps of process.
+</td></tr>
+<tr>
+<td><a href="parafac2.html" title="Parafac2">PARAFAC2</a></td>
+<td>3</td>
+<td>No</td>
+<td>No</td>
+<td>Cell Array of Batches</td>
+<td>PARAFAC with relaxed multiway structures (only available at PLS_Toolbox command line). Much less sensitive to specific batch trajectory than PARAFAC or MPCA.
+</td></tr></tbody></table>
+<p>See Also: <a href="batchmaturity.html" title="Batchmaturity">Batch Maturity</a>, <a href="mpca.html" title="Mpca">MPCA</a>, <a href="mspc_and_identification_of_finite_impulse_response_models.html" title="MSPC and Identification of Finite Impulse Response Models">MSPC</a>, <a href="parafac.html" title="Parafac">PARAFAC</a>, <a href="parafac2.html" title="Parafac2">PARAFAC2</a>
+</p>
+<h1><span class="mw-headline" id="Batch_Processor_Window">Batch Processor Window</span></h1>
+<p>The goal of the Batch Processor interface is to make it easier to assemble batch data for multivariate analysis. Different analyses and conditions require different data manipulation. This interface attempts to simplify the assembling of data for batch analysis which might otherwise be <a href="bspc_diagram_roadmap.png" class="internal" title="Bspc diagram roadmap.png">‎ very complicated</a>.
+</p><p>The workflow of the interface moves from left to right across the tabs at the top of the interface. Loading data and choosing an Analysis Type will enable relevant tabs. Clicking the <b>Next</b> button will open the next enabled tab. Batches and steps are defined, then alignment and summary information is added. When finished, "folded" data can be saved or exported to the <a href="analysis_gui.html" class="mw-redirect" title="Analysis GUI">analysis</a> interface and a model for folding new data can be saved.
+</p><p><a href="" class="image" title="BSPC GUI"><img alt="BSPC GUI" src="bspcgui_main.png" decoding="async" width="703" height="484" /></a>
+</p>
+<h2><span class="mw-headline" id="Start">Start</span></h2>
+<p>Load, append, edit, and or clear data. Selecting the Analysis type will automatically enable/disable relevant tabs.
+</p>
+<ul><li>Dropping data onto the status area will load data. If previously loaded data exists, a prompt for overwrite or augment will appear.
+<ul><li>If augment is chosen, two options will be given, augment as new batch or not. Augment as new batch adds a class for the data being augmented otherwise a "normal" augment will occur and if the new dataset has a matching class it will be merged.</li></ul></li>
+<li>Dragging and dropping multiple-selected (Excel) files from the system browser (e.g., Windows Explorer or Finder) will pre-augment the files and create a label indicating file name. This label can be used to identify batches in the <b>Batches</b> tab.</li>
+<li>Data can be edited in the <a href="dataset_editor.html" class="mw-redirect" title="DataSet Editor">DataSet Editor</a> by clicking the <b>Edit</b> button. Editing will cause the model to be cleared.</li></ul>
+<h2><span class="mw-headline" id="Batch">Batch</span></h2>
+<p>Indicates which samples belong to which batch based on information in the loaded DataSet. Sources can be Class, Label, or Axisscale sets, or a single Variable (column). If manually loaded, a class is created from the loaded content. If the DataSet contains a class with the default name of "BSPC Batch" then it will be automatically selected after loading.
+</p>
+<ul><li>If variable is used, data for that column will be excluded (not deleted) so other mechanisms (preprocessing) can work.</li>
+<li>Once Batches have been identified, one or more batches can be plotted in the lower plot.</li></ul>
+<p>All methods, except <a href="batchmaturity.html" title="Batchmaturity">Batch Maturity</a> require defining a means to identify the different batches because these are used to form the samples of the input matrices (and multiple samples are required for all methods other than Batch Maturity).
+</p>
+<h2><span class="mw-headline" id="Steps">Steps</span></h2>
+<p>Steps (subdivisions of batches) can be indicated on the <b>Steps</b> tab. Steps can be created in the same manor as <b>Batches</b> or indicated manually. Particular steps to be included or excluded can be selected.
+</p><p>Manual selection is done by selecting a primary variable and batch to align <b>to</b> then designating <b>steps</b> for the primary variable/batch. After the steps are set the <a href="batchalign.html" title="Batchalign">batchalign</a> function is used to "map" step location (as dataset class) for each batch.
+</p>
+<h3><span class="mw-headline" id="Manually_Selecting_Steps">Manually Selecting Steps</span></h3>
+<p><a href="" class="image" title="Manual Selection Interface"><img alt="Manual Selection Interface" src="500px_bspc_manual_select.png" decoding="async" width="500" height="378" /></a>
+</p><p>To manually select steps:
+</p>
+<ol><li>Select the variable and batch to use from the plot list boxes at the bottom of the interface. These will become the variable and batch to which all others are aligned to (designated by a "*" next to the list item.</li>
+<li>Click the <b>Select</b> button and the interface will switch.</li>
+<li>Click the <b>Add</b> button to place the first step marker.</li>
+<li>Drag this marker to the first step location.</li>
+<li>Repeat until all steps are placed.</li>
+<li>Select different batch from list menu to display "aligned" step position.</li>
+<li>Adjust alignment algorithm as needed using toolbar button.</li>
+<li>Click check-mark button to finish and save steps.</li></ol>
+<h3><span class="mw-headline" id="Selected_Steps_Menu">Selected Steps Menu</span></h3>
+<p><a href="" class="image"><img alt="Bspc selected steps.png" src="300px_bspc_selected_steps.png" decoding="async" width="300" height="245" /></a>
+</p><p>Once steps have been designated, they will appear the <b>Step Selection</b> list. If one or more steps should be ignored they can be deselected in this menu. Selected steps will appear in the batch plot as solid green lines and unselected steps appear as red dashed lines.
+</p>
+<h2><span class="mw-headline" id="Align">Align</span></h2>
+<p>Methods that require equal length batches use the tools available on the <b>Align</b> tab from the <a href="batchalign.html" title="Batchalign">batchalign</a> function.
+</p><p>The process to configure the alignment is:
+</p>
+<ol><li>Select the type of alignment:
+<ul><li><b>Linear</b> - Linear interpolation or decimation to match selected batch's length.</li>
+<li><b>COW</b> - <a href="cow.html" title="Cow">Correlation Optimized Warping</a> with Alignment Settings values.</li>
+<li><b>Pad With NaN</b> - Append each batch with NaN to make all batches equal length.</li></ul></li>
+<li>Select the Batch and Variable to use as a reference (target) or Load a vector.</li>
+<li>Select alignment settings (if using COW).</li>
+<li>Click Update Plot to see the results.</li></ol>
+<p>The plots switch to displaying selected variables and batches with the pre-aligned data on top and post-aligned data on the bottom. Click the <b>Update Plots</b> button to refresh the plot after making any changes.
+</p><p><a href="" class="image" title="Align Settings"><img alt="Align Settings" src="bspc_align_settings.png" decoding="async" width="844" height="773" /></a>
+</p><p>NOTE: In the image above, the alignment batch is Class 0 (the default) which has no members. This must be changed before alignment will work.
+</p>
+<h2><span class="mw-headline" id="Summarize">Summarize</span></h2>
+<p>The summary PCA and summary PARAFAC methods make use of statistical summary functions to capture the trends in the trajectories of the variables. A Summary PCA or Summary PARAFAC model does not require alignment of batches and is generally less sensitive to the exact trajectory of the batches, providing some model robustness.
+</p><p>The statistics are calculated by the <a href="summary.html" title="Summary">summary</a> function and have different sensitivities to profile changes. The ability of each statistic to capture useful information from a trajectory depends on the dynamics and the statistic. Often it is useful to include a number of the statistics and decide, while modeling, which seem to be providing information and excluding the remaining statistics. If the statistics are sufficiently sensitive to the trajectory profile as to provide detection of out-of-specification batches, then the model will likely provide longer-term performance over an equivalent MPCA or PARAFAC model.
+</p><p>The statistics which are available include:
+</p><p><a href="" class="image" title="Summary Options"><img alt="Summary Options" src="bspc_summarize.png" decoding="async" width="286" height="276" /></a>
+</p><p>All stats summarize each column and each step (if specified) except for:
+</p>
+<ul><li><b>Length</b> Length of step = a single number for each step (irrespective of number of variables).</li>
+<li><b>Five-Number Summary</b> 10, 25, 50, 75, 90th percentile = 5 values per step per variable.</li></ul>
+<p>For example with the <a href="demonstration_datasets.html" title="Demonstration Datasets"> Dupont</a> demo calibration data (dupont_cal), if you choose mean, std, slope, skewness, and length the size of your folded summary pca data will be:
+</p><p>10 variables x 4 stats + length = 41 values per step * 5 steps = 205 columns
+</p>
+<h2><span class="mw-headline" id="Finish">Finish</span></h2>
+<p>When completed there are 4 options:
+</p>
+<ul><li>Send data directly to a new <a href="analysis.html" title="Analysis">Analysis</a> window.</li>
+<li>Save the data to the workspace.</li>
+<li>Save a model for future data application. NOTE: In some more complicated instances (loading outside information) the model may not be able to fully capture each step taken in the interface.</li>
+<li>Cancel and close the window.</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930043542
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.024 seconds
+Real time usage: 0.028 seconds
+Preprocessor visited node count: 61/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1168-0!canonical and timestamp 20240930043542 and revision id 8389.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Bspcgui&amp;oldid=8389">https://www.wiki.eigenvector.com/index.php?title=Bspcgui&amp;oldid=8389</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 6 September 2017, at 11:21.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

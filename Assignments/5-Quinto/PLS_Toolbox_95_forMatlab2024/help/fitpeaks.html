@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Fitpeaks - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Fitpeaks rootpage-Fitpeaks skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Fitpeaks"><span class="mw-page-title-main">Fitpeaks</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Optional_Inputs"><span class="tocnumber">3.2</span> <span class="toctext">Optional Inputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Outputs"><span class="tocnumber">3.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Algorithm"><span class="tocnumber">4</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Options"><span class="tocnumber">5</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Examples"><span class="tocnumber">6</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#See_Also"><span class="tocnumber">7</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Peak fitting routine.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[peakdefo,fval,exitflag,out,fit,res] = fitpeaks(peakdef,y,<i>ax,options</i>)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Based on the initial guess in input <tt>peakdef</tt>, FITPEAKS estimates the peak fit (also the Jacobian and Hessian), and makes a call to LMOPTIMIZEBND to find the best fit of the peaks to the data. (See LMOPTIMIZEBND for additional information.) Results are output to <tt>peakdefo</tt>.
+</p><p>Information about individual peaks is stored in standard peak structures (see PEAKSTRUCT). Information on multiple peaks is stored in a multi-record structure. Given a standard peak structure <tt>peakdef</tt> that contains an initial guess of peak locations and widths, FITPEAKS finds new parameters that best fits peaks to the rows of the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle M\,x\,N}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mi>M</mi>
+          <mspace width="thinmathspace" />
+          <mi>x</mi>
+          <mspace width="thinmathspace" />
+          <mi>N</mi>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle M\,x\,N}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/860f3bfc15f720cd7d2369229a4cb8b09e5746ec" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:4.901ex; height:1.676ex;" alt="{\displaystyle \scriptstyle M\,x\,N}"/></span> data matrix <tt>y</tt>. Results are output to a standard peak structure <tt>peakdefo</tt>.
+</p><p>Fields of <tt>peakdef</tt> required in the initial guess for each peak are <tt>.fun</tt>, <tt>.param</tt>, <tt>.lb</tt>, <tt>.penlb</tt>, <tt>.ub</tt>, and <tt>.penub</tt>.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>peakdef</b> = multi-record standard peak structure with the following fields:
+<ul><li><b>name</b>: 'Peak', name indicating that this is a standard peak structure.</li>
+<li><b>id</b>: ' ', double or character string peak identification.</li>
+<li><b>fun</b>: [ {'Gaussian'} | 'Lorentzian' | 'PVoigt1' | 'PVoigt2' ], defines the peak function (see definitions in the Algorithm section).</li>
+<li><b>param</b>: Parameter list for each peak function. The number of parameters depends on the peak function used:
+<ul><li>'<b>Gaussian'</b>: [height, location, width] (width is expressed as standard deviation - multiply by 2*sqrt(2*(-log(0.5))) = 2.3548 to calculate full-width at half-height.)</li>
+<li>'<b>Lorentzian'</b>: [height, location, width] (width is expressed as half-width - multiply by 2 to calculate full-width at half-height.)</li>
+<li>'<b>PVoigt1'</b>: [height, location, width, fraction Gaussian]</li>
+<li>'<b>PVoigt2'</b>: [height, location, width, fraction Gaussian]</li>
+<li>'<b>GaussianSkew'</b>: [height, location, width, skewparameter]</li></ul></li>
+<li><b>lb</b>: [ ], Lower bounds on the function parameters. This is a row vector with the same number of elements as peakdef.param.</li>
+<li><b>penlb</b>: [ ], Penalty wt for lower bounds, &gt;=0. This is a row vector with the same number of elements as peakdef.param. If set to 0 this constraint is not employed.</li>
+<li><b>ub</b>: [ ], Upper bounds on the function parameters. This is a row vector with the same number of elements as peakdef.param.</li>
+<li><b>penub</b>: [ ], Penalty wt for upper bounds, &gt;=0. This is a row vector with the same number of elements as peakdef.param. If set to 0 this constraint is not employed.</li>
+<li><b>area</b>: [ ], Estimated peak area.</li></ul></li>
+<li><b>y</b> = <i>M</i>x<i>N</i> measured responses with peaks to fit. Each row of (y) is fit to the peaks given in (peakdef).</li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<ul><li><b>ax</b> = 1x<i>N</i> x-axis to fit to {default <tt>ax</tt>=1:N}.</li></ul>
+<ul><li><b>options</b> = discussed below in the Options Section.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>peakdefo</b> = The input peak structure <tt>peakdef</tt> with parameters changed to correspond to the best fit values.</li></ul>
+<ul><li><b>fval</b> = Scalar value of the objective function evaluated at termination of FITPEAKS.</li></ul>
+<ul><li><b>exitflag</b> = Describes the exit condition (see LMOPTIMIZEBND).</li></ul>
+<ul><li><b>out</b> = Structure array with information on the optimization/fitting (see LMOPTIMIZEBND).</li></ul>
+<ul><li><b>fit</b> = Model fit of the peaks, i.e it is the best fit to <tt>y</tt>.</li></ul>
+<ul><li><b>res</b> = Residuals of fit of the peaks.</li></ul>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>Peaks are fit to the functions defined below based on the definitions in the field (<tt>peakdef.fun</tt>). The functions can be evaluated using independent functions or a wrapper function PEAKFUNCTION. See PEAKFUNCTION for more help.
+</p><p>For <tt>peakdef.fun</tt> = 'Gaussian' the function is
+</p><p><br />
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">x</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <mi>exp</mi>
+        <mo>&#x2061;<!-- ⁡ --></mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mfrac>
+              <mrow>
+                <mo>&#x2212;<!-- − --></mo>
+                <msup>
+                  <mrow>
+                    <mo>(</mo>
+                    <mrow>
+                      <msub>
+                        <mi>a</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mi>i</mi>
+                        </mrow>
+                      </msub>
+                      <mo>&#x2212;<!-- − --></mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>2</mn>
+                        </mrow>
+                      </msub>
+                    </mrow>
+                    <mo>)</mo>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+              </mrow>
+              <mrow>
+                <mn>2</mn>
+                <msup>
+                  <mrow>
+                    <mo>(</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>3</mn>
+                      </mrow>
+                    </msub>
+                    <mo>)</mo>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+              </mrow>
+            </mfrac>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/66304c47dc173fb9d66a6d13cac2ea3ce95399fe" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:33.427ex; height:7.509ex;" alt="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)}"/></span></dd></dl></dd></dl>
+<p><br />
+where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle a_{i},\,i=1,\ldots N}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>a</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+            </mrow>
+          </msub>
+          <mo>,</mo>
+          <mspace width="thinmathspace" />
+          <mi>i</mi>
+          <mo>=</mo>
+          <mn>1</mn>
+          <mo>,</mo>
+          <mo>&#x2026;<!-- … --></mo>
+          <mi>N</mi>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle a_{i},\,i=1,\ldots N}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7a5c013895ca1ccdf2b30c9e9334c600cec22d21" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:8.849ex; height:1.843ex;" alt="{\displaystyle \scriptstyle a_{i},\,i=1,\ldots N}"/></span>  is the <i>i<sup>th</sup></i> element of optional input <tt>ax</tt>, and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mo>=</mo>
+          <mrow>
+            <mo>[</mo>
+            <mrow>
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>1</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>3</mn>
+                </mrow>
+              </msub>
+            </mrow>
+            <mo>]</mo>
+          </mrow>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f639c8eb1436c4ecc6149801f3b2628f8b5b44b5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:9.797ex; height:2.176ex;" alt="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\right]}"/></span>  corresponds to the peak parameters in the three-element vector <tt>peakdef.param</tt>. Constraints that should be used are (bounds in <tt>peakdef</tt>) are <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{1}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{1}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/088709f705d603306e804adee496958a5e5ccb6e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:3.872ex; height:1.843ex;" alt="{\displaystyle \scriptstyle x_{1}\geq 0}"/></span>  and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{3}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{3}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/49bf44e89fb89a05ab0c5c1689296b0107a840d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.872ex; height:2.009ex;" alt="{\displaystyle \scriptstyle x_{3}\geq 0}"/></span> .
+</p><p>For <tt>peakdef.fun</tt> = 'Lorentzian' the function is
+</p><p><br />
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[1+\left({\frac {a_{i}-x_{2}}{x_{3}}}\right)^{2}\right]^{-1}=x_{1}\left[{\frac {\left(x_{3}\right)^{2}}{\left(x_{3}\right)^{2}+\left(a_{i}-x_{2}\right)^{2}}}\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">x</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <msup>
+          <mrow>
+            <mo>[</mo>
+            <mrow>
+              <mn>1</mn>
+              <mo>+</mo>
+              <msup>
+                <mrow>
+                  <mo>(</mo>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mfrac>
+                      <mrow>
+                        <msub>
+                          <mi>a</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi>i</mi>
+                          </mrow>
+                        </msub>
+                        <mo>&#x2212;<!-- − --></mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>2</mn>
+                          </mrow>
+                        </msub>
+                      </mrow>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>3</mn>
+                        </mrow>
+                      </msub>
+                    </mfrac>
+                  </mrow>
+                  <mo>)</mo>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msup>
+            </mrow>
+            <mo>]</mo>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <mo>=</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <mrow>
+          <mo>[</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mfrac>
+              <msup>
+                <mrow>
+                  <mo>(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>3</mn>
+                    </mrow>
+                  </msub>
+                  <mo>)</mo>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msup>
+              <mrow>
+                <msup>
+                  <mrow>
+                    <mo>(</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>3</mn>
+                      </mrow>
+                    </msub>
+                    <mo>)</mo>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+                <mo>+</mo>
+                <msup>
+                  <mrow>
+                    <mo>(</mo>
+                    <mrow>
+                      <msub>
+                        <mi>a</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mi>i</mi>
+                        </mrow>
+                      </msub>
+                      <mo>&#x2212;<!-- − --></mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>2</mn>
+                        </mrow>
+                      </msub>
+                    </mrow>
+                    <mo>)</mo>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+              </mrow>
+            </mfrac>
+          </mrow>
+          <mo>]</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[1+\left({\frac {a_{i}-x_{2}}{x_{3}}}\right)^{2}\right]^{-1}=x_{1}\left[{\frac {\left(x_{3}\right)^{2}}{\left(x_{3}\right)^{2}+\left(a_{i}-x_{2}\right)^{2}}}\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2f1a4640f3bb770c5635d9d1f518e5a0de1e9d7f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:62.277ex; height:8.009ex;" alt="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[1+\left({\frac {a_{i}-x_{2}}{x_{3}}}\right)^{2}\right]^{-1}=x_{1}\left[{\frac {\left(x_{3}\right)^{2}}{\left(x_{3}\right)^{2}+\left(a_{i}-x_{2}\right)^{2}}}\right]}"/></span></dd></dl></dd></dl>
+<p><br />
+Constraints that should be used are (bounds in <tt>peakdef</tt>) are <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{1}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{1}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/088709f705d603306e804adee496958a5e5ccb6e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:3.872ex; height:1.843ex;" alt="{\displaystyle \scriptstyle x_{1}\geq 0}"/></span>  and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{3}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{3}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/49bf44e89fb89a05ab0c5c1689296b0107a840d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.872ex; height:2.009ex;" alt="{\displaystyle \scriptstyle x_{3}\geq 0}"/></span> .
+</p><p>For <tt>peakdef.fun</tt> = 'PVoigt1' the function is
+</p><p><br />
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-4\ln(2)\left(a_{i}-x_{2}\right)^{2}}{\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">x</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <mrow>
+          <mo>[</mo>
+          <mrow>
+            <msub>
+              <mi>x</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mn>4</mn>
+              </mrow>
+            </msub>
+            <mi>exp</mi>
+            <mo>&#x2061;<!-- ⁡ --></mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mfrac>
+                  <mrow>
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mn>4</mn>
+                    <mi>ln</mi>
+                    <mo>&#x2061;<!-- ⁡ --></mo>
+                    <mo stretchy="false">(</mo>
+                    <mn>2</mn>
+                    <mo stretchy="false">)</mo>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                          <msub>
+                            <mi>a</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi>i</mi>
+                            </mrow>
+                          </msub>
+                          <mo>&#x2212;<!-- − --></mo>
+                          <msub>
+                            <mi>x</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mn>2</mn>
+                            </mrow>
+                          </msub>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </mrow>
+                  <msup>
+                    <mrow>
+                      <mo>(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>3</mn>
+                        </mrow>
+                      </msub>
+                      <mo>)</mo>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </msup>
+                </mfrac>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+            <mo>+</mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mn>1</mn>
+                <mo>&#x2212;<!-- − --></mo>
+                <msub>
+                  <mi>x</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>4</mn>
+                  </mrow>
+                </msub>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+            <mrow>
+              <mo>[</mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mfrac>
+                  <msup>
+                    <mrow>
+                      <mo>(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>3</mn>
+                        </mrow>
+                      </msub>
+                      <mo>)</mo>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </msup>
+                  <mrow>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                          <msub>
+                            <mi>a</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi>i</mi>
+                            </mrow>
+                          </msub>
+                          <mo>&#x2212;<!-- − --></mo>
+                          <msub>
+                            <mi>x</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mn>2</mn>
+                            </mrow>
+                          </msub>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                    <mo>+</mo>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>3</mn>
+                          </mrow>
+                        </msub>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </mrow>
+                </mfrac>
+              </mrow>
+              <mo>]</mo>
+            </mrow>
+          </mrow>
+          <mo>]</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-4\ln(2)\left(a_{i}-x_{2}\right)^{2}}{\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5c09ce83b13f8f321aaf0dc4a37f60b9ced0bf3d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:78.545ex; height:7.509ex;" alt="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-4\ln(2)\left(a_{i}-x_{2}\right)^{2}}{\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}"/></span></dd></dl></dd></dl>
+<p><br />
+where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mo>=</mo>
+          <mrow>
+            <mo>[</mo>
+            <mrow>
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>1</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>3</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>4</mn>
+                </mrow>
+              </msub>
+            </mrow>
+            <mo>]</mo>
+          </mrow>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cf19382b4dfcee92328e902d32fa13b7691f931d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:12.214ex; height:2.176ex;" alt="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}"/></span> corresponds to the peak parameters in the four-element vector <tt>peakdef.param</tt>. Constraints that should be used are (bounds in <tt>peakdef</tt>) are <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{1}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{1}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/088709f705d603306e804adee496958a5e5ccb6e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:3.872ex; height:1.843ex;" alt="{\displaystyle \scriptstyle x_{1}\geq 0}"/></span>  and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{3}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{3}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/49bf44e89fb89a05ab0c5c1689296b0107a840d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.872ex; height:2.009ex;" alt="{\displaystyle \scriptstyle x_{3}\geq 0}"/></span>, while <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mn>1</mn>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>4</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bbcee86249360fe1411ced0cb55105ecfa15b3b2" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:5.973ex; height:2.009ex;" alt="{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}"/></span>. The Pseudo-Voigt peak shape is an estimate of the Gaussian and Lorentzian peak shapes convolved.
+</p><p>For <tt>peakdef.fun</tt> = 'PVoigt2' the function is
+</p><p><br />
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>a</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">x</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <mrow>
+          <mo>[</mo>
+          <mrow>
+            <msub>
+              <mi>x</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mn>4</mn>
+              </mrow>
+            </msub>
+            <mi>exp</mi>
+            <mo>&#x2061;<!-- ⁡ --></mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mfrac>
+                  <mrow>
+                    <mo>&#x2212;<!-- − --></mo>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                          <msub>
+                            <mi>a</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi>i</mi>
+                            </mrow>
+                          </msub>
+                          <mo>&#x2212;<!-- − --></mo>
+                          <msub>
+                            <mi>x</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mn>2</mn>
+                            </mrow>
+                          </msub>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </mrow>
+                  <mrow>
+                    <mn>2</mn>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>3</mn>
+                          </mrow>
+                        </msub>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </mrow>
+                </mfrac>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+            <mo>+</mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mn>1</mn>
+                <mo>&#x2212;<!-- − --></mo>
+                <msub>
+                  <mi>x</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>4</mn>
+                  </mrow>
+                </msub>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+            <mrow>
+              <mo>[</mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mfrac>
+                  <msup>
+                    <mrow>
+                      <mo>(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>3</mn>
+                        </mrow>
+                      </msub>
+                      <mo>)</mo>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </msup>
+                  <mrow>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                          <msub>
+                            <mi>a</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mi>i</mi>
+                            </mrow>
+                          </msub>
+                          <mo>&#x2212;<!-- − --></mo>
+                          <msub>
+                            <mi>x</mi>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mn>2</mn>
+                            </mrow>
+                          </msub>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                    <mo>+</mo>
+                    <msup>
+                      <mrow>
+                        <mo>(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>3</mn>
+                          </mrow>
+                        </msub>
+                        <mo>)</mo>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </mrow>
+                </mfrac>
+              </mrow>
+              <mo>]</mo>
+            </mrow>
+          </mrow>
+          <mo>]</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cf8ee44dcf3718fe54d841f1feda42c8199131d3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:72.084ex; height:7.509ex;" alt="{\displaystyle f(a_{i},\mathbf {x} )=x_{1}\left[x_{4}\exp \left({\frac {-\left(a_{i}-x_{2}\right)^{2}}{2\left(x_{3}\right)^{2}}}\right)+\left(1-x_{4}\right)\left[{\frac {\left(x_{3}\right)^{2}}{\left(a_{i}-x_{2}\right)^{2}+\left(x_{3}\right)^{2}}}\right]\right]}"/></span></dd></dl></dd></dl>
+<p><br />
+where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mo>=</mo>
+          <mrow>
+            <mo>[</mo>
+            <mrow>
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>1</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>3</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>4</mn>
+                </mrow>
+              </msub>
+            </mrow>
+            <mo>]</mo>
+          </mrow>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cf19382b4dfcee92328e902d32fa13b7691f931d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:12.214ex; height:2.176ex;" alt="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}"/></span> corresponds to the peak parameters in the four-element vector <tt>peakdef.param</tt>. Constraints that should be used (bounds in <tt>peakdef</tt>) are <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{1}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{1}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/088709f705d603306e804adee496958a5e5ccb6e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:3.872ex; height:1.843ex;" alt="{\displaystyle \scriptstyle x_{1}\geq 0}"/></span>  and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{3}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{3}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/49bf44e89fb89a05ab0c5c1689296b0107a840d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.872ex; height:2.009ex;" alt="{\displaystyle \scriptstyle x_{3}\geq 0}"/></span>, while <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mn>1</mn>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>4</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bbcee86249360fe1411ced0cb55105ecfa15b3b2" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:5.973ex; height:2.009ex;" alt="{\displaystyle \scriptstyle 1\geq x_{4}\geq 0}"/></span> . The Pseudo-Voigt peak shape is an estimate of the Gaussian and Lorentzian peak shapes convolved.
+</p><p>For <tt>peakdef.fun</tt> = 'GaussianSkew' (a skewed Gaussian) the function is
+</p><p><br />
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle f\left(\mathbf {x} \right)={{x}_{1}}{{e}^{\tfrac {-{{\left(x-{{x}_{2}}\right)}^{2}}}{2x_{3}^{2}}}}\int _{-\infty }^{{{x}_{4}}\left({\tfrac {x-{{x}_{2}}}{{x}_{3}}}\right)}{{{e}^{\tfrac {-{{t}^{2}}}{2}}}dt}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msub>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>x</mi>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msup>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>e</mi>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mstyle displaystyle="false" scriptlevel="0">
+                <mfrac>
+                  <mrow>
+                    <mo>&#x2212;<!-- − --></mo>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <msup>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mrow>
+                            <mo>(</mo>
+                            <mrow>
+                              <mi>x</mi>
+                              <mo>&#x2212;<!-- − --></mo>
+                              <mrow class="MJX-TeXAtom-ORD">
+                                <msub>
+                                  <mrow class="MJX-TeXAtom-ORD">
+                                    <mi>x</mi>
+                                  </mrow>
+                                  <mrow class="MJX-TeXAtom-ORD">
+                                    <mn>2</mn>
+                                  </mrow>
+                                </msub>
+                              </mrow>
+                            </mrow>
+                            <mo>)</mo>
+                          </mrow>
+                        </mrow>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mn>2</mn>
+                        </mrow>
+                      </msup>
+                    </mrow>
+                  </mrow>
+                  <mrow>
+                    <mn>2</mn>
+                    <msubsup>
+                      <mi>x</mi>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>3</mn>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msubsup>
+                  </mrow>
+                </mfrac>
+              </mstyle>
+            </mrow>
+          </msup>
+        </mrow>
+        <msubsup>
+          <mo>&#x222B;<!-- ∫ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mi mathvariant="normal">&#x221E;<!-- ∞ --></mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mrow class="MJX-TeXAtom-ORD">
+              <msub>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>x</mi>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>4</mn>
+                </mrow>
+              </msub>
+            </mrow>
+            <mrow>
+              <mo>(</mo>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mstyle displaystyle="false" scriptlevel="0">
+                  <mfrac>
+                    <mrow>
+                      <mi>x</mi>
+                      <mo>&#x2212;<!-- − --></mo>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <msub>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi>x</mi>
+                          </mrow>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>2</mn>
+                          </mrow>
+                        </msub>
+                      </mrow>
+                    </mrow>
+                    <msub>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mi>x</mi>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>3</mn>
+                      </mrow>
+                    </msub>
+                  </mfrac>
+                </mstyle>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+        </msubsup>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <msup>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>e</mi>
+              </mrow>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mstyle displaystyle="false" scriptlevel="0">
+                  <mfrac>
+                    <mrow>
+                      <mo>&#x2212;<!-- − --></mo>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <msup>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi>t</mi>
+                          </mrow>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mn>2</mn>
+                          </mrow>
+                        </msup>
+                      </mrow>
+                    </mrow>
+                    <mn>2</mn>
+                  </mfrac>
+                </mstyle>
+              </mrow>
+            </msup>
+          </mrow>
+          <mi>d</mi>
+          <mi>t</mi>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle f\left(\mathbf {x} \right)={{x}_{1}}{{e}^{\tfrac {-{{\left(x-{{x}_{2}}\right)}^{2}}}{2x_{3}^{2}}}}\int _{-\infty }^{{{x}_{4}}\left({\tfrac {x-{{x}_{2}}}{{x}_{3}}}\right)}{{{e}^{\tfrac {-{{t}^{2}}}{2}}}dt}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1e9e552bf59986bff21014b4009b563de839a6f1" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.505ex; width:39.3ex; height:8.009ex;" alt="{\displaystyle f\left(\mathbf {x} \right)={{x}_{1}}{{e}^{\tfrac {-{{\left(x-{{x}_{2}}\right)}^{2}}}{2x_{3}^{2}}}}\int _{-\infty }^{{{x}_{4}}\left({\tfrac {x-{{x}_{2}}}{{x}_{3}}}\right)}{{{e}^{\tfrac {-{{t}^{2}}}{2}}}dt}}"/></span></dd></dl></dd></dl>
+<p><br />
+where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mo>=</mo>
+          <mrow>
+            <mo>[</mo>
+            <mrow>
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>1</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>3</mn>
+                </mrow>
+              </msub>
+              <mspace width="thickmathspace" />
+              <msub>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>4</mn>
+                </mrow>
+              </msub>
+            </mrow>
+            <mo>]</mo>
+          </mrow>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cf19382b4dfcee92328e902d32fa13b7691f931d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:12.214ex; height:2.176ex;" alt="{\displaystyle \scriptstyle \mathbf {x} =\left[x_{1}\;x_{2}\;x_{3}\;x_{4}\right]}"/></span> corresponds to the peak parameters in the four-element vector <tt>peakdef.param</tt>. Constraints that should be used (bounds in <tt>peakdef</tt>) are <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{1}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{1}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/088709f705d603306e804adee496958a5e5ccb6e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.505ex; width:3.872ex; height:1.843ex;" alt="{\displaystyle \scriptstyle x_{1}\geq 0}"/></span>  and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \scriptstyle x_{3}\geq 0}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mstyle displaystyle="false" scriptlevel="1">
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+          <mo>&#x2265;<!-- ≥ --></mo>
+          <mn>0</mn>
+        </mstyle>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \scriptstyle x_{3}\geq 0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/49bf44e89fb89a05ab0c5c1689296b0107a840d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.872ex; height:2.009ex;" alt="{\displaystyle \scriptstyle x_{3}\geq 0}"/></span>. The peak area is <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \pi {{x}_{1}}{{x}_{3}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03C0;<!-- π --></mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msub>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>x</mi>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>1</mn>
+            </mrow>
+          </msub>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msub>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>x</mi>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>3</mn>
+            </mrow>
+          </msub>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \pi {{x}_{1}}{{x}_{3}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1fe644386b89fb884bf0d3d1527ffa89720ff9a9" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:6.1ex; height:2.009ex;" alt="{\displaystyle \pi {{x}_{1}}{{x}_{3}}}"/></span>.
+</p><p>A comparison of the first four peaks is given in the figure below, and was generated using the following code:
+</p>
+<pre>  ax     = 0:0.1:100;
+  y      = zeros(4,length(ax));
+  plot(ax,peakgaussian([2 51 8],ax),'-b', ...
+       ax,peaklorentzian([2 51 8],ax),'--k', ...
+       ax,peakpvoigt1([2 51 8 0.5],ax),':g', ...
+       ax,peakpvoigt2([2 51 8 0.5],ax),'-.r')
+  legend('Gaussian','Lorentzian','PVoigt1','PVoigt2')
+</pre>
+<p><br />
+</p><p><a href="" class="image"><img alt="Peakfit peakshapes.png" src="peakfit_peakshapes.png" decoding="async" width="592" height="444" /></a>
+</p>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><b>options</b>  = structure array with the following fields:
+</p>
+<ul><li><b>name</b>: 'options', name indicating that this is an options structure.</li></ul>
+<ul><li><b>display</b>: [ 'off' | {'on'} ] governs level of display to the command window.</li></ul>
+<ul><li><b>optimopts</b>: options structure from LMOPTIMIZEBND. This field is passed to LMOPTIMIZEBND and can be used to control the optimization / fitting.</li></ul>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<pre>%Make a single known peak
+ax            = 0:0.1:100;
+y             = peakgaussian([2 51 8],ax);
+
+%Define first estimate and peak type
+peakdef       = peakstruct;
+peakdef.param = [0.1  43   5]; %coef, position, spread
+peakdef.lb    = [0     0  0.0001]; %lower bounds on param
+peakdef.penlb = [1e-6 1e-6 1e-6];
+peakdef.ub    = [10 99.9 40]; %upper bounds on params
+peakdef.penub = [1e-6 1e-6 1e-6];
+
+%Estimate fit and plot
+yint   = peakfunction(peakdef,ax);
+[peakdef,fval,exitflag,out] = fitpeaks(peakdef,y,ax);
+yfit   = peakfunction(peakdef,ax); figure
+plot(ax,yint,'m',ax,y,'b',ax,yfit,'r--')
+legend('Initial','Actual','Fit')</pre>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="peakfind.html" title="Peakfind">peakfind</a>, <a href="lmoptimizebnd.html" title="Lmoptimizebnd">lmoptimizebnd</a>, <a href="peakfunction.html" title="Peakfunction">peakfunction</a>, <a href="peakgaussian.html" title="Peakgaussian">peakgaussian</a>, <a href="peaklorentzian.html" title="Peaklorentzian">peaklorentzian</a>, <a href="peakpvoigt1.html" title="Peakpvoigt1">peakpvoigt1</a>, <a href="peakpvoigt2.html" title="Peakpvoigt2">peakpvoigt2</a>, <a href="peakstruct.html" title="Peakstruct">peakstruct</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930002818
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 1.295 seconds
+Real time usage: 1.733 seconds
+Preprocessor visited node count: 160/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1810/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:103-0!canonical and timestamp 20240930002816 and revision id 1117.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Fitpeaks&amp;oldid=1117">https://www.wiki.eigenvector.com/index.php?title=Fitpeaks&amp;oldid=1117</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 21 January 2011, at 15:39.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

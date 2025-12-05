@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>EVRIModel Objects - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-EVRIModel_Objects rootpage-EVRIModel_Objects skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=EVRIModel_Objects"><span class="mw-page-title-main">EVRIModel Objects</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Working_with_Model_Objects_in_Matlab_and_Solo_Scripting"><span class="tocnumber">2</span> <span class="toctext">Working with Model Objects in Matlab and Solo Scripting</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Displaying_Contents"><span class="tocnumber">2.1</span> <span class="toctext">Displaying Contents</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#Building_from_Uncalibrated_Model_Objects"><span class="tocnumber">3</span> <span class="toctext">Building from Uncalibrated Model Objects</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#Example"><span class="tocnumber">3.1</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Uncalibrated_Model_Properties"><span class="tocnumber">3.2</span> <span class="toctext">Uncalibrated Model Properties</span></a>
+<ul>
+<li class="toclevel-3 tocsection-7"><a href="#Model_Status_Properties_(Read-Only)"><span class="tocnumber">3.2.1</span> <span class="toctext">Model Status Properties (Read-Only)</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="#Modifiable_Properties"><span class="tocnumber">3.2.2</span> <span class="toctext">Modifiable Properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="#Uncalibrated_Model_Methods"><span class="tocnumber">3.3</span> <span class="toctext">Uncalibrated Model Methods</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#Working_With_Calibrated_Models"><span class="tocnumber">4</span> <span class="toctext">Working With Calibrated Models</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="#Example_2"><span class="tocnumber">4.1</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Calibrated_Model_Properties"><span class="tocnumber">4.2</span> <span class="toctext">Calibrated Model Properties</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Calibrated_Model_Methods"><span class="tocnumber">4.3</span> <span class="toctext">Calibrated Model Methods</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="#Working_With_Applied_Models_(Predictions)"><span class="tocnumber">5</span> <span class="toctext">Working With Applied Models (Predictions)</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="#Applied_Model_Properties"><span class="tocnumber">5.1</span> <span class="toctext">Applied Model Properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#General_Model_Properties_and_Methods"><span class="tocnumber">6</span> <span class="toctext">General Model Properties and Methods</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="#Informational_Properties_(Read-Only)"><span class="tocnumber">6.1</span> <span class="toctext">Informational Properties (Read-Only)</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#General_Methods"><span class="tocnumber">6.2</span> <span class="toctext">General Methods</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="#Backwards_Compatibility"><span class="tocnumber">7</span> <span class="toctext">Backwards Compatibility</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>EVRIModel Objects provide access to the <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a> content of all models and provide some easy-to-use methods and properties for building, manipulating, and reviewing models from Matlab's command line, scripts, and functions. In addition, these properties and methods are available from <a href="solo_predictor_script_construction.html" title="Solo Predictor Script Construction">Solo Scripting</a> when using <a href="solo_predictor_user_guide.html" title="Solo Predictor User Guide">Solo_Predictor</a> and Solo_Server. This page describes the various modes, methods, and properties of EVRIModel objects, here shortened to just "model objects".
+</p><p>Model objects have three distinct states:
+</p>
+<ol><li><a href="#Building_from_Uncalibrated_Model_Objects"><b>Empty Models</b></a> - Empty models can be populated with data to analyze, "meta parameters" (model building settings), and other modeling options, then models can be calibrated or built from those settings.</li>
+<li><a href="#Working_With_Calibrated_Models"><b>Calibrated Models</b></a> - Calibrated models contain all the model results and parameters necessary to apply that model to new data. Plots and other information can be obtained from calibrated models.</li>
+<li><a href="#Working_With_Applied_Models_.28Predictions.29"><b>Applied Models</b></a> - When a calibrated model is applied to new data, the result is a prediction or "applied model". This object contains all the results from applying the model to the new data. Plots and other information can be obtained from applied models.</li></ol>
+<p>In addition, there are a number of <a href="#General_Model_Properties_and_Methods">general properties and methods</a> which are available for all model states which are useful in working with EVRIModel objects.
+</p>
+<h2><span class="mw-headline" id="Working_with_Model_Objects_in_Matlab_and_Solo_Scripting">Working with Model Objects in Matlab and Solo Scripting</span></h2>
+<p>EVRIModels are standard Matlab objects which are manipulated using the dot notation to access properties and methods. For example, to retrieve the "model type" (modeltype) property from a model, you give the object (a.k.a. variable) name followed by .modeltype. All examples here will assume that the model is stored in a variable named "model".
+</p>
+<pre>model.modeltype</pre>
+<p>Most object methods can be accessed in the same way:
+</p>
+<pre>model.plotscores</pre>
+<p>Some methods (<tt>.apply</tt> and <tt>.crossvalidate</tt>, for example) also require for additional inputs. These are passed in parenthesis after naming the method:
+</p>
+<pre>model.apply(newdata)</pre>
+<h3><span class="mw-headline" id="Displaying_Contents">Displaying Contents</span></h3>
+<p>At the Matlab command line (but not in Solo Scripting), you can view the contents of a model object by simply typing its name or by using the <tt>.disp</tt> method. When viewing content, there are several ways to view the model:
+</p>
+<ol><li>By Description (Desc.)&#160;: this view shows you a text description of the type of model, how it was built, and a summary of its results.</li>
+<li>By Contents&#160;: this view contains the raw field information from the model. Users of previous versions of PLS_Toolbox will recognize this as the previous standard display.</li></ol>
+<p>At the Matlab command window, you can turn either one of these sections on or off by clicking the [on] or [off] hyperlinks in the top display line (shown as <font color="#0000ee"><u>underlined blue</u></font> text below)
+</p>
+<pre>   PCA Model Object (Desc. ON/<font color="#0000ee"><u>[off]</u></font>  Contents ON/<font color="#0000ee"><u>[off]</u></font>)
+</pre>
+<h2><span class="mw-headline" id="Building_from_Uncalibrated_Model_Objects">Building from Uncalibrated Model Objects</span></h2>
+<p>When a model object has been initially created, it contains no data and no results. Many model objects' properties can then be populated with data, meta-parameters, and other settings (options) which can then be used with the <tt>.calibrate</tt> method to build a calibrated model. The <tt>.inputs</tt> property lists the specific properties that can be set for a given model type.
+</p>
+<dl><dd><b>NOTE:</b> Some model types do NOT support calibration in this manner. In these cases, use the <tt>.cancalibrate</tt> property to determine if it allows calibration directly (1) or if it requires a call to the function named in <i>modeltype</i> (0). In addition, the model will clearly show the state in its display at the command line with a statement to "See _____ function to calibrate." In these cases, the only way to create a calibrated model is to access the named function directly.</dd></dl>
+<h3><span class="mw-headline" id="Example">Example</span></h3>
+<p>The following is an example which would build a PCA model from the data stored in the <tt>data</tt> variable with 3 principal components:
+</p>
+<pre>model = evrimodel('pca');
+model.x = data;
+model.ncomp = 3;
+model = model.calibrate;
+</pre>
+<h3><span class="mw-headline" id="Uncalibrated_Model_Properties">Uncalibrated Model Properties</span></h3>
+<p>The properties of an uncalibrated model depend on the model type. Typically, a value can be provided for the data to model, plus some number of "meta-parameters" which define aspects of how the model will be built. The list of values available is indicated by the .inputs property. All models which are calibratable (<tt>.cancalibrate</tt> is equal to 1) allow modification of the <tt>.display</tt> and <tt>.plots</tt> properties.
+</p><p>The properties available for a given calibratable model type will correspond to the function of the same name as the model type. For example, the "LWR" model type has the properties: <tt>x</tt>, <tt>y</tt>, <tt>ncomp</tt>, and <tt>npts</tt>. These are identical to the inputs listed for the LWR function as described on the inputs section of the <a href="lwr.html#Inputs" title="Lwr">LWR documentation page</a>.
+</p><p>The properties which are generally available for all model types are listed below.
+</p>
+<h4><span id="Model_Status_Properties_.28Read-Only.29"></span><span class="mw-headline" id="Model_Status_Properties_(Read-Only)">Model Status Properties (Read-Only)</span></h4>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.cancalibrate</tt>
+</p>
+</td>
+<td>Returns (1) if the model contains a modeling building definition (see Empty Model description, below), or (0) if the model does not contain a definition and must be calibrated using the function defined in the modeltype property.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.inputs</tt>
+</p>
+</td>
+<td>Returns a cell array of strings indicating which properties can be set for the model in its current state. Most often this is used when a model is in an uncalibrated state and this property will indicate what parameters and data fields are available to the user to assign before calibrating the model.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.validmodeltypes</tt>
+</p>
+</td>
+<td>Returns a cell array of strings listing the model types which are currently valid for assignment to the <tt>.modeltype</tt> field.
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h4><span class="mw-headline" id="Modifiable_Properties">Modifiable Properties</span></h4>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.modeltype</tt>
+</p>
+</td>
+<td>Returns the short "keyword" model type of the current model (or empty string if the model type has not been set). This keyword most often is linked to the PLS_Toolbox function that created the given model. This can be assigned to any model type listed in the <tt>.validmodeltypes</tt> property.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.display</tt>
+</p>
+</td>
+<td>String property indicating 'on' if command-line display should be given when calibrating or applying a model and 'off' if no display should be given.
+<ul><li>'<b>on'</b>&#160;: Display command-line output</li>
+<li>'<b>off'</b>&#160;: Do not display any output</li></ul>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.plots</tt>
+</p>
+</td>
+<td>String property indicating 'final' if plots should be displayed after calibrating or applying a model and 'none' if no plots should be displayed.
+<ul><li>'<b>final'</b>&#160;: Generate plots (if possible)</li>
+<li>'<b>none'</b>&#160;: Do not generate any plots</li></ul>
+</td>
+<td>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.options</tt>
+</p>
+</td>
+<td>Structure array with modifiable fields specific to each model object. For example
+<p><tt>.options.confidencelimit = 0.99;</tt>  sets the default confidence limit for the model to 99%.
+</p>
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h3><span class="mw-headline" id="Uncalibrated_Model_Methods">Uncalibrated Model Methods</span></h3>
+<p>Both of the methods below return a model object. In Matlab, when no output is requested, the model object is stored back into the same object invoked. In Solo Scripting, these methods require an output variable, usually the same model object being built from. For example: <tt>m = m.calibrate</tt>
+</p>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.calibrate</tt>
+</p>
+</td>
+<td>Build the model based on the current meta-parameters and options.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.crossvalidate(<i>cvi</i>,<i>ncomp</i>)</tt>
+</p>
+</td>
+<td>Build the model and cross-validate with the supplied conditions. <i>cvi</i> is the cross-validation splitting as described for cvi in <a href="crossval.html" title="Crossval">crossval</a> (default = venetian blinds with square-root of the number of samples as splits). <i>ncomp</i> is the number of components (default = maximum number available).
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h2><span class="mw-headline" id="Working_With_Calibrated_Models">Working With Calibrated Models</span></h2>
+<p>Once calibrated, a model object contains all the results (relevant to the model type) derived from the modeled data. The object also has all the information necessary to apply that model to new data. For many models, methods exist for plotting parts of the model (scores, loadings, eigenvalues, etc.)
+</p><p>Whether or not a model has been calibrated can be determined by the <tt>.iscalibrated</tt> property which will be true (1) when the model is calibrated. If the object is a prediction from a model, its <tt>.isprediction</tt> property will be true (1) indicating it cannot be applied to new data (only the original, calibrated model can be applied).
+</p>
+<h3><span class="mw-headline" id="Example_2">Example</span></h3>
+<p>Given a model which has already been calibrated (either by using the calibrate method, or by calling one of the <a href="modeling_function_overview.html" title="Modeling Function Overview">model building functions</a> directly), the following would produce a plot of the scores for the model:
+</p>
+<pre> model.plotscores
+</pre>
+<p>or obtain a DataSet object containing those scores:
+</p>
+<pre> dso = model.plotscores;
+</pre>
+<p>Extracting the Hotelling's T<sup>2</sup> statistic for the first 5 samples would be done using:
+</p>
+<pre> model.t2(1:5)
+</pre>
+<p>Applying the model to new data in the variable <tt>x_new</tt> could be done using:
+</p>
+<pre> prediction = model.apply(x_new);
+</pre>
+<h3><span class="mw-headline" id="Calibrated_Model_Properties">Calibrated Model Properties</span></h3>
+<p>The properties available in a calibrated model depends on the model type. Many of the properties are listed in the <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a> documentation. In Matlab, all fields available can be found by using "tab completion" (type the name of the variable containing the model plus a period, then press the [Tab] key) or by using the fieldnames() function.
+</p><p>In addition to the properties (fields) listed in the Standard Model Structure information, the following "shortcut" fields exist as an easy way to access properties usually embedded in the object. Note that not all of these fields exist for all model types:
+</p><p>The following properties are available for many models once they have been calibrated and represent "shortcut" methods into the Standard Model Structure fields or other model analysis methods. See also the <tt>.display</tt> and <tt>.plots</tt> properties described in the <a href="#Modifiable_Properties"> Uncalibrated Model Properties (Modifiable Properties) section</a>
+</p>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.componentnames</tt>
+</p>
+</td>
+<td>Component names can be added after a model is calculated to models of type PCA, MCR, PURITY, and PARAFAC. Recalculating the model will clear component names so it's recommended to name components at the end of the model building process. Component names can be used to help identify components of models in exported models.
+<pre>model.componentnames = {'Low Group 1' 'Low Zirconium' 'High Yttrium'};</pre>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.detail</tt>
+</p>
+</td>
+<td>As described in the <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a> pages, this field contains model-specific statistics, results, and parameters of the model. The contents are highly varied. For ease of use, any field within the <tt>.detail</tt> property can be accessed <i>without</i> the <tt>.detail</tt> prefix (i.e. by requesting the value directly from the "top-level" model object. For example:  <tt>model.preprocessing</tt> is identical to <tt>model.detail.preprocessing</tt>.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.esterror</tt>
+</p>
+</td>
+<td>Returns the error estimate for each sample as defined in <a href="ils_esterror.html" title="Ils esterror">ils_esterror</a>. When used with a prediction (when <tt>.isprediction</tt> is true), the prediction must have either been calculated using the <tt>.apply</tt> method or the original model must be passed as an input:
+<dl><dd><dl><dd><tt> pred.esterror(model)</tt></dd></dl></dd></dl>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.iscalibrated</tt>
+</p>
+</td>
+<td>Returns (1) if the model has been calibrated or applied and (0) if the model is in the "empty" state and has not been calibrated.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.loadings</tt>
+</p>
+</td>
+<td>Returns the x-block loadings as simple matrix (equivalent to <tt>.loads{2,1}</tt>)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.ncomp</tt>
+</p>
+</td>
+<td>Returns the number of components (PCs, LVs, etc) used in the model. For model types that do not have an adjustable parameter for number of components, a value of one (1) will be returned.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.reg</tt>
+</p>
+</td>
+<td>Returns the regression vector for model types: MLR, PCR, PLS, and PLSDA. For PLS-2 models, <tt>.reg</tt> will return a cell array with regression coefficients.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.prediction</tt>
+</p>
+</td>
+<td>Returns the property most associated with "predictions" for the given model type. Model types are:
+<ul><li>Decomposition (PCA, MCR, etc) - returns x-block scores for each sample (<tt>.loads{1,1}</tt>)</li>
+<li>Regression (PLS, PCR, SVM, etc) - returns y-block predictions (known as y_hat, usually <tt>.pred{2}</tt>)</li>
+<li>Classification (PLSDA, SVMDA, KNN, etc) - returns the single-class assignment for each sample as a class ID string (<tt>.classification.inclass</tt> indexed into the class ID lookup <tt>.classification.classids</tt>)</li></ul>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.predictionlabel</tt>
+</p>
+</td>
+<td>Returns the labels associated with each column of the .prediction field (see above)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.q</tt>
+</p>
+</td>
+<td>Returns the x-block sum squared residuals for each sample (<tt>.ssqresiduals{1}</tt>). If the <i>reducedstats</i> property is set to 'on', the value returned by this property is normalized to the confidence limit stored in the model.detail.reslim{1} field.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.qcon</tt>
+</p>
+</td>
+<td><i>See methods below</i>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.scoredistance</tt>
+</p>
+</td>
+<td>Returns the normalized k nearest neighbor score distance. This distance is used to detect "inliers" which are samples that fall within the Q and T2 limits, but are in an unusual area of score space with few other close samples. The value is as defined in <a href="knnscoredistance.html" title="Knnscoredistance">knnscoredistance</a> except that the values returned by this property are normalized to the maximum value observed for all included calibration samples. Thus, a value of 1 for a sample means that the given sample is as far away from any calibration sample(s) as was the furthest (most unusual) calibration sample. Can optionally take an integer input to indicate the number of neighbors (k) to calculate distance from. Default for k is defined in <a href="knnscoredistance.html" title="Knnscoredistance">knnscoredistance</a> and is usually 3.
+<dl><dd><dl><dd><tt> model.scoredistance(1)</tt></dd></dl></dd></dl>
+<p>When used with a prediction (when <tt>.isprediction</tt> is true), the prediction must have either been calculated using the <tt>.apply</tt> method or the original model must be passed as an input, with or without a value for k:
+</p>
+<dl><dd><dl><dd><tt> pred.scoredistance(model)</tt></dd>
+<dd><tt> pred.scoredistance(model,1)</tt></dd></dl></dd></dl>
+<p><br />
+KNN Distance with k=1 is equivalent to the Nearest Neighbor Distance described in the ASTM standard D6122-06 "Standard Practice for Validation of the Performance of Multivariate Process Infrared Spectrophotometers" Section A3 Outlier Detection Methods sub-section A3.4 Nearest Neighbor Distance. 
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.scores</tt>
+</p>
+</td>
+<td>Returns the x-block scores for each sample (<tt>.loads{1,1}</tt>)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.t2</tt>
+</p>
+</td>
+<td>Returns the Hotelling's T<sup>2</sup> for the x-block (<tt>.tsqs{1}</tt>).  If the <i>reducedstats</i> property is set to 'on', the value returned by this property is normalized to the confidence limit stored in the model.detail.tsqlim{1} field.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.tcon</tt>
+</p>
+</td>
+<td><i>See methods below</i>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.uniqueid</tt>
+</p>
+</td>
+<td>Returns a unique ID identifying this model based on its model type, author, and build time/date.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.x</tt>
+</p>
+</td>
+<td>Returns the original x-block data (when available)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.xhat</tt>
+</p>
+</td>
+<td>Returns the reconstructed x-block (x_hat, see <a href="datahat.html" title="Datahat">datahat</a>)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.y</tt>
+</p>
+</td>
+<td>Returns the original y-block data (when available)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.yhat</tt>
+</p>
+</td>
+<td>Returns the estimated y-block (y_hat, as estimated by the model)
+</td></tr></tbody></table>
+<p>The following properties modify the behavior of the properties and methods of a calibrated model:
+</p>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.matchvars</tt>
+</p>
+</td>
+<td>Governs use of variable alignment when appling the model to new data via the .apply() method.
+<ul><li>'on' = new data will be aligned to model before application.</li>
+<li>'off' = if the new data variables do not match the model's expected variables, an error will be thrown.</li></ul>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.contributions</tt>
+</p>
+</td>
+<td>
+<p>Governs detail of returned T^2 and Q contributions from the .tcon and .qcon properties. Return contributions for: 
+</p>
+<ul><li>'passed' = only the variables passed by the client in the order passed. This mode allows the client to easily map contributions back to passed data and is the preferred mode.</li>
+<li>'used' = all variables used by the model including even variables which client did not provide. Variable order is that used by model and may not match the order passed by the client.</li>
+<li>'full' = all variables used or excluded by the model, including even variables which client did not provide. Variable order is that used by model and may not match the order passed by the client.</li></ul>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.reducedstats</tt>
+</p>
+</td>
+<td>Governs whether Q and T^2 statistics returned by .T2 and .Q properties are "reduced" using the confidence limit set in the model.detail.reslim and model.detail.tsqlim fields.
+<ul><li>'on' = statistics are normalized using the value stored in the appropriate detail sub-field.</li>
+<li>'off' = statistics are returned as calculated.</li></ul>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Calibrated_Model_Methods">Calibrated Model Methods</span></h3>
+<p>The following methods are available when a model has been calibrated.
+</p>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.apply(x_new,<i>y_new</i>,<i>options</i>)</tt>         
+</p>
+</td>
+<td>Applies the model to the data  <tt>x_new</tt> and returns a <a href="#Working_With_Applied_Models_.28Predictions.29">prediction structure</a>. If <tt><i>y_new</i></tt> is supplied (and is appropriate for the model type, e.g. the model is a regression model), this data will be used as validation/test values to compare predictions against. If <tt><i>options</i></tt> is supplied, it is passed into the model prediction function (allowing modification of some parameters.).
+<dl><dd><b>Note:</b> The <a href="#Modifiable_Properties"><tt>.plots</tt> and <tt>.display</tt> properties</a> of a model will be used when using this method. If enabled, the method will show plots and/or command-line display as requested. The values in these properties will always override any values passed in the <tt><i>options</i></tt> input to the <tt>.apply</tt> method.</dd></dl>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.crossvalidate(x,<i>cvi</i>,<i>ncomp</i>)</tt>         
+</p>
+</td>
+<td>When cross-validation has not been done when building a model, this method can be used to cross-validate a model (with the conditions used to build it) and store the results in the model object. This is a similar method to the one used with the <a href="#Uncalibrated_Model_Methods">Uncalibrated Model Methods</a> except that it generally <i>requires</i> the x-block data be provided in the inputs (since most models do not keep the original calibration x-block data in the calibrated model structure.) The <tt><i>cvi</i></tt> and <tt><i>ncomp</i></tt> inputs are <a href="#Uncalibrated_Model_Methods">as defined above</a>.
+<dl><dd><b>Note:</b> The <a href="#Modifiable_Properties"><tt>.plots</tt> and <tt>.display</tt> properties</a> of a model will be used when using this method. If enabled, the method will show plots and/or command-line display as requested.</dd></dl>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.ssqtable .ssqtext .ssqcell</tt>     
+</p>
+</td>
+<td>Return variance captured table in different formats (MATALB table objec, raw text, or cell array).
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.ploteigen</tt>     
+</p>
+</td>
+<td>With no outputs, this method generates a plot of the eigenvalues or other  statistics associated with changing the number of components in the model (e.g. RMSEC, misclassification rates) for the given model. With an output, no plot is generated but the DataSet object containing the data that would have been plotted is returned.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.plotloads</tt>     
+</p>
+</td>
+<td>With no outputs, this method generates a plot of the loadings (including all variable-specific statistics and results) for the given model. With an output, no plot is generated but the DataSet object containing the loadings is returned.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.plotscores</tt>    
+</p>
+</td>
+<td>With no outputs, this method generates a plot of the scores (including all sample-specific statistics and results) for the given model. With an output, no plot is generated but the DataSet object containing the scores is returned.
+<p><br />
+</p>
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.qcon(x)</tt>
+</p>
+</td>
+<td>Returns the Q contributions (matrix of x-block residuals for each sample). For most model types, this method <i>requires</i> input of the x-data for which the q residuals should be calculated. (see <a href="qconcalc.html" title="Qconcalc">qconcalc</a>)
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.tcon(<i>x</i>)</tt>
+</p>
+</td>
+<td>Returns the Hotelling's T<sup>2</sup> contributions (scaled matrix of x-block projections into the model for each sample.) If the <i>x</i> input is omitted, the contributions for the calibration data are returned. If <i>x</i> is supplied, the contributions for the supplied x-data are calculated. (see <a href="tconcalc.html" title="Tconcalc">tconcalc</a>)
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h2><span id="Working_With_Applied_Models_.28Predictions.29"></span><span class="mw-headline" id="Working_With_Applied_Models_(Predictions)">Working With Applied Models (Predictions)</span></h2>
+<p>When a model is applied to new data, the output is an applied model, also known as a prediction object. The object type itself is still an EVRIModel Object and nearly all of the methods and properties that were available <a href="#Working_With_Calibrated_Models">when working with a calibrated model</a> are available with an applied model. The most notable difference is that any plots or sample-specific results extracted from the model will be for the data to which it was applied instead of the calibration data. For example, when a model which calculates scores is applied to new data, the resulting EVRIModel Object will contain a <tt>.scores</tt> property that is the scores calculated for the new data.
+</p><p>Whether a model object is a calibrated model or a model prediction can be determined by looking at the <tt>.isprediction</tt> field. Note that a prediction object cannot be applied to new data. Only the original model can be applied. However, if a model has been applied using the <tt>.apply</tt> method of a model, the original model is generally stored in the <tt>.parent</tt> field so the model could be re-applied using:  <tt>pred2 = pred.parent.apply(x_new2)</tt> where <tt>x_new2</tt> is new(er) data to apply the original model to.
+</p>
+<h3><span class="mw-headline" id="Applied_Model_Properties">Applied Model Properties</span></h3>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.isprediction</tt>
+</p>
+</td>
+<td>Returns (1) if the model contains a prediction from applying a calibrated model to new data and (0) if the model is just "calibrated" or "empty".
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.parent</tt>
+</p>
+</td>
+<td>When a model has been applied to new data using the <tt>.apply</tt> method, this property will contain a copy of the original model object. The contents of this property are automatically used when a plotting method requires both the calibration and application data.
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h2><span class="mw-headline" id="General_Model_Properties_and_Methods">General Model Properties and Methods</span></h2>
+<p>In addition to the properties and methods described above, the following properties and methods are always available in a model independent of the model state or model type:
+</p>
+<h3><span id="Informational_Properties_.28Read-Only.29"></span><span class="mw-headline" id="Informational_Properties_(Read-Only)">Informational Properties (Read-Only)</span></h3>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.author</tt>
+</p>
+</td>
+<td>String describing the author and computer on which this model was created. Usually <i>user@computername</i>. Given a system with assigned usernames and computer names, this is equivalent to an electronic signature on a model.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.content</tt>
+</p>
+</td>
+<td>Returns the "raw" model information in a form that is most similar to the model structures from previous versions of PLS_Toolbox and Solo. Generally, users need not access this field directly except to provide a model in a form more similar to old models.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.downgradeinfo</tt>
+</p>
+</td>
+<td>Informational string explaining the purpose of the <tt>.content</tt> field.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.evrimodelversion</tt><br />
+<tt>.modelversion</tt>
+</p>
+</td>
+<td>Returns a string containing the model version description. The model version is almost always linked to the version of PLS_Toolbox or Solo that created the given model. The two field names here are synonymous.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.info</tt>
+</p>
+</td>
+<td>Returns (or displays with no outputs) the text description of the model. This is the same description shown at the Matlab command line when the model is viewed with content "on". With an output, the results are returned as a cell array of strings.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.isclassification</tt>
+</p>
+</td>
+<td>Returns (1) if the model is a classification model that returns class assignments for unknowns or (0) if it is a decomposition or regression model type.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.isyused</tt>
+</p>
+</td>
+<td>Returns (1) if the model is using a 2-block (x-block and y-block) method.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.uniqueid</tt>
+</p>
+</td>
+<td>Returns a string which uniquely identifies this model including the author, author's computer, and a date/time stamp. This uniqueid can be used to safely discriminate between different models.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.validmodeltypes</tt>
+</p>
+</td>
+<td>Returns a cell array of strings listing the model types which are currently valid for assignment to the <tt>.modeltype</tt> field.
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h3><span class="mw-headline" id="General_Methods">General Methods</span></h3>
+<table border="1" cellpadding="5" cellspacing="0" style="margin-left:3em">
+
+<tbody><tr>
+<td valign="top">
+<p><tt>.disp</tt>
+</p>
+</td>
+<td>Displays the contents of the model. There is no output variable from this method, it only displays the information. For access to the content, see the <tt>.info</tt> method.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.encode</tt>
+</p>
+</td>
+<td>Returns m-script code which, when executed by Matlab with PLS_Toolbox, will regenerate the model contents (note: this code does not rebuild the model from raw data, but reconstitutes the content of the model from this text format description of the model.) See the <a href="encode.html" title="Encode">encode</a> function.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.encodexml</tt>
+</p>
+</td>
+<td>Returns xml descriptor of the model content. Parsing this content using the XML import functions of Solo or PLS_Toolbox (see <a href="parsexml.html" title="Parsexml">parsexml</a>) will regenerate the model contents from this text format description of the model.  See the <a href="encodexml.html" title="Encodexml">encodexml</a> function.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.help</tt>
+<tt>.help.predictions</tt>
+</p>
+</td>
+<td>Alone without any additional sub-indexing, this method brings up the help which is most relevant for the particular model type. With the <tt>.predictions</tt> sub-field, this method returns <a href="solo_predictor_script_construction.html#Common_Return_Properties" title="Solo Predictor Script Construction">a structure array of possible sub-fields</a> that may be requested for certain properties of the current model.
+</td></tr>
+<tr>
+<td valign="top">
+<p><tt>.isnewmodel</tt>
+</p>
+</td>
+<td>Test if model is newer than current version.
+</td></tr></tbody></table>
+<p>&#160;
+</p>
+<h2><span class="mw-headline" id="Backwards_Compatibility">Backwards Compatibility</span></h2>
+<p>In general, PLS_Toolbox and Solo models cannot be guaranteed to be backwards compatible to earlier versions of the software. This is because we may introduce a new preprocessing method, or numerical calculation option to an analysis method which simply doesn't exist in the earlier software. Although Eigenvector Research cannot guarantee that we won't make changes to our data or model formats that will "break" code which users have written, we do make every effort to make new code as compatible with old user code as much as practical. The EVRIModel Object has been similarly constructed and will, for the most part, behave much as the old PLS_Toolbox model structures. Indexing into fields and referencing models in code will appear almost identical.
+</p><p>One notable exception is that the EVRIModel Object itself is stored in a format such that a model saved in the released version of PLS_Toolbox or Solo will <i>not</i> be readable by a version of the software released prior to the introduction of EVRIModel objects. The only way to extract the "simple" model structure format that existed prior to the EVRIModel object is to use the <a href="#General_Model_Properties_and_Methods"><tt>.content</tt> property</a> of the model object. This will convert the top-level model into the basic format that is nominally readable by old versions. However, it is critical to note that other model format or algorithmic changes may make this backwards compatibility impossible.
+</p><p>An additional way to extract all model objects into their non-object form is to set the 'noobject' property to 1 (one).
+</p>
+<pre> setplspref('evrimodel','noobject',1)
+</pre>
+<p>All models (top-level models and any embedded models) loaded when that flag is enabled will be automatically extracted.
+</p><p>If backwards compatibility is truly needed, it is best to contact the <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">Eigenvector Research Helpdesk</a>.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205515
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.036 seconds
+Real time usage: 0.038 seconds
+Preprocessor visited node count: 113/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 261/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1163-0!canonical and timestamp 20240930205515 and revision id 12215.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=EVRIModel_Objects&amp;oldid=12215">https://www.wiki.eigenvector.com/index.php?title=EVRIModel_Objects&amp;oldid=12215</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 18 March 2024, at 09:01.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

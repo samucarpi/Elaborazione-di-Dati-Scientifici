@@ -1,0 +1,685 @@
+<demodata>
+  <dataitem>
+    <gui>analysis</gui>
+    <file>alcohol</file>
+    <name>Alcoholics Biological Data (alcohol, 65x52)</name>
+    <varitem>
+      <varname>alcohol</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>aminoacids</file>
+    <name>Aminoacid Fluorescence EEMs (aminoacids, 5x201x61)</name>
+    <varitem>
+      <varname>X</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>arch</file>
+    <name>Archeology XRF (arch, 75x10)</name>
+    <varitem>
+      <varname>arch</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>iris</file>
+    <name>Iris Flowers (iris, 150x4)</name>
+    <varitem>
+      <varname>iris</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>SIMS_arylate</file>
+    <name>Polyarylates TOF-SIMS (SIMS_arylate, 47x433)</name>
+    <varitem>
+      <varname>arylate</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>flucuttest</file>
+    <name>Fluorescence EEM data (flucuttest, 2x15x23)</name>
+    <varitem>
+      <varname>z</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>bread</file>
+    <name>Bread 3-Way Sensory Evaluation (bread, 10x11x8)</name>
+    <varitem>
+      <varname>bread</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>dorrit</file>
+    <name>Dorrit 4-component Fluorescence EEMs (dorrit, 27x116x18)</name>
+    <varitem>
+      <varname>EEM</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Y</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>Dupont_BSPC</file>
+    <name>Dupont Batch Statistical Process Control (Dupont_BSPC, 3600x10)</name>
+    <varitem>
+      <varname>dupont_cal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>dupont_test</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>etchdata</file>
+    <name>Semiconductor Etch Batch Data (etchdata, 80x12x107)</name>
+    <varitem>
+      <varname>EtchCal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>EtchTest</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>fia</file>
+    <name>FIA of Hydroxy-Benzaldehyde 3-way (fia, 12x50x45)</name>
+    <varitem>
+      <varname>FIA</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+   
+  <dataitem>
+    <gui>analysis</gui>
+    <file>FTIR_microscopy</file>
+    <name>FTIR Microscopy of Polymer Laminate (FTIR_Microscopy, 17x81)</name>
+    <varitem>
+      <varname>FTIR_microscopy</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>halddata</file>
+    <name>Hald Portland Cement Curing Data (halddata, 13x4)</name>
+    <varitem>
+      <varname>xblock</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>yblock</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>pulsdata</file>
+    <name>Slurry-fed Ceramic Melter Timeseries Data (pulsdata, 325x3)</name>
+    <varitem>
+      <varname>melter_data</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem> 
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>nir_data</file>
+    <name>NIR of Pseudo-Gasolines (nir_data, 30x401)</name>
+    <varitem>
+      <varname>spec1</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>conc</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>spec2</varname>
+      <loadas></loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>NIR_GlutenStarch</file>
+    <name>NIR of Starch and Gluten Particles (NIR_GlutenStarch 100x100)</name>
+    <varitem>
+      <varname>x</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>y</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>octane</file>
+    <name>Octane Rating by NIR Spectroscopy (octane, 39x226)</name>
+    <varitem>
+      <varname>spec</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>octane</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem> 
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>OliveOilData</file>
+    <name>Olive Oil Classification by FT-IR (OliveOilData, 36x518)</name>
+    <varitem>
+      <varname>xcal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>xtest</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+  </dataitem> 
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>plsdata</file>
+    <name>Slurry-Fed Ceramic Melter PLS Data (plsdata, 300x20)</name>
+    <varitem>
+      <varname>xblock1</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>yblock1</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>xblock2</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>yblock2</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem> 
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>raman_time_resolved</file>
+    <name>Raman of Time Resolved Reaction (raman_time_resoloved, 16x151)</name>
+    <varitem>
+      <varname>raman_time_resolved</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>raman_dust_particles</file>
+    <name>Raman Spectra of Microcrystals (raman_dust_particles, 120x1025)</name>
+    <varitem>
+      <varname>raman_dust_particles</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>stars</file>
+    <name>Star Temp and Intensity Data (stars, 47x2)</name>
+    <varitem>
+      <varname>stars</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>sugar</file>
+    <name>Sugar Quality by Fluorescence EEM (sugar, 268x44x7)</name>
+    <varitem>
+      <varname>sugar</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>analysis</gui>
+    <file>wine</file>
+    <name>Wine, Beer, Liquor vs. Heart Disease (wine, 10x5)</name>
+    <varitem>
+      <varname>wine</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>corrspecgui</gui>
+    <file>data_mid_IR</file>
+    <name>Mid IR Demo Data (data_mid_IR, 21x130)</name>
+    <varitem>
+      <varname>data_mid_IR</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <gui>corrspecgui</gui>
+    <file>data_near_IR</file>
+    <name>Near IR Demo Data (data_near_IR, 21x149)</name>
+    <varitem>
+      <varname>data_near_IR</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+ 
+  <dataitem>
+    <file>MS_time_resolved</file>
+    <name>Time Resolved MassSpec (MS_time_resolved, 20x757)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>MS_time_resolved</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>MS_time_resolved_references</file>
+    <name>Time Resolved MassSpec Reference Spectra (MS_time_resolved_references, 3x757)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>MS_time_resolved_references</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>SBRdata_EU</file>
+    <name>Styrene-Butadiene Copolymer NIR Spectra (SBRdata_EU, 60x141)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>Xcal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Ycal</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Xtest</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Ytest</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>biscuit</file>
+    <name>Biscuit Dough NIR Analysis (biscuit, 40x600)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>spec</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>recipe</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>brain_weight</file>
+    <name>Brain Weight and Body Mass Animal Data (brain_weight, 28x2)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>brains</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>gcwine</file>
+    <name>GCMS Data of Red Wines vs. Region (gcwine, 71x150x24)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>gcwine</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>lcms</file>
+    <name>LCMS of Surfactants (lcms, 345x1451)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>lcms</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>lcms_compare1</file>
+    <name>LCMS of Surfactants, Good Batch (lcms_compare1, 675x1940)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>lcms_compare1</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>lcms_compare2</file>
+    <name>LCMS of Surfactants, Bad Batch (lcms_compare2, 675x1940)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>lcms_compare2</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>lcms_compare3</file>
+    <name>LCMS of Surfactants, Problematic Batch (lcms_compare3, 675x1940)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>lcms_compare3</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>nmr_data</file>
+    <name>PGSE NMR of Photographic Film (nmr_data, 20x1176)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>nmrdata</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>oesdata</file>
+    <name>Semiconductor Etch Optical Emission Spectra (oesdata, 46x770)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>oes1</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>paint</file>
+    <name>Paint Formulation Non-Linear Data (paint, 49x4)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>paint_cal_X</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>paint_cal_Y</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>paint_cal_X</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>paint_cal_Y</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>pcadata</file>
+    <name>Slurry-Fed Ceramic Melter PCA Data (pcadata, 300x10)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>part1</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>part2</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>purvardata</file>
+    <name>Purity Demo Data (purvardata, 6x99)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>data</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>purvardata_noise</file>
+    <name>Purity Demo Data w/noise (purvardata_noise, 6x99)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>data</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>raman_dust_particles_references</file>
+    <name>Raman Spectra of Microcrystals References (raman_dust_particles_refs, 3x1025)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>raman_dust_particles_references</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>replacedata</file>
+    <name>Slurry-Fed Ceramic Melter Replacement Demo Data (replacedata, 450x21)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>repcal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>reptest1</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>sawdata</file>
+    <name>Surface Acoustic Wave Vapor Sensor Data (sawdata, 72x13)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>SAWdata</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>wineregion</file>
+    <name>Wine Metal Composition by XRF (wineregion, 38x17)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>wineregion</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <file>cancer</file>
+    <name>Cervical Cancer EEM Classification Data (cancer, 563x22)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>cancer</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <file>asca_data</file>
+    <name>Glucosinolate Levels in Cabbage (asca_data, 60x11)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>X</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>F</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <file>mlsca_data</file>
+    <name>Metal Etch Wafer Data (mlsca_data, 8560x12)</name>
+    <gui>analysis</gui>
+    <varitem>
+      <varname>x</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>F</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+  </dataitem>
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>corn_dso</file>
+    <name>Corn samples by NIR (corn_dso, 80x700)</name>
+    <varitem>
+      <varname>m5spec</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>conc</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>mp5spec</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>conc</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem> 
+  
+    <dataitem>
+    <gui>analysis</gui>
+    <file>beer</file>
+    <name>Beer VIS-NIR Transmission (beer, 40x926)</name>
+    <varitem>
+      <varname>beer</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>extract</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>beertest</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>extracttest</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem> 
+  
+  <dataitem>
+    <gui>analysis</gui>
+    <file>tecator</file>
+    <name>NIR of Meat Samples  (tecator, 216x100)</name>
+    <varitem>
+      <varname>Xcal</varname>
+      <loadas>xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Ycal</varname>
+      <loadas>yblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Xtest</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>Ytest</varname>
+      <loadas>validation_yblock</loadas>
+    </varitem>
+  </dataitem>
+
+  <dataitem>
+    <gui>analysis</gui>
+    <file>clsti_data</file>
+    <name>CLSTI - Pure Component Data  (clsti_data)</name>
+    <varitem>
+      <varname>pureAcetone</varname>
+      <loadas></loadas>
+    </varitem>
+    <varitem>
+      <varname>pureEthanol</varname>
+      <loadas></loadas>
+    </varitem>
+    <varitem>
+      <varname>pureIsopropanol</varname>
+      <loadas></loadas>
+    </varitem>
+    <varitem>
+      <varname>pureMethanol</varname>
+      <loadas></loadas>
+    </varitem>
+    <varitem>
+      <varname>sample01_DSO</varname>
+      <loadas>validation_xblock</loadas>
+    </varitem>
+    <varitem>
+      <varname>sample02_DSO</varname>
+      <loadas></loadas>
+    </varitem>
+    <varitem>
+      <varname>sample03_DSO</varname>
+      <loadas></loadas>
+    </varitem>
+  </dataitem>
+</demodata>
+
+

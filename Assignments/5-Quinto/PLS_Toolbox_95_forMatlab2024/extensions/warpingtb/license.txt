@@ -1,0 +1,22 @@
+Dynamic Time Warping (DTW) and Correlation Optimized Warping (COW)
+
+This code is included with permission from the authors. 
+It is available for free from: 
+
+http://www.models.kvl.dk/DTW_COW
+ 
+Giorgio Tomasi, Thomas Skov and Frans van den Berg
+
+Introduction:
+Many analytical signals based on time-trajectories show artifacts 
+appear as shifts. Of the many algorithms developed to correct for 
+these artifacts DTW (named Dynamic Multi-way Warping - DMW - to 
+distinguish it form other implementations) and COW are 
+implemented as Matlab code.
+
+References:
+Correlation Optimized Warping and Dynamic Time Warping as Preprocessing Methods for Chromatographic Data
+Tomasi, G., van den Berg, F., Andersson, C., Journal of Chemometrics 18(2004)231-241
+Automated Alignment of Chromatographic Data Skov T, van den Berg F, Tomasi G, Bro R (2006) Automated alignment of chromatographic data, Journal of Chemometrics, 20 (11-12): 484-497
+
+

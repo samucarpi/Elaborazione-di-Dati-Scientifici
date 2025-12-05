@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Analysis Window: Model Cache Pane - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+<link rel="canonical" href="https://www.wiki.eigenvector.com/index.php?title=Analysis_Window:_Model_Cache_Pane"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Analysis_Window_Model_Cache_Pane rootpage-Analysis_Window_Model_Cache_Pane skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=AnalysisWindow_ModelCachepane"><span class="mw-page-title-main">Analysis Window: Model Cache Pane</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"><span class="mw-redirectedfrom">(Redirected from <a href="" class="mw-redirect" title="AnalysisWindow ModelCachepane">AnalysisWindow ModelCachepane</a>)</span></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Analysis_window_Model_Cache_pane"><span class="tocnumber">1</span> <span class="toctext">Analysis window Model Cache pane</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Model_Cache_pane_view"><span class="tocnumber">2</span> <span class="toctext">Model Cache pane view</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Cache_management"><span class="tocnumber">3</span> <span class="toctext">Cache management</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Manipulating_cached_items"><span class="tocnumber">4</span> <span class="toctext">Manipulating cached items</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Moving/Changing_a_Cache"><span class="tocnumber">5</span> <span class="toctext">Moving/Changing a Cache</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Exporting_and_Importing_Models"><span class="tocnumber">6</span> <span class="toctext">Exporting and Importing Models</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Troubleshooting"><span class="tocnumber">7</span> <span class="toctext">Troubleshooting</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href=""><span class="tocnumber">7.1</span> <span class="toctext">Can't Connect</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Confirm_Location"><span class="tocnumber">7.2</span> <span class="toctext">Confirm Location</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Remove_Lock_Files"><span class="tocnumber">7.3</span> <span class="toctext">Remove Lock Files</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Recreate_Empty_Cache"><span class="tocnumber">7.4</span> <span class="toctext">Recreate Empty Cache</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<p><a href="tableofcontents.html" title="TableOfContents">Table of Contents</a> | <a href="analysiswindow_analysisflowchartpane.html" class="mw-redirect" title="AnalysisWindow AnalysisFlowChartPane">Previous</a> | <a href="modelbuilding_preprocessingmethods.html" class="mw-redirect" title="ModelBuilding PreProcessingMethods">Next</a>
+</p>
+<h3><span class="mw-headline" id="Analysis_window_Model_Cache_pane">Analysis window Model Cache pane</span></h3>
+<p>Data that is used to create models and predictions during data analysis as well as all of the models and predictions created from this data is automatically <a href="modelcache.html" title="Modelcache">cached</a>. After a model is created, the model and the data used to create it are added to the cache. If new data is loaded and a prediction is made, this new data and the prediction are added to the cache. Every time you edit data and create a new model or prediction from the data, each version of the modified data and the corresponding model or prediction are added to the cache. The Model Cache pane displays this complete history of all your cached items-all of the data that was used to create models and predictions during data analysis as well as all of the models and predictions that were created from this data-in a hierarchical view. 
+</p>
+<dl><dd><i>Analysis window Model Cache pane</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Model cache pane.png" src="247px_model_cache_pane.png" decoding="async" width="247" height="288" /></a></dd></dl></dd></dl>
+<p>To reload a previously created model:
+</p>
+<ol><li>Set the Model Cache view to the mode which best organizes the list to help you find the item desired (see the <a href="#Model_Cache_pane_view" class="mw-redirect" title="AnalysisWindow ModelCachepane">Model Cache pane view</a> descriptions for suggestions.)</li>
+<li>Locate the model to load in the list (Note that after other sorting criteria are met, models on a specific branch are sorted by date in all views.)</li>
+<li>Double-click on the old model to load it into the Analysis window. The calibration data corresponding to the model will also be automatically loaded (if it is available in the cache.) Right-clicking the model will give other options - see <a href="#Manipulating_cached_items" class="mw-redirect" title="AnalysisWindow ModelCachepane">Manipulating cached items</a>.</li></ol>
+<p>For more usage hints, see the <a href="#Model_Cache_pane_view" class="mw-redirect" title="AnalysisWindow ModelCachepane">Model Cache pane view</a> descriptions below.
+</p><p><b>Note:</b> By default, the Model Cache pane is turned on when Solo first opens. You can close the Model Cache pane by clicking the Close ("X") button in the upper right hand corner of the pane. To turn the Model Cache on again, on the Tools menu on the Analysis window, click View Cache, and then select a viewing option. Models and data are cached even if the Model Cache pane is not open.
+</p><p>Multiple options are available to you for changing the Model Cache view, managing your cache, and manipulating cache items. See:
+</p>
+<ul><li><a href="#Model_Cache_pane_view" class="mw-redirect" title="AnalysisWindow ModelCachepane">Model Cache pane view</a>.</li>
+<li><a href="#Cache_management" class="mw-redirect" title="AnalysisWindow ModelCachepane">Cache management</a>.</li>
+<li><a href="#Manipulating_cached_items" class="mw-redirect" title="AnalysisWindow ModelCachepane">Manipulating cached items</a>.</li></ul>
+<h3><span class="mw-headline" id="Model_Cache_pane_view">Model Cache pane view</span></h3>
+<p>The options to change the Model Cache pane view are found in two locations:
+</p>
+<ul><li>In the Model Cache pane itself under Cache Settings and View</li>
+<li>On the Tools menu (the View Cache option) for the Analysis windows</li></ul>
+<dl><dd><i>Options to change the Model Cache pane view</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Model cache settings options.png" src="170px_model_cache_settings_options.png" decoding="async" width="170" height="56" /></a></dd></dl></dd></dl>
+<p>You can select from three different organizational views:
+</p>
+<ul><li>View Cache by Lineage-In the View Cache by Lineage view, the cache items are sorted by the parent data item. Under the parent data item, the child items (modified data, model, and predictions) are sorted by the timestamps at each modification point.</li></ul>
+<dl><dd>This is a convenient view to use in identifying a set of models which were all created from a specific data set or <i>version</i> of a data set (such as a specific data set with different sets of included variables and/or samples.)</dd></dl>
+<dl><dd><i>View Cache by Lineage view</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Model cache view lineage.png" src="247px_model_cache_view_lineage.png" decoding="async" width="247" height="288" /></a></dd></dl></dd></dl>
+<ul><li>View Cache by Date-In the View Cache by Date view, all cached items are simply sorted by creation date in chronological order.</li></ul>
+<dl><dd>This is a convenient view to use when attempting to locate a model or data which was used on a specific date. For example, to reload a model which you knew was built yesterday, switch to the Date view, locate yesterday's date, and expand the tree. All data and models used on that day will be listed. Reload any model by double-clicking it.</dd></dl>
+<dl><dd><i>View Cache by Date view</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Model cache view date.png" src="247px_model_cache_view_date.png" decoding="async" width="247" height="288" /></a></dd></dl></dd></dl>
+<ul><li>View Cache by Type-In the View Cache by Type view, all cached items are simply sorted by object type-data, model, or prediction.</li></ul>
+<dl><dd>This is a convenient view to use when attempting to locate a specific type of model when the data used and model's created date are not known. All data, models, and predictions are listed under their own branch, and then sorted by name (for data), type (for models and predictions), and date. For example, to locate an MCR model you know you created on some previous date, switch to the Type view, expand the Models branch, and locate the MCR models in that branch. You can then reload any model by double-clicking it.</dd></dl>
+<dl><dd><i>View Cache by Type view</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Model cache view type.png" src="247px_model_cache_view_type.png" decoding="async" width="247" height="288" /></a></dd></dl></dd></dl>
+<h3><span class="mw-headline" id="Cache_management">Cache management</span></h3>
+<p>Several options are available to you for managing your cache. You can modify all of these options in the Options dialog box.
+</p><p><b>Note:</b> For a detailed discussion about the Options dialog box, see <a href="solo_commonapplicationfeatures.html" title="Solo CommonApplicationFeatures">Options dialog box</a>.
+</p>
+<table>
+
+
+
+<tbody><tr valign="top">
+<td>1.
+</td>
+<td>Do one of the following to open the Options dialog box:
+</td></tr></tbody></table>
+<table style="margin-left:18pt">
+
+
+
+<tbody><tr valign="top">
+<td>
+<ul><li>Via the <b>Analysis</b> window Model Cache tree: select the Model Cache pane, expand the Cache Settings and View option, and under this option, click Edit Model Cache Settings.</li></ul>
+</td></tr></tbody></table>
+<dl><dd><i>Cache Settings and View options</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Edit Model Cache settings paneoptions.png" src="231px_edit_model_cache_settings_paneoptions.png" decoding="async" width="231" height="122" /></a></dd>
+<dd></dd></dl></dd></dl>
+<dl><dd><dl><dd></dd>
+<dd></dd></dl></dd></dl>
+<table style="margin-left:18pt">
+
+
+
+<tbody><tr valign="top">
+<td>
+<ul><li>Via the <b>Analysis</b> window menu: click Edit &gt; Options &gt; Model Cache Settings.</li></ul>
+</td></tr></tbody></table>
+<dl><dd><dl><dd>The Options dialog box for the Model Cache pane opens.</dd></dl></dd></dl>
+<dl><dd><i>Options dialog box</i></dd></dl>
+<dl><dd><dl><dd><a href="" class="image"><img alt="Options Model Cache dialogbox.png" src="650px_options_model_cache_dialogbox.png" decoding="async" width="650" height="392" /></a></dd>
+<dd></dd></dl></dd></dl>
+<dl><dd><dl><dd></dd>
+<dd></dd></dl></dd></dl>
+<table>
+
+
+
+<tbody><tr valign="top">
+<td>2.
+</td>
+<td>Modify the value for any option, and then click OK.
+</td></tr></tbody></table>
+<dl><dd>The Options dialog box closes and you return to the Model Cache pane. Any changes that you made are effective immediately.</dd></dl>
+<dl><dd><dl><dd></dd>
+<dd></dd></dl></dd></dl>
+<table style="border-collapse: collapse; margin-bottom: 12.0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 3.0pt; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; text-align: left; width: 465.75144pt;" cellspacing="0" summary="">
+
+<tbody><tr>
+<td style="background-color: #E8E8E8; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top; width: 97.50024pt;">
+<p><b>Option</b>
+</p>
+</td>
+<td style="background-color: #E8E8E8; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top; width: 368.2512pt;">
+<p><b>Description</b>
+</p>
+</td>
+</tr>
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>cache
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Controls the operation of the cache. "On" records all data, models, and predictions. "readonly" locks down the cache and prevents recording to the cache and clearing of the cache.
+</p>
+</td>
+</tr>
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>project 
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Specifies an optional subfolder within the cachefolder for holding the cached items. The default name for project is "general." You can use the project setting to separate cached items among different work projects. 
+<b>Note: </b>No option is available in Solo to delete a project folder after you create it. You can delete old project folders only by manually locating the project folder on your computer and deleting the folder.
+<b>Note:</b> You can also change value for the project setting using the Change Project option under Cache Settings and View in the Model Cache pane.
+</p>
+</td>
+</tr>
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>maxage
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>The maximum number of days an item is saved in the cache. An item that is older than this value is permanently deleted from the cache. 
+<b>Note:</b> See <a href="#Manipulating_cached_items" class="mw-redirect" title="AnalysisWindow ModelCachepane">"Manipulating cached items"</a> below for information about saving cached items to a location other than the cachefolder.
+</p>
+</td>
+</tr>
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>maxdatasize
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Specifies the maximum size of a data item (in total number of table elements) that can be stored in the cache.
+</p>
+</td>
+</tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Manipulating_cached_items">Manipulating cached items</span></h3>
+<p>You can right-click on an entry for a cached item Model Cache pane to open a context menu that contains options for manipulating the item.
+</p>
+<dl><dd><dl><dd></dd>
+<dd></dd></dl></dd></dl>
+<table style="border-collapse: collapse; margin-bottom: 12.0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 3.0pt; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; text-align: left; width: 405.75096pt;" cellspacing="0" summary="">
+
+<tbody><tr>
+<td style="background-color: #E8E8E8; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top; width: 108.75024pt;">
+<p><b>Menu Option</b>
+</p>
+</td>
+<td style="background-color: #E8E8E8; border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top; width: 297.00072pt;">
+<p><b>Description</b>
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>View Details
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Opens and displays the selected item in a separate window-either the DataSet Editor window or the Model Reader window.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Load
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Loads the selected cached item into the Analysis window. By default, if no data is loaded into the Analysis window, then the cached item is loaded into the X calibration component; otherwise, you are prompted to override the loaded data or load the data to another location.
+<b>Note:</b> You can also double-click a cached item to load it into the Analysis window.
+</p>
+</td>
+</tr>
+
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Load in New Window
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Opens a new Analysis window and loads item same as Load above.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Export Cache Model
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Save calibration data and model to a MAT file. These files can then be dragged and dropped onto an Analysis window to load.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Compare
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Send a model to the <a href="modeloptimizergui.html" title="Modeloptimizergui"> Model Optimizer</a>.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Save As
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Save the cached item to the workspace or to a file.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Rename
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Rename the cached item.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Remove From Cache
+</p>
+</td>
+<td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 1pt; padding-left: 6pt; padding-right: 6pt; padding-top: 6pt; vertical-align: top;">
+<p>Remove selected item from the cache.
+</p>
+</td>
+</tr>
+
+</tbody></table>
+<h3><span id="Moving.2FChanging_a_Cache"></span><span class="mw-headline" id="Moving/Changing_a_Cache">Moving/Changing a Cache</span></h3>
+<p>You can copy and move your Model Cache folder to a new location without any special consideration. When moving to a new computer, copy the cache folder to the new EVRI <a href="evridir.html" title="Evridir"> home folder</a> and restart Matlab. In Solo, the location of the home folder can be found by selecting Help &#8594; About Solo. Once the folder is in the new location select <b>File/Change Cache</b> from the Workspace Browser and select the new folder. The cache will refresh automatically.
+</p><p>From the Workspace Browser <b>File&gt;Change Cache</b> menu item. From the Matlab command line the cache folder location can be change with:
+</p>
+<pre>modelcache('changecachedir','path/to/new/location')
+</pre>
+<p>If you move your modelcache and experience problems getting the Model Cache to recognize the new location you may need to clear your preferences (matlabprefs.mat) file. Contact helpdesk@eigenvector.com for more details on how to do this.
+</p><p>The modelcache folder consists of the <b>database</b> folder and <b>project</b> folders. This folder and its contents are required to move/recover the model cache.
+</p><p><a href="" class="image"><img alt="Cachefolder.jpg" src="700px_cachefolder.jpg" decoding="async" width="700" height="411" /></a>
+</p>
+<h3><span class="mw-headline" id="Exporting_and_Importing_Models">Exporting and Importing Models</span></h3>
+<p>Models can be exported from the cache via the right-click menu <b>Export For Cache</b> item. This will export the model, the data used to create it (if available), and the associated pred object (if available), to a MAT file. The file can then be Imported into a different cache. To import a cache model, expand the Cache Settings and View leaf and click the <b>Import Model</b> leaf. The model and data can also be loaded into an Analysis window by dragging and dropping the MAT file onto the window.
+</p><p><a href="" class="image"><img alt="ImportExportCacheModel.jpg" src="350px_importexportcachemodel.jpg" decoding="async" width="350" height="357" /></a>
+</p>
+<h3><span class="mw-headline" id="Troubleshooting">Troubleshooting</span></h3>
+<h4><span id="Can.27t_Connect"></span><span class="mw-headline" id="Can't_Connect">Can't Connect</span></h4>
+<p>Note that only one instance of PLS_Toolbox/Solo can be connected to the model cache. If another instance is running, close it and try reconnecting. It's possible an orphaned instance of PLS_Toolbox/Solo is running so restarting your computer would fix this situation.
+</p>
+<h4><span class="mw-headline" id="Confirm_Location">Confirm Location</span></h4>
+<p>If a model cache appears empty when you're expecting to see models and data confirm the location of the cache and update the locaiton if needed. The model cache is located in the <a rel="nofollow" class="external text" href="https://www.wiki.eigenvector.com/index.php?title=Evridir">EVRI home folder</a>, see information above for specific folder structure and location. If the location is not correct, use File&gt;Change Cache in the Browse window to change the location (see above).
+</p>
+<h4><span class="mw-headline" id="Remove_Lock_Files">Remove Lock Files</span></h4>
+<p>Sometimes the database lock files can get orphaned. The following instructions will rebuild the files. 
+</p>
+<ul><li>Restart your computer</li></ul>
+<ul><li>Go to the model cache folder and delete the 2 database lock files (db.lck and dbex.lck) located here:</li></ul>
+<dl><dd><dl><dd>C:\Users\{username}\AppData\Local\EVRI\modelcache\evri_cache_db</dd></dl></dd>
+<dd>or
+<dl><dd>/Users/{username}/EVRI/modelcache</dd></dl></dd></dl>
+<ul><li>Start MATLAB and open PLS_Toolbox (use the 'browse' command)</li></ul>
+<h4><span class="mw-headline" id="Recreate_Empty_Cache">Recreate Empty Cache</span></h4>
+<p>In some cases the database is not recoverable. You can rename the \modelcache folder (to "modelcache_copy" for example) and restart PLS_Toolbox/Solo. The program will recreate the folder and database. Any old models/data will need to be manually loaded from the old modelcache copy.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930162454
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.036 seconds
+Real time usage: 0.043 seconds
+Preprocessor visited node count: 86/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:796-0!canonical and timestamp 20240930162454 and revision id 12450.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Analysis_Window:_Model_Cache_Pane&amp;oldid=12450">https://www.wiki.eigenvector.com/index.php?title=Analysis_Window:_Model_Cache_Pane&amp;oldid=12450</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href="analysis_window__model_cache_pane.html"><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 23 September 2024, at 09:31.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

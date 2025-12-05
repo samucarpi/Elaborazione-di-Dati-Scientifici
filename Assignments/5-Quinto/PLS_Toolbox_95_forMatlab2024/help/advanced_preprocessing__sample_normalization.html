@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Advanced Preprocessing: Sample Normalization - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Advanced_Preprocessing_Sample_Normalization rootpage-Advanced_Preprocessing_Sample_Normalization skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Advanced_Preprocessing:_Sample_Normalization"><span class="mw-page-title-main">Advanced Preprocessing: Sample Normalization</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Normalize"><span class="tocnumber">2</span> <span class="toctext">Normalize</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#SNV_(Standard_Normal_Variate)"><span class="tocnumber">3</span> <span class="toctext">SNV (Standard Normal Variate)</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#MSC_(Multiplicative_Scatter_Correction)"><span class="tocnumber">4</span> <span class="toctext">MSC (Multiplicative Scatter Correction)</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Introduction">Introduction</span></h3>
+<p>In many analytical methods, the variables measured for a given sample are subject to overall scaling or gain effects. That is, all (or maybe just a portion of) the variables measured for a given sample are increased or decreased from their true value by a multiplicative factor. Each sample can, in these situations, experience a different level of multiplicative scaling.
+</p><p>In spectroscopic applications, scaling differences arise from pathlength effects, scattering effects, source or detector variations, or other general instrumental sensitivity effects (see, for example, Martens and Næs, 1989). Similar effects can be seen in other measurement systems due to physical or chemical effects (e.g., decreased activity of a contrast reagent or physical positioning of a sample relative to a sensor). In these cases, it is often the relative value of variables which should be used when doing multivariate modeling rather than the absolute measured value. Essentially, one attempts to use an internal standard or other pseudo-constant reference value to correct for the scaling effects.
+</p><p>The sample normalization preprocessing methods attempt to correct for these kinds of effects by identifying some aspect of each sample which should be essentially constant from one sample to the next, and correcting the scaling of all variables based on this characteristic. The ability of a normalization method to correct for multiplicative effects depends on how well one can separate the scaling effects which are due to properties of interest (e.g., concentration) from the interfering systematic effects.
+</p><p>Normalization also helps give all samples an equal impact on the model. Without normalization, some samples may have such severe multiplicative scaling effects that they will not be significant contributors to the variance and, as a result, will not be considered important by many multivariate techniques.
+</p><p>When creating discriminant analysis models such as PLS-DA or SIMCA models, normalization is done if the relationship between variables, and not the absolute magnitude of the response,  is the most important aspect of the data for identifying a species (e.g., the concentration of a chemical isn't important, just the fact that it is there in a detectable quantity). Use of normalization in these conditions should be considered after evaluating how the variables' response changes for the different classes of interest. Models with and without normalization should be compared.
+</p><p>Typically, normalization should be performed before any centering or scaling or other column-wise preprocessing steps and after baseline or offset removal (see above regarding these preprocessing methods). The presence of baseline or offsets can impede correction of multiplicative effects. The effect of normalization prior to background removal will, in these cases, not improve model results and may deteriorate model performance.
+</p><p>One exception to this guideline of preprocessing order is when the baseline or background is very consistent from sample to sample and, therefore, provides a very useful reference for normalization. This can sometimes be seen in near-infrared spectroscopy in the cases where the overall background shape is due to general solvent or matrix vibrations. In these cases, normalization before background subtraction may provide improved models. In any case, cross-validation results can be compared for models with the normalization and background removal steps in either order and the best selected.
+</p><p>A second exception is when normalization is used after a scaling step (such as autoscaling). This should be used when autoscaling emphasizes features which may be useful in normalization. This reversal of normalization and scaling is sometimes done in discriminant analysis applications.
+</p>
+<h3><span class="mw-headline" id="Normalize">Normalize</span></h3>
+<p>Simple normalization of each sample is a common approach to the multiplicative scaling problem. The Normalize preprocessing method calculates one of several different metrics using all the selected variables of each sample. Possibilities include:
+</p><p><br />
+</p>
+<table class="wikitable" border="1">
+<caption>
+</caption>
+<tbody><tr>
+<th>Name</th>
+<th>Description</th>
+<th>Equation*
+</th></tr>
+<tr>
+<td>1-Norm</td>
+<td>
+<p>Normalize  to (divide each variable by) the sum of the absolute value of all selected variables  for the given sample. Returns a vector with unit area (area = 1) "under  the curve."
+</p>
+</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle w_{i}=\sum _{j=1}^{n}\left|x_{i,j}\right|}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>w</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <munderover>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <mrow>
+          <mo>|</mo>
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+              <mo>,</mo>
+              <mi>j</mi>
+            </mrow>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle w_{i}=\sum _{j=1}^{n}\left|x_{i,j}\right|}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ab6cfa4e3730fd14ea08ca32983cc3e9dd57e294" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:13.862ex; height:7.176ex;" alt="{\displaystyle w_{i}=\sum _{j=1}^{n}\left|x_{i,j}\right|}"/></span>
+</td></tr>
+<tr>
+<td>2-Norm</td>
+<td>
+<p>Normalize to the square root of the sum of the squared value of all selected variables for the given sample.  Returns a vector of unit length (length = 1). A form of weighted  normalization where larger values are weighted more heavily in the scaling.
+</p>
+</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle w_{i}=\left(\sum _{j=1}^{n}x_{i,j}^{2}\right)^{\frac {1}{2}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>w</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mrow>
+              <munderover>
+                <mo>&#x2211;<!-- ∑ --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>j</mi>
+                  <mo>=</mo>
+                  <mn>1</mn>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>n</mi>
+                </mrow>
+              </munderover>
+              <msubsup>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>i</mi>
+                  <mo>,</mo>
+                  <mi>j</mi>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mn>2</mn>
+                </mrow>
+              </msubsup>
+            </mrow>
+            <mo>)</mo>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mfrac>
+              <mn>1</mn>
+              <mn>2</mn>
+            </mfrac>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle w_{i}=\left(\sum _{j=1}^{n}x_{i,j}^{2}\right)^{\frac {1}{2}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fdd6649837b05af3842ea35c72b2da09e350b47c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.338ex; width:17.986ex; height:8.843ex;" alt="{\displaystyle w_{i}=\left(\sum _{j=1}^{n}x_{i,j}^{2}\right)^{\frac {1}{2}}}"/></span>
+</td></tr>
+<tr>
+<td>Inf-Norm</td>
+<td>
+<p>Normalize to the maximum value observed for all selected variables  for the given sample. Returns a vector with unit maximum value. Weighted  normalization where only the largest value is considered in the scaling.
+</p>
+</td>
+<td><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle w_{i}=Max\left(\mathbf {x} _{i}\right)}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>w</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mi>M</mi>
+        <mi>a</mi>
+        <mi>x</mi>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi mathvariant="bold">x</mi>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+            </mrow>
+          </msub>
+          <mo>)</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle w_{i}=Max\left(\mathbf {x} _{i}\right)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9486ebfef807a7efd3886c1baa68c15f50364425" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:14.971ex; height:2.843ex;" alt="{\displaystyle w_{i}=Max\left(\mathbf {x} _{i}\right)}"/></span>
+</td></tr></tbody></table>
+<p><tt></tt>* Where, in each case, wi is the normalization weight for sample i, xi is the vector of observed values for the given sample, j is the variable number, and n is the total number of selected variables (columns of x).
+</p><p>The weight calculated for a given sample is then used to calculate the normalized sample, <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {x} _{i,norm}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>n</mi>
+            <mi>o</mi>
+            <mi>r</mi>
+            <mi>m</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {x} _{i,norm}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a1f025bcd81f46f2fb766602f87782e565780cce" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:6.636ex; height:2.343ex;" alt="{\displaystyle \mathbf {x} _{i,norm}}"/></span>, using:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {x} _{i,norm}=\mathbf {x} _{i}w_{i}^{-1}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>n</mi>
+            <mi>o</mi>
+            <mi>r</mi>
+            <mi>m</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <msubsup>
+          <mi>w</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msubsup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {x} _{i,norm}=\mathbf {x} _{i}w_{i}^{-1}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7b4e1fdd1370a0ba0f3652b3f5c4354e66e5eed5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:15.942ex; height:3.343ex;" alt="{\displaystyle \mathbf {x} _{i,norm}=\mathbf {x} _{i}w_{i}^{-1}}"/></span></dd></dl>
+<p>An example using the 1-norm on near infrared spectra is shown in the figure below. These spectra were measured as 20 replicates of 5 synthetic mixtures of gluten and starch (Martens, Nielsen, and Engelsen, 2003) In the original data (top plot), the five concentrations of gluten and starch are not discernable because of multiplicative and baseline effects among the 20 replicate measurements of each mixture. After normalization using a 1-norm (bottom plot), the five mixtures are clearly observed in groups of 20 replicate measurements each.
+</p><p><b>Figure</b>: Effect of normalization on near-IR spectra of five synthetic gluten and starch mixtures. Original spectra (top plot) and spectra after 1-norm normalization (bottom plot) are shown.
+</p><p><a href="" class="image"><img alt="App snv 1 lwl.png" src="500px_app_snv_1_lwl.png" decoding="async" width="500" height="326" /></a>
+</p><p>From the Preprocessing window, the only setting associated with this method is the type of normalization (1-norm, 2-norm or inf-norm). There is currently no option to perform this normalization based on anything other than all selected variables.
+</p><p>From the command line, this method is performed using the <a href="normaliz.html" title="Normaliz">normaliz</a> function (note the unusual spelling of the function).
+</p>
+<h3><span id="SNV_.28Standard_Normal_Variate.29"></span><span class="mw-headline" id="SNV_(Standard_Normal_Variate)">SNV (Standard Normal Variate)</span></h3>
+<p>Unlike the simple 1-Norm Normalize described above, the Standard Normal Variate (SNV) normalization method is a weighted normalization (i.e., not all points contribute to the normalization equally). SNV calculates the standard deviation of all the pooled variables for the given sample (see for example Barnes et al., 1989). The entire sample is then normalized by this value, thus giving the sample a unit standard deviation (s = 1). Note that this procedure also includes a zero-order detrend (subtraction of the individual mean value from each spectrum - see discussion of detrending, above), and also that this is different from mean centering (described later). The equations used by the algorithm are the mean and standard deviation equations:
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\bar {x}}_{i}={\frac {\sum _{j=1}^{n}{X_{i,j}}}{n}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mrow class="MJX-TeXAtom-ORD">
+              <mover>
+                <mi>x</mi>
+                <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+              </mover>
+            </mrow>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mrow>
+              <munderover>
+                <mo>&#x2211;<!-- ∑ --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>j</mi>
+                  <mo>=</mo>
+                  <mn>1</mn>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>n</mi>
+                </mrow>
+              </munderover>
+              <mrow class="MJX-TeXAtom-ORD">
+                <msub>
+                  <mi>X</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>i</mi>
+                    <mo>,</mo>
+                    <mi>j</mi>
+                  </mrow>
+                </msub>
+              </mrow>
+            </mrow>
+            <mi>n</mi>
+          </mfrac>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\bar {x}}_{i}={\frac {\sum _{j=1}^{n}{X_{i,j}}}{n}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e1341d9b991f12b04934fa50e87606b7b1e7864c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.838ex; width:15.774ex; height:6.176ex;" alt="{\displaystyle {\bar {x}}_{i}={\frac {\sum _{j=1}^{n}{X_{i,j}}}{n}}}"/></span>
+</p><p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle w_{i}={\sqrt {\frac {\sum _{j=1}^{n}{(X_{i,j}-{\bar {x}}_{i})^{2}}}{(n-1)}}}+\delta ^{-1}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>w</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msqrt>
+            <mfrac>
+              <mrow>
+                <munderover>
+                  <mo>&#x2211;<!-- ∑ --></mo>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>j</mi>
+                    <mo>=</mo>
+                    <mn>1</mn>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>n</mi>
+                  </mrow>
+                </munderover>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo stretchy="false">(</mo>
+                  <msub>
+                    <mi>X</mi>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>i</mi>
+                      <mo>,</mo>
+                      <mi>j</mi>
+                    </mrow>
+                  </msub>
+                  <mo>&#x2212;<!-- − --></mo>
+                  <msub>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mover>
+                          <mi>x</mi>
+                          <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+                        </mover>
+                      </mrow>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>i</mi>
+                    </mrow>
+                  </msub>
+                  <msup>
+                    <mo stretchy="false">)</mo>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </msup>
+                </mrow>
+              </mrow>
+              <mrow>
+                <mo stretchy="false">(</mo>
+                <mi>n</mi>
+                <mo>&#x2212;<!-- − --></mo>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+              </mrow>
+            </mfrac>
+          </msqrt>
+        </mrow>
+        <mo>+</mo>
+        <msup>
+          <mi>&#x03B4;<!-- δ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle w_{i}={\sqrt {\frac {\sum _{j=1}^{n}{(X_{i,j}-{\bar {x}}_{i})^{2}}}{(n-1)}}}+\delta ^{-1}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/645300e2836fc70e18b02962db463af71ba10d2f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:32.492ex; height:7.676ex;" alt="{\displaystyle w_{i}={\sqrt {\frac {\sum _{j=1}^{n}{(X_{i,j}-{\bar {x}}_{i})^{2}}}{(n-1)}}}+\delta ^{-1}}"/></span>
+</p><p>where <i>n</i> is the number of variables, <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle x_{i,j}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle x_{i,j}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fd698068c9322e82d11cb2bc02cb2f51739a2cc0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:3.264ex; height:2.343ex;" alt="{\displaystyle x_{i,j}}"/></span>, is the value of the j<sup>th</sup> variable for the i<sup>th</sup> sample, and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \delta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B4;<!-- δ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \delta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c5321cfa797202b3e1f8620663ff43c4660ea03a" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.049ex; height:2.343ex;" alt="{\displaystyle \delta }"/></span> is a user-definable offset. The user-definable offset can be used to avoid over-normalizing samples which have near zero standard deviation. The default value for this offset is zero, indicating that samples will be normalized by their unweighted standard deviation. The selection of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \delta }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03B4;<!-- δ --></mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \delta }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c5321cfa797202b3e1f8620663ff43c4660ea03a" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.049ex; height:2.343ex;" alt="{\displaystyle \delta }"/></span> is dependent on the scale of the variables. A setting near the expected noise level (in the variables' units) is a good approximation.
+</p><p>This normalization approach is weighted towards considering the values that deviate from the individual sample mean more heavily than values near the mean. Consider the example Raman spectrum in the figure below. The horizontal line at intensity 0.73 indicates the mean of the spectrum. The dashed lines at 1.38 and 0.08 indicate one standard deviation away from the mean. In general, the normalization weighting for this sample is driven by how far all the points deviate from the mean of 0.73. Considering the square term in the equation above and the histogram on the left of the figure, it is clear that the high intensity points will contribute greatly to this normalization.
+</p><p><b>Figure</b>: Eample Raman spectrum (right plot) and corresponding intensity histogram (left plot). The mean of the spectrum is shown as a dashed line at intensity 0.73; one standard deviation above and below this mean are shown at intensities 1.38 and 0.08 and indicated by the arrow.
+</p><p><a href="" class="image"><img alt="App snv 1a lwl.png" src="500px_app_snv_1a_lwl.png" decoding="async" width="500" height="335" /></a>
+</p><p>This approach is a very empirical normalization method in that one seldom expects that variables for a given sample should deviate about their mean in a normal distribution with unit variance (except in the case where the primary contribution to most of the variables is noise and the variables are all in the same units). When much of the signal in a sample is the same in all samples, this method can do very well. However, in cases where the overall signal changes significantly from sample to sample, problems may occur. In fact, it is quite possible that this normalization can lead to non-linear responses to what were otherwise linear responses. SNV should be carefully compared to other normalization methods for quantitative models.
+</p><p>The figure below shows the result of SNV on the gluten and starch mixtures described earlier. Comparing the SNV results to the original spectra and 1-norm spectra shown in the  "normalize" section above, it is obvious that SNV gives tighter groupings of the replicate measurements. In fact, SNV was originally developed for NIR data of this sort, and it behaves well with this kind of response.
+</p><p><b>Figure</b>: Effect of SNV normalization on near-IR spectra measured of five synthetic gluten and starch mixtures.
+</p><p><a href="" class="image"><img alt="App SNV lwl.png" src="500px_app_snv_lwl.png" decoding="async" width="500" height="429" /></a>
+</p><p>From the Preprocessing window, the only setting associated with this method is the offset. There is currently no option to perform this normalization based on anything other than all selected variables.
+From the command line, this method is performed using the <a href="snv.html" title="Snv">snv</a> function.
+</p>
+<h3><span id="MSC_.28Multiplicative_Scatter_Correction.29"></span><span class="mw-headline" id="MSC_(Multiplicative_Scatter_Correction)">MSC (Multiplicative Scatter Correction)</span></h3>
+<p>Multiplicative signal correction (MSC) is a relatively simple processing step that attempts to account for scaling effects and offset (baseline) effects (Martens and Næs, 1989). This correction is achieved by regressing a measured spectrum against a reference spectrum and then correcting the measured spectrum using the slope (and possibly intercept) of this fit. Specifically, MSC follows this procedure: Define x as a column vector corresponding to a spectrum to be standardized and r as a vector corresponding to the reference spectrum (often this is the mean spectrum of the calibration data set). The vectors are most often mean-centered according to:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {x} _{c}=\mathbf {x} -{\bar {x}}\mathbf {1} }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">x</mi>
+        </mrow>
+        <mo>&#x2212;<!-- − --></mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>x</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mn mathvariant="bold">1</mn>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {x} _{c}=\mathbf {x} -{\bar {x}}\mathbf {1} }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fc2e5e14cd185db20c11beaf128985cf679d4293" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:12.371ex; height:2.509ex;" alt="{\displaystyle \mathbf {x} _{c}=\mathbf {x} -{\bar {x}}\mathbf {1} }"/></span></dd></dl>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {r} _{c}=\mathbf {r} -{\bar {r}}\mathbf {1} }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">r</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="bold">r</mi>
+        </mrow>
+        <mo>&#x2212;<!-- − --></mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>r</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mn mathvariant="bold">1</mn>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {r} _{c}=\mathbf {r} -{\bar {r}}\mathbf {1} }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/517a783678e8876b342161a706c17c1b60d7c347" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:11.715ex; height:2.509ex;" alt="{\displaystyle \mathbf {r} _{c}=\mathbf {r} -{\bar {r}}\mathbf {1} }"/></span></dd></dl>
+<p>where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle x_{c}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle x_{c}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1392d858de78728de5dbc225a31883b17db303b7" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.274ex; height:2.009ex;" alt="{\displaystyle x_{c}}"/></span> and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle r_{c}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>r</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle r_{c}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5e41dc9dcda9fd0c224d94555361f02b73aacd2e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.993ex; height:2.009ex;" alt="{\displaystyle r_{c}}"/></span> are the mean centered vectors, <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\bar {x}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>x</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\bar {x}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/466e03e1c9533b4dab1b9949dad393883f385d80" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.33ex; height:2.009ex;" alt="{\displaystyle {\bar {x}}}"/></span>   and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\bar {r}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>r</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\bar {r}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3068f25537e70241a9a83d733c46fe052a905358" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.292ex; height:2.009ex;" alt="{\displaystyle {\bar {r}}}"/></span> are the respective means, and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {1} }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mn mathvariant="bold">1</mn>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {1} }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/235ffc0f1788b720aef5caa7b97246a84421fd0e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.337ex; height:2.176ex;" alt="{\displaystyle \mathbf {1} }"/></span> is a vector of ones. The unknown multiplicative factor b is determined using:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle \mathbf {r} _{c}b=\mathbf {x} _{c}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">r</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+        <mi>b</mi>
+        <mo>=</mo>
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \mathbf {r} _{c}b=\mathbf {x} _{c}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8785b1e9fa0f45e10acabdd9eebb2c3060e6bf4d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:8.497ex; height:2.509ex;" alt="{\displaystyle \mathbf {r} _{c}b=\mathbf {x} _{c}}"/></span></dd>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle b=(\mathbf {r} _{c}^{T}\mathbf {r} _{c})^{-1}\mathbf {r} _{c}^{T}\mathbf {x} _{c}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>b</mi>
+        <mo>=</mo>
+        <mo stretchy="false">(</mo>
+        <msubsup>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">r</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msubsup>
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">r</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+        <msup>
+          <mo stretchy="false">)</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <msubsup>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">r</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>T</mi>
+          </mrow>
+        </msubsup>
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle b=(\mathbf {r} _{c}^{T}\mathbf {r} _{c})^{-1}\mathbf {r} _{c}^{T}\mathbf {x} _{c}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/cf6f33ed97d24650542664d97e9b2448fa5ac37f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:17.622ex; height:3.176ex;" alt="{\displaystyle b=(\mathbf {r} _{c}^{T}\mathbf {r} _{c})^{-1}\mathbf {r} _{c}^{T}\mathbf {x} _{c}}"/></span></dd></dl>
+<p>and the corrected spectrum  <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\hat {\mathbf {x} }}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi mathvariant="bold">x</mi>
+              </mrow>
+              <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\hat {\mathbf {x} }}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8a5451354f837d5d89774e1de386b44a903d929d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.411ex; height:2.343ex;" alt="{\displaystyle {\hat {\mathbf {x} }}}"/></span> is then given by:
+</p>
+<dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\hat {\mathbf {x} }}=\mathbf {x} _{c}/b+{\bar {r}}\mathbf {1} }">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi mathvariant="bold">x</mi>
+              </mrow>
+              <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <msub>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi mathvariant="bold">x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>c</mi>
+          </mrow>
+        </msub>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo>/</mo>
+        </mrow>
+        <mi>b</mi>
+        <mo>+</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>r</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mn mathvariant="bold">1</mn>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\hat {\mathbf {x} }}=\mathbf {x} _{c}/b+{\bar {r}}\mathbf {1} }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e2bb35c3d37a5f334d6b8364008392bba3bb2417" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:14.493ex; height:2.843ex;" alt="{\displaystyle {\hat {\mathbf {x} }}=\mathbf {x} _{c}/b+{\bar {r}}\mathbf {1} }"/></span></dd></dl>
+<p>The figure below shows an example of MSC using NIR spectra of synthetic gasoline samples with added baseline and scaling effects. The spectra with artificial baseline and scaling effects are shown in the top plot. The corrected spectra are shown in the bottom plot. The corrected spectra were brought to within 0.03 absorbance units of the original spectra (not shown).
+</p><p><b>Figure</b>: Example of Multiplicative Scatter Correction of artificial baseline and scaling effects.
+</p><p><a href="" class="image"><img alt="App snv 3 lwl.png" src="500px_app_snv_3_lwl.png" decoding="async" width="500" height="311" /></a>
+</p><p>The simulated baseline addition and subsequent correction can be done using the following commands:
+</p>
+<pre>» bspec = spec1.data(21:30,:);
+» for i = 1:10, bspec(i,:) = bspec(i,:)*rand(1) + randn(1); end
+» [sx,alpha,beta] = mscorr(bspec,mean(spec1.data(1:20,:)));
+</pre>
+<p>The first line creates a matrix of ten spectra. The second multiplies them by a random number between 0 and 1 and adds a random offset. The function mscorr is then used to correct the spectra using the mean of the first twenty spectra as the reference. The outputs of mscorr are the corrected spectra (sx), and the intercepts (alpha), and slope (beta) for the fit of each spectrum to the reference.
+</p><p>From the Preprocessing window, there are two settings which can be modified: intercept and spectral mode. The intercept option controls whether or not the intercept (i.e.,      <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\bar {r}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>r</mi>
+              <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\bar {r}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3068f25537e70241a9a83d733c46fe052a905358" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.292ex; height:2.009ex;" alt="{\displaystyle {\bar {r}}}"/></span> in the last equation above) is used. The spectral mode setting defaults to 2 and can only be modified when x is a multiway matrix. This setting defines the data mode which is associated with the spectral dimension (i.e., the mode which should be used in the regression). There is currently no option to perform this normalization based on anything other than all selected variables.
+</p><p>From the command line, this method is performed using the <a href="mscorr.html" title="Mscorr">mscorr</a> function. The extended multiplicative scatter correction (EMSC) algorithm is a patented algorithm which can be purchased separately. The algorithm and use are described in the <a href="emscorr.html" title="Emscorr">emscorr</a> documentation pages.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930161407
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 1.189 seconds
+Real time usage: 1.522 seconds
+Preprocessor visited node count: 105/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 962/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:765-0!canonical and timestamp 20240930161405 and revision id 11514.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Advanced_Preprocessing:_Sample_Normalization&amp;oldid=11514">https://www.wiki.eigenvector.com/index.php?title=Advanced_Preprocessing:_Sample_Normalization&amp;oldid=11514</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 16 December 2021, at 13:31.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

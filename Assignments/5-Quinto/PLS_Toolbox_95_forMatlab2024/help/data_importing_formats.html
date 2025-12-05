@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Data Importing Formats - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Data_Importing_Formats rootpage-Data_Importing_Formats skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Data_Importing_Formats"><span class="mw-page-title-main">Data Importing Formats</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>Data can be imported into PLS_Toolbox or Solo from a variety of sources using <b>File&gt;Import Data</b> (or similar) menu itesm in the <a href="workspace_browser.html" class="mw-redirect" title="Workspace Browser">Workspace Browser</a>, <a href="analysis_gui.html" class="mw-redirect" title="Analysis GUI">Analysis</a>, and <a href="dataset_editor.html" class="mw-redirect" title="DataSet Editor">DataSet Editor</a> windows.
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Unsupported_File_Formats"><span class="tocnumber">1</span> <span class="toctext">Unsupported File Formats</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Common_Formats"><span class="tocnumber">2</span> <span class="toctext">Common Formats</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Commercial_Formats"><span class="tocnumber">3</span> <span class="toctext">Commercial Formats</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Notes"><span class="tocnumber">4</span> <span class="toctext">Notes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#AutoImport_Keywords"><span class="tocnumber">4.1</span> <span class="toctext">AutoImport Keywords</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Unsupported_File_Formats">Unsupported File Formats</span></h2>
+<p><b>Note</b>: If you do not see the file type list below try the following:
+</p>
+<ol><li>Export your data to a supported file type. Often this is delimited text, Excel, or SPC.
+<ul><li>If data can be exported as text, some customization can be done via our text importing tools to accommodate different formatting:</li></ul>
+<dl><dd><ul><li>For more information on using the textreadr function see <a href="textreadr.html" title="Textreadr">Textreadr</a></li>
+<li>Create a custom import function <a href="editds_userimport.html" title="Editds userimport">Editds_userimport</a></li></ul></dd></dl></li>
+<li>Locate a community developed importer on the Matlab <a rel="nofollow" class="external text" href="http://www.mathworks.com/matlabcentral/fileexchange/">file exchange</a>.
+<ul><li>Other sources exist as well, for example: <a rel="nofollow" class="external text" href="http://cdf.gsfc.nasa.gov/html/dttools.html">CDF Tools</a>.</li></ul></li>
+<li>Obtain a file format (specification) from the vendor. We're always happy to develop (or help develop) file importers.
+<ul><li>An actual specification document is great but often vendors have internally developed Matlab importers that can be used outright or be modified to work. It's also very helpful to have example files that can be used to test with.</li></ul></li></ol>
+<h2><span class="mw-headline" id="Common_Formats">Common Formats</span></h2>
+<ul><li>Workspace/MAT file - <i>see <a href="workspacebrowser_importingdata.html#To_import_a_.mat_file" class="mw-redirect" title="WorkspaceBrowser ImportingData">Importing .mat Files</a></i></li>
+<li><a href="xclreadr.html" class="mw-redirect" title="Xclreadr">Delimited Text File (CSV,TXT)</a> - <i>see <a href="text_import_settings.html" title="Text Import Settings">Text Import Settings</a></i></li>
+<li><a href="xyreadr.html" title="Xyreadr">XY... Delimited Text Files (TXT,XY)</a> - <i>see <a href="text_import_settings.html" title="Text Import Settings">Text Import Settings</a></i></li>
+<li><a href="xlsreadr.html" title="Xlsreadr">Excel File (XLS,XLSX,CSV,TXT)</a></li>
+<li><a href="experimentreadr.html" title="Experimentreadr">Experiment File (EXP,CSV,XLS,TXT)</a></li>
+<li><a href="table2dataset.html" title="Table2dataset">table2dataset</a> - Convert Matlab Table Array to <a href="dataset.html" class="mw-redirect" title="Dataset">Dataset</a>.</li>
+<li>Text from Clipboard (CSV,TXT,XML)</li>
+<li>Extensible Markup Language (XML) - <i>see <a href="dataset_xml_format.html" title="DataSet XML Format">DataSet XML Format</a></i></li></ul>
+<h2><span class="mw-headline" id="Commercial_Formats">Commercial Formats</span></h2>
+<ul><li><a href="mtfreadr.html" title="Mtfreadr">AdventaCT MTF File (MTF)</a></li>
+<li><a href="asfreadr.html" title="Asfreadr">AIT ASF File (ASF, AIF, BKH)</a></li>
+<li><a href="pdfreadr.html" title="Pdfreadr">AIT PIONIR File (PDF)</a></li>
+<li><a href="asdreadr.html" title="Asdreadr">Analytical Spectral Devices (ASD) Indico (V6 and V7)</a></li></ul>
+<ul><li><a href="envireadr.html" title="Envireadr">ENVI Image File (HDR/IMG) Image DSO if MIA_Toolbox installed.</a></li>
+<li><a href="opusreadr.html" title="Opusreadr">Bruker OPUS</a></li>
+<li><a href="brukerxrpdreadr.html" title="Brukerxrpdreadr">Bruker XRPD (RAW)</a></li>
+<li><a href="cytospecreadr.html" title="Cytospecreadr"> CytoSpec CYT File (CYT)</a></li>
+<li><a href="spcreadr.html" title="Spcreadr">Grams Thermo Galactic File (SPC, DHB)</a></li>
+<li><a href="gwscanreadr.html" title="Gwscanreadr">Guided Wave File (SCAN, AUTOSCAN)</a></li>
+<li><a href="hitachieemreadr.html" title="Hitachieemreadr"> Hitachi EEM File (TXT)</a></li>
+<li><a href="hjyreadr.html" title="Hjyreadr">Horiba JY Raman File (NGS, NGC)</a></li>
+<li><a href="aqualogreadr.html" title="Aqualogreadr">Horiba JY Aqualog ASCII File (DAT)</a></li>
+<li><a href="jascoeemreadr.html" title="Jascoeemreadr">Jasco EEM Files (CSV)</a></li>
+<li><a href="jcampreadr.html" title="Jcampreadr">JCAMP (DX,JDX)</a></li>
+<li><a href="rdareadr.html" title="Rdareadr">Siemens RDA file (RDA)</a></li>
+<li><a href="spareadr.html" title="Spareadr">Omnic SPA File (SPA)</a></li>
+<li><a href="spereadr.html" title="Spereadr">Princeton Instruments SPE File (SPE)</a></li>
+<li><a href="pereadr.html" title="Pereadr">PerkinElmer (FSM, SP, VIS, IMP)</a></li>
+<li><a href="snabsreadr.html" title="Snabsreadr">Stellarnet ABS File (ABS)</a></li>
+<li><a href="shimadzueemreadr.html" title="Shimadzueemreadr">Shimadzu EEM File (TXT)</a></li>
+<li><a href="visionairxmlreadr.html" title="Visionairxmlreadr">Vision Air XML Data File (XML)</a></li>
+<li>Other... - Call Matlab importer.</li></ul>
+<hr />
+<p>Additional import methods may be available depending on the specific purchased options and the distributor of your copy of PLS_Toolbox or Solo. See other notes below.
+</p>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<ul><li>Our image processing products MIA_Toolbox and Solo+MIA include additional image-specifc importers. See <a href="image_importing_formats.html" title="Image Importing Formats">Image_Importing_Formats</a> and <a href="constructing_image_datasets.html" title="Constructing Image DataSets">Constructing_Image_DataSets</a> for more information.</li></ul>
+<ul><li>The Delimited Text File format provides a flexible way to import lots of different text file formats. For details on the format and the options available, see: <a href="text_import_settings.html" title="Text Import Settings">Text Import Settings</a></li></ul>
+<ul><li>The <a href="experimentreadr.html" title="Experimentreadr"><b>Experiment File</b> import method</a> is used to import multiple data files at once along with corresponding reference values. For more information on the Experiment File format and features, see the reference page for <a href="experimentreadr.html" title="Experimentreadr">experimentreadr</a>.</li></ul>
+<ul><li>PLS_Toolbox users can access the importers through the <a href="autoimport.html" title="Autoimport">autoimport</a> command or the <a href="importing_data.html" title="Importing Data">file import functions</a> directly.</li></ul>
+<ul><li>In some cases you may have to use the <a href="dataset_editor.html" class="mw-redirect" title="DataSet Editor">DataSet Editor</a> to add additional information to your dataset. For instance, you may add labels and or axis scales after you've imported the raw data. See <a href="key_guis.html" class="mw-redirect" title="Key GUIs">Key_GUIs</a> for more information on using the DataSet Editor.</li></ul>
+<ul><li>In cases involving n-way (multidimensional) data you man need to "build up" you dataset. More information about how to do that can be found <a rel="nofollow" class="external text" href="http://software.eigenvector.com/faq/index.php?id=110">here</a>.</li></ul>
+<ul><li>Convert Matlab Table Object to DatasetObject using <a href="table2dataset.html" title="Table2dataset">table2dataset</a> and from DataSet to a Table object using <a href="dataset2table.html" title="Dataset2table">dataset2table</a>.</li></ul>
+<h3><span class="mw-headline" id="AutoImport_Keywords">AutoImport Keywords</span></h3>
+<p>The following table lists keywords (aka method names) that can be used to import the corresponding file types when using <a href="solo_predictor_script_construction.html#Importing_From_a_File" title="Solo Predictor Script Construction">Solo Scripting import commands</a> or when using the <a href="autoimport.html" title="Autoimport">autoimport</a> PLS_Toolbox function.
+</p><p><br />
+</p>
+<table class="wikitable" border="1">
+<caption>
+</caption>
+<tbody><tr>
+<th>Keyword</th>
+<th>File Type
+</th></tr>
+<tr>
+<td>workspace</td>
+<td>Workspace/MAT file
+</td></tr>
+<tr>
+<td>text</td>
+<td>Delimited Text File (CSV,TXT)
+</td></tr>
+<tr>
+<td>xy</td>
+<td>XY... Delimited Text Files (TXT,XY)
+</td></tr>
+<tr>
+<td>excel</td>
+<td>Excel File (XLS,XLSX,CSV,TXT)
+</td></tr>
+<tr>
+<td>experimentreadr</td>
+<td>Experiment File (EXP,CSV,XLS,TXT)
+</td></tr>
+<tr>
+<td>clipboard</td>
+<td>Text from Clipboard (CSV,TXT,XML)
+</td></tr>
+<tr>
+<td>xml</td>
+<td>XML file (XML)
+</td></tr>
+<tr>
+<td>------</td>
+<td>--------------------------------
+</td></tr>
+<tr>
+<td>editds_mtfimport</td>
+<td>AdventaCT MTF File (MTF)
+</td></tr>
+<tr>
+<td>asf</td>
+<td>AIT ASF File (ASF, AIF, BKH)
+</td></tr>
+<tr>
+<td>pdfreadr</td>
+<td>AIT PIONIR File (PDF)
+</td></tr>
+<tr>
+<td>asdreadr</td>
+<td>Analytical Spectral Devices (ASD) Indico (V6 and V7)
+</td></tr>
+<tr>
+<td>opusreadr</td>
+<td>Bruker OPUS File
+</td></tr>
+<tr>
+<td>brukerxrpdreadr</td>
+<td>Bruker XRPD File (RAW)
+</td></tr>
+<tr>
+<td>cytospecreadr</td>
+<td>CytoSpec CYT File (CYT)
+</td></tr>
+
+<tr>
+<td>envireadr</td>
+<td>ENVI File (HDR/IMG)
+</td></tr>
+<tr>
+<td>spc</td>
+<td>Grams Thermo Galactic File (SPC, DHB)
+</td></tr>
+<tr>
+<td>gwscanreadr</td>
+<td>Guided Wave File (SCAN, AUTOSCAN)
+</td></tr>
+<tr>
+<td>hjyreadr</td>
+<td>Horiba JY Raman File (NGS, NGC)
+</td></tr>
+<tr>
+<td>aqualogreadr</td>
+<td>Horiba JY Aqualog File (DAT)
+</td></tr>
+<tr>
+<td>hitachieemreadr</td>
+<td>Hitachi EEM File (TXT)
+</td></tr>
+<tr>
+<td>shimadzueemreadr</td>
+<td>Shimadzu EEM File (TXT)
+</td></tr>
+<tr>
+<td>jascoeemreadr</td>
+<td>Jasco EEM File (CSV)
+</td></tr>
+<tr>
+<td>jcamp</td>
+<td>JCAMP (DX,JDX,JCAMP)
+</td></tr>
+<tr>
+<td>spareadr</td>
+<td>Omnic SPA File (SPA)
+</td></tr>
+<tr>
+<td>spereadr</td>
+<td>Princeton Instruments SPE File (SPE)
+</td></tr>
+<tr>
+<td>spgreadr</td>
+<td>Omnic SPG File (SPG)
+</td></tr>
+<tr>
+<td>pereadr</td>
+<td>PerkinElmer File (FSM, SP, VIS)
+</td></tr>
+<tr>
+<td>snabsreadr</td>
+<td>Stellarnet ABS File (ABS)
+</td></tr>
+<tr>
+<td>------</td>
+<td>--------------------------------
+</td></tr>
+<tr>
+<td>camecard</td>
+<td>Cameca Ion-Tof BIF/BIF6 Image (BIF,BIF6)
+</td></tr>
+<tr>
+<td>opotekenvirdr</td>
+<td>ENVI Image Format (HDR)
+</td></tr>
+<tr>
+<td>lispixrawreadr</td>
+<td>Lispix Raw Formatted Image (RAW)
+</td></tr>
+<tr>
+<td>opotektiffrdr</td>
+<td>Multi-layer TIFF files (TIFF)
+</td></tr>
+<tr>
+<td>rawread</td>
+<td>Physical Electronics RAW Image (RAW)
+</td></tr>
+<tr>
+<td>specimreadr</td>
+<td>Spectral Imaging SPECIM (HDR/RAW)
+</td></tr>
+<tr>
+<td>img</td>
+<td>Image (Workspace/MAT file)
+</td></tr>
+<tr>
+<td>imgother</td>
+<td>Image standard (JPG, TIFF, GIF, BMP, PNG)
+</td></tr></tbody></table>
+<!-- 
+NewPP limit report
+Cached time: 20240930014703
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.017 seconds
+Real time usage: 0.022 seconds
+Preprocessor visited node count: 63/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:911-0!canonical and timestamp 20240930014703 and revision id 11737.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Data_Importing_Formats&amp;oldid=11737">https://www.wiki.eigenvector.com/index.php?title=Data_Importing_Formats&amp;oldid=11737</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 27 December 2022, at 13:21.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

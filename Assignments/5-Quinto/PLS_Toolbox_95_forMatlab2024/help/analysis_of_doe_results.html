@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Analysis of DOE Results - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Analysis_of_DOE_Results rootpage-Analysis_of_DOE_Results skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Analysis_of_DOE_Results"><span class="mw-page-title-main">Analysis of DOE Results</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Create_Design"><span class="tocnumber">1</span> <span class="toctext">Create Design</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Load_DOE_into_Analysis"><span class="tocnumber">2</span> <span class="toctext">Load DOE into Analysis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Add_Response_(Y-Block)_Data"><span class="tocnumber">3</span> <span class="toctext">Add Response (Y-Block) Data</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Calculate_Model"><span class="tocnumber">4</span> <span class="toctext">Calculate Model</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Review_Results"><span class="tocnumber">5</span> <span class="toctext">Review Results</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Term_Selection_for_Optimum_Model"><span class="tocnumber">6</span> <span class="toctext">Term Selection for Optimum Model</span></a></li>
+</ul>
+</div>
+
+<p>The following gives a general outline for analyzing Design of Experiments results with <a href="mlr.html" title="Mlr">MLR</a>, <a href="anovadoe.html" title="Anovadoe">ANOVA</a>, and <a href="#Review_Results">Effects Plots</a>.
+</p>
+<h3><span class="mw-headline" id="Create_Design">Create Design</span></h3>
+<p>First create and save your DOE Dataset using the <a href="doegui.html" title="Doegui">Experiment Designer</a> or <a href="doegen.html" title="Doegen">doegen</a> function. You can also create a run sheet for your results from Experiment Designer or the command line <a href="doerunsheet.html" title="Doerunsheet">doerunsheet</a> function.
+</p>
+<h3><span class="mw-headline" id="Load_DOE_into_Analysis">Load DOE into Analysis</span></h3>
+<p>The DOE Dataset can be loaded into the <a href="analysiswindow_layout.html" class="mw-redirect" title="AnalysisWindow Layout">Analysis window</a> for MLR and ANOVA analysis directly from <a href="doegui.html" title="Doegui">Experiment Designer</a> using the toolbar button, or you can manually load it from another location such as the base workspace or a file. When a DOE DataSet is loaded into Analysis and MLR is selected as the analysis method, <a href="#Review_Results">several toolbar buttons</a> specific to DOE will become visible (but not necessarily enabled).
+</p>
+<h3><span id="Add_Response_.28Y-Block.29_Data"></span><span class="mw-headline" id="Add_Response_(Y-Block)_Data">Add Response (Y-Block) Data</span></h3>
+<p>Once a DOE Dataset is loaded as an X-Block, a toolbar button for creating a Response Y-Block DataSet will be enabled. Clicking the button will create a Y-Block DataSet of the correct size (but with all NaN values) and open that DataSet in the DataSet Editor (DSE). The actual response values can be entered via the DSE "Data" tab.
+</p><p><a href="" class="image"><img alt="DOE yblock toolbar.png" src="doe_yblock_toolbar.png" decoding="async" width="333" height="128" /></a>
+</p>
+<h3><span class="mw-headline" id="Calculate_Model">Calculate Model</span></h3>
+<p>Once Response data has been entered, calculate the MLR model by clicking on the gears toolbar button.
+</p><p>By default, all DOE factors and calculated interaction terms (columns of the X-Block) are included in the analysis. Individual factors or interactions can be removed from the analysis by editing the X-Block (double-click the "X" in the Analysis window to open the DataSet in the DSE) and un-checking the "Include" flags in the "Column Labels" tab of the DSE for any factor or interaction term to exclude from the analysis. The model will have to be re-calculated after any change of inclusions.
+</p>
+<h3><span class="mw-headline" id="Review_Results">Review Results</span></h3>
+<p>After a model is created, the toolbar will be updated with DOE specific buttons for exploring the significance of each factor or interaction term on the response variable:
+</p>
+<ul><li>View ANOVA Table - displays a standard ANOVA results table.</li>
+<li>Open Half-Norm plot - displays a <a href="half_normal_probability_plot.html" title="Half-Normal Probability Plot">Half-Normal probability plot</a>.</li>
+<li>Open DOE Effects Plot - displays a one- or two-factor <a href="effects_plot.html" title="Effects Plot">effects plot</a>.</li></ul>
+<p><a href="" class="image"><img alt="DOE Toolbar.png" src="doe_toolbar.png" decoding="async" width="357" height="127" /></a>
+</p>
+<h3><span class="mw-headline" id="Term_Selection_for_Optimum_Model">Term Selection for Optimum Model</span></h3>
+<p>Now that the default model containing all terms has been constructed, the experimenter will need to iterate among the ANOVA table and MLR model diagnostics to arrive at an optimum model containing (generally) only the statistically significant terms.  A good approach is to serially eliminate the highest order terms first, recalculate the model, and observe the effect on the significance of remaining factors.  Factors are eliminated (or excluded as termed in this software) as described in the section above.  Continue elimination of higher order terms until only statistically significant (and scientifically reasonable) terms remain.  The MLR model diagnostics provide insight into the model fit, outliers, residuals, etc.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930210231
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.020 seconds
+Real time usage: 0.025 seconds
+Preprocessor visited node count: 31/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1106-0!canonical and timestamp 20240930210231 and revision id 7907.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Analysis_of_DOE_Results&amp;oldid=7907">https://www.wiki.eigenvector.com/index.php?title=Analysis_of_DOE_Results&amp;oldid=7907</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 14 November 2011, at 11:32.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

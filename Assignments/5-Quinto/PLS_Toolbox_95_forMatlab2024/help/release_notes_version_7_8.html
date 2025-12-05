@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Release Notes Version 7 8 - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Release_Notes_Version_7_8 rootpage-Release_Notes_Version_7_8 skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_8"><span class="mw-page-title-main">Release Notes Version 7 8</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>Version 7.8 of PLS_Toolbox and Solo was released in June, 2014.
+</p><p>For general product information, see <a rel="nofollow" class="external text" href="http://www.eigenvector.com/software/pls_toolbox.htm">PLS_Toolbox Product Page</a>. For information on Solo, see <a rel="nofollow" class="external text" href="http://www.eigenvector.com/software/solo.htm">Solo Product Page</a>.
+</p><p>(back to <a href="release_notes_pls_toolbox_and_solo.html" title="Release Notes PLS Toolbox and Solo">Release Notes PLS Toolbox and Solo</a>)
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#New_Features_in_Solo_and_PLS_Toolbox"><span class="tocnumber">1</span> <span class="toctext">New Features in Solo and PLS_Toolbox</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#ASCA_(Analysis_of_Variance_Simultaneous_Component_Analysis)"><span class="tocnumber">1.1</span> <span class="toctext">ASCA (Analysis of Variance Simultaneous Component Analysis)</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Analysis_Interface"><span class="tocnumber">1.2</span> <span class="toctext">Analysis Interface</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Preprocessing"><span class="tocnumber">1.3</span> <span class="toctext">Preprocessing</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Browse"><span class="tocnumber">1.4</span> <span class="toctext">Browse</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Dataset_Editor"><span class="tocnumber">1.5</span> <span class="toctext">Dataset Editor</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Importers"><span class="tocnumber">1.6</span> <span class="toctext">Importers</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Plot_Controls"><span class="tocnumber">1.7</span> <span class="toctext">Plot Controls</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Hierarchical_Model_Builder"><span class="tocnumber">1.8</span> <span class="toctext">Hierarchical Model Builder</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Model_Optimizer"><span class="tocnumber">1.9</span> <span class="toctext">Model Optimizer</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#MPCA_/_PARAFAC"><span class="tocnumber">1.10</span> <span class="toctext">MPCA / PARAFAC</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Batch_Processor"><span class="tocnumber">1.11</span> <span class="toctext">Batch Processor</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#New_Command-line_Features_and_Functions"><span class="tocnumber">2</span> <span class="toctext">New Command-line Features and Functions</span></a>
+<ul>
+<li class="toclevel-2 tocsection-14"><a href="#Misc_New_Functions"><span class="tocnumber">2.1</span> <span class="toctext">Misc New Functions</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Command-Line_Changes"><span class="tocnumber">2.2</span> <span class="toctext">Command-Line Changes</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="New_Features_in_Solo_and_PLS_Toolbox">New Features in Solo and PLS_Toolbox</span></h2>
+<h3><span id="ASCA_.28Analysis_of_Variance_Simultaneous_Component_Analysis.29"></span><span class="mw-headline" id="ASCA_(Analysis_of_Variance_Simultaneous_Component_Analysis)"><a href="asca.html" title="Asca"> ASCA (Analysis of Variance Simultaneous Component Analysis)</a></span></h3>
+<ul><li>Add new command-line and Analysis Window-based access to ASCA method</li>
+<li>Allows multivariate analysis of designed experiments by creating a PCA model for each of the ANOVA-calculated effect matrices.</li>
+<li>In the Analysis window, user can navigate through each factor's PCA model investigating the magnitude and influenced variables.</li>
+<li>Effect of each factor are reported in the Effects column and in the scores for the PCA model for the particular factor.</li>
+<li>The variable(s) which are significantly influenced by the factor are given by the loadings for the PCA model on that factor.</li>
+<li>Includes a permutation calculator which, when enabled, will report the probability that the given effect is significant (based on randomization of samples within each level of each given factor)</li></ul>
+<h3><span class="mw-headline" id="Analysis_Interface">Analysis Interface</span></h3>
+<ul><li>Add ASCA (ANOVA Simultaneous Component Analysis) analysis method</li>
+<li>Add support for "wide" (thick) venetian blinds</li>
+<li>SVM-R / SVM-C: Support all cross-validation methods (not just random)</li>
+<li>Show visual display of cross-validation sample splitting</li>
+<li>Give advice when current cross-validation conditions are non-optimal</li>
+<li>Improve cross-validation speed</li>
+<li>Add "weights" option to PLS and PLSDA to weight samples</li>
+<li>Add showyinbiplot option which allows hiding y-loadings in the Biplot</li>
+<li>Speed improvements for iPLS, iPLSDA, Stepwise MLR</li>
+<li>For two-class PLSDA models, include the average number of samples CORRECT as additional column (translation of fractional error into actual number of samples)</li>
+<li>Add sorting option for dates in cache.</li>
+<li>Allow drag/drop of exported model cache model+data format file into Analysis</li>
+<li>Add "rebuild model" to menu context menu (clear + build)</li>
+<li>Add Matthew's Correlation Coefficient to the output from confusionmatrix (two classes only)</li>
+<li>Calculate and show area under the curve (AUC) for ROC curves</li>
+<li>Calculate and display the min/max/ave percentage of samples left out per cross-validation cycle</li>
+<li>Add ability to automatically create plots when creating a report</li>
+<li>Better exporting of text-based information in Report Writer (e.g. Confusion tables and matrices)</li>
+<li>Always reconcile variables in test set with model, even when the NUMBER of variables matches</li>
+<li>ANN: fix for wrong CV predicted values shown for models with &gt; 1 Node (RMSECV was correct)</li>
+<li>Fix for pointer not always getting set back to arrow</li></ul>
+<h3><span class="mw-headline" id="Preprocessing">Preprocessing</span></h3>
+<ul><li>Log10: Use an offset AND ignore negative values</li>
+<li>Normalize: Allow normalization with multi-way data</li>
+<li>Arithmetic: Add visual variable selection and clarify other options</li>
+<li>GLSW: Make sure data .include field is applied to external data</li></ul>
+<h3><span class="mw-headline" id="Browse">Browse</span></h3>
+<ul><li>Align variables (if possible) when joining two datasets in the samples dimension</li>
+<li>Add new drag drop behavior for datasets onto datasets, datasets onto preprocessing, and datasets onto models.</li>
+<li>Add support for F2 = rename selected variable</li>
+<li>Easier to navigate EigenGuide video list and improved handling when new list can't be obtained</li>
+<li>Give option to clear data from base workspace if large data is pushed into Analysis or Image Manager</li></ul>
+<h3><span class="mw-headline" id="Dataset_Editor">Dataset Editor</span></h3>
+<ul><li>Add View &gt; Class and Axisscale Summary menu to EditDS (views Class Summary table)</li>
+<li>Add View Boxplot to menus (simple boxplot call)</li></ul>
+<h3><span class="mw-headline" id="Importers">Importers</span></h3>
+<ul><li>Add new Bruker XRPD importer (.raw file format)</li>
+<li>Improved handling of imports when multiple importers match the file type</li>
+<li>Text graphical import tool - improved support for ignoring data, automatically detecting types, and visibility</li>
+<li>Streamlined importing from GUIs- no longer necessary to select file type first, simply locate and load the file(s) of interest</li>
+<li>Automatically sort filenames into alphabetical order when importing</li>
+<li>Horiba importer (<a href="hjyreadr.html" title="Hjyreadr">hjyreadr</a>) automatically transpose image so that it matches Horiba's image mode</li>
+<li>Text importer (<a href="textreadr.html" title="Textreadr">textreadr</a>):
+<ul><li>Date format yyyymmddTHHMMSS (datestr format 30) is now recognized automatically</li>
+<li>Improved handling of small data tables</li>
+<li>Fix handling of double-quoted label that looks numeric</li>
+<li>Recognize dates which use spelled out month names</li>
+<li>Add improved auto-detection of XLS (look for binary file)</li></ul></li>
+<li>SPC importer (<a href="spcreadr.html" title="Spcreadr">spcreadr</a>):
+<ul><li>Fix for bug reading files with negative scaling exponents (fexp&lt;0)</li>
+<li>Fix to better handle files that have binary logs as well as text audit logs</li>
+<li>Add ability to specify data is an image by including "imagesize=..." and "imageorder=..." in audit log</li>
+<li>Add ability to specify author and name to be used by including them as key=value pairs in audit log</li></ul></li></ul>
+<h3><span class="mw-headline" id="Plot_Controls">Plot Controls</span></h3>
+<ul><li>Add scroll-wheel functionality (zoom plot, combine with shift or control to zoom one axes, click and move to pan)</li>
+<li>Add click-to-highlight feature to move a line or class set to the front of the plot</li>
+<li>Add class connect methods "spider" and "means" (connect means of each x)</li>
+<li>Significant improvement to speed of updating when plot control listbox does not need to be repopulated</li>
+<li>Add logic to bring target figure back to focus after docking controls (avoids issue that clicking on figure looses focus on figure)</li>
+<li>Add "automonotonic" flag to plotgui to avoid use of monotonic in "auto" mode unless allowed</li>
+<li>Add density-plot replot on zoom functionality</li>
+<li>Allow ALL options to be seen in settings</li>
+<li>Change connect class toolbar button into a popup menu</li>
+<li>Convert Axis Settings from instant-pop-up to context-menu-based command</li>
+<li>Axis Settings "all fonts" option now changes axes fonts too</li>
+<li>Change class colors base to improve visibility</li>
+<li>Move axis lines and class outlines to bottom of plot order so that right-click controls are not inaccessible</li>
+<li>Exporting figure: add new "resizemode" option to control resizing behavior</li>
+<li>Revise classmarkers to improve speed and automatically tie colors to classcolors</li></ul>
+<h3><span class="mw-headline" id="Hierarchical_Model_Builder"><a href="hierarchical_model_builder.html" title="Hierarchical Model Builder">Hierarchical Model Builder</a></span></h3>
+<ul><li>Add ability to set preferences including whether Q and T2 tests are based on reduced statistics and what thresholds should be used to trigger "otherwise" in PLSDA-based rule nodes</li>
+<li>Add scores as ouptut option for regression models</li>
+<li>Add "on-canvas" display of numerics, strings, errors, and model types</li>
+<li>Added ability to set condition on end points before the content of the end point has been defined</li>
+<li>Improve behavior when overwriting nodes with similar node type</li>
+<li>Allow drag/drop of models onto nodes to overwrite existing rule node WITHOUT changing branches (if possible)</li>
+<li>Allow double-click of model-based rule nodes to open model in Analysis</li>
+<li>Fix for error using "load" toolbar button or menu option</li>
+<li>Add "copy image to clipboard" functionality.</li></ul>
+<h3><span class="mw-headline" id="Model_Optimizer"><a href="modeloptimizergui.html" title="Modeloptimizergui">Model Optimizer</a></span></h3>
+<ul><li>Add R2C, R2CV, and compression information (from ANN and SVM models) to displayed fields</li></ul>
+<h3><span id="MPCA_.2F_PARAFAC"></span><span class="mw-headline" id="MPCA_/_PARAFAC"><a href="mpca.html" title="Mpca">MPCA</a> / <a href="parafac.html" title="Parafac">PARAFAC</a></span></h3>
+<ul><li>Allow for single slab input for prediction if sizes of two existing modes match variables for n-way array</li></ul>
+<h3><span class="mw-headline" id="Batch_Processor"><a href="bspcgui.html" title="Bspcgui">Batch Processor</a></span></h3>
+<ul><li>Fix for manually selecting batch steps.</li></ul>
+<h2><span class="mw-headline" id="New_Command-line_Features_and_Functions">New Command-line Features and Functions</span></h2>
+<h3><span class="mw-headline" id="Misc_New_Functions">Misc New Functions</span></h3>
+<h3><span class="mw-headline" id="Command-Line_Changes">Command-Line Changes</span></h3>
+<ul><li><a href="anovadoe.html" title="Anovadoe">anovadoe</a>
+<ul><li>Fix to force use of center points</li>
+<li>Use design information to identify center points ONLY (don't infer based on values)</li>
+<li>Allow input of matrix for y (squelches statistical tests - only reports coefficients)</li>
+<li>Add calculation of 3-way interactions</li>
+<li>Calculate the ANOVA decomposition column/matrices as needed for ASCA</li></ul></li>
+<li><a href="boxplot.html" title="Boxplot">boxplot</a>
+<ul><li>Fix for bug which would truncate labels to a single character</li>
+<li>Fix for bug when converting multiple inputs to options structure when one of those inputs was a cell array</li>
+<li>Revision to logic - give preference to classes in DSO when grouping (if no classes passed) THEN use labels (if no classes present in DSO)</li></ul></li>
+<li><a href="brukerxrpdreadr.html" title="Brukerxrpdreadr">brukerxrpdreadr</a> -add new Bruker XRPD importer (.raw file format)</li>
+<li><a href="confusionmatrix.html" title="Confusionmatrix">confusionmatrix</a> / <a href="confusiontable.html" title="Confusiontable">confusiontable</a>
+<ul><li>Handle excluded samples in simca case.</li>
+<li>Allow cell array of strings to be passed as trueClass and predClass</li>
+<li>Fix for bug in texttable output when no y is present</li></ul></li>
+<li><a href="dataset.html" class="mw-redirect" title="Dataset">dataset</a>
+<ul><li>-Add augment method, will create class that tracks augmented dataSets after a concatenation</li>
+<li>-Add table method, gets text table with labels from DataSet</li></ul></li>
+<li><a href="doegui.html" title="Doegui">Experiment Designer</a> -Add randomize menu item, overhaul options usage, and fix a few bugs with loading a DOE dataset.</li>
+<li><a href="oplecorr.html" title="Oplecorr">oplecorr</a>  -Add new "Optical Path-Length Estimation and Correction" preprocessing (command-line only)</li>
+<li><a href="reviewcrossval.html" title="Reviewcrossval">reviewcrossval</a> - Examines cross-validation settings for typical problems.</li>
+<li><a href="textreadr.html" title="Textreadr">textreadr</a> -Add "catdim" and "autopermute" options to manually control concatenation of multiple files</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930210006
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.018 seconds
+Real time usage: 0.021 seconds
+Preprocessor visited node count: 49/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1294-0!canonical and timestamp 20240930210006 and revision id 8999.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_8&amp;oldid=8999">https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_8&amp;oldid=8999</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 10 June 2014, at 16:33.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Release Notes Version 7 5 - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Release_Notes_Version_7_5 rootpage-Release_Notes_Version_7_5 skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_5"><span class="mw-page-title-main">Release Notes Version 7 5</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#New_Features_in_Solo_and_PLS_Toolbox"><span class="tocnumber">1</span> <span class="toctext">New Features in Solo and PLS_Toolbox</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Hierarchical_Model_Builder"><span class="tocnumber">1.1</span> <span class="toctext">Hierarchical Model Builder</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Model_Optimizer"><span class="tocnumber">1.2</span> <span class="toctext">Model Optimizer</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Artificial_Neural_Networks"><span class="tocnumber">1.3</span> <span class="toctext">Artificial Neural Networks</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Analysis_and_Workspace_Browser"><span class="tocnumber">1.4</span> <span class="toctext">Analysis and Workspace Browser</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#New/Improved_Importers_and_Preprocessing_Methods"><span class="tocnumber">1.5</span> <span class="toctext">New/Improved Importers and Preprocessing Methods</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Plot_Controls_Improvements"><span class="tocnumber">1.6</span> <span class="toctext">Plot Controls Improvements</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Other"><span class="tocnumber">1.7</span> <span class="toctext">Other</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#New_Command-line_Features_and_Functions"><span class="tocnumber">2</span> <span class="toctext">New Command-line Features and Functions</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="#Misc_New_Functions"><span class="tocnumber">2.1</span> <span class="toctext">Misc New Functions</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="New_Features_in_Solo_and_PLS_Toolbox">New Features in Solo and PLS_Toolbox</span></h2>
+<h3><span class="mw-headline" id="Hierarchical_Model_Builder"><a href="modelselectorgui.html" class="mw-redirect" title="Modelselectorgui"> Hierarchical Model Builder</a></span></h3>
+<ul><li>New graphical interface to build Hierarchical Models based on <a href="modelselector.html" title="Modelselector"> Model Selector</a> models.</li>
+<li>Allows building of complex classification trees, local model selectors, and input/output filters and tests.</li>
+<li>Branch decisions based on classification models, regression models, decomposition models, or tests on raw input variables.</li>
+<li>Output model predictions, fixed strings or numerical values, or throw errors for each branch.</li>
+<li>Drag and drop models and other objects from the Model Cache, workspace, or file system.</li>
+<li>Compatible with Solo_Predictor for immediate use in on-line applications.</li></ul>
+<h3><span class="mw-headline" id="Model_Optimizer"><a href="modeloptimizergui.html" title="Modeloptimizergui"> Model Optimizer</a></span></h3>
+<ul><li>Added ability to <a href="modeloptimizergui.html#Survey_Preprocessing" title="Modeloptimizergui"> automatically survey</a> over preprocessing settings.</li>
+<li>Improved support for PLSDA and SVMDA, added support for new ANN models.</li>
+<li>Improved handling of options and modeling errors.</li></ul>
+<h3><span class="mw-headline" id="Artificial_Neural_Networks">Artificial Neural Networks</span></h3>
+<ul><li><a href="ann.html" title="Ann">Artificial Neural Network (ANN)</a> added to Analysis window and command-line tools. Build ANN models in the same familiar interface as other models.</li>
+<li>Initial release includes previously released engine/algorithm, next minor release will include an additional, previously unreleased algorithm.</li></ul>
+<h3><span class="mw-headline" id="Analysis_and_Workspace_Browser">Analysis and Workspace Browser</span></h3>
+<ul><li>Completely revamped <a href="optionseditor.html" title="Optionseditor">options window</a> allows easier saving and restoring of options.</li>
+<li>Export and Import models and calibration data directly from <a href="analysis_window__model_cache_pane.html#Exporting_and_Importing_Models" title="Analysis Window: Model Cache Pane"> the Model Cache</a> to simplify sharing of models and data with others.</li>
+<li>Easier access to build SVM classification models and SIMCA models on any class set.</li>
+<li>Improved control over SIMCA classification rules and options.</li>
+<li>Add <b>Refine</b> menu to Analysis to better organize menu items and provide access to new hierarchical model builder.</li>
+<li>Add option to browse (see Edit &gt; Options &gt; Workspace Browser Options) to do either concatenation or not when dropping multiple files.</li></ul>
+<h3><span id="New.2FImproved_Importers_and_Preprocessing_Methods"></span><span class="mw-headline" id="New/Improved_Importers_and_Preprocessing_Methods">New/Improved Importers and Preprocessing Methods</span></h3>
+<ul><li><a href="emsc_toolbox_manual.html" title="EMSC Toolbox Manual">Extended Multiplicative Scatter Correction (EMSC)</a> now included in base products without additional purchase.</li>
+<li><a href="jcampreadr.html" title="Jcampreadr">jcampreadr</a> - Add peaktable support.</li>
+<li>Improved memory and speed performance for text parsing</li></ul>
+<h3><span class="mw-headline" id="Plot_Controls_Improvements">Plot Controls Improvements</span></h3>
+<ul><li>Added context-menu options to quickly select all members of a given sample's class</li>
+<li>Added ability to get <a href="summary.html" title="Summary">summary statistics</a> on selected samples (e.g. get mean of all selected samples)</li></ul>
+<h3><span class="mw-headline" id="Other">Other</span></h3>
+<ul><li>Added ability to access Sammon components (<a href="sammon.html" title="Sammon">sammon mapping</a>) in scores.</li></ul>
+<h2><span class="mw-headline" id="New_Command-line_Features_and_Functions">New Command-line Features and Functions</span></h2>
+<h3><span class="mw-headline" id="Misc_New_Functions">Misc New Functions</span></h3>
+<ul><li><a href="ann.html" title="Ann">ann</a> - Artificial Neural Network regression models.</li>
+<li>dataset/copy_clipboard - Copy data and labels to clipboard.</li>
+<li>EGrid - Property grid control based on Jide Property Table.</li>
+<li><a href="emscorr.html" title="Emscorr">emscorr</a> - Extended Multiplicative Scatter Correction (EMSC).</li>
+<li>evritree - Wrapper object for working with jtree in Matlab.</li>
+<li>evritreefcn - Rename of old evritree function.</li>
+<li>hideaxistext - Hides text objects which are outside the current axis limits.</li>
+<li><a href="importtool.html" title="Importtool">importtool</a> - GUI for designating column/row data types.</li>
+<li><a href="modelselectorgui.html" class="mw-redirect" title="Modelselectorgui">modelselectorgui</a> - Graphical Interface to build Hierarchical (modelselector) models.</li>
+<li><a href="preprocessiterator.html" title="Preprocessiterator">preprocessiterator</a>- Create array of preprocessing combinations.</li>
+<li><a href="sammon.html" title="Sammon">sammon</a> - Computes Sammon projection for data or map.</li>
+<li><a href="textreadr.html" title="Textreadr">textreadr</a> - Reads an ASCII or .XLS file in as a DataSet Object (formally xclreadr).</li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20240930201935
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.010 seconds
+Real time usage: 0.011 seconds
+Preprocessor visited node count: 38/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1261-0!canonical and timestamp 20240930201935 and revision id 8863.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_5&amp;oldid=8863">https://www.wiki.eigenvector.com/index.php?title=Release_Notes_Version_7_5&amp;oldid=8863</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 14 November 2013, at 14:06.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

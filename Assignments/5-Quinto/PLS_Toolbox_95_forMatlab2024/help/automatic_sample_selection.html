@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Automatic sample selection - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Automatic_sample_selection rootpage-Automatic_sample_selection skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Automatic_sample_selection"><span class="mw-page-title-main">Automatic sample selection</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>The Calibration/Validation Sample selection interface allows the user to choose which samples to keep in the calibration set (Cal) and which to move to the validation set (Val).
+</p><p>Selection can be done manually, by setting the "Sample Type" Class set (Under the Row Labels tab) to either Calibration or Validation for each sample, or automatically by selecting the Automatic split button (gear) in the toolbar.
+</p><p>The sample selection interface is opened by choosing "Split into Calibration / Validation" from any of the data blocks in the Analysis status window. The resulting interface is a customized DataSet editor which shows one row for each sample in the current calibration and validation blocks and allows the user to modify the status of each sample.
+</p><p>Once set selection is done, the "Accept Experiment Setup" toolbar button can be used to automatically sort the data into the calibration and validation blocks. All data marked as "Calibration" will be moved to the X/Y blocks in the calibration section of the Analysis window and all data marked as "Validation" will be moved to the X/Y blocks in the validation section of the Analysis window. Clicking the "Discard Experiment Setup" button will discard all Cal / Val changes.
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Manual_Sample_Selection"><span class="tocnumber">1</span> <span class="toctext">Manual Sample Selection</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Automatic_Sample_Selection"><span class="tocnumber">2</span> <span class="toctext">Automatic Sample Selection</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Disposition_of_Previous_Selection_Changes"><span class="tocnumber">2.1</span> <span class="toctext">Disposition of Previous Selection Changes</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Direction_for_Sample_Selection"><span class="tocnumber">2.2</span> <span class="toctext">Direction for Sample Selection</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Main_Interface"><span class="tocnumber">2.3</span> <span class="toctext">Main Interface</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Selection_Method"><span class="tocnumber">2.4</span> <span class="toctext">Selection Method</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Distance_Measure"><span class="tocnumber">2.5</span> <span class="toctext">Distance Measure</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Handling_Replicates"><span class="tocnumber">2.6</span> <span class="toctext">Handling Replicates</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Choosing_Percentage_to_Keep"><span class="tocnumber">2.7</span> <span class="toctext">Choosing Percentage to Keep</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Finishing_the_Selection"><span class="tocnumber">2.8</span> <span class="toctext">Finishing the Selection</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Manual_Sample_Selection">Manual Sample Selection</span></h2>
+<p>Each sample can be moved to either the Calibration or Validation set by simply changing the "Sample Type" class. If there are labels for the samples, these will be shown in the Label field of the interface.
+</p><p>To move more than one sample at a time, click the button at the left of each row to move to select the row. Once all the desired rows are selected, use the Class pull-down menu on one of the selected rows to choose Calibration or Validation, as desired. All selected samples will be switched to the indicated set.
+</p>
+<h2><span class="mw-headline" id="Automatic_Sample_Selection">Automatic Sample Selection</span></h2>
+<p>Automatic sample selection walks the user through the selection asking a series of questions outlined below.
+</p>
+<h3><span class="mw-headline" id="Disposition_of_Previous_Selection_Changes">Disposition of Previous Selection Changes</span></h3>
+<p>First, if there are any samples which have been manually or automatically moved from Cal to Val, or vice versa, the user is asked if they want to Reset all samples back to their original set before automatic selection is done. Choosing "Reset" will restore all the samples to the set they were in when the sample selection interface was opened. Choosing "Select from Current Split" will keep the samples in their current split and allow <b>further</b> selection automatically. "Cancel" stops all selection.
+</p><p><a href="" class="image"><img alt="Selreset.png" src="selreset.png" decoding="async" width="524" height="149" /></a>
+</p>
+<h3><span class="mw-headline" id="Direction_for_Sample_Selection">Direction for Sample Selection</span></h3>
+<p>Next, if there are any samples marked as Validation, the user is asked which "direction" they want to select, either removing samples FROM the calibration set (to the validation set), or adding samples TO the calibration set (out of the validation set). The first option is used when there are more samples in the calibration than are desired <i>or</i> when the user wishes to create a test set for their model. The second option is used when new data has been measured and the user wishes to add some subset of these samples to a previous set of calibration samples (to improve model performance on the new types of samples.)
+</p><p>If all the samples are in the calibration set already, Remove From Calibration is assumed.
+</p><p><a href="" class="image"><img alt="Seldirection.png" src="seldirection.png" decoding="async" width="489" height="160" /></a>
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Main_Interface">Main Interface</span></h3>
+<table class="wikitable" style="text-align: center;">
+
+<tbody><tr>
+<td style="padding: 25px"><a href="" class="image" title="Auto Split Window with no Y-block"><img alt="Auto Split Window with no Y-block" src="400px_selmethod_new.png" decoding="async" width="400" height="429" /></a>
+</td>
+<td style="padding: 25px"><a href="" class="image" title="Auto Split Window with Y-block"><img alt="Auto Split Window with Y-block" src="400px_selmethod_newy.png" decoding="async" width="400" height="459" /></a>
+</td></tr>
+<tr>
+<td>Only X block loaded
+</td>
+<td>X block and Y block loaded
+</td></tr>
+</tbody></table>
+<p>The left image shows the Automatic Sample Selection interface with only an X block loaded. The right image shows the Automatic Sample Selection interface with an X block and Y block loaded. See Handling Replicates section for more details.
+</p>
+<h3><span class="mw-headline" id="Selection_Method">Selection Method</span></h3>
+<p>Next, the selection method must be chosen:
+</p>
+<ul><li>Kennard-Stone - based on <a href="kennardstone.html" title="Kennardstone">kennardstone</a> this method selects samples that best span the same range as the original data, but with an even distribution of samples across that range. This is similar to the previously-offered method <a href="reducennsamples.html" title="Reducennsamples">reducennsamples</a>.</li></ul>
+<ul><li>Onion - based on <a href="distslct.html" title="Distslct">distslct</a> and <a href="splitcaltest.html" title="Splitcaltest">Splitcaltest</a> this method first selects a ring of the most unique samples (based on distance from the mean - like the outer-most layer of an onion.) These are used in the calibration set. Next, a ring of less unique samples, just inside the first set (the next onion layer), is put into the validation set. This is repeated two more times so there are three outer rings of most unique and less unique samples. Finally, all remaining samples are split randomly into calibration and validation.</li></ul>
+<ul><li>Duplex - based on <a href="duplex.html" title="Duplex">duplex</a>, selected samples should provide uniform coverage of the dataset and include samples on the boundary of the data set. Duplex starts by selecting the two samples furthest from each other and assigns these to the calibration set. Then finds the next two samples furthest from each other assigns these to the test set. Then iterates over the rest of the samples to find the sample furthest from the samples in the calibration set and assigns this to the calibration set and then finds the sample furthest from the test set and assigns this to the test set. This is done until the desired number of samples in the calibration set is reached.</li></ul>
+<ul><li>Random - based on <a href="randomsplit.html" title="Randomsplit">randomsplit</a>, this method will randomly split the data into calibration and test sets.</li></ul>
+<ul><li>SPXY - based on <a href="spxy.html" title="Spxy">spxy</a>, this method requires X block data and Y block data to split data into calibration and test sets.</li></ul>
+<h3><span class="mw-headline" id="Distance_Measure">Distance Measure</span></h3>
+<p>Defines the type of distance measure to use for the onion method. Euclidean does simple, non-scaled distance. Mahalanobis scales each direction by the covariance matrix (correcting for unusually small or large directions).
+</p>
+<h3><span class="mw-headline" id="Handling_Replicates">Handling Replicates</span></h3>
+<p>When choosing a selection method, the user can also define whether to use special replicate handling. In most cases, if you have replicate measurements, you do <b>not</b> want to split them between the calibration and validation sets. You want to keep them together in either the calibration or validation sets.
+</p><p>To use this feature, you must first <a href="assigning_sample_classes.html" title="Assigning Sample Classes">create a class set in your data</a> in which each set of replicate samples are assigned to the same class (with a different class for each group of samples that it is safe to split - see example below). Next, after a sample selection method is chosen, mark the "Keep Replicates Together" check-box on the Data Split Dialog. Then, choose the class set from the "Replicate Class Set" list which defines the replicate classes. The automatic splitting algorithm will keep those replicate samples together.
+</p><p>As shown in the images above, the Keep Replicates portion of the interface will appear different based on if there is only an X block loaded or if there is an X block and Y block loaded. When a Y block is loaded then you can choose which block to use for selecting a class set to keep replicates.
+</p><p>Below is an example of a set of samples and the classes that would work to keep replicates together:
+</p>
+<table class="wikitable" border="1" align="center">
+<caption>
+</caption>
+<tbody><tr>
+<th>Label</th>
+<th>Class
+</th></tr>
+<tr align="center">
+<td>Sample 1 Replicate 1</td>
+<td>A
+</td></tr>
+<tr align="center">
+<td>Sample 1 Replicate 2</td>
+<td>A
+</td></tr>
+<tr align="center">
+<td>Sample 2 Replicate 1</td>
+<td>B
+</td></tr>
+<tr align="center">
+<td>Sample 2 Replicate 2</td>
+<td>B
+</td></tr>
+<tr align="center">
+<td>Sample 2 Replicate 3</td>
+<td>B
+</td></tr>
+<tr align="center">
+<td>Sample 3 Replicate 1</td>
+<td>C
+</td></tr>
+<tr align="center">
+<td>Sample 3 Replicate 2</td>
+<td>C
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Choosing_Percentage_to_Keep">Choosing Percentage to Keep</span></h3>
+<p>Finally, the user must select the percentage of samples to "select". In the case of Removing From Calibration, this is the percentage of Calibration samples to <b>keep</b> in the calibration set. In the case of Adding To Calibration, this is the percentage of Validation samples to <b>add</b> to the calibration set. The value must be between 1 and 100
+</p><p><a href="" class="image"><img alt="Selpct.png" src="selpct.png" decoding="async" width="190" height="122" /></a>
+</p><p><b>Note:</b> If using the <b>Onion</b> method, the number of samples that are split into calibration and validation may slightly differ from the expected number due to the "nonion" and loop fraction parameters. See <a href="splitcaltest.html" title="Splitcaltest"> splitcaltest</a> for more information on these parameters.
+</p>
+<h3><span class="mw-headline" id="Finishing_the_Selection">Finishing the Selection</span></h3>
+<p>Once all settings have been defined, the selection will take place and the samples will be marked in their new sets. It may be useful to create a plot (click on the Plot toolbar button, or the Plot tab) to view which samples are in which sets. Accepting the changes will move all samples to the new sets and make sure Analysis is in the appropriate configuration for analysis of the data.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930154920
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.019 seconds
+Real time usage: 0.023 seconds
+Preprocessor visited node count: 44/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1197-0!canonical and timestamp 20240930154920 and revision id 11987.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Automatic_sample_selection&amp;oldid=11987">https://www.wiki.eigenvector.com/index.php?title=Automatic_sample_selection&amp;oldid=11987</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 20 November 2023, at 09:24.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

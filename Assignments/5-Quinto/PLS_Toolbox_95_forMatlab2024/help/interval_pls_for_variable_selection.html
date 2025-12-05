@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Interval PLS (IPLS) for Variable Selection - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+<link rel="canonical" href="https://www.wiki.eigenvector.com/index.php?title=Interval_PLS_(IPLS)_for_Variable_Selection"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Interval_PLS_IPLS_for_Variable_Selection rootpage-Interval_PLS_IPLS_for_Variable_Selection skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Interval_PLS_for_Variable_Selection"><span class="mw-page-title-main">Interval PLS (IPLS) for Variable Selection</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"><span class="mw-redirectedfrom">(Redirected from <a href="" class="mw-redirect" title="Interval PLS for Variable Selection">Interval PLS for Variable Selection</a>)</span></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Practical_IPLS_Considerations"><span class="tocnumber">2</span> <span class="toctext">Practical IPLS Considerations</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Using_the_IPLS_Function"><span class="tocnumber">3</span> <span class="toctext">Using the IPLS Function</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Conclusions"><span class="tocnumber">4</span> <span class="toctext">Conclusions</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Similar to <a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">Genetic Algorithms for Variable Selection</a> (GA), Interval PLS (<a href="ipls.html" title="Ipls">IPLS</a>) selects a subset of variables which will give superior prediction compared to using all the variables in a data set. Unlike the GA, IPLS does a sequential, exhaustive search for the best variable or combination of variables. Furthermore, it can be operated in "forward" mode, where intervals are successively included in the analysis, or in "reverse" mode, where intervals are successively removed from the analysis.
+</p><p>The "interval" in IPLS can be either a single variable or a "window" of adjacent variables (as might be used with spectroscopically-correlated or time-correlated variables, where adjacent variables are related to each other). In this discussion, we will refer to an "interval" with the understanding that this may include one ore more variables.
+</p><p>In forward mode, IPLS starts by creating individual PLS models, each using only one of the pre-defined variable intervals. This is similar to what is shown in <a href="genetic_algorithms_for_variable_selection.html#Genetic_Algorithm_Theory" title="Genetic Algorithms for Variable Selection">GA Figure 1</a>, except that only one of the individual intervals can be "on" at a time. If there are 100 intervals defined for a given data set, the first step calculates 100 models (one for each interval). Cross-validation is performed for each of these models and the interval which provides the lowest model root-mean-square error of cross-validation (RMSECV) is selected. This is the best single-interval model and the first selected interval, I1.
+</p><p>If only one interval is desired, the algorithm can stop at this point returning the one selected interval. If, however, more than one interval is desired (to increase information available to the model and maybe, thereby, improve performance), additional cycles can be performed. In the second cycle, the first selected interval is used in all models but is combined with each of the other remaining intervals, one at a time, when creating a new set of new PLS models. Again using RMSECV, the best combination of two intervals (I1 and one additional interval, I2) is determined. Note that the first selected interval can not change at this point. This is repeated for as many intervals as requested (up to In). Reverse mode of IPLS works in an opposite manner to forward mode. All intervals are initially included in the models, and the algorithm selects a single interval to discard. The interval which, when excluded, produced a model with the best RMSECV is selected for permanent exclusion. This is the "worst" interval, I1. If the user has selected that more than one interval should be excluded, subsequent cycles discard the next worst intervals based on improved RMSECV when each interval is discarded.  
+</p><p>For more information on this method see the following paper:
+</p><p>L. Nergaard, A. Saudland, J. Wagner, J.P. Nielsen, L. Munck, and S.B. Engelsen, “Interval Partial Least-Squares Regression (iPLS): A Comparative Chemometric Study with an Example from Near-Infrared Spectroscopy” <i>Applied Spectroscopy</i>, <b>54</b> (3), 413-419, 2000
+</p>
+<h2><span class="mw-headline" id="Practical_IPLS_Considerations">Practical IPLS Considerations</span></h2>
+<p>The total number of intervals to include or drop (number of cycles to perform) depends on various factors, including but not limited to:
+</p>
+<ul><li>The expected complexity of the system being modeled – the more complex (e.g., non-linear) the data, the more intervals usually needed.</li>
+<li>The amount of data reduction necessary – if only a fixed number of variables can be measured in the final experiment, the number of intervals should be limited.</li>
+<li>The distribution of information in the variables – the more distributed the information, the more intervals needed for a good model.</li></ul>
+<p>One method to select the best number of intervals is to cross-validate by repeating the variable selection using different sub-sets of the data. There is no automatic implementation of this approach in PLS_Toolbox. However, the IPLS algorithm does allow one to indicate that the algorithm should continue to add (or remove) intervals until the RMSECV does not improve. This can give a rough estimate of the total number of
+useful intervals. If multiple runs with different sub-sets of the data are done using this feature, it can give an estimate of the likely "best" number of intervals.
+</p><p>Another consideration is interval "overlap". Variables in the data can be split in a number of ways.
+</p>
+<ul><li>Intervals can each contain a single variable, thereby allowing single-variable selection.</li>
+<li>Intervals can contain a unique range or "window" of variables where each variable exists in only one interval.</li>
+<li>Intervals can contain overlapping ranges of variables where variables may be included in two or more intervals and can be included by selecting any of those intervals.</li></ul>
+<p>The decision on which approach to use depends on the uniqueness of information in the variables of the data and how complex their relationships are. If variables are unique in their information content, single-variable intervals may be the best approach. If adjacent variables contain correlated or complementary information, intervals which contain ranges of variables may provide improved signal-to-noise, increased speed of variable selection, and decreased chance of over-fitting (that is, selecting variables which work well on the calibration data but not necessarily on any data for the given system).
+</p><p>In contrast, although allowing overlapping intervals may seem as though it provides the advantages of increased signal-to-noise and modeling complexity, it may also lead to over-fitting. The difference between two adjacent windows becomes only the variables on the edges of the windows (those which are dropped or added by selecting the neighboring intervals.) In addition, overlapping windows can increase the analysis time
+considerably.
+</p><p>One general caveat to IPLS variable selection should be carefully considered. It is possible that, given n different intervals, the best "single interval" model would be obtained by selecting a given interval (interval 10, for example). The best "two interval" model, however, might actually be obtained by selecting two different intervals (5 and 6, for example). Because of the step-wise approach to this IPLS algorithm, once the single best interval is selected, it is required to be included in all additional models. As a result, the two-interval model might include intervals 5 and 10 (because 10 was selected first), even though 5 and 6 would provide a better RMSECV. This type of situation is most likely to arise when data are complex and require a significant number of factors for modeling. In these situations, using larger interval "windows" and requiring the addition of additional intervals (cycles) should be used. Additionally, the <a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">GA method of variable selection</a> may provide superior results.
+</p>
+<h2><span class="mw-headline" id="Using_the_IPLS_Function">Using the IPLS Function</span></h2>
+<p>In Solo and PLS_Toolbox, the IPLS functionality is available in the Analysis Window for the analysis methods PLS, PLSDA, MLR, and PCR. Settings for the variable selection can be made from the <a href="ipls_variable_selection_interface.html" title="IPLS Variable Selection Interface">IPLS Variable Selection Interface</a>. Use of the settings on that interface are described on the linked page.
+</p><p>In PLS_Toolbox, the <a href="ipls.html" title="Ipls">ipls</a> function can be used at the command-line where it takes as input the X- and Y-block data to be analyzed, the size of the interval windows (1 = one variable per interval), the maximum number of latent variables to use in any model, and an options structure. The options structure allows selection of additional features including:
+</p>
+<ul><li>mode&#160;: defines forward or reverse analysis mode.</li>
+<li>numintervals&#160;: defines the total number of intervals which should be selected. A value of inf tells IPLS to continue selecting until the RMSECV does not improve.</li>
+<li>stepsize&#160;: defines the number of variables between the center of each window. By default, this is empty, specifying that windows should abut each other but not overlap (i.e., stepsize is equal to the window size).</li>
+<li>mustuse&#160;: indices of variables which must be used in all models, whether or not they are included in the "selected" intervals.</li>
+<li>preprocessing&#160;: defines the preprocessing to be performed on each data subset (for more information, see the preprocess function).</li>
+<li>cvi&#160;: cross-validation settings to use (for more information, see the cvi input to the crossval function).</li></ul>
+<p>Demonstration of the ipls function can be done through the analysis of the slurry-fed ceramic melter (SFCM) thermocouple data. Briefly,
+these data consist of measurements from twenty thermocouples at various depths in a tank of melted ceramic material. As the level of the material rises and falls, the different thermocouples experience different temperatures. One can use IPLS to consider which thermocouple or thermocouples are the most useful in determining the level of material.
+</p><p>To do this, ipls is called with the SFCM data and inputs to set the maximum number of latent variables, interval width, and preprocessing options (autoscaling, in this case):
+</p>
+<pre>» load pls_data
+» options = ipls('options');
+» options.preprocessing = {'autoscale' 'autoscale'};
+» int_width = 1; %one variable per interval
+» maxlv = 5; %up to 5 latent variables allowed
+» sel = ipls(xblock1,yblock1,int_width,maxlv,options);
+</pre>
+<p>The result is the plot shown in Figure 1.
+</p><p><a href="" class="image"><img alt="Ipls results 1.png" src="ipls_results_1.png" decoding="async" width="541" height="406" /></a>
+</p><p><b>Figure 1.</b> First selected interval for SFCM data.
+</p><p>The figure shows the RMSECV obtained for each interval (with the average sample superimposed as a black line). The numerical values inside the axes along the bottom (just above the variable number) indicate the number of latent variables (LVs) used to obtain the given RMSECV. Because each interval contains only a single variable, only 1 LV can be calculated in all cases. The green interval (variable 18) is the selected interval.
+The horizontal dashed lines indicate the RMSECV obtained when using all variables and 1 or 5 LVs. Note that interval 18 on its own gave a slightly better one-LV model than did the model using all twenty variables. However, a five-LV model using all variables still did better than any individual interval.
+</p><p>The commands below repeat this analysis but request that two intervals be selected instead of one. The plot shown in Figure 2 is the result.
+</p>
+<pre>» options.numintervals = 2;
+» sel = ipls(xblock1,yblock1,int_width,maxlv,options);
+</pre>
+<p><a href="" class="image"><img alt="Ipls results 2.png" src="ipls_results_2.png" decoding="async" width="543" height="406" /></a>
+</p><p><b>Figure 2.</b> First two selected intervals for SFCM data.
+</p><p>The figure shows the results at the end of all interval selections. The final selected n<sup>th</sup> interval is shown in green. Intervals selected in the first n-1 steps of the algorithm are shown in blue. Because this analysis included only two intervals being selected, there is
+only one interval shown in blue (the first selected interval) and the second selected interval is shown in green. The height shown for the selected intervals (blue and green) is equal to the RMSECV for the final model. In this case, the final model with two selected intervals used only one latent variable (as indicated at the bottom of the bars) and gave an RMSECV which was slightly better than the RMSECV obtained using five latent
+variables and all intervals (dashed red line). Interestingly, the variables selected (numbers 8 and 18) are duplicate measurements at the same depth in the tank. This is a good indication that the given depth is a good place to measure, should only a single thermocouple be used.
+</p><p>The final example for IPLS shows the reverse analysis of the gasoline samples. In this case, the Y-block being predicted is the concentration of one of five components in these simulated gasoline mixtures and the X-block is the near-IR spectra measured for each sample. The reverse IPLS analysis indicates the effect on the RMSECV when each interval is discarded, and therefore the best interval(s) to discard. In this case, IPLS will be run with the maxintervals option set to infinity to trigger the "automatic" mode. The ipls function will continue to remove intervals until removing an interval would cause the RMSECV to increase. The MATLAB commands are shown below; the resulting plot is shown in Figure 3.
+</p>
+<pre>» load nir_data
+» options = ipls('options');
+» options.preprocessing = {'autoscale' 'autoscale'};
+» options.numintervals = inf;
+» ipls(spec1,conc(:,1),25,5,options);
+</pre>
+<p><a href="" class="image"><img alt="Ipls results rev.png" src="ipls_results_rev.png" decoding="async" width="533" height="405" /></a>
+</p><p><b>Figure 3.</b> Reverse IPLS analysis for simulated gasoline samples.
+</p><p>A total of eight intervals were discarded before it was determined that removing any additional intervals would cause an increase in RMSECV. Intervals marked in red on the reverse IPLS results plot are those that were discarded in the first seven cycles. The interval marked in green was the last discarded interval. The blue intervals are those that were retained. Each bar indicates the RMSECV which would have resulted, had the given interval been discarded. It can be seen that the intervals centered at 38, 113, and 263 are all critical for a good model (discarding these intervals would result in a significant increase in RMSECV.) It can also be seen that intervals at 63 and 88 were likely candidates for exclusion in the last cycle as the RMSECV change would have been nearly negligible.
+</p><p>It is interesting to compare the IPLS results on the gasoline simulant shown in Figure 3 to those from the GA run on the same data, shown in <a href="genetic_algorithms_for_variable_selection.html#Analysis_of_GA_Results" title="Genetic Algorithms for Variable Selection">GA Figure 7</a>. Note that, with a few exceptions, the same regions are discarded in each case. The biggest discrepancy is the inclusion of the interval centered at variable 113. This interval was under-represented in the GA models, but appears to be highly important to the model formed with IPLS-based selection. The difference is likely due to IPLS having excluded some region in an earlier cycle which left the 113-centered interval as the only source of some information.
+</p><p>In contrast, the GA models discovered that a different combination of intervals could achieve a better RMSECV by discarding interval 113 and retaining a different interval. Note, incidentally, that the final model created by IPLS selection returns an RMSECV of around 0.71. This is in contrast with the GA result of 0.27 for the same data.
+</p>
+<h2><span class="mw-headline" id="Conclusions">Conclusions</span></h2>
+<p>In general it should be remembered that, although variable selection may improve the error of prediction of a model, it can also inadvertently throw away useful redundancy in a model. Using a fewer number of variables to make a prediction means that each variable has a larger influence on the final prediction. If any of those variables becomes corrupt, there are fewer other variables to use in its place. Likewise, it is harder to detect a failure. If you keep only as many measured variables as you have latent variables in a model, you cannot calculate Q residuals, and the ability to detect outliers is virtually eliminated (except by considering T<sup>2</sup> values). As such, the needs of the final model should always be carefully considered when doing variable selection.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930160535
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.019 seconds
+Real time usage: 0.023 seconds
+Preprocessor visited node count: 21/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1027-0!canonical and timestamp 20240930160535 and revision id 7544.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Interval_PLS_(IPLS)_for_Variable_Selection&amp;oldid=7544">https://www.wiki.eigenvector.com/index.php?title=Interval_PLS_(IPLS)_for_Variable_Selection&amp;oldid=7544</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href="interval_pls_%28ipls%29_for_variable_selection.html"><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 28 June 2018, at 05:52.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

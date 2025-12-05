@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Faq where to find regression vector and regression intercept for a PLS or PCR model - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Faq_where_to_find_regression_vector_and_regression_intercept_for_a_PLS_or_PCR_model rootpage-Faq_where_to_find_regression_vector_and_regression_intercept_for_a_PLS_or_PCR_model skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Faq_where_to_find_regression_vector_and_regression_intercept_for_a_PLS_or_PCR_model"><span class="mw-page-title-main">Faq where to find regression vector and regression intercept for a PLS or PCR model</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><h3><span class="mw-headline" id="Issue:">Issue:</span></h3>
+<p>Where do I find the regression vector (B) and regression intercept (B<sub>0</sub>) for a PLS or PCR model?
+</p>
+<h3><span class="mw-headline" id="Possible_Solutions:">Possible Solutions:</span></h3>
+<p>NOTE: If you are trying to implement a model in an on-line prediction environment, please see our <a rel="nofollow" class="external text" href="http://www.eigenvector.com/software/model_exporter.htm">Model_Exporter</a> and <a rel="nofollow" class="external text" href="http://www.eigenvector.com/software/solo_predictor.htm">Solo_Predictor</a> products or <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">contact us</a> regarding use of on-line prediction engines.
+</p><p>Regression models store the regression vector information in units of the preprocessed data. In order to use this, you will either need to use additional information stored in the model to preprocess new data first (before using the regression vector) or use one of a couple of functions to convert the regression vector into one that can be applied to raw data. 
+</p><p>For some simple preprocessing situations, you may be able to convert a regression model over to a simple slope (a) and intercept (b) form:
+</p>
+<pre>y = ax+b 
+</pre>
+<p>using the Analysis menu item: "File &gt; Export Model &gt; To Regression Vector" which uses the <a href="regcon.html" title="Regcon">PLS_Toolbox regcon function</a>: 
+</p>
+<pre> &gt;&gt; regcon
+ REGCON Converts regression model to y = ax + b form.
+  'regcon help' gives extended help
+ I/O: [a,b] = regcon(mod);
+</pre>
+<p>However, this function will only operate on models with simple autoscaling or mean centering. 
+</p><p>More advanced preprocessing methods require either the <a rel="nofollow" class="external text" href="http://www.eigenvector.com/software/model_exporter.htm">Model_Exporter</a> add-on product, or custom programming to convert into a simple equation format. 
+</p><p><b>Manually Extracting and Applying</b>
+</p><p>To manually extract the regression vector (B) and the intercept (B<sub>0</sub>), these items would need to be extracted from the model object containing the regression model. The following describes these fields and the preprocessing steps needed to be performed. 
+</p><p>The regression vector is stored in the <code>model.reg</code> field of the model:
+</p>
+<pre>&gt;&gt; b = model.reg
+</pre>
+<p>B<sub>0</sub> is more subtle. In PLS_Toolbox, the regression vector and intercept are stored in terms of preprocessed data and the intercept is effectively zero. 
+</p><p>Preprocessing information in general can be found in:
+</p>
+<pre>&gt;&gt; model.detail.preprocessing{1}
+</pre>
+<p>for the x-block and
+</p>
+<pre>&gt;&gt; model.detail.preprocessing{2}
+</pre>
+<p>for the y-block. If you are using ONLY mean centering or autoscaling (i.e. no other preprocessing steps), the y-block mean is stored in:
+</p>
+<pre>&gt;&gt; model.detail.preprocessing{2}(1).out{1}
+</pre>
+<p>This may look like a terribly complicated command, but basically, it is saying that from preprocessing for the y-block "{2}" pull the first step "(1)" and return the first stored value ".out{1}". This will be the mean from your y-block (or means for multi-column y). If you are using autoscaling, there will also be a vector of standard deviations:
+</p>
+<pre>&gt;&gt; model.detail.preprocessing{2}(1).out{2}
+</pre>
+<p>Here are several simple situations and the equations you can use this information in: 
+</p>
+<ul><li>If you have mean-centered both X and Y prior to building the model (or applying it to new data), you can calculate a y prediction (<code>y_hat</code>) using:</li></ul>
+<pre>&gt;&gt; b     = model.reg;
+&gt;&gt; y_hat = x*b
+</pre>
+<p>This returns <code>y_hat</code> in preprocessed y-block units. 
+</p>
+<ul><li>If your model used ONLY mean-centering on ONLY the y-block (the model contained NO preprocessing on the X-block), the following will make a prediction:</li></ul>
+<pre>&gt;&gt; b     = model.reg;
+&gt;&gt; y_mn  = model.detail.preprocessing{2}.out{1};
+&gt;&gt; y_hat = x*b + y_mn;
+</pre>
+<p>This returns <code>y_hat</code> in original y-block units. 
+</p>
+<ul><li>If your model used ONLY autoscaling on ONLY the y-block (the model contained NO preprocessing of the X-block), this will make a prediction:</li></ul>
+<pre>&gt;&gt; b     = model.reg;
+&gt;&gt; y_mn  = model.detail.preprocessing{2}.out{1};
+&gt;&gt; y_sc  = model.detail.preprocessing{2}.out{2};
+&gt;&gt; y_hat = (x*b)*diag(y_sc) + y_mn;
+</pre>
+<p>This also returns <code>y_hat</code> in original y-block units. 
+</p><p>For other preprocessing methods, you will need to use the <code>preprocess</code> function to apply the preprocessing. 
+</p><p><br />
+</p><p><b>Still having problems? Please contact our helpdesk at <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a></b>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930034836
+Cache expiry: 86400
+Reduced expiry: false
+Complications: []
+CPU time usage: 0.006 seconds
+Real time usage: 0.009 seconds
+Preprocessor visited node count: 5/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1589-0!canonical and timestamp 20240930034836 and revision id 10236.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Faq_where_to_find_regression_vector_and_regression_intercept_for_a_PLS_or_PCR_model&amp;oldid=10236">https://www.wiki.eigenvector.com/index.php?title=Faq_where_to_find_regression_vector_and_regression_intercept_for_a_PLS_or_PCR_model&amp;oldid=10236</a>"</div></div>
+		<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="" title="Special:Categories">Category</a>: <ul><li><a href="category_faq.html" title="Category:FAQ">FAQ</a></li></ul></div></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 9 January 2019, at 09:53.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

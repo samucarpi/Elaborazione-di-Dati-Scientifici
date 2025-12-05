@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Variable Selection - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Variable_Selection rootpage-Variable_Selection skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Variable_Selection"><span class="mw-page-title-main">Variable Selection</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#General_Guidance"><span class="tocnumber">2</span> <span class="toctext">General Guidance</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Variable_Selection_in_Practice"><span class="tocnumber">3</span> <span class="toctext">Variable Selection in Practice</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Methods"><span class="tocnumber">4</span> <span class="toctext">Methods</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Work_Flow"><span class="tocnumber">5</span> <span class="toctext">Work Flow</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Other_Features"><span class="tocnumber">6</span> <span class="toctext">Other Features</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Variable_Selection_Functions"><span class="tocnumber">7</span> <span class="toctext">Variable Selection Functions</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>The Variable Selection panel contains an interface to several methods for performing variable selection. The goal is to find subsets of variables that improve predictions when compared to using all variables. This interface has several different methods available. Finding the best method and options settings depends on the data and usually requires some experimentation. Use the links below to find out more information on a particular method.
+</p>
+<h2><span class="mw-headline" id="General_Guidance">General Guidance</span></h2>
+<p>In general, all variable selection methods can over-fit and it is necessary to be aware of this to avoid spurious results. If you have very many samples, few variables and a good relation between your variables, it is less of a problem whereas if you have a weak model, few samples and many variables, the risk is much higher.
+</p><p>In such cases, it is important to use a very conservative cross-validation and set aside a test to verify your findings. A conservative cross-validation would be one using few segments, random (if possible) segments and many repetitions.
+</p><p>The available variable selection methods work for linear regression methods (PCR, PLS, MLR) but only the Genetic Algorithm (GA) or Interval PLS (iPLS) variable selection methods are available when performing linear classification using PLSDA.
+</p>
+<h2><span class="mw-headline" id="Variable_Selection_in_Practice">Variable Selection in Practice</span></h2>
+<ol><li>If you can build an almost reasonable model on your data, then the model diagnostics of that model will be meaningful. Hence you can use the model parameters to select variable and hence, it makes sense to start selecting variables with Automatic (VIP or sRatio). If the predictions improve and the selected variables seem reasonable, you use those selected variables and refine the model using the loadings and scores etc. Remember to always check for outliers before and after and maybe redo the variable selection upon removing outliers and re-adding all variables to the data. See the <a href="using_the_dataset_include_field.html" title="Using the DataSet Include Field">this page</a> for more information on how to manage including/excuding data.</li>
+<li>If you do not have a good model to begin with. Or if step one did not succeed it is useful to check a variable selection that does not rely on the initial overall model. Forward selection of variables can be performed with Interval PLS (iPLS). If you have spectral data or similarly continuous data, you have to choose windows (intervals). Select the interval width such that you will get something like 10-40 intervals. Maybe play around with the interval width and see if it makes a huge difference. As above, if the selection works, build a model with the selected variables and refine, check for outliers etc.</li>
+<li>If step 1 and 2 fails you can go to the more heavy machinery and run a genetic algorithm. It is a more greedy approach so it may be able to find a solution in more difficult cases. As it is more greedy, it is also more important that the cross-validation is conservative.</li></ol>
+<h2><span class="mw-headline" id="Methods">Methods</span></h2>
+<table class="wikitable">
+<caption>Variable Selection Performance
+</caption>
+<tbody><tr>
+<th>Method</th>
+<th>Speed</th>
+<th>Works without good model on all data
+</th></tr>
+<tr>
+<td><a href="selectvars.html" title="Selectvars">Automatic (VIP or sRatio)</a></td>
+<td>Fast</td>
+<td>No
+</td></tr>
+<tr>
+<td><a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">GA - Genetic Algorithm</a></td>
+<td>Slow</td>
+<td>Yes
+</td></tr>
+<tr>
+<td><a href="interval_pls_%28ipls%29_for_variable_selection.html" title="Interval PLS (IPLS) for Variable Selection">iPLS - Interval (Forward Selection) PLS </a></td>
+<td>Slow</td>
+<td>Yes
+</td></tr>
+<tr>
+<td><a href="rpls.html" title="Rpls">rPLS - Recursive PLS</a></td>
+<td>Very Fast</td>
+<td>No
+</td></tr>
+<tr>
+<td><a href="sratio.html" title="Sratio">sRatio - Selectivity Ratio</a></td>
+<td>Very Fast</td>
+<td>No
+</td></tr>
+<tr>
+<td><a href="vip.html" title="Vip">VIP - Variable Importance in Projection</a></td>
+<td>Very Fast</td>
+<td>No
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Work_Flow">Work Flow</span></h2>
+<p><a href="" class="image"><img alt="Variableselectionpanel.jpg" src="600px_variableselectionpanel.jpg" decoding="async" width="600" height="445" /></a>
+</p>
+<ul><li><u>Select a Method</u> - Select a method from the drop-down menu. Options for the method will be displayed. If a previous calculation has been done, the results of it will be displayed.</li>
+<li><u>Adjust Options</u> - By default, a simplified set of options are displayed. If the <b>Show All Options</b> checkbox is selected then all available options will be displayed. Depending on the options set, a particular method can take an extended amount of time to complete. For example, decreasing the window width in GA will increase the amount of time it takes to complete. See documentation for more details on optional settings. Clicking <b>Reset</b> button will reset all options to default values.</li>
+<li><u>Run Variable Selection</u> - Clicking the <b>Execute</b> button will run the current variable selection method with values specified in the options. A waitbar will be displayed indicating the method is running. Some methods will display a waitbar with a message indicating it can be closed to cancel execution. NOTE: It can take some time for the method to finish a calculation loop and identify the user has canceled. If <b>Show Plots</b> is checked then any additional plots will be displayed in separate windows. This is useful for GA as it will show progress of the calculation.</li>
+<li><u>View Results</u> - When a calculation is complete the selected variables will be displayed under a plot of the data mean as green bars. Two lines are displayed indicating the relative RMSECV values. The red line is the best RMSECV for all variables and the blue line is the best RMSECV for selected variables. These lines are scaled to the max RMSECV with all variables included.</li></ul>
+<dl><dd><dl><dd><b>NOTE:</b> These RMSECV values are different values from those displayed in the old interface and via existing plots (Show Plots is checked).</dd></dl></dd></dl>
+<ul><li><u>Use Selected Variables</u> - To use the selected variables click the <b>Use</b> button and the current selection will become the "included" variables of the current dataset (.include{2} field).</li>
+<li>Build a model with new include field.</li>
+<li>To undo the <u>last selection</u> click the the <b>Discard</b> button.</li>
+<li>Repeat these steps try different settings in Variable Selection.</li></ul>
+<p>NOTE: <b>Discard</b> will only undo the last selection. If <b>Use</b> is clicked, another selection is run, and <b>Use</b> is clicked again, the <b>Discard</b> button will only undo the last selection and will not return the include field to the "original" state.
+</p>
+<h2><span class="mw-headline" id="Other_Features">Other Features</span></h2>
+<ul><li><u>Automatic (VIP or sRatio)</u> - Uses the .fractionstotest option to survey over .fractiontoremove option of <a href="selectvars.html" title="Selectvars">selectvars</a> and select the best result.</li>
+<li><u>GA Window</u> - The <a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">GenAlg (GA) Window</a> can be displayed clicking the GA Window button. This will give access to all options. Values set on the panel will be reflected in the GA Window.</li>
+<li><a href="ipls_variable_selection_interface.html" title="IPLS Variable Selection Interface">IPLS Variable Selection Interface</a></li>
+<li><a href="rpls_variable_selection_interface.html" title="Rpls variable selection interface">Rpls variable selection interface</a></li>
+<li><u>Show List</u> - The <b>Show List</b> button will open a separate window listing the indices of the selected variables.</li>
+<li><u>Help</u> - The <b>Help</b> button displays this page.</li>
+<li><u>Cross Validation Settings</u> - For methods that use cross validation settings (e.g., maxlv and splits), these settings are pulled from the current values in the <a href="using_cross_validation.html" title="Using Cross-Validation">Cross Val</a> window.</li>
+<li><u>Drag Legend</u> The legend on the plot can be dragged to a new location in needed.</li></ul>
+<h2><span class="mw-headline" id="Variable_Selection_Functions">Variable Selection Functions</span></h2>
+<dl><dd><a href="calibsel.html" title="Calibsel">calibsel</a> - Statistical procedure for variable selection.</dd>
+<dd><a href="fullsearch.html" title="Fullsearch">fullsearch</a> - Exhaustive Search Algorithm for small problems.</dd>
+<dd><a href="gaselctr.html" title="Gaselctr">gaselctr</a> - Genetic algorithm for variable selection with PLS.</dd>
+<dd><a href="genalg.html" title="Genalg">genalg</a> - Genetic Algorithm for Variable Selection. See also <a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">Genetic Algorithms for Variable Selection</a>.</dd>
+<dd><a href="genalgplot.html" title="Genalgplot">genalgplot</a> - Plot GA results using selected variable plot, color-coded by RMSECV.</dd>
+<dd><a href="ipls.html" title="Ipls">ipls</a> - Interval PLS variable selection. See also <a href="interval_pls_%28ipls%29_for_variable_selection.html" title="Interval PLS (IPLS) for Variable Selection">Interval PLS (IPLS) for Variable Selection</a>.</dd>
+<dd><a href="rpls.html" title="Rpls">rpls</a> - Recursive PLS (and PCR) variable selection.</dd>
+<dd><a href="sratio.html" title="Sratio">sratio</a> - Calculates selectivity ratio for a given regression model.</dd>
+<dd><a href="selectvars.html" title="Selectvars">selectvars</a> - Selects variables that are predictive.</dd>
+<dd><a href="vip.html" title="Vip">vip</a> - Calculate Variable Importance in Projection from regression model.</dd></dl>
+<p>(Sub topic of <a href="categorical_index.html" title="Categorical Index">Categorical_Index</a>)
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205754
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.029 seconds
+Real time usage: 0.035 seconds
+Preprocessor visited node count: 33/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:350-0!canonical and timestamp 20240930205754 and revision id 10892.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Variable_Selection&amp;oldid=10892">https://www.wiki.eigenvector.com/index.php?title=Variable_Selection&amp;oldid=10892</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 15 November 2019, at 11:19.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

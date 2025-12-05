@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Reportwriter - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Reportwriter rootpage-Reportwriter skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Reportwriter"><span class="mw-page-title-main">Reportwriter</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>This page describes the Report Writer feature and its usage
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Usage"><span class="tocnumber">2</span> <span class="toctext">Usage</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Contents_of_the_Report"><span class="tocnumber">3</span> <span class="toctext">Contents of the Report</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Finding_Saved_Figures"><span class="tocnumber">3.1</span> <span class="toctext">Finding Saved Figures</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="#Command_Line_Usage"><span class="tocnumber">4</span> <span class="toctext">Command Line Usage</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Synopsis"><span class="tocnumber">4.1</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Description"><span class="tocnumber">4.2</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#Inputs"><span class="tocnumber">4.2.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Optional_Inputs"><span class="tocnumber">4.2.2</span> <span class="toctext">Optional Inputs</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="#Outputs"><span class="tocnumber">4.2.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="#Options"><span class="tocnumber">4.3</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Example"><span class="tocnumber">4.4</span> <span class="toctext">Example</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>ReportWriter allows the user a convenient way to create a summary report of their current work. It is available as a menu item in the Analysis window in Solo and PLS_Toolbox and as a command line function in PLS_Toolbox.  The summary report includes details of the data and analysis used and of the model if one was created. Figures opened from the Analysis window are also shown in the report. The report is generated in HTML format as a webpage by default. Microsoft Word or Powerpoint document output formats are also available on Windows platforms.
+</p>
+<h2><span class="mw-headline" id="Usage">Usage</span></h2>
+<p>The Reportwriter is available from the analysis GUI “Tools” menu item.
+</p><p><a href="" class="image"><img alt="Wikifig1.gif" src="wikifig1.gif" decoding="async" width="559" height="303" /></a>
+</p><p>You can choose to create the report in HTML format on Mac OSX,  or in HTML, Powerpoint or Word format on Windows platforms.  When you select the report format you are presented with a text entry window allowing you to add comments which will be included in the report.  Clicking the  “OK”  button on this window initiates the creation of the report, whether you added comments or not. Clicking “Cancel”  will abort the creation of the report.  When a report is generated it opens automatically (Word or Powerpoint documents will be minimized to the taskbar).  In the case of HTML format the report document and associated image files are saved in a folder with a name of the form “AnalysisReport_20100828T173449” (plus a suffix).  You can use the application’s save function to save a copy of the report to a permanent location using a new name, if desired. The Report Writer drop-down choice “Open Report Folder” allows you to open the folder where report files are saved on your computer. 
+</p><p>In the case of  HTML you can save the report as follows:
+</p><p>Firefox: Menu: “File”-&gt;”Save Page As…”  
+</p><p>Internet Explorer:  “File”-&gt;”Save As”, using “Web page complete” option.
+</p>
+<h2><span class="mw-headline" id="Contents_of_the_Report">Contents of the Report</span></h2>
+<p>There are two main sections to the report, namely, the "Analysis Details" section and the "Associated Figures" section, as shown in the example below taken from a PCR model in Analysis using the plsdata dataset.  The "Analysis Details" section can contain subsections named "Model" if a model has been built, "SSQ Table" if the model is of a type which includes such sums of squares information, and "Prediction" if the model has been applied to test data.  There is also a "Comments" subsection which contains any comments the user can optionally insert as they create the report.
+</p><p>The "Figures Associated with the Analysis" section shows all figures which were opened from the analysis GUI.  When the report is in HTML format these figures are .PNG format but they are also available in .FIG and .EPS formats by following links which appear below the figure labeled  "View as EPS" and "View as .FIG".
+</p><p>Example of HTML format analysis report:
+</p><p><a href="" class="image"><img alt="Wikifig2.gif" src="wikifig2.gif" decoding="async" width="918" height="1946" /></a>
+</p>
+<h3><span class="mw-headline" id="Finding_Saved_Figures">Finding Saved Figures</span></h3>
+<p>Reports are saved to the EVRI temp directory in a folder named "analysisreports".  This folder contains a report type folder named "html" (and "word" and "powerpoint" for Windows operating systems).  The report type folder contains all reports created using that format. Considering the HTML format for example, there will be a file and a folder created in the html folder for each new report. They will have a name formed using a date and timestamp, for example, "AnalysisReport_20100828T173449.html". The folder will have the same name as the file (minus the suffix) and will contain the image files for the figures shown in the report. There will be three versions of each image file, .PNG,  .EPS  and .FIG..  
+</p><p>Reportwriter also removes old report files from the analysisreports sub-folders itself.  When reportwriter runs it deletes files from its temporary directory which are older than options.maxage (days), which has a default value of 10 days. This option is configurable through the preferences expert interface (function name "reportwriter").
+</p>
+<h2><span class="mw-headline" id="Command_Line_Usage">Command Line Usage</span></h2>
+<p>The "reportwriter" function can be used to create a report from the command line on specific figures and optionally include information on a model. User comments may also be included in the report. The report is saved in the same manner as described above for analysis GUI generated reports. The report can be created in any format (HTML, Word, Powerpoint - although HTML is the only supported format on MAC and Linux).
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>filename = reportwriter(target, figs, <i>comments</i>, <i>options</i>);   %Report including the figures listed</dd>
+<dd>filename = reportwriter(target, model, <i>comments</i>, <i>options</i>);  %Report on model supplied</dd>
+<dd>filename = reportwriter(target, modelcell, <i>comments</i>, <i>options</i>);  %Report on model and figures supplied</dd>
+<dd>filename = reportwriter(target, h, <i>comments</i>, <i>options</i>);      %Report on Analysis with handle h</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Report writer generates an analysis report in the requested target format. Typically, a report is generated based on a model and figures created within the Analysis window. However, instead of providing an Analysis window handle, the caller may instead provide a vector of figure handles, a model alone, or a cell array containing a model and figure handles.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>target</b> = The program/file format to export figures to. Can have the following values:</li></ul>
+<dl><dd><dl><dd>'html'      &#160;: HTML document</dd>
+<dd>'powerpoint'&#160;: Microsoft PowerPoint</dd>
+<dd>'word'      &#160;: Microsoft Word</dd></dl></dd></dl>
+<ul><li>Second input can be any of the following:
+<ul><li><b>h</b>    = Handle to existing Analysis Window</li>
+<li><b>figs</b> = One or more handles of figures to include in a report  (without any model information)</li>
+<li><b>model</b>     = Model to report on (without figures)</li>
+<li><b>modelcell</b> = Cell array containing a model and handles of any figures to include in the report. E.g.: <tt>{model fig1 fig2 fig3}</tt></li></ul></li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<ul><li><b>comments</b> = A comment string (user supplied comments). If empty, no comment is included.</li>
+<li><b>options</b> = a structure with one or more of the fields identified below.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>filename</b> = name of the report file, including path.</li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<ul><li><b>notificationdialog</b>&#160;: [{'off'}| 'on' ]  Show a dialog at completion of report generation?</li>
+<li><b>autocreateplots</b>&#160;: [ {'off'} | 'on']  Automatically create standard plots (if reporting on an Analysis figure)</li>
+<li><b>autoopening</b>&#160;: [ 'off' |{'on'}]  Open the report when it is generated?</li>
+<li><b>autonaming</b>&#160;: [ 'off' |{'on'}]  Determine how output files should be named. If 'on', output files are given unique names. Otherwise, files are always given the same name so each new report overwrites the previous.</li>
+<li><b>maxage</b>&#160;: [10] Maximum age (in days) for old reports. Reports left in report folder longer than this will be automatically deleted.</li>
+<li><b>outdir</b>&#160;: [{<i>}] Default folder to save reports to. If emptyreports are saved to EVRIDIR folder in "analysisreports".</i></li></ul>
+<ul><li><b>ignoretags</b>&#160;: [{'gawindow'}] Ignore figures with these tags. Default includes 'gawindow' because causes problems when variable selection is used (hidden GA window). To remove crossval gui add 'crossvalgui' to list.</li></ul>
+<h3><span class="mw-headline" id="Example">Example</span></h3>
+<p>This is a convenient way of creating .PNG, .EPS or .FIG versions of your figures. For example, if you had 3 figures (figures 1, 4 and 5) you wanted to versions of them in the appropriate file formats, use the command:
+</p>
+<pre>  filename = reportwriter('html',[1 4 5])
+</pre>
+<p>to create an HTML report and the figures. Likewise, if you had a model to include, pass it in a CELL with the figures:
+</p>
+<pre>  filename = reportwriter('html',{model 1 4 5})
+</pre>
+<p>The returned report file name includes the path to the folder which contains the figure files. For example, if the returned file name is:
+</p>
+<pre>'C:\Users\username\AppData\Local\EVRI\analysisreports\html\AnalysisReport_20100901T230749.html'
+</pre>
+<p>then the figure files are located in the folder named
+</p>
+<pre>'C:\Users\username\AppData\Local\EVRI\analysisreports\html\AnalysisReport_20100901T230749'.
+</pre>
+<p><br />
+Comments may also be added to the generated report by including a text string as the third argument:
+</p>
+<pre>  filename = reportwriter('html',[1 4 5], 'User comments for the report')
+</pre>
+<!-- 
+NewPP limit report
+Cached time: 20240930205807
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.022 seconds
+Real time usage: 0.032 seconds
+Preprocessor visited node count: 38/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:919-0!canonical and timestamp 20240930205807 and revision id 7030.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Reportwriter&amp;oldid=7030">https://www.wiki.eigenvector.com/index.php?title=Reportwriter&amp;oldid=7030</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 14 November 2018, at 15:53.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

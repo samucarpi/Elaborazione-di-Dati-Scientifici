@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Model Exporter Reference Manual - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Model_Exporter_Reference_Manual rootpage-Model_Exporter_Reference_Manual skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Model_Exporter_Reference_Manual"><span class="mw-page-title-main">Model Exporter Reference Manual</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#System_Requirements"><span class="tocnumber">2</span> <span class="toctext">System Requirements</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Matlab-Based_Exporter_Requirements"><span class="tocnumber">2.1</span> <span class="toctext">Matlab-Based Exporter Requirements</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Solo-Based_Exporter_Requirements"><span class="tocnumber">2.2</span> <span class="toctext">Solo-Based Exporter Requirements</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Requirements_for_Using_Exported_Models"><span class="tocnumber">2.3</span> <span class="toctext">Requirements for Using Exported Models</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Installation"><span class="tocnumber">3</span> <span class="toctext">Installation</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Supported_Methods"><span class="tocnumber">4</span> <span class="toctext">Supported Methods</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Validity_of_Exported_Model_Predictions"><span class="tocnumber">5</span> <span class="toctext">Validity of Exported Model Predictions</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Exporting_a_Model"><span class="tocnumber">6</span> <span class="toctext">Exporting a Model</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="#Exporting_from_PLS_Toolbox_and_MATLAB"><span class="tocnumber">6.1</span> <span class="toctext">Exporting from PLS_Toolbox and MATLAB</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Exporting_from_Solo"><span class="tocnumber">6.2</span> <span class="toctext">Exporting from Solo</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Handling_Excluded_Variables"><span class="tocnumber">6.3</span> <span class="toctext">Handling Excluded Variables</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Storing_Numerical_Values_as_Binary"><span class="tocnumber">6.4</span> <span class="toctext">Storing Numerical Values as Binary</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="#M-file_Format"><span class="tocnumber">7</span> <span class="toctext">M-file Format</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="#Options"><span class="tocnumber">7.1</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Input_Data"><span class="tocnumber">7.2</span> <span class="toctext">Input Data</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#Returned_Results"><span class="tocnumber">7.3</span> <span class="toctext">Returned Results</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#Creating_Functions_from_Exported_Models"><span class="tocnumber">7.4</span> <span class="toctext">Creating Functions from Exported Models</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="#Python_File_Format"><span class="tocnumber">8</span> <span class="toctext">Python File Format</span></a>
+<ul>
+<li class="toclevel-2 tocsection-20"><a href="#Input_Data_2"><span class="tocnumber">8.1</span> <span class="toctext">Input Data</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="#Using_Exported_Models"><span class="tocnumber">8.2</span> <span class="toctext">Using Exported Models</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="#Returned_Results_2"><span class="tocnumber">8.3</span> <span class="toctext">Returned Results</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-23"><a href="#XML_File_Format"><span class="tocnumber">9</span> <span class="toctext">XML File Format</span></a>
+<ul>
+<li class="toclevel-2 tocsection-24"><a href="#Numerical_Matrix_Definitions"><span class="tocnumber">9.1</span> <span class="toctext">Numerical Matrix Definitions</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="#XML_Structure"><span class="tocnumber">9.2</span> <span class="toctext">XML Structure</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="#Using_XML-Exported_Models"><span class="tocnumber">9.3</span> <span class="toctext">Using XML-Exported Models</span></a>
+<ul>
+<li class="toclevel-3 tocsection-27"><a href="#Using_XML-Exported_Models_in_.Net"><span class="tocnumber">9.3.1</span> <span class="toctext">Using XML-Exported Models in .Net</span></a></li>
+<li class="toclevel-3 tocsection-28"><a href="#Using_XML-Exported_Models_in_Java"><span class="tocnumber">9.3.2</span> <span class="toctext">Using XML-Exported Models in Java</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-29"><a href="#Requirements_for_XML_Interpreters"><span class="tocnumber">10</span> <span class="toctext">Requirements for XML Interpreters</span></a>
+<ul>
+<li class="toclevel-2 tocsection-30"><a href="#Managing_of_Constants_and_Variables"><span class="tocnumber">10.1</span> <span class="toctext">Managing of Constants and Variables</span></a></li>
+<li class="toclevel-2 tocsection-31"><a href="#Script_Execution"><span class="tocnumber">10.2</span> <span class="toctext">Script Execution</span></a>
+<ul>
+<li class="toclevel-3 tocsection-32"><a href="#Single_Input_Functions"><span class="tocnumber">10.2.1</span> <span class="toctext">Single Input Functions</span></a></li>
+<li class="toclevel-3 tocsection-33"><a href="#Double_Input_Functions"><span class="tocnumber">10.2.2</span> <span class="toctext">Double Input Functions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-34"><a href="#Mathematical_Operation_Requirements"><span class="tocnumber">10.3</span> <span class="toctext">Mathematical Operation Requirements</span></a></li>
+<li class="toclevel-2 tocsection-35"><a href="#Script_Execution_Requirements"><span class="tocnumber">10.4</span> <span class="toctext">Script Execution Requirements</span></a></li>
+<li class="toclevel-2 tocsection-36"><a href="#Returned_Results_3"><span class="tocnumber">10.5</span> <span class="toctext">Returned Results</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-37"><a href="#Requirements_for_XML_Writers"><span class="tocnumber">11</span> <span class="toctext">Requirements for XML Writers</span></a></li>
+<li class="toclevel-1 tocsection-38"><a href="#evriMEaddon"><span class="tocnumber">12</span> <span class="toctext">evriMEaddon</span></a>
+<ul>
+<li class="toclevel-2 tocsection-39"><a href="#Enabled_Support_For:"><span class="tocnumber">12.1</span> <span class="toctext">Enabled Support For:</span></a>
+<ul>
+<li class="toclevel-3 tocsection-40"><a href="#Preprocessing_Methods"><span class="tocnumber">12.1.1</span> <span class="toctext">Preprocessing Methods</span></a></li>
+<li class="toclevel-3 tocsection-41"><a href="#Model_Types"><span class="tocnumber">12.1.2</span> <span class="toctext">Model Types</span></a></li>
+<li class="toclevel-3 tocsection-42"><a href="#Implementations"><span class="tocnumber">12.1.3</span> <span class="toctext">Implementations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-43"><a href="#Examples"><span class="tocnumber">12.2</span> <span class="toctext">Examples</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p><a href="model_exporter.html" class="mw-redirect" title="Model Exporter">Model_Exporter</a> converts models created within the <a href="software_user_guide.html" title="Software User Guide">PLS_Toolbox or Solo</a> chemometrics modeling environments into an interpretable format for use outside of these products. Models exported to Matlab or Python produce a stand-alone "predictor" script which includes a simple-to-implement formula to perform a model prediction.
+Models exported to XML can be used with the included C# or Java interpreters or with a user-supplied interpreter to make predictions on new data.
+Model_Exporter takes as input a standard model structure created in PLS_Toolbox or Solo and outputs the model into one of three formats: an XML file (executable by a user-supplied external parser or the Java or C# <a href="model_exporter_interpreter.html" title="Model Exporter Interpreter">Model Exporter Interpreter</a> class provided with Model_Exporter), an m-file (executable in MATLAB – separately distributed by Mathworks, Inc – without any additional toolboxes, or LabView with their MathScript addon package) or a Python file (executable in a Python 3.6 or higher environment).
+</p><p>The exported models require very few resources to be executed. Specifically, they requires floating-point numerical calculations, a small amount of memory, and the overhead resources required by the specific interpreter or language environment.
+</p><p>This documentation describes the use of the Model_Exporter, the use of exported M-file and Python file formats as well as to help in the design of external XML parsing engines. Model_Exporter includes a freely-distributable interpreter class with versions in C# and Java as described on the <a href="model_exporter_interpreter.html" title="Model Exporter Interpreter">Model Exporter Interpreter</a> page. In addition, an example interpreter engine is supplied for the PHP language (often used for web-page scripting predictions; see <a rel="nofollow" class="external free" href="http://www.php.net">http://www.php.net</a> for more information on PHP). Additional engines may be available - <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">Contact Eigenvector Research, Inc.</a> for more information.
+Latest version release notes can be found at <a rel="nofollow" class="external free" href="">http://wiki.eigenvector.com/index.php?title=Model_Exporter_Release_Notes</a>
+</p>
+<h2><span class="mw-headline" id="System_Requirements">System Requirements</span></h2>
+<p>Model_Exporter can be executed from either the MATLAB computational environment (<a rel="nofollow" class="external text" href="http://mathworks.com">Mathworks, Inc., Natick, MA</a>), or  <a href="software_user_guide.html" title="Software User Guide">Solo</a> (Eigenvector Research, Inc., Wenatchee, WA). Model_Exporter converts models created by PLS_Toolbox 3.5 or higher or Solo 4.0 or higher.
+</p>
+<h3><span class="mw-headline" id="Matlab-Based_Exporter_Requirements">Matlab-Based Exporter Requirements</span></h3>
+<p>For execution of Model_Exporter within the MATLAB environment, the following is required:
+</p>
+<dl><dd>Compatible with any version of Matlab released within five years of this product's release.  For example, Model exporter 3.3.0 released in 2016, is guaranteed to be compatible with any version of Matlab released within 5 years of the 2016 release data, so in this case Matlab 2011 would be the oldest version of Matlab that we fully guarantee compatibility.</dd>
+<dd>256 MB RAM (recommended – less may be required)</dd></dl>
+<h3><span class="mw-headline" id="Solo-Based_Exporter_Requirements">Solo-Based Exporter Requirements</span></h3>
+<p>For execution of the Model_Exporter, the following is recommended
+</p>
+<dl><dd>Solo+Model_Exporter 4.1 or higher</dd>
+<dd>Operating system requirements as listed for the specified Solo version</dd>
+<dd>200 MB Disk Space (for installation; some models may require additional space)</dd>
+<dd>256 MB RAM (recommended – less may be required)</dd></dl>
+<h3><span class="mw-headline" id="Requirements_for_Using_Exported_Models">Requirements for Using Exported Models</span></h3>
+<p>The requirements to execute an exported model vary depending on the interpreter used, the number of variables in the modeled data, and the complexity of the model (i.e. the number of factors/components included in the model and the types of preprocessing used).
+</p><p>Memory requirements depend on the precision required for the application, the number of variables in the data and the total number of factors in the model. For example, a model working on 10,000 variables and 5 factors would require around 1MB for double-precision calculations and 500KB single-precision calculations.
+</p><p>The software which executes the specific file formats may have additional requirements. See the file format description sections later in this manual for where to locate model execution details.
+</p>
+<h2><span class="mw-headline" id="Installation">Installation</span></h2>
+<p>Model_Exporter is installed by adding the Model_Exporter folder to your Matlab path. Once installed, PLS_Toolbox will recognize the installation and enable the proper menu items. Solo+Model_Exporter has the folder pre-installed.
+</p><p>For Matlab:
+</p>
+<ol><li>Make the Model_Exporter folder your Current Folder in Matlab.</li>
+<li>Run the command 'setpath' from the command line.</li></ol>
+<h2><span class="mw-headline" id="Supported_Methods">Supported Methods</span></h2>
+<p>Model_Exporter supports the following model types:
+</p>
+<dl><dd>PCA – Principal Components Analysis model</dd>
+<dd>PLS – Partial Least Squares regression model</dd>
+<dd>PLSDA – Partial Least Squares discriminant analysis model</dd>
+<dd>PCR – Principal Components Regression model</dd>
+<dd>CLS – Classical Least Squares Regression model</dd>
+<dd>SVM – Support Vector Machine Regression model</dd>
+<dd>SVMDA – Support Vector Machine Classification model</dd>
+<dd>ANN – Artificial Neural Network Regression model using BPN algorithm</dd>
+<dd>ANNDL - Artificial Neural Network Deep Learning Regression model</dd>
+<dd>MLR - Multivariate Linear Regression model</dd>
+<dd>LWR - Locally Weighted Regression*</dd>
+<dd>CLSTI - Temperature Interpolated Classical Least Squares models*</dd></dl>
+<p>and preprocessing methods:
+</p>
+<dl><dd>Absolute value</dd>
+<dd>Arithmetic</dd>
+<dd>Autoscale</dd>
+<dd>Baseline (specified)</dd>
+<dd>Calibration Transfer (Model Centric Calibration Transfer)**</dd>
+<dd>Derivative (SavGol)</dd>
+<dd>Detrend</dd>
+<dd>ELS</dd>
+<dd>EPO</dd>
+<dd>GLS weighting</dd>
+<dd>Log Decay Scaling</dd>
+<dd>Log10</dd>
+<dd>MSC (median, windows, and subinds not currently supported)</dd>
+<dd>Mean center</dd>
+<dd>Median center</dd>
+<dd>Normalize</dd>
+<dd>OSC</dd>
+<dd>Pareto Scaling</dd>
+<dd>Poisson Scaling</dd>
+<dd>SNV</dd>
+<dd>Smooth (SavGol)</dd>
+<dd>Sqrt Mean Scale</dd>
+<dd>Transmission to Absorbance</dd>
+<dd>Variance Scaling</dd>
+<dd>Weighted Least Squares Baseline Correction*</dd>
+<dd>Whittaker Baseline Correction*</dd></dl>
+<p>*requires the use of the <a href="#evriMEaddon" title="Model Exporter Reference Manual"> evriMEaddon</a> module. LWR and "Weighted Least Squares Baseline Correction" are currently only supported for export to Matlab and Python.
+</p><p>**this means that models containing calibration transfer as a preprocessing step generated via MCCT are exportable, provided that the input model type and other preprocessing methods are exportable.
+</p><p><br />
+</p><p>CLS algorithm options 'nnls' and 'cnnls' are only supported for Matlab target
+</p><p>Normalization and Baseline support windowing. Normalization supports type 1 (area) and type 2 (length) normalization, but does not support 'Inf' type normalization.
+</p><p>Arithmetic does not support using individual variables.
+</p><p>Model_Exporter does not support replacement of missing values (values must be measured for all variables).
+</p>
+<h2><span class="mw-headline" id="Validity_of_Exported_Model_Predictions">Validity of Exported Model Predictions</span></h2>
+<p>Exported models have been validated against "native" PLS_Toolbox/Solo model predictions for all supported analysis and preprocessing methods, with one exception. The exception is the case where the model was built using calibration X-block which has excluded variables and Savgol (smoothing or derivative) preprocessing is used. The one situation where exact agreement may NOT occur requires the following three conditions for the exported model:
+</p>
+<dl><dd>1. The model is built from X-block data which has excluded variables</dd>
+<dd>2. Savgol preprocessing with option "useexcluded"= true is the second or later preprocessing step</dd>
+<dd>3. The Savgol preprocessing step must be preceded by one of the following preprocessing methods: 'arithmetic', 'Autoscale', 'simple baseline', 'derivative', 'EpO', 'GLS Weighting', 'logdecay','Normalize', 'sqmnsc', 'smooth', or 'detrend'</dd></dl>
+<p>The cause of this exceptional case is related to exported models using only included variables, as this affects the ability of smoothing or derivative (Savgol) preprocessing steps to correctly process variables near excluded variables.
+</p><p>If a model with the conditions above is exported then a warning dialog will alert the user of the potential problem. The user can decide to cancel the exporting or not. In the latter case the user should test the exported model using typical samples to see if the prediction behavior is acceptable.
+</p><p>If Savgol preprocessing is used then it is best, if possible, to include it as the first preprocessing step, since this usage will be valid.
+</p>
+<h2><span class="mw-headline" id="Exporting_a_Model">Exporting a Model</span></h2>
+<h3><span class="mw-headline" id="Exporting_from_PLS_Toolbox_and_MATLAB">Exporting from PLS_Toolbox and MATLAB</span></h3>
+<p>Model_Exporter is easily called from the MATLAB environment. After adding the Model_Exporter folder to the MATLAB path, a model can be exported by simply calling the exportmodel function, passing the model structure itself, and an optional input specifying the file name and type to which the exported model should be written. When filename is omitted, Model_Exporter will prompt for a filename, file type, and location.
+</p>
+<pre>   exportmodel(model,filename)
+</pre>
+<pre>   exportmodel(model,filename,options)
+</pre>
+<p>The third parameter, options, allows specification of how excluded variables are handled, how numerical values are stored (text or binary), and whether the exported m-file is a script or function. See below for further details of options.
+</p><p>Model_Exporter is also accessible from the PLS_Toolbox through the Analysis GUI. With the model to export loaded into the Analysis GUI, go to the <b>File &gt; Export Model &gt; To Predictor…</b> menu and select the file type to export from the flyout menu.
+</p>
+<h3><span class="mw-headline" id="Exporting_from_Solo">Exporting from Solo</span></h3>
+<p>When installed with the stand-alone Solo software, a model is exported from the Analyis GUI. With the model to export loaded into the Analysis GUI, Go to the <b>File &gt; Export Model &gt; To Predictor…</b> menu and select the file type to export from the flyout menu.
+</p>
+<h3><span class="mw-headline" id="Handling_Excluded_Variables">Handling Excluded Variables</span></h3>
+<p>When excluded variables are detected within a model, the user will be given two options for how to handle these variables.
+</p>
+<ol><li>Compress Model – Model_Exporter will attempt to remove all references to excluded variables. The created predictor will expect values for only the included variables.</li>
+<li>Use Placeholders – Model_Exporter will create a predictor which expects values for all variables, excluded or included, although excluded values will be ignored.</li></ol>
+<p>The choice between these two methods depends on the environment in which the exported model is going to be used. If it is easier to always provide all variables to the predictor, then the “Use Placeholders” option is probably preferred. If, instead, only the included variables will be available (e.g. the excluded variables are not going to be measured), compressing the model is the correct approach.
+</p><p>In general, the two methods give identical numerical results with the sole exception of models which make use of smoothing and derivative preprocessing. These methods may give slightly different “edge effects” after compressing a model and validation of such models is encouraged.
+</p><p>In either case, the header information in the exported model will always reflect the number of variables expected and any labels or axisscale information for those variables.
+</p>
+<h3><span class="mw-headline" id="Storing_Numerical_Values_as_Binary">Storing Numerical Values as Binary</span></h3>
+<p>With large numbers of variables, and with certain types of preprocessing (e.g. derivatives and smoothing), the numerical matrices needed to apply the model can become quite large, particularly when stored in the standard text format of an exported model. When the output target is either Matlab (.m) or Python (.py), you have the choice to store the numerical values in one of three formats:
+</p>
+<ul><li>Text in the script (Default)</li>
+<li>Binary data file in DOUBLE (64-bit) precision</li>
+<li>Binary data file in SINGLE (32-bit) precision</li></ul>
+<p>Text in the script is the default format to store numerical values and allows all the model information to be included in a single file (the text script.) The second two options instead store these values in a separate binary file as a simple stream of numerical values of the indicated precision. When the binary formats are selected, the script is written to automatically open the binary file and read in the values from there instead of parsing them out of the script.
+</p>
+<dl><dd><b>Notes:</b>
+<ol><li>This file format is currently only available for scripts exported in the m-file format. <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com%7CContact">Eigenvector Research</a> if you have interest in using a similar format for other export formats.</li>
+<li>Single Precision Binary will reduce the accuracy of the predictions due to rounding error. The extent of error will depend greatly on the noise level of the data and the precision required by the model. Models exported with this precision should be validated with known samples to determine the effect of rounding on the predictions for the given model.</li>
+<li>It is assumed that the binary file is in the "current working directory" (unless the script is edited to change the file location.)</li></ol></dd></dl>
+<h2><span class="mw-headline" id="M-file_Format">M-file Format</span></h2>
+<p>The m-files output by <a href="model_exporter.html" class="mw-redirect" title="Model Exporter">Model Exporter</a> are stand-alone. That is, they can be run by the MATLAB computational environment (available from Mathworks, Inc., <a rel="nofollow" class="external free" href="http://www.mathworks.com">http://www.mathworks.com</a>) without any additional toolboxes or the LabVIEW environment (available from National Instruments, Inc., <a rel="nofollow" class="external free" href="http://www.ni.com">http://www.ni.com</a>) with any MathScript-enabled package.
+</p><p>For maximum flexibility, an exported model is written as a script which expects only to find a variable named x in its workspace. This variable provides the input data to which the model should be applied. It is important to note that the variable x will be modified by the script and, thus, the caller should not expect the variable to remain unchanged. See "Creating Functions from Exported Models", below, for more information on how to isolate the script and call it as a function. (Those unfamiliar with MATLAB scripts and functions should read the MATLAB documentation describing these concepts and the associated "variable scope" documentation.)
+</p><p>The input variable x should be a vector, representing a single sample, and the output will be a prediction for this one sample.
+</p>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>When exporting from the Matlab environment to a .m file using the <i>options</i> parameter it is possible to specify preferred behavior for these choices. The available options are:
+</p>
+<ul><li><b>handleexcludes</b>: [ {'ask'} | 'ignore' | 'placeholders'} Governs how excluded variables should be handled.</li></ul>
+<dl><dd>'ignore' = attempt to remove all references to excluded variables. Only included values will be expected.</dd>
+<dd>'placeholders' = expect values for all variables, although excluded values will not be used by model.</dd>
+<dd>'ask' = prompt user for desired behavior.</dd></dl>
+<ul><li><b>datastorageformat</b>: [ {'ask'} | 'text' | 'binarydouble' | 'binarysingle' ] Governs output format of numerical values.</li></ul>
+<dl><dd>'text' = store numerical values as text in the script (the normal output mode).</dd>
+<dd>'binarydouble' = store as binary data file in DOUBLE precision.</dd>
+<dd>'binarysingle' = store as binary data file in SINGLE precision.</dd>
+<dd>'ask' = prompt user for desired format.</dd></dl>
+<p>Note: Single Precision Binary will reduce the accuracy of the predictions due to rounding error. Validate results against known samples if single precision is used. Note: Binary output formats provide for smaller memory footprint but require parsers that can execute binary file read instructions.
+</p>
+<ul><li><b>creatematlabfunction</b>: [ {'no'}  | 'yes' ]  Governs m-file format specifying whether to create a Matlab script or function.</li></ul>
+<dl><dd>'yes' outputs m-files with appropriate code to allow calls to the model application in a functional form.</dd>
+<dd>'no' outputs m-file in script form.</dd></dl>
+<ul><li><b>distancemetric</b>: [ 'yes' | {'no'} ] Governs inclusion of distance metric which is an approximation of the nearest neighbor distance in score space (relative to the calibration samples.) The returned value will be normalized such that a value of 1 (one) indicates the given sample is as far from its nearest neighbor as was seen for any calibration sample. A value greater than 1 indicates a sample which is likely unusually distant from any calibration sample and may be an "inlier".</li></ul>
+<h3><span class="mw-headline" id="Input_Data">Input Data</span></h3>
+<p>The expected length (number of elements) and contents of the input x vector are defined in the comments and initial sections of the exported model script. The script, as exported, does not use this information to perform any validity testing on the input variable. This information is only provided to indicate to the user what type of data is expected.
+</p><p>The example below shows the part of an exported model which indicates the expected data size and associated context information. This particular model expects input data of ten variables as a row vector (as described by inputdata.size). 
+</p>
+<pre>%     .size = [ 75 10 ];
+%     .include_size = [ 75 10 ];
+</pre>
+<p>The user can make use of this information to assure the data being passed to the model is correct. Again, as written, the script provides no testing. Incorrect data sizes will be indicated by a runtime error when executing the script.
+</p>
+<h3><span class="mw-headline" id="Returned_Results">Returned Results</span></h3>
+<p>The results available from a model prediction will be present as variables in the script's workspace. The user is responsible for making use of these variables as needed. The following list specifies the supported results which may be of interest to the user.
+</p>
+<dl><dd><b>scores</b> - Scores for each component as a row vector.</dd>
+<dd><b>T2</b> - The Hotelling's T^2 as a scalar value.</dd>
+<dd><b>Q</b> - The sum squared x residuals (Q value) as a scalar value.</dd>
+<dd><b>Tcon</b> - Variable contributions to T2 as a row vector.</dd>
+<dd><b>Qcon</b> - Q residuals contributions (x residuals) as a row vector.</dd>
+<dd><b>x</b> - The preprocessed version of the input data.</dd>
+<dd><b>Xhat</b> - Model estimate of the data as a row vector (in preprocessed units - comparable to the preprocessed <b>x</b>).</dd></dl>
+<p>Note that returned Q and T2 are their "reduced" form, divided by the model's confidence limit value for Q or T2 (95 percent by default). A value of Q or T2 greater than 1 indicates an unusual sample at the model's confidence limit level for Q or T2.
+</p><p>All regression and PLSDA models return the following additional value:
+</p>
+<dl><dd><b>yhat</b> - Model prediction for y (predicted y value) as a scalar value or vector.</dd></dl>
+<p>PLSDA discriminant analysis models also return an additional value
+</p>
+<dl><dd><b>probs</b> - Model predicted probability of the input sample belonging to each class, where the classes are ordered as unique(y), as a vector. (y refers to the classes variable originally used in building the model).</dd></dl>
+<p>SVM regression analysis models return values:
+</p>
+<dl><dd><b>yhat</b> - Model prediction for y (predicted y value) as a scalar.</dd>
+<dd><b>nsvs</b> - Number of support vectors used by the model, as a scalar.</dd></dl>
+<p>SVMDA discriminant analysis (classification) models return values:
+</p>
+<dl><dd><b>probs</b> - Model predicted "probability" of the input sample belonging to each class, where the classes are ordered as shown in classorder (below). Note that the probability reported here is <b>not</b> the same as the probability reported by the SVM algorithm (based on a maximum likelihood calculation). Instead, this is based on the classvotes reported below. The class votes are normalized to give fraction of votes for each class. This fraction is raised to the power of 10, then normalized to unit area again. This gives a ROUGH estimate of probability where the class with the highest votes also gets the highest probability and the remaining classes are ranked in decreasing order. The log of the probability is roughly proportional to the number of class votes that would have to change to cause the assignment to change.
+<dl><dd>NOTE: For historical reasons, the output <b>prob</b> will also contain the identical probabilities as <b>probs</b>.</dd></dl></dd>
+<dd><b>classvotes</b> - Votes cast in favor of each class, as a vector. The class with most votes is the predicted class of the input sample.</dd>
+<dd><b>classorder</b> - Is a vector of class numbers identifying which class each classvotes value is associated with. For example, if the second entry in classvotes (or probs) has the largest value then the second value in classorder give the winning class number. See the model's model.classification.classnums and model.classification.classids to translate between class numbers with class names. Ties between two or more classes are resolved by choosing the first.</dd>
+<dd><b>nsvs</b> - Number of support vectors used by the model, as a scalar.</dd>
+<dd><b>df</b> - Vector of decision function values for pairwise classifiers, as a vector. If there are N classes then there are N*(N-1)/2 pairwise classifiers used. The decision functions are in order: class 1-2, 1-3,...1-N, 2-3, 2-4, ...,2-N,..., (N-1)-N. The classvotes are based on the decision function values.</dd></dl>
+<dl><dd>Note these exported model results should be the same as results from SVMDA when using option probabilityestimates = 0 (even if the exported model was built using option probabilityestimates = 1). Thus the exported model's predictions should only be validated against SVMDA models built using probabilityestimates = 0.</dd></dl>
+<p>ANN regression analysis models return values:
+</p>
+<dl><dd><b>yhat</b> - Model prediction for y (predicted y value) as a scalar.</dd>
+<dd><b>anntype</b> - ANN algorithm 1 = 'BPN', 2 = 'Encog'.</dd></dl>
+<h3><span class="mw-headline" id="Creating_Functions_from_Exported_Models">Creating Functions from Exported Models</span></h3>
+<p>Although the exported model is written as a script which would normally operate in the base workspace of MATLAB, the user can also wrap the script into a function by simply adding a standard function definition to the script file. A function wrapper keeps the input variable x from being modified outside the function. This approach tends to be safer than a script, but is not implemented by default in order to provide the widest flexibility to the user.
+</p><p>An example function line is provided in the exported model file (commented out) along with instructions for customization. In addition, there is an example block of code (also commented out by default) which will return “expected information” about x if the function is called without any inputs.
+</p><p>In general, the function definition requires only one input, x, and can output any of the variables which are present after the script's execution. An example would be:
+</p>
+<pre>  function [scores,Q,T2,Qcon,Tcon] = mymodel(x)
+</pre>
+<p>This function definition returns the vectors: scores, Qcon, and Tcon, as well as the scalar values: Q and T2 to the caller.
+</p><p>Note, as discussed above, the user can have this conversion of the exported m-file from a script to a function applied automatically by specifying the exportmodel option <b>creatematlabfunction</b> = 'yes'.
+</p>
+<h2><span class="mw-headline" id="Python_File_Format">Python File Format</span></h2>
+<p>The Python file output by <a href="model_exporter.html" class="mw-redirect" title="Model Exporter">Model Exporter</a> can be run in a Python version 3.6 or higher environment. It requires the <a rel="nofollow" class="external text" href="http://www.numpy.org/">NumPy</a> package be available.
+</p><p>For maximum flexibility, an exported model is written as a Python module (.py file) which expects only to find a NumPy array named x in its variable space. This variable provides the input data to which the model should be applied. It is important to note that the variable x will be modified by the script and, thus, the caller should not expect the variable to remain unchanged.
+</p><p>The input variable x should be a 1xn or mxn array, representing a single sample or multiple samples, and the output will be a prediction(s).
+</p>
+<h3><span class="mw-headline" id="Input_Data_2">Input Data</span></h3>
+<p>The expected length (number of elements) and contents of the input x vector are defined in the comments and initial sections of the exported model script. The script, as exported, does not use this information to perform any validity testing on the input variable. This information is only provided to indicate to the user what type of data is expected.
+</p><p>The example below shows the part of an exported model which indicates the expected data size and associated context information. This particular model expects input data of ten variables as a row vector. 
+</p>
+<pre>#   .size = [ 75 10 ];
+#   .include_size = [ 75 10 ];
+</pre>
+<p>The user can make use of this information assure the data being passed to the model is correct. Again, such testing is not provided by the script as written. Incorrect data sizes will be indicated by a runtime error when executing the script.
+</p>
+<h3><span class="mw-headline" id="Using_Exported_Models">Using Exported Models</span></h3>
+<p>The exported model is written as a Python module with the user's specified name, for example 'pcaexample.py'. This module can be imported and used in Python code.
+</p><p>All exported model Python modules contain an "apply" function which requires only one input, x, and returns a dictionary containing results. The input, x, should be a NumPy array of test samples with shape 1xn or mxn for single or multiple sample data. An example would be:
+</p>
+<pre>  # PCA model was exported to Python file named 'pcaexample.py'
+  import pcaexample
+  
+  # Use absolute or relative path
+  filename = '../arch_5row.csv'
+  
+  x = np.loadtxt(open(filename, "rb"), delimiter=",", skiprows=0)
+  
+  # Apply exported model
+  res = pcaexample.apply(x)   
+  
+  # This PCA example function returns a dictionary containing the scores, loads, Qcon, and Tcon,    
+  # as well as the scalar values Q and T2 to the caller.   # Report scores
+  print('PCA: [\'scores\']: \n', res['scores'])
+</pre>
+<h3><span class="mw-headline" id="Returned_Results_2">Returned Results</span></h3>
+<p>The particular results returned from applying the exported model depend on the model type and are the same as those listed under the <a href="#Returned_Results">M-file format description</a>. These will be contained in a returned dictionary 'res' and can be accessed as in this example:
+</p>
+<pre> print('PCA: [\'scores\']: \n', res['scores'])
+</pre>
+<p>The full list of returned quantities is available from the dictionary keys:
+</p>
+<pre> # Query the resulting dictionary for keys
+ print('\nPCA: res keys: ', res.keys())
+</pre>
+<h2><span class="mw-headline" id="XML_File_Format">XML File Format</span></h2>
+<p>The XML files output by Model Exporter are not directly usable. They can be used in any programming language for which an interpreter is available to translate the model's XML representation into a form which can be used by that programming language. The Model Exporter software package includes two such interpreters, one for .NET languages and one for Java. For more details see <a rel="nofollow" class="external text" href="">Model_Interpreter</a>. The input variable x should be a vector, representing a single sample, and the output will be a prediction for this one sample.
+</p>
+<h3><span class="mw-headline" id="Numerical_Matrix_Definitions">Numerical Matrix Definitions</span></h3>
+<p>The XML format utilizes custom tags to define various parts of the model. For some tags, the content is a vector or matrix of values. In these cases, a comma character delineates different column elements and semicolon indicates the end of a matrix row and the beginning of the next. All white space is ignored. If a given matrix contains only one row, it is described as a "row vector". A matrix with a single column is described as a "column vector". Orientation of such vectors is critical to the mathematical operations and must be parsed appropriately.
+</p>
+<h3><span class="mw-headline" id="XML_Structure">XML Structure</span></h3>
+<p>The XML file will consist of a top level &lt;model&gt; tag which will contain an &lt;information&gt; tag, an &lt;inputdata&gt; tag, and one or more step segments, each wrapped in a separate &lt;step&gt; tag.
+</p><p><b>&lt;model&gt;</b>
+</p>
+<dl><dd><b>&lt;information&gt;</b>   General information on the encoded model.
+<dl><dd><b>&lt;source&gt;</b>    Text description of file source (EVRI Model_Exporter).</dd>
+<dd><b>&lt;modeltype&gt;</b>  Standard model method acronym (PCA, PLS, etc).</dd>
+<dd><b>&lt;description&gt;</b> Text description of model including preprocessing, data size(s), and number of components. Each row of this multi-row string is delineated by &lt;sr&gt; (string row) tags.</dd>
+<dd><b>&lt;datasource&gt;</b> Information block of modeled calibration data. &lt;datasource&gt; is a multi-cell table format. There will be one column of information for each block of data required by the given modeltype (e.g. PCA requires 1 block, PLS requires 2). Each &lt;td&gt; tag will contain a number of sub-fields describing the data used for the given block. Informational only, sub-fields may change.</dd>
+<dd><b>&lt;outputs&gt;</b> Table-formatted (TR and TD wrapped) array of the names associated with the columns of the yhat output (if any). These can be used by the caller to assign string descriptions to each output. They are not used by the interpreter itself, however.</dd></dl></dd>
+<dd><b>&lt;/information&gt;</b></dd>
+<dd><b>&lt;inputdata&gt;</b>    Specific requirements for input data including the following information:
+<dl><dd><b>&lt;size&gt;</b>     Numeric class row vector describing the size expected for the input data (x). The first element of the vector gives the expected number of rows, the second is the expected number of columns.</dd>
+<dd><b>&lt;axisscale&gt;</b>   Numeric class row vector providing the expected axisscale of the input values. The actual values stored in the axisscale vector are completely dependent on the application and the analytical method used and may be empty.</dd>
+<dd><b>&lt;label&gt;</b>     Strings (delimited by &lt;sr&gt; sub-tags) defining the names of the variables expected in the input data (x). The names are dependent on the application and the analytical method used and may be empty.</dd></dl></dd>
+<dd><b>&lt;/inputdata&gt;</b></dd>
+<dd><b>&lt;step&gt;</b>       Repeated tag for each step required for making a prediction using this model. Will contain the following sub-fields:
+<dl><dd><b>&lt;sequence&gt;</b>  Numeric class single value indicating the order in which this step should be performed. The steps are generally included in the XML file in sequence-order (sequence 1 will be the first step in the file), but this field can be used to assure in-order processing of steps.</dd>
+<dd><b>&lt;description&gt;</b> String class description of the step (informational only)</dd>
+<dd><b>&lt;constants&gt;</b>  Contains information on constants required by this step. Each constant is defined as a sub-tag herein. The name of the constant is the sub-tag name and will contain a matrix (or vector) of values to use for the given constant. See below for more information.</dd>
+<dd><b>&lt;script&gt;</b>    One or more rows of strings describing the mathematical operations to perform this step. When more than one mathematical operation is to be performed, each will be given in a separate string row &lt;sr&gt; tag. However, these can be ignored. Each mathematical operation will be terminated with a semicolon.</dd></dl></dd>
+<dd><b>&lt;/step&gt;</b></dd></dl>
+<p><i>(Additional &lt;step&gt; tags located here…)</i>
+</p><p><b>&lt;/model&gt;</b>
+</p><p>See the provided files "pcaexample.xml" and "plsexample.xml" for full examples of the XML structure.
+</p>
+<h3><span class="mw-headline" id="Using_XML-Exported_Models">Using XML-Exported Models</span></h3>
+<p>TODO: describe briefly the .NET and Java ModelInterpreters and refer to the examples
+</p>
+<h4><span class="mw-headline" id="Using_XML-Exported_Models_in_.Net">Using XML-Exported Models in .Net</span></h4>
+<p>TODO:
+</p>
+<h4><span class="mw-headline" id="Using_XML-Exported_Models_in_Java">Using XML-Exported Models in Java</span></h4>
+<p>TODO:
+</p>
+<h2><span class="mw-headline" id="Requirements_for_XML_Interpreters">Requirements for XML Interpreters</span></h2>
+<p>To execute each of the &lt;step&gt; segments contained in the XML file, an interpreter must be able to parse the constants defined into matrices and be able to execute the script commands. The following give the specifications for an interpreter.
+</p><p>For examples of interpreters, see the <a href="model_exporter_interpreter.html" title="Model Exporter Interpreter">Model_Exporter Interpreter</a> objects in folder: interpreters/MEInterpreter, or the PHP interpreter in interpreters/predict.php. These are all distributed with Model_Exporter and are <i>freely-distributable without additional licensing</i>.
+</p>
+<h3><span class="mw-headline" id="Managing_of_Constants_and_Variables">Managing of Constants and Variables</span></h3>
+<ul><li>The interpreter must  maintain a "workspace" of stored constants and variables in  which the matrices can be accessed by a variable name (specified by the  tag in which the given constant was read, for example:<pre>&lt;s class="numeric" size="[1,1]"&gt;4&lt;/s&gt;</pre></li></ul>
+<dl><dd>would define a constant "s" which was equal to the scalar value 4).</dd></dl>
+<ul><li>Constants are NOT case sensitive and any interpreter must be written to consider the upper or lower case variables as the same.</li>
+<li>"Constants" are just pre-defined variables. Although every effort will be made to avoid changing these values, it is NOT a rule that these "constants" cannot be  changed – scripts may modify and overwrite these values. They are called  "constants" because they are initially defined by the model.</li>
+<li>The enclosing tag for the  constant will define the class of the constant (in this application,  constants will always be "numeric") and will also define the  size of the constant using the attribute 'size'. For example, <pre>&lt;s class="numeric" size="[1,5]"&gt;</pre> defines that the enclosed constant will be a row vector (1 row) of 5 elements (5 columns).</li>
+<li>Prior to the execution of  the script(s), the XML interpreter must place a variable named "x"  (lower-case) in their workspace. This variable must contain the data to which  the model should be applied. The value of "x" will be modified by the script so, following initial assignment, no alteration of this  variable should be done outside what is specified by the script.</li>
+<li>All constants/variables  must be retained for the entirety of a given step. In many cases, the  variables remaining in the workspace will contain results of interest to  the caller and, therefore, all workspace values should be retained. The variable "x" must always be present.</li></ul>
+<h3><span class="mw-headline" id="Script_Execution">Script Execution</span></h3>
+<p>The following lists define the script commands which must be supported by the interpreter (scripts may contain only these commands). When applicable, the Matlab operator corresponding to the given function is given. Interpreters do not need to interpret these operators. They will never be used in any script and are provided here only for reference.
+</p>
+<h4><span class="mw-headline" id="Single_Input_Functions">Single Input Functions</span></h4>
+<pre>C = function(A);  
+ abs             Absolute Value     Removal of sign of elements ( abs(A) )
+ log10           log (base 10)      Base 10 logarithm of elements ( log10(A) )
+ transpose       transpose array    Exchange rows for columns ( A' )
+</pre>
+<h4><span class="mw-headline" id="Double_Input_Functions">Double Input Functions</span></h4>
+<pre>C = function(A,B);
+   plus          Plus                              Addition of paired elements ( A+B )
+   minus         Minus                             Subtraction of paired elements ( A-B )
+   mtimes        Matrix multiply (dot product)     Dot product of matrices ( A*B )
+   times         Array multiply                    Multiplication of paired elements ( A.*B )
+   power         Array power                       Exponent using paired elements ( A.^B )
+   rdivide       Right array divide                Division of paired elements ( A./B )
+   cols          Index into columns of matrix      Select or replicate columns  ( A(:,B) )
+   rows          Index into rows of matrix         Select or replicate rows     ( A(B,:) )
+</pre>
+<h3><span class="mw-headline" id="Mathematical_Operation_Requirements">Mathematical Operation Requirements</span></h3>
+<ul><li>All mathematical operations are expected to be performed using signed, single precision numbers.</li>
+<li>With the exception of mtimes (dot product), all operations are "element-by-element". That is, the two matrices passed will be equal in size (see scalar exception below) and the mathematical operation is performed between each element of matrix A and its corresponding element in matrix B. The output matrix C is always the same size as A and B.</li>
+<li>Scalar Exception (except mtimes): A or B may be a scalar even if the other isn't. In this situation, the scalar input must be interpreted as an appropriately-sized matrix containing all the same value.</li>
+<li>mtimes (dot product) is performed using the standard linear-algebraic dot-product operation. In generic terms, the input matrix A will contain m rows and k columns, the input matrix B will contain k rows and n columns and the output matrix C will contain m rows and n columns. The following equation is used to calculate each element of the C matrix (loop for i = 1 to m and for j = 1 to n):</li></ul>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle C_{i,j}=A_{i,1}B_{1,j}+A_{i,2}B_{2,j}+A_{i,3}B_{3,j}+...+A_{i,k}B_{k,j}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>C</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <msub>
+          <mi>A</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>+</mo>
+        <msub>
+          <mi>A</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mn>2</mn>
+          </mrow>
+        </msub>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>+</mo>
+        <msub>
+          <mi>A</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mn>3</mn>
+          </mrow>
+        </msub>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>3</mn>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>+</mo>
+        <mo>.</mo>
+        <mo>.</mo>
+        <mo>.</mo>
+        <mo>+</mo>
+        <msub>
+          <mi>A</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>k</mi>
+          </mrow>
+        </msub>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>k</mi>
+            <mo>,</mo>
+            <mi>j</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle C_{i,j}=A_{i,1}B_{1,j}+A_{i,2}B_{2,j}+A_{i,3}B_{3,j}+...+A_{i,k}B_{k,j}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/47ad4663f7a4383ee92345f4755893dd483cd85d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:50.264ex; height:2.843ex;" alt="{\displaystyle C_{i,j}=A_{i,1}B_{1,j}+A_{i,2}B_{2,j}+A_{i,3}B_{3,j}+...+A_{i,k}B_{k,j}}"/></span></dd></dl></dd>
+<dd>Subscripts indicate the row and column indexing (respectively) into the  given array. When either A or B is a scalar, the mtimes operation should  be handled as a "times" operation. That is, the operation  becomes an element-by-element multiplication where each element of the  matrix input is multiplied by the scalar value and C is the same size as  the input matrix.</dd></dl>
+<ul><li>cols and rows indexing operations should expect a row vector for B that may have repeated elements (which allows replication of a given row or column). For example, given a row vector for B of</li></ul>
+<dl><dd><dl><dd>B = [1 1 1 2 2 2]</dd></dl></dd>
+<dd>passed into the cols operation, this would replicate column 1 three times then replicate column 2 three times giving a total of 6 columns in the output.</dd></dl>
+<h3><span class="mw-headline" id="Script_Execution_Requirements">Script Execution Requirements</span></h3>
+<ul><li>The format for a single  script command is: <pre> C = function(A,B);</pre> where function is one of the above functions, A and B are the pre-defined constants / variables to use as input to function, and C is the output. Input B will be omitted for functions which require only one input. Each command of the script will end in a semi-colon ";". All commands must be performed in the order in which they appear in the script.</li>
+<li>The expected size, axisscale,  and labels associated with x will be stored in the &lt;sourcedata&gt; tab  (if any exist). These values can be used by an XML interpreter to verify  the data being analyzed.</li>
+<li>Constants are NOT case  sensitive and any interpreter must be written to consider the upper or lower  case variables as the same.</li></ul>
+<h3><span class="mw-headline" id="Returned_Results_3">Returned Results</span></h3>
+<p>The results returned by a model prediction will be present as variables in the interpreter's workspace upon completion of the XML parsing. The returned results are the same as those listed for the <a href="#Returned_Results">M-file format</a>.
+</p>
+<h2><span class="mw-headline" id="Requirements_for_XML_Writers">Requirements for XML Writers</span></h2>
+<p>The following rules are to be followed by the script creation algorithm of Model_Exporter. These rules may be of interest to script interpreters, but should not have any critical impact on interpreter design.
+</p>
+<ul><li>Nesting of functions is not  allowed. Functions can only take variables or pre-defined constants as  input.</li>
+<li>NO iterative processes are  supported. All scripts must be straight-through executing (no control  structures such as "ifs", "while", etc are supported.)</li>
+<li>Missing data replacement  is not supported.</li>
+<li>As of version 1.0 of this product,  only variables or pre-defined constants may be used in a function. No  "in-line" constants may be used. For example:</li></ul>
+<pre>    C = minus(A,1);
+</pre>
+<p>is invalid because the constant "1" has to be pre-defined. This command should instead be written where the "1" is pre-defined as a constant and the name of that constant is used.
+</p>
+<ul><li>Variables are NOT case  sensitive and any interpreter must be written to consider the upper or  lower case variables as the same. Note, however, that the Matlab output of  this function will be case-sensitive code so the scripts should try to be  consistent in case, even if other interpreters won't care.</li></ul>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="evriMEaddon">evriMEaddon</span></h2><p>
+The original intent of Model_Exporter was to produce lean code, often for low resource targets, where a minimal number of basic matrix operations are needed to convert application of a model into a top-down recipe.  As such, some model and preprocessing methods are precluded from export in Model_Exporter due to requiring high level functions, iterations, and the like.  In response to customer requests to broaden this list, especially in instances where computing resources are not so limited, we have added to the Model_Exporter architecture an add-on library named </p><pre>evriMEaddon</pre><p> (MATLAB, Python and XML platforms).  The main code exported by Model_Exporter will continue to consist of basic matrix operations and be strictly top-down, but additional functionality will be available through a call to this library.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Enabled_Support_For:">Enabled Support For:</span></h3>
+<h4><span class="mw-headline" id="Preprocessing_Methods">Preprocessing Methods</span></h4>
+<ul><li>"baseline" (Weighted least squares baseline correction):    Matlab, Python. Currently not supported by XML-Java or XML-C# Interpreter</li>
+<li>"whittaker" (Whittaker baseline correction):    Matlab, Python, XML. Supported by Java and C# Interpreters</li></ul>
+<h4><span class="mw-headline" id="Model_Types">Model Types</span></h4>
+<ul><li>LWR:      Matlab, Python</li>
+<li>CLSTI:    Matlab, Python, XML - Java</li></ul>
+<h4><span class="mw-headline" id="Implementations">Implementations</span></h4>
+<p>Matlab and Python methods are included in files evriMEaddon.m and evriMEaddon.py available in the supplied evrimeaddon folder.
+Java and CSharp methods are included in the supplied MEInterpreter\Java\javainterpreter.jar. and MEInterpreter\CSharp\bin\Release\ModelExporterInterpreter.dll.
+</p>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<p>For example, in an exported model calling for Whittaker baseline correction, the following code is generated defining the parameters for the preprocessing algorithm (following examples in MATLAB code):
+</p>
+<pre>whittakerOPS.lambda = 100;
+whittakerOPS.p = 0.001;
+whittakerOPS.maxiter = 100;
+whittakerOPS.maxtime = 600;</pre>
+<p>The baseline correction is performed with the following command:
+</p>
+<pre>x = evriMEaddon('evriMEwhittaker', x, whittakerOPS);</pre><p>
+The syntax will always consist of calling the library </p><pre>evriMEaddon</pre><p> and the argument list consists of
+</p><ul><li>the name of the module</li>
+<li>the variable containing the data</li>
+<li>any additional parameters (for example, weight least squares baseline correction uses the axis scale from mode 2 of the data)</li>
+<li>an options <code>structure</code> (MATLAB)/<code>dictionary</code> (Python) containing the necessary parameters for applying the algorithm</li></ul>
+<p>Note that these commands will be generated automatically by Model_Exporter, so no further modification is needed on the part of the user.
+</p><p>The files <code>evriMEaddon.m</code> and <code>evriMEaddon.py</code> may be found in the folder "evrimeaddon" under the main installation folder for Model_Exporter.  During deployment, these files need to be accessible within the environment of the exported model code.  In the case of Python, the <code>evriMEaddon</code> function needs to be imported within the application via
+</p>
+<pre>from evriMEaddon import evriMEaddon</pre>
+<p>or add <code>evriMEaddon.py</code> to the Python path.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930203521
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.092 seconds
+Real time usage: 0.442 seconds
+Preprocessor visited node count: 187/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 448/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:915-0!canonical and timestamp 20240930203521 and revision id 12260.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Model_Exporter_Reference_Manual&amp;oldid=12260">https://www.wiki.eigenvector.com/index.php?title=Model_Exporter_Reference_Manual&amp;oldid=12260</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 8 July 2024, at 06:53.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

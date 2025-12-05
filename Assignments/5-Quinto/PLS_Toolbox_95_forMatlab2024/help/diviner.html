@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Diviner - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Diviner rootpage-Diviner skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Diviner"><span class="mw-page-title-main">Diviner</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Diviner"><span class="tocnumber">1</span> <span class="toctext">Diviner</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Data_Workflow"><span class="tocnumber">1.1</span> <span class="toctext">Data Workflow</span></a>
+<ul>
+<li class="toclevel-3 tocsection-3"><a href="#Exploratory_Module"><span class="tocnumber">1.1.1</span> <span class="toctext">Exploratory Module</span></a></li>
+<li class="toclevel-3 tocsection-4"><a href="#Refinement_Module"><span class="tocnumber">1.1.2</span> <span class="toctext">Refinement Module</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="#Command_Line_Function_diviner.m"><span class="tocnumber">2</span> <span class="toctext">Command Line Function diviner.m</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Synopsis"><span class="tocnumber">2.1</span> <span class="toctext">Synopsis</span></a>
+<ul>
+<li class="toclevel-3 tocsection-7"><a href="#Inputs"><span class="tocnumber">2.1.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="#Output"><span class="tocnumber">2.1.2</span> <span class="toctext">Output</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Optional_Inputs"><span class="tocnumber">2.1.3</span> <span class="toctext">Optional Inputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-10"><a href="#See_Also"><span class="tocnumber">2.2</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Diviner">Diviner</span></h2>
+<p><b>Diviner</b> is a semi-automated machine learning (Semi-AutoML) tool specifically designed to enhance the development of linear multivariate regression models. Unlike traditional AutoML systems that entirely automate the machine learning workflow —often sacrificing domain-specific insights and transparency— Diviner strikes a balance between automation and expert involvement. It allows users to efficiently leverage automation while retaining control over critical decision points in the modeling process. This hybrid approach addresses key shortcomings of AutoML, such as the lack of domain knowledge, overfitting, and limited customization, by incorporating user input to guide model development more effectively.
+</p><p>Diviner is a tool designed for calibrating linear models, specifically Partial Least Squares (<b>PLS</b>) and regularized multiple linear regression (<b>MLR</b>) models, such as Elastic Net. It provides a comprehensive workflow that includes outlier assessment, a grid search for preprocessing methods, variable selection, and user-guided model refinement.
+</p><p>With its extensive library of preloaded preprocessing methods, Diviner is particularly suited for chemometrics and spectral data analysis. However, users can also create custom preprocessing libraries, making Diviner a versatile tool for linear regression tasks across various data types.
+</p>
+<h3><span class="mw-headline" id="Data_Workflow">Data Workflow</span></h3>
+<div class="thumb tright"><div class="thumbinner" style="width:502px;"><a href="" class="image"><img alt="Diviner workflow.png" src="500px_diviner_workflow.png" decoding="async" width="500" height="255" class="thumbimage" /></a>  <div class="thumbcaption"><div class="magnify"><a href="" class="internal" title="Enlarge"></a></div></div></div></div>
+<h4><span class="mw-headline" id="Exploratory_Module">Exploratory Module</span></h4>
+<p><b>Data loading:</b> The process begins with data being loaded into the system. If a test dataset is available, it should be loaded at this time to evaluate the performance of the models. Note: if a test set is not loaded before the run, applying the models to the test set later will not be possible.
+</p><p>See this page for more information on using the the Diviner Analysis interface: <a href="diviner_analysis.html" title="Diviner analysis"> Diviner Analysis interface</a>.
+</p><p><b>Choice of algorithms:</b>PLS is set as the default algorithm, while MLR must be activated in the options. PLS model optimization of number of components (LVs) is included in Diviner's initial grid search. MLR (Elastic Net) performs a separate optimization routine to find the best penalty for each MLR model in the grid search.
+</p><p><b>Preprocessing:</b> This step involves selecting multiple preprocessing methods based on the data type and application. Preprocessing methods for outlier assessment must also be selected at this stage. See this page for more information: <a href="diviner_preprocess.html" title="Diviner preprocess"> Diviner Preprocess interface</a>.
+</p><p><b>Cross-validation (CV):</b> Diviner supports all cross-validation modes available in the PLS_Toolbox and Solo. This step also sets the number of PLS latent variables (LVs) to be used in the initial grid search. 
+</p><p><b>Auto-Variable Selection:</b> Variable selection in the initial module uses two fast algorithms: Variable Importance in Projection (VIP) and Selectivity Ratio (sRatio). Learn more about these algorithms <a href="selectvars.html" title="Selectvars">here</a>.
+</p><p><b>Outlier assessment:</b> Diviner automatically identifies potential outliers in the dataset using a combination of robust PCA and PLS with the preprocessing methods previously selected by the user. See this page for more information: <a href="diviner_review_outliers.html" title="Diviner review outliers"> review outliers from Diviner</a>.
+</p><p><b>Preliminary Output &amp; First Model Selection:</b> After the full grid search of PLS (and MLR) models—based on preprocessing recipes, variable selection, and Latent Variable combinations—the initial output is generated as a plot of Overfit (RMSECV/RMSEC) vs. RMSECV. The user manually selects the best models from this plot for refinement or further analysis. See this page for more information: <a href="diviner_review_results.html" title="Diviner review results"> review Diviner results</a>.
+</p>
+<h4><span class="mw-headline" id="Refinement_Module">Refinement Module</span></h4>
+<p><b>Refinement Process:</b> This involves further variable selection and outlier reinclusion. Given that these procedures are time-consuming and not ideal for a large number of models, they are performed only on the models selected from the initial grid search.
+</p><p><b>Further Variable Selection:</b> Additional refinement of variable selection is conducted using interval Partial Least Squares (iPLS) to fine-tune which variables contribute to the model.
+</p><p><b>Outlier Reinclusion:</b>  If any previously excluded outliers are found to be significant upon further analysis, they may be re-evaluated and potentially reintegrated into the models.
+</p><p><b>Final Model Selection and Output:</b> After all refinements are completed, the user selects the best-performing models for the final output.
+</p>
+<h2><span class="mw-headline" id="Command_Line_Function_diviner.m">Command Line Function diviner.m</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<pre>diviner - Launches the diviner interface
+</pre>
+<pre>[allresults] = diviner(x,y,options);
+[allresults] = diviner(x_cal,y_cal,x_val,y_val,options);
+</pre>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<pre>x  = X-block (predictor calibration/training block) class "double" or "dataset"
+y  = Y-block (predicted calibration/training block) class "double" or "dataset"
+x_cal  = X-block (predictor calibration/training block) class "double" or "dataset"
+y_cal  = Y-block (predicted calibration/training block) class "double" or "dataset"
+x_val  = X-block (test/validation block) class "double" or "dataset"
+y_val  = Y-block (test/validation block) class "double" or "dataset"
+options = an optional input options structure
+</pre>
+<h4><span class="mw-headline" id="Output">Output</span></h4>
+<pre>allresults = struct of results 
+</pre>
+<p>The structure contains the following fields:              
+</p>
+<ul><li>errordata: dataset object with error information for each model in Diviner. This also contains several class sets for the samples.</li></ul>
+<ul><li>errortable: table object containing additional information about each of the Diviner models, such as preprocessing descriptions, and contains the actual models.</li></ul>
+<ul><li>calibrationoutliers: vector of indices from the calibration set the were excluded from calibration.</li></ul>
+<ul><li>preprocesslookup: lookup table for preprocessing classes.</li></ul>
+<h4><span class="mw-headline" id="Optional_Inputs">Optional Inputs</span></h4>
+<p>options = structure array with the following fields:
+</p>
+<ul><li>alpha: [ {0.9} ] (1-alpha) measures the number of outliers the algorithm should resist. Any value between 0.5 and 1 may be specified (default = 0.75). Only used when outlier detection is set to 'on'.</li></ul>
+<ul><li>cvi: {{'vet' 5}}  Standard cross-validation cell (see crossval) defining a split method, number of splits, and number of iterations.</li></ul>
+<ul><li>preprocessing: {[] []} preprocessing structures or cells for x and y blocks (see PREPROCESS). The first column pertains to the X-block preprocesing, the second column pertains to the Y-block preprocessing.</li></ul>
+<ul><li>outlierdetection: [ {'off'} 'on' ] Governs whether or not to perform outlier detection.</li></ul>
+<ul><li>outlierpreprocessing: {[]} preprocessing structures or cells for x block to use for outlier detection. Only used when outlierdetection is set to 'on'.</li></ul>
+<ul><li>maxlvs: [ {10} ] The maximum number of LVs the PLS models will be built out to.</li></ul>
+<ul><li>exhaustivevarselect: [ {'no'} 'yes' ] Governs the amount of variable selection is done in the first iteration of building PLS models. If 'no', then 'automatic' will be used. If 'yes', then {'automatic', 'iPLS'} will be used.</li></ul>
+<ul><li>savemodels: [ {'yes'} 'no'] Determines whether all of the final models will be saved in the workspace.</li></ul>
+<ul><li>plots: [ 'none' | {'final'} ]  governs level of plotting.</li></ul>
+<ul><li>createvalset: [ {'yes'} 'no' ] Determines whether or not the data will be split into a calibration and validation set. This is only 1 X and 1 Y is passed into diviner.</li></ul>
+<ul><li>splitcaltestoptions: options structure from splitcaltest. See splitcaltest. This is only used when createvalset is 'yes'.</li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="browse.html" title="Browse">browse</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="diviner_analysis.html" title="Diviner analysis">Diviner_analysis</a>, <a href="diviner_preprocess.html" title="Diviner preprocess">Diviner_preprocess</a>, <a href="diviner_review_outliers.html" title="Diviner review outliers">Diviner_review_outliers</a>, <a href="diviner_review_results.html" title="Diviner review results">Diviner_review_results</a>, <a href="pls.html" title="Pls">pls</a>, <a href="mlr.html" title="Mlr">mlr</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240929211059
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.018 seconds
+Real time usage: 0.020 seconds
+Preprocessor visited node count: 40/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 11/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1895-0!canonical and timestamp 20240929211059 and revision id 12467.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Diviner&amp;oldid=12467">https://www.wiki.eigenvector.com/index.php?title=Diviner&amp;oldid=12467</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 26 September 2024, at 07:26.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

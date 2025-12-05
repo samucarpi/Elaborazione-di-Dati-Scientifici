@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Plotgui - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Plotgui rootpage-Plotgui skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Plotgui"><span class="mw-page-title-main">Plotgui</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Plot_Controls"><span class="tocnumber">3.3</span> <span class="toctext">Plot Controls</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Properties_and_Keywords"><span class="tocnumber">4</span> <span class="toctext">Properties and Keywords</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#Image_Specific_Properties"><span class="tocnumber">4.1</span> <span class="toctext">Image Specific Properties</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#View_Properties"><span class="tocnumber">4.2</span> <span class="toctext">View Properties</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Plot_Properties"><span class="tocnumber">4.3</span> <span class="toctext">Plot Properties</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Selection_Properties"><span class="tocnumber">4.4</span> <span class="toctext">Selection Properties</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Class_Plotting_Properties"><span class="tocnumber">4.5</span> <span class="toctext">Class Plotting Properties</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#On-Event_Properties"><span class="tocnumber">4.6</span> <span class="toctext">On-Event Properties</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Confidence_Limit_Properties"><span class="tocnumber">4.7</span> <span class="toctext">Confidence Limit Properties</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Color_Properties"><span class="tocnumber">4.8</span> <span class="toctext">Color Properties</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Plot_Controls_Properties"><span class="tocnumber">4.9</span> <span class="toctext">Plot Controls Properties</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#Figure_Linking_Properties"><span class="tocnumber">4.10</span> <span class="toctext">Figure Linking Properties</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#Other_Miscellaneous_Properties"><span class="tocnumber">4.11</span> <span class="toctext">Other Miscellaneous Properties</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="#Read-Only_Properties"><span class="tocnumber">4.12</span> <span class="toctext">Read-Only Properties</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="#Other_Valid_Figure_Properties"><span class="tocnumber">4.13</span> <span class="toctext">Other Valid Figure Properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-21"><a href="#Examples"><span class="tocnumber">5</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Interactive data viewer.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>fig = plotgui(data)</dd>
+<dd>fig = plotgui(data,'<i>PropertyName',PropertyValue,...</i>)</dd>
+<dd>fig = plotgui('update','<i>PropertyName',PropertyValue,...</i>)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Plots input data <tt>data</tt> and provides a control toolbar in the <b>Plot Controls</b> window to select portions of the data to view. The toolbar allows interactive selection, exclusion, and classing of rows or columns of data. The PLOTGUI command has various display options that are given as 'PropertyName', 'PropertyValue' pairs or as a single keyword. Properties and Keywords are discussed below.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>data</b> = input data, can be class "double" or "dataset". The description given below is generally listed for two-way data arrays.</li></ul>
+<dl><dd><b>Notes: </b>Options specific to data that are three-way or image are noted explicitly. PLOTGUI uses the dataset labels, classes, etc. when <b>data</b> is class "dataset".</dd></dl>
+<ul><li>'update' is used as a keyword input to modify options for an existing PLOTGUI figure without providing new data</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>fig</b> = the handle of the figure in which the data is displayed</li></ul>
+<h4><span class="mw-headline" id="Plot_Controls">Plot Controls</span></h4>
+<p>The toolbar consists of
+</p>
+<ul><li>1) a menu bar with <b>File</b>, <b>Edit</b>, <b>View</b>, and <b>Plot</b> menus (see <a href="plot_controls_window_menus.html" title="Plot Controls Window Menus">Plot Controls Window Menus</a> )</li>
+<li>2) a figure selection dropdown menu,</li>
+<li>3) three axis menus (labeled <b>x</b>, <b>y</b>, and <b>z</b>),</li>
+<li>4) plot update controls <b>Plot</b> button and <b>auto-update</b> checkbox, and <b>Select</b> button.</li></ul>
+<p>Each figure in the figure selection dropdown menu menu can be modified by the PLOTGUI controls. Selecting a figure from this menu will bring that figure into view and indicate the selected axis menu settings. A "<b>+</b>" or a "<b>\*</b>" next to a figure's name indicates that it is linked with another figure (see Duplicate Figure below).
+</p><p>The axis menus (labeled <b>x</b>, <b>y</b>, and <b>z</b>) select what parts of the data should be used for the plot. Each column or row selected in the y-axis menu will be plotted against the column, row or index selected in the x-axis menu. If any selection is made on the z-axis menu, then each y-axis selection is also plotted against the column or row selected in the z-axis menu to make a three-dimensional plot.
+</p><p>If the input <tt>data</tt> is three-way it is assumed to be a multivariate image, and the y-axis is slice or slab and the figure default is imagesc(dat(:,:,1)). This is also true if <tt>data</tt> is class "dataset" with the type field set to 'image' or 'image'.
+</p><p>If the <b>auto-update</b> checkbox is selected, figures are updated automatically when new axis-menu selections are made. Otherwise, the <b>Plot</b> button must be pressed before any changes are reflected in the figure.
+</p><p>The <b>Select</b> button allows the user to select plotted points in the current figure. After clicking <b>Select</b>, the current figure will be brought to the front and points are selected using the current selection tool (selected using the <b>Tool</b> button; see also Edit/Selection Mode menu). To extend a selection (i.e. add new points to the already selected points), use the <b>shift-key</b> while pressing the mouse button. To remove points from the selection, use the <b>control-key</b> while pressing the mouse button. To keep from making any selection, press "<b>Esc</b>" or "<b>Escape</b>".
+</p>
+<h3><span class="mw-headline" id="Properties_and_Keywords">Properties and Keywords</span></h3>
+<p>The following is a list of available properties. Each should be included as a 'PropertyName', 'PropertyValue' pair in an initial PLOTGUI call or a PLOTGUI 'update' call. Note that calls to PLOTGUI for <b>PropertyName</b> and <b>PropertyValue</b> are case insensitive.
+</p><p>The current value of almost all properties can be retrieved using the GETAPPDATA function on the PLOTGUI figure and requesting the property of interest. Note that calls to GETAPPDATA are case sensitive and <b>PropertyName</b> must be in all lower-case. The I/O format is:
+</p>
+<dl><dd>currentvalue = getappdata(fig,'propertyname')</dd></dl>
+<p>where <tt>fig</tt> is the handle of the PLOTGUI figure. If 'propertyname' is not included getappdata(fig) will list all the properties and their current values. Properties and their possible values follow:
+</p>
+<ul><li><b>AxisMenuValues:</b> {[x] [y] [z]}, Two or three element cell containing indices or strings indicating which item, or items, to select in each of the three axis pull down menus. In [x] or [y] a value of 0 (zero) means to select index number. In [z] a value of 'none' means to not use the z-axis.</li>
+<li><b>AxisMenuDefaults:</b> Axis menu defaults are axis menu values used if the axis menu values can not be restored. The input format is the same as axismenuvalues.</li>
+<li><b>Figure:</b> [scalar integer], Figure on which data should be plotted {default is current figure}.</li>
+<li><b>New:</b> Key word - no associated <i>PropertyValue</i>. Creates a new figure for display of data. This is equivalent to an initial PLOTGUI call.</li>
+<li><b>PlotBy:</b> [scalar integer], Dimension (mode) for the axis menu selections: 0 = special "data browser", 1 = rows, 2 = columns, etc. (see <b>View</b> menu). The default is 2 or the number of modes in the data if larger than 2-way.</li>
+<li><b>VSIndex:</b> [ 1 1] {default}, Two element vector indicating if "Index" should be offered on x and y axis menus. A 1 indicates that it should be offered as a selection and a 0 indicates that it should not e.g. [1 1] indicates that it should be offered for both the x-axis and y-axis.</li></ul>
+<h4><span class="mw-headline" id="Image_Specific_Properties">Image Specific Properties</span></h4>
+<ul><li><b>Image:</b> Key word - no associated <i>PropertyValue</i>. Unfolds a 2 or 3-way array and displays it as and image, allowing selection, classing, and exclusion of individual pixels.</li>
+<li><b>Unfold:</b> Key word - no associated <i>PropertyValue</i>. Pseudonym for "image".</li>
+<li><b>AsImage:</b> Key word - no associated <i>PropertyValue</i>. Display 3-way data that have already been unfolded as an image allowing selection, classing, and exclusion of individual pixels.</li>
+<li><b>slabcolormode</b>: [‘rgb’] {default}, &lt;String&gt;, determins the colormap used when viewing more than 3 image slabs in a false-color image. Each pixel is assigned a single color from the colormap based on the slab with the largest value for that pixel. This value is then scaled based on the slab color contrast setting. <i>lines</i> = draw from standard line color sequence; <i>rgb</i> = similar to lines but starts with red, green, blue; <i>classes</i> = draw from color scheme used for class symbols; <i>jet</i> = interpolate from the jet color scheme; <i>colormap</i> = interpolate from current figure's colormap.</li>
+<li><b>slabcolorcontrast</b>: [0.8] {default}, Set the level of intensity contrast shown for each slab when viewing more than 3 slabs in a false-color image. The higher the value, the more the base color is scaled by the image<i>s value. A value of zero shows the color without scaling.</i></li>
+<li><b>viewautocontrast</b>: [0] {default}, A Boolean that turns on/off the use of auto-contrasting on images. When on, image data magnitude is truncated to 3 times the standard deviation. Helps adjust the color scale of images when unusually large or small values are present.</li>
+<li><b>viewinterpolated</b>: [0] {default}, A Boolean that turns on/off the use of interpolated-color images. When on, images are interpolated to higher spatial resolution. Note that not all display modes support interpolation. Other settings may disable this feature.</li>
+<li><b>viewpixelscale</b>: [0] {default}, Turns on/off the display of pixel axis scales on images. When off, axis scales will be hidden unless user defines an image axisscale. When on, axis scales will be shown in pixels if no user-defined image axisscale is set.</li>
+<li><b>imagegunorder</b>: [1 2 3] {default}, &lt;Vector&gt;, determines the order of the color used for false color images. 1 = red, 2 = green, 3 = blue.</li>
+<li><b>viewdensity</b>: [1] {default} A Boolean that turns on/off use of density plots for images, turn off to force the use of a scatter plot.</li>
+<li><b>densitybinsmin</b>: [64] {default}, Minimum number of bins to use in image density plots.</li>
+<li><b>densitybinsmax</b>: [512] {default}, Maximum number of bins to use in image density plots.</li></ul>
+<h4><span class="mw-headline" id="View_Properties">View Properties</span></h4>
+<ul><li><b>ViewClasses</b>: [1] {default}, Turns on <b>View/Classes</b> menu. A 0 (zero) turns it off.</li>
+<li><b>ViewExcludedData:</b> [1] {default}, Turns on <b>View/Excluded Data</b> menu. A 0 (zero) turns it off.</li>
+<li><b>ViewLabels</b>: [1] {default}, Turns on <b>View/Labels</b> menu. A 0 (zero) turns it off.</li>
+<li><b>ViewNumbers</b>: [1] {default}, Turns on <b>View/Numbers</b> menu. A 0 (zero) turns it off.</li>
+<li><b>viewlabelset</b>: [1] {default}, Specifies the label set (by integer number) to use when labeling data.</li>
+<li><b>declutter</b>: [0.5] {default}, Specifies the level of decluttering to use on labels. 0 = no declutter, 0-1 = light, 1-5 = moderate, 5+ = significant.</li>
+<li><b>labelselected</b>: [1] {default}, A Boolean that turns on/off the labeling of selected points only. If "on" only selected points will be labeled (when ViewLabels is on). If "off" all points are labeled.</li>
+<li><b>viewlabelangle</b>: [0] {default}, Specifies the angle of text labels in degrees. 0 = Horizontal Right, 90 = Vertical up. Valid values range from 0 through 360.</li>
+<li><b>viewlabelmaxy</b>: [] {default}, Specifies the upper limit on position of text labels (i.e. on the y-axis). Used to keep labels below the specified position.</li>
+<li><b>viewlabelminy</b>: [] {default}, Specifies the lower limit on position of text labels (i.e. on the y-axis). Used to keep labels above the specified position.</li>
+<li><b>textinterpreter</b>: ‘None’ {default}, &lt;String&gt; Specifies the text interpreter to use on labels. ‘LaTex’ and ‘Tex’ interpret strings using special notation for various text effects.</li>
+<li><b>menulabelset</b>: [1] {default}, Specifies the label set (by integer number) to use for the labels in the y-axis menu on the Plot Controls.</li>
+<li><b>viewlabelprespace</b>: [1] or [3] (for Mac) {default}, Specifies the number of padding spaces to include before point labels (allows easy offset of labels).</li>
+<li><b>viewaxisscale</b>: [0] {default}, A Boolean that turns on/off the labeling of data using the DataSet-defined axisscale (if present).</li>
+<li><b>viewaxisscaleset</b>: [1] {default}, Specifies the axisscale set (by integer number) to use when labeling data.</li></ul>
+<p><br />
+</p>
+<h4><span class="mw-headline" id="Plot_Properties">Plot Properties</span></h4>
+<ul><li><b>LineStyle</b>: &lt;string&gt;, Defines line style (see PLOT).</li>
+<li><b>PlotType</b>: &lt;string&gt;, String used to select plot type {default [ ] is atuomatic selection}. Other values are 'scatter', 'bar', 'none' ('none' = do no plotting). Automatic plotting checks to see if data is continuous (line plot), has steps (monotonic), otherwise (scatter).</li>
+<li><b>symbolsize</b>: [] {default}, Specifies an overriding symbol size to use in plots. Empty or zero uses the default symbol size.</li>
+<li><b>linewidth</b>: [] {default}, Specifies an overriding line width to use in plots. Empty or zero uses the default line width.</li>
+<li><b>SelectionMarker</b>: &lt;string&gt;, Defines marker style for selected points (see PLOT).</li>
+<li><b>automonotonic</b>: [0] {default}, A Boolean that specifies whether or not Monotonic is acceptable as an automatic selection for plot type. A 0 value disables the possible auto-selection of Monotonic plot types which are typically only used with time-based data.</li>
+<li><b>viewcompressgaps</b>: [0] {default}, A Boolean turns on/off squeezing out points which are excluded, the x-axis is compressed to leave out gaps.</li>
+<li><b>autoscale</b>: 0 {default}, A Boolean turns on/off automatic y-scaling and plot all items on the same scale.</li>
+<li><b>autoscaleorder</b>: [1] {default}, Define type of automatic y-scaling to use on each plotted item. 0 = none, 1 = mean area, [2] = normalized length, inf = min/max scaling (0/1).</li>
+<li><b>autoscalewindow</b>: {} {default}, A Cell array containing indices to use as window for scaling (see autoscale). There is a cell element for each mode of the data.</li>
+<li><b>viewaxislines</b>: [0 0 0] {default}, Governs the display of axis = 0 lines for the [X Y Z] axes. A value of "1" shows the axis=0 line for the specified axis.</li>
+<li><b>viewaxisplanes</b>: [0] {default}, A Boolean that turns on/off the display of axis "planes" in 3D plots when view axis lines is ON for any axis.</li>
+<li><b>viewdiag</b>: [0] {default}, A Boolean that turns on/off the display of a 1:1 diagonal line on the plot. Does not apply to 3-dimensional plots.</li>
+<li><b>viewtable</b>: [0] {default}, A Boolean that that turns on/off the display of a table showing the currently-plotted values.</li>
+<li><b>findpeakswidth</b>: [] {default}, Enables peak finding using the specified width window for peak sensitivity threshold. 0 or empty disables peak finding.</li>
+<li><b>usespecialmarkers</b>: [0] {default}, A Boolean that turns on/off the use of complex symbols on different scatter-plot items (i.e. on a non-continuous x-axis). Complex symbols shift both inner and outer color to increase the number of possible unique element styles.</li>
+<li><b>viewtimeaxisauto</b>: [1] {default}, A Boolean that turns on/off the automatic detection of a time-stamp x-axis scale. When "1", the x-axis scale is examined and, if it appears to be a time stamp, dates and times are used instead of raw numbers.</li>
+<li><b>viewtimeaxis</b>: [ 0 0 0] {default}, Forces the interpretation of one or more axes as time-stamps (labeled using dates and times). Specified for each of the [X Y Z] axes.</li></ul>
+<h4><span class="mw-headline" id="Selection_Properties">Selection Properties</span></h4>
+<ul><li><b>SelectionMode</b>: &lt;string&gt;, Defines the selection mode. This can be any string listed under <b>View/Selection Mode</b> above. Also see GSELECT.</li>
+<li><b>BrushWidth</b>: [scalar integer number of pixels], This defines the brush width for use when selectionmode = 'paintbrush'. See <b>View/Selection Mode/Paintbrush</b>.</li>
+<li><b>NoSelect</b>: [0] {default}, When set to 0 this allows selections. When set to 1 no selection is allowed.</li>
+<li><b>NoInclude</b>: [0] {default}, When set to 0 this allows changes to the inlclud field (i.e. it allows data to be excluded). When set to 1 no changes to the inlclud field are allowed (i.e. data can not be excluded).</li>
+<li><b>noload</b>: [0] {default},  A Boolean that turns on/off the ability of the user to load new data.</li>
+<li><b>showcontrols</b>: [1] {default}, A Boolean that turns on/off the display of the Plot Controls when the target figure is active.</li>
+<li><b>pgtoolbar</b>: [1] {default}, A Boolean that specifies if the toolbar controls should be added to the target figure.</li>
+<li><b>status</b>: [] {default}, Specifies the label to use for the given figure in the list of figures on the Plot Controls (top of the controls).</li>
+<li><b>targetaxestag</b>: [‘’] {default}, Specifies a tag which, if non-empty, indicates the axis on which all plots should be plotted. All other plots will be ignored.</li></ul>
+<p><br />
+</p>
+<h4><span class="mw-headline" id="Class_Plotting_Properties">Class Plotting Properties</span></h4>
+<ul><li><b>viewclassset</b>: [1] {default}, Specifies the class set (by integer number) to use when viewing classes.</li>
+<li><b>connectclasses</b>: [0] {default}, Governs plotting of class-encirciling ellipses. When 1 ellipses are drawn around each displayed class.</li>
+<li><b>classsymbol</b>: [‘’] {default}, &lt;String&gt; Symbol to use when plotting classes. If not specified, all symbols are used in a rotating manner.</li>
+<li><b>classsymbolsize</b>: [ ] {default}, Specifies the symbol size to use when plotting classes. If empty, the default symbol size is used.</li>
+<li><b>classfacecolor</b>: [1] {default}, Governs the use of symbol face color when viewing classes. If (0), each symbol is a single color. If (1), the face color of symbols will be rotated through the class colors independently from the symbol outline color.</li>
+<li><b>classcolormode</b>: [‘’] {default}, &lt;String&gt;  Specifies a standard colormap to use for class colors. Empty (the default) uses a standard "optimized" color map (recommended). "figure" uses the colormap set on the current figure. Any other setting is assumed to be a standard colormap name. If using "figure" you must update the plot (by clicking the "plot" button or issuing an 'update' command) after changing the figure colormap to have the change take effect.</li>
+<li><b>connectclassmethod</b>: [‘pca’] {default}, &lt;String&gt; Specifies method used to outline classes (when connectclasses is (1)).
+<ul><li><i>pca</i> uses PCA confidence ellipses</li>
+<li><i>outline</i> draws a border around the outermost class members,</li>
+<li><i>connect</i> connects all class members in series,</li>
+<li><i>means</i> mean at each X,</li>
+<li><i>spider</i> spider plot,</li>
+<li><i>sequence</i> connect in sequence of data,</li>
+<li><i>delauncy</i>  2-D Delaunay triangulation of the points.</li></ul></li>
+<li><b>connectclasslimit</b>: [.95] {default}, Specifies confidence level at which classes should be outlined when using "PCA" class connect method.</li>
+<li><b>connectclassitems</b>: [ ] {default}, List of classes to apply connect method on. If empty, all classes are used.</li>
+<li><b>selectioncolor</b>: [1 0 1] {default}, Specifies the color to use for selections. Set using a three-element vector indicating [red green blue] where each value is between zero and one.</li>
+<li><b>selectpersistent</b>: [0] {default}, A Boolean that keeps selection button toggled on after selection. Meaning a second click starts a new selection automatically.</li>
+<li><b>connectitems</b>: [] {default}, Indices of items to connect sequentially in the plot.</li>
+<li><b>connectitemsstyle</b>: [‘’] {default}, &lt;String&gt; A Line/Marker style to use on connected items (see connectitems).</li>
+<li><b>connectitemslinewidth</b>: [2] {default}, Width of the line used to connect items.</li>
+<li><b>imageselection</b>: [‘overlay’] {default}, &lt;String&gt; Style of selection on images. "overlay" uses a semi-transparent mask, "outline" outlines selected pixels.</li>
+<li><b>viewclassesasoverlay</b>: [0] {default}, A Boolean that turns on/off displaying underlying data lines when classes are shown. (Hidden (0) or shown (1)).</li>
+<li><b>autosizemarkers</b>: [0] {default}, A Boolean that turns on/off the auto adjusting the size of symbols.  When (1), and no symbol size is specified, symbol size is adjusted to axes size and smaller symbols are used when axis is small.</li></ul>
+<h4><span class="mw-headline" id="On-Event_Properties">On-Event Properties</span></h4>
+<ul><li><b>CloseGUICallback:</b> Command(s) to execute when the figure is closed.</li>
+<li><b>InfoReqCallback:</b> Command executed when information on a selected point is requested.</li>
+<li><b>PlotCommand:</b> Command executed after plotting (e.g. draw limits, assign ButtonDownFcns, modifiy axes, ...).</li></ul>
+<h4><span class="mw-headline" id="Confidence_Limit_Properties">Confidence Limit Properties</span></h4>
+<ul><li><b>ConfLimits</b>: Boolean flag to make "Conf. Limits" controls visible. 1 = show controls (PLOTGUI does nothing with these controls, thus the routine specified in '[plotcommand-]' must be set to use values).</li>
+<li><b>LimitsValue</b>: Value for Conf. Limits editbox.</li>
+<li><b>ShowLimits</b>: Value for "Conf. Limits" checkbox (1 = checked).</li></ul>
+<h4><span class="mw-headline" id="Color_Properties">Color Properties</span></h4>
+<ul><li><b>colorby</b>: [] {default}, Specifies an item number (from the data’s ‘plotby’ mode), or an explicit vector of values to use in coloring the data. When not empty, the given values or index into the dataset is used to color-code the plotted data using the class color scale.</li>
+<li><b>colorbybins</b>: [30] {default}, Specifies the number of color bins to group the ‘colorby’ vector into. The more bins, the slower the plotting and more complex the legend, but the more detailed the color mapping. Default is recommended.</li>
+<li><b>colorbyscale</b>: [‘linear’] {default} &lt;String&gt;, specifies the type of ‘colorby’ bin mapping to use. "linear" maps colorby values to color maintaining the scale of the values. "nonlinear" maps values to color compressing values into sorted non-linear bins (may increase color contrast).</li></ul>
+<h4><span class="mw-headline" id="Plot_Controls_Properties">Plot Controls Properties</span></h4>
+<ul><li><b>validplotby</b>: [] {default}, specifies the mode(s) the user is permitted to select from the "Plot" menu. Empty [] allows any mode in the data.</li>
+<li><b>axismenuenable</b>: [1 1 1] {default} &lt;Vector&gt;, enabling/disabling the [X Y Z] axis menus. If off (0), the specified axis menu is not enabled and the user cannot change the default selected value. See AxisMenuValues property to set the default value.</li>
+<li><b>axisautoinvert</b>: [1] {default}, When on (1) x-axis will be inverted in direction if the axisscale in the data is in decreasing order. When -1, x-axis will ALWAYS be inverted (irrespective of the data direction). When 0, axis will never invert.</li>
+<li><b>labelwithnumber</b>: [‘auto’] {default}, &lt;String&gt; Can be set to ‘on’, ’off’, or ‘auto’. Controls numbering of axis menu items (appended within parenthesis at the end of the label), <i>auto</i> adds numbering if there are duplicate.</li>
+<li><b>autoduplicate</b>: [1] {default}, A Boolean. When on (1) a clicked sub-plot is automatically duplicated as a single axis in a new figure.</li>
+<li><b>autopopulate</b>: [1] {default}, A Boolean, when on (1) new sub-plots are automatically populated with results. When off (0) subplots are left empty for the user to populate manually.</li>
+<li><b>maximumyitems</b>: [200000] {default}, specifies the maximum number of items allowed to be shown in the y-axis listbox menu.</li>
+<li><b>maximumitems</b>: [500] {default}, specifies the maximum number of items allowed to be shown in the x- and z-axis pull-down menus.</li>
+<li><b>maximumdatasummary</b>: [1000] {default}, specifies the maximum number of items allowed to be shown in the "data" view of the "Data Summary" plot mode.</li>
+<li><b>maxclassview</b>: [200] {default}, specifies the maximum number of classes to display in a scatter plot.</li></ul>
+<h4><span class="mw-headline" id="Figure_Linking_Properties">Figure Linking Properties</span></h4>
+<p><b>WARNING!</b> Modifying these settings can lead to unexpected results!
+</p>
+<ul><li><b>ControlBy</b>: Reassign control for PLOTGUI figure.</li>
+<li><b>TimeStamp</b>: Time-stamp of last time this figure was updated (can be set to any string to isolate figure from updating by parents).</li></ul>
+<h4><span class="mw-headline" id="Other_Miscellaneous_Properties">Other Miscellaneous Properties</span></h4>
+<ul><li><b>UIControl</b>: Add extra uicontrol(s) to PLOTGUI control toolbar for use with current figure (buttons, sliders, etc.). The value passed to UIControl should be a cell in which each entry is the tag of a new object to create and the value of that field should contain a cell of uicontrol property / value pairs to set for that object. For example:
+<dl><dd><tt>myobj.mybtn<b> = {'style', 'pushbutton', 'string', 'new fig', 'callback', 'figure'};</b></tt></dd>
+<dd><tt>plotgui('update','uicontrol',myobj)</tt></dd>
+<dd>creates a button with the tag 'mybtn' on the controls for the current figure.</dd></dl>
+<ul><li>In addition to standard object properties, the special property 'updatecallback' can be set on an object. This callback will be executed whenever the Plot Controls window is updated. The variables <tt>targfig</tt> and <tt>h</tt> will be available to the callback to indicate the current "target figure" handle and the current object's handle, respectively. This property is useful for updating an object's enable or value properties when multiple figures share the same object (e.g. a checkbox which reflects some user-defined appdata). For an example of its use, see the <a href="plotscores.html" title="Plotscores">plotscores</a> function which uses this property for the "Show Error Bars" checkbox.</li>
+<li>If the cell for any object does not contain a 'position' property for the object, PLOTGUI will manage the object's position.</li></ul></li></ul>
+<h4><span class="mw-headline" id="Read-Only_Properties">Read-Only Properties</span></h4>
+<p>These properties can only be viewed and are only accessible through the MATLAB getappdata command.
+</p>
+<ul><li><b>Selection</b>: Cell array of currently selected values. Usually the same format as "includ" field of DataSet object where each cell represents the index of selected items in each dimension {rows, columns, slabs, ...}.</li>
+<li><b>When</b> selecting elements in greater than 2-dimensional data (and without the use of the 'image' keyword), two cells of this field will be pairs of selected indices: {x,y,[]} or {[],y,z}.</li>
+<li><b>FigureType</b>: 'PlotGUI'</li>
+<li><b>DataSet</b>: DataSet used in figure (or pointer to figure with actual dataset)</li></ul>
+<dl><dd><dl><dd><b>Note</b>: This is set by calling PLOTGUI with a new dataset as an input. The actual DataSet can be retrieved using the getdataset command (see below).</dd></dl></dd></dl>
+<h4><span class="mw-headline" id="Other_Valid_Figure_Properties">Other Valid Figure Properties</span></h4>
+<p>See the MATLAB documentation on FIGURE properties for additional information.
+</p>
+<ul><li>HandleVisibility, MenuBar, Name, NumberTitle, Position, Resize, Tag, ToolBar, Units, UserData, Visible, WindowStyle</li></ul>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<p>The following give some typical use examples:
+</p>
+<dl><dd>fig = plotgui(mydata)</dd></dl>
+<p>plots <tt>mydata</tt> allowing user to select which column(s) of <tt>mydata</tt> to plot using pull-down menus. Figure number of plot is returned. 
+</p>
+<dl><dd>plotgui(mydata,'plotby',1) or plotgui(mydata,'plotby','rows')</dd></dl>
+<p>plots mydata as in first example except that rows of mydata (dimension 1) are used for pull-down menus instead of columns. Note: When a PLOTGUI property is set for a given figure, the new value will be retained until a new value for that property is provided, even if new data is plotted on the same PLOTGUI figure.
+</p>
+<dl><dd>fig = plotgui(mydata,'plotby',1,'axismenuvalues',{[1] [2 3]})</dd></dl>
+<p>plots rows of mydata; sets controls with row 1 selected for the x-axis and rows 2 and 3 selected for the y-axis. Use:
+</p>
+<dl><dd>getappdata(fig,'axismenuvalues')</dd></dl>
+<p>retrieves current axis menu settings. [axispulldown-]
+</p>
+<dl><dd>plotgui(mydata,'viewclasses',1)</dd></dl>
+<p>plots <tt>mydata</tt> using symbols to identify the classes stored in dataset <tt>mydata</tt>. Use a value of 0 (zero) to turn off viewclasses. 
+</p>
+<dl><dd>plotgui('update','viewclasses',1)</dd></dl>
+<p>Turns on viewclasses property for current figure without having to pass data to plot (substitute string 'update' for data)
+</p>
+<dl><dd>mydata = plotgui('getdataset',fig)</dd></dl>
+<p>Retrieves <tt>mydata</tt> from figure <tt>fig</tt>. 
+</p>
+<dl><dd>plotgui(myimage,'image')</dd></dl>
+<p>plots 3-way image <tt>myimage</tt> selecting slabs of the image for display. The keyword 'image' allows selection, classing and exclusion of pixels in the image.
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="boxplot.html" title="Boxplot">boxplot</a>, <a href="dataset.html" class="mw-redirect" title="Dataset">dataset</a>, <a href="editds.html" title="Editds">editds</a>, <a href="gselect.html" title="Gselect">gselect</a>, <a href="modelviewer.html" title="Modelviewer">modelviewer</a>, <a href="mplot.html" title="Mplot">mplot</a>, <a href="ploteigen.html" title="Ploteigen">ploteigen</a>, <a href="plotloads.html" title="Plotloads">plotloads</a>, <a href="plotscores.html" title="Plotscores">plotscores</a>, <a href="trendtool.html" title="Trendtool">trendtool</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205839
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.027 seconds
+Real time usage: 0.030 seconds
+Preprocessor visited node count: 67/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:199-0!canonical and timestamp 20240930205839 and revision id 10846.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Plotgui&amp;oldid=10846">https://www.wiki.eigenvector.com/index.php?title=Plotgui&amp;oldid=10846</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 13 September 2019, at 09:09.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

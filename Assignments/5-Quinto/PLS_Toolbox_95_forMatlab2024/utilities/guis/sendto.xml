@@ -1,0 +1,30 @@
+<list>
+  <item>
+    <label>&amp;Analysis</label>
+    <fn>analysis</fn>
+    <method>drop</method>
+    <shareddata class="numeric">0</shareddata>
+    <separator>off</separator>
+  </item>
+  <item>
+    <label>&amp;Trend Tool</label>
+    <fn>trendtool</fn>
+    <method>input</method>
+    <shareddata class="numeric">1</shareddata>
+    <separator>off</separator>
+  </item>
+  <item>
+    <label>&amp;Image Manager</label>
+    <fn>miagui</fn>
+    <method>input</method>
+    <shareddata class="numeric">1</shareddata>
+    <separator>on</separator>
+  </item>
+  <item>
+    <label>&amp;Particle Analysis</label>
+    <fn>particlegui</fn>
+    <method>input</method>
+    <shareddata class="numeric">0</shareddata>
+    <separator>off</separator>
+  </item>
+</list>

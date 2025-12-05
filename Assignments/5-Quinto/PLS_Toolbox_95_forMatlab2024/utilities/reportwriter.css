@@ -1,0 +1,137 @@
+/* css for report writer */
+/* http://www.w3schools.com/css/css_table.asp */
+/* http://www.quackit.com/html/tutorial/html_tables.cfm */
+/* http://www.microsoft.com/typography/css/gallery/extract1.htm?fname=%20&fsize= */
+/* http://www.quackit.com/html/tags/html_p_tag.cfm */
+/* http://www.w3schools.com/css/tryit.asp?filename=trycss_border-style */
+/* http://www.w3schools.com/css/pr_border-style.asp */
+
+body {
+  font-size:90%;  /* 90% = ~14px */
+}
+
+.maintitle {
+	text-align: center;
+	font-family: Arial;
+	color: black;
+	font-size: 1.8em; 
+  font-weight: bold; 
+  margin:0px;
+}
+
+.subtitle {
+	text-align: center;
+	font-family: monospace;
+	color: black;
+	font-size: 1.2em; 
+  font-weight: bold; 
+  margin:0px;
+}
+
+.sectiontitle {
+  color: black;
+  font-weight: bold; 
+  font-family: Arial; 
+  font-size: 1.5em;
+  border-top: 1px solid black;
+  margin-top: 0.7em;
+  padding-top: 0.5em;
+  margin-bottom:0em;
+}
+
+.figcaption a {
+  color: black; 
+  font-family:Arial; 
+	text-align:center;
+  text-decoration:none;
+}
+.figcaption a:hover {
+  color: #aa0000;
+  font-weight:bold;
+}
+.fig img {
+  border:0px;
+}
+a:hover img {
+  border:0px solid #aa0000;
+}
+
+.sectionbody table { 
+  border-collapse:collapse;
+  font-size: 1em;
+  margin-left:2em;
+  width:95%;
+  border: 1px solid black;
+}
+
+.sectionbody td { 
+  font-family: monospace;
+  font-size: 1em;
+  padding-left:1.2em;
+  white-space:pre-wrap;		
+}
+
+.sectionbody th {
+	text-align:center; 
+  font-size:1.2em;
+	font-family:Arial;
+	font-weight:bold;
+  border: 1px solid black;
+}
+
+.fig td{
+  text-align:center;
+}
+.fig img{
+  max-width:750px;
+}
+.otherformats img {
+  display:none;
+}
+.otherformats a {
+  text-decoration:none;
+}
+.otherformats a:hover {
+  text-decoration:underline;
+  color:#aa0000;
+}
+
+@media screen {
+  .sectionbody td {
+    background-color:#ffffdd;
+    color:blue;
+  }
+  .sectionbody th {
+    background-color:#ffff11; 
+  }
+  .fig td {
+    background-color:#ffffff;
+  }
+  .pagebreak {
+    display:none;
+  }
+}
+
+@media print {
+  .sectionbody table {
+    margin-left:0em;
+    width: 100%;
+  }
+  .sectionbody td {
+    background-color:#666666;
+  }
+  .sectionbody th {
+    background-color:#999999; 
+  }
+  .pagebreak {
+    page-break-before:always;
+  }
+  #figuresection {
+    display:none;
+  }
+  .otherformats {
+    display:none;
+  }
+}
+
+

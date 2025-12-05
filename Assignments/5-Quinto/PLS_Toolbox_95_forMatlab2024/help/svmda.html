@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Svmda - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Svmda rootpage-Svmda skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Svmda"><span class="mw-page-title-main">Svmda</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Options"><span class="tocnumber">3.3</span> <span class="toctext">Options</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Algorithm"><span class="tocnumber">4</span> <span class="toctext">Algorithm</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#Model_building_performance"><span class="tocnumber">4.1</span> <span class="toctext">Model building performance</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#C-SVC_and_nu-SVC"><span class="tocnumber">4.2</span> <span class="toctext">C-SVC and nu-SVC</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Class_prediction_probabilities"><span class="tocnumber">4.3</span> <span class="toctext">Class prediction probabilities</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#SVMDA_Parameters"><span class="tocnumber">4.4</span> <span class="toctext">SVMDA Parameters</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="#Examples_of_SVMDA_models_on_simple_two-class_data"><span class="tocnumber">5</span> <span class="toctext">Examples of SVMDA models on simple two-class data</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="#Effect_of_varying_cost_parameter_for_SVMDA_using_RBF_kernel"><span class="tocnumber">5.1</span> <span class="toctext">Effect of varying cost parameter for SVMDA using RBF kernel</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Effect_of_varying_gamma_parameter_for_SVMDA_using_RBF_kernel"><span class="tocnumber">5.2</span> <span class="toctext">Effect of varying gamma parameter for SVMDA using RBF kernel</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Effect_of_varying_nu_parameter_for_SVMDA_using_RBF_kernel"><span class="tocnumber">5.3</span> <span class="toctext">Effect of varying nu parameter for SVMDA using RBF kernel</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#Choosing_the_best_SVM_parameters"><span class="tocnumber">6</span> <span class="toctext">Choosing the best SVM parameters</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="#SVM_parameter_search_summary_plot"><span class="tocnumber">6.1</span> <span class="toctext">SVM parameter search summary plot</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-18"><a href="#Possible_poor_prediction_from_the_optimal_SVM_model"><span class="tocnumber">7</span> <span class="toctext">Possible poor prediction from the optimal SVM model</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#See_Also"><span class="tocnumber">8</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>SVMDA Support Vector Machine (LIBSVM) for classification. Use SVM for support vector machine regression(<a href="svm.html" title="Svm">Svm</a>).
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>model = svmda(x,options);           %identifies model (calibration step) based on x-block classes</dd>
+<dd>model = svmda(x,y,options);          %identifies model (calibration step)</dd>
+<dd>pred  = svmda(x,model,options);      %makes predictions with a new X-block</dd>
+<dd>pred  = svmda(x,y,model,options);    %performs a "test" call with a new X-block and known</dd>
+<dd>svmda&#160;% Launches an analysis window with svmda as the selected method.</dd></dl>
+<p>Please note that the recommended way to build and apply a SVMDA model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>.
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>SVMDA performs calibration and application of Support Vector Machine (SVM) classification models. (Please see the svm function for support vector machine regression problems). These are non-linear models which can be used for classification problems. The model consists of a number of support vectors (essentially samples selected from the calibration set) and non-linear model coefficients which define the non-linear mapping of variables in the input x-block. The model allows prediction of the classification based on either the classes field of the calibration x-block or a y-block which contains integer-valued classes. It is recommended that regression be done through the <a href="svm.html" title="Svm">svm</a> function.
+</p><p>Svmda is implemented using the LIBSVM package which provides both cost-support vector regression (C-SVC) and nu-support vector regression (nu-SVC). Linear and Gaussian Radial Basis Function kernel types are supported by this function.
+</p><p>Note: Calling svmda with no inputs starts the graphical user interface (GUI) for this analysis method. 
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block (predictor block) class "double" or "dataset", containing numeric values,</li>
+<li><b>y</b> = Y-block (predicted block) class "double" or "dataset", containing integer values,</li>
+<li><b>model</b> = previously generated model (when applying model to new data).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard model structure model with the following fields (see <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a>):
+<ul><li><b>modeltype</b>: 'SVM',</li>
+<li><b>datasource</b>: structure array with information about input data,</li>
+<li><b>date</b>: date of creation,</li>
+<li><b>time</b>: time of creation,</li>
+<li><b>info</b>: additional model information,</li>
+<li><b>pred</b>: 2 element cell array with
+<ul><li>model predictions for each input block (when options.blockdetail='normal' x-block predictions are not saved),</li></ul></li>
+<li><b>classification</b>: information about the classification of X-block samples (see description at <a href="standard_model_structure.html#model" title="Standard Model Structure">Standard Model</a>). For more information on class predictions, see <a href="sample_classification_predictions.html" title="Sample Classification Predictions">Sample    Classification Predictions</a>.,</li>
+<li><b>detail</b>: sub-structure with additional model details and results, including:
+<ul><li>model.detail.svm.model: Matlab version of the libsvm svm_model (Java). Note that the number of support vectors used is given by model.detai.svm.model.l. It is useful to check this because it can indicate overfitting if most of the calibration samples are used as support vectors, or can indicate problems fitting a model if there are no support vectors (and all prediction values will equal a constant value, a weighted mean).</li>
+<li>model.detail.svm.cvscan: results of CV parameter scan</li>
+<li>model.detail.svm.svindices: Indices of X-block samples which are support vectors.</li></ul></li></ul></li></ul>
+<ul><li><b>pred</b> a structure, similar to <b>model</b> for the new data.
+<ul><li><b>pred</b>: The vector pred.pred{2} will contain the class predictions for each sample.</li></ul></li></ul>
+<p>For more information on class predictions, see <a href="sample_classification_predictions.html" title="Sample Classification Predictions">Sample Classification Predictions</a>
+</p>
+<h4><span class="mw-headline" id="Options">Options</span></h4>
+<p><i>options</i> =  a structure array with the following fields:
+</p>
+<ul><li><b>display</b>: [ 'off' | {'on'} ], governs level of display to command window,</li>
+<li><b>plots</b> [ 'none' | {'final'} ], governs level of plotting,</li>
+<li><b>classset</b> [ {1} ], indicates which class set in x to use when no y-block is provided,</li>
+<li><b>preprocessing</b>: {[]} preprocessing structures for x block (see PREPROCESS). NOTE that y-block preprocessing is NOT used with SVMDA. Any y-preprocessing will be ignored.</li>
+<li><b>compression</b>: [{'none'}| 'pca' | 'pls' ] type of data compression to perform on the x-block prior to calculaing or applying the SVM model. 'pca' uses a simple PCA model to compress the information. 'pls' uses either a pls or plsda model (depending on the svmtype). Compression can make the SVM more stable and less prone to overfitting.</li>
+<li><b>compressncomp</b>: [1]  Number of latent variables (or principal components to include in the compression model.</li>
+<li><b>blockdetails</b>: [ {'standard'} | 'all' ], extent of predictions and residuals included in model, 'standard' = only y-block, 'all' x- and y-blocks.</li>
+<li><b>algorithm</b>: [ 'libsvm' ] algorithm to use. libsvm is default and currently only option.</li>
+<li><b>kerneltype</b>: [ 'linear' | {'rbf'} ], SVM kernel to use. 'rbf' is default.</li>
+<li><b>svmtype</b>: [ {'c-svc'} | 'nu-svc' ] Type of SVM to apply. The default is 'c-svc' for classification.</li>
+<li><b>probabilityestimates</b>: [0| {1} ], whether to train the SVR model for probability estimates, 0 or 1 (default 1)"</li></ul>
+<ul><li><b>cvtimelimit</b>: Set a time limit (seconds) on individual cross-validation sub-calculation when searching over supplied SVM parameter ranges for optimal parameters. Only relevant if parameter ranges are used for SVM parameters such as cost, epsilon, gamma or nu. Default is 10 (seconds);</li>
+<li><b>splits</b>: Number of subsets to divide data into when applying n-fold cross validation. Default is 5. This option is only used when the "cvi" option is empty.</li>
+<li><b>cvi</b>: {{}} Standard cross-validation cell (see crossval) defining a split method, number of splits, and number of iterations. This cross-validation is use both for parameter optimization and for error estimate on the final selected parameter values. If empty (the default), then random cross-validation is done based on the "splits" option.</li>
+<li><b>gamma</b>: Value(s) to use for LIBSVM kernel gamma parameter. Default is 15 values from 10^-6 to 10, spaced uniformly in log.</li>
+<li><b>cost</b>: Value(s) to use for LIBSVM 'c' parameter. Default is 11 values from 10^-3 to 100, spaced uniformly in log.</li>
+<li><b>nu</b>: Value(s) to use for LIBSVM 'n' parameter (nu of nu-SVC, and nu-SVR). Default is the set of values [0.2, 0.5, 0.8]. See note below about the maximum allowed value for nu.</li>
+<li><b>random_state</b>&#160;: [1] Random seed number. Set this to a number for reproducibility.</li>
+<li><b>strictthreshold</b>: Probability threshold value to use in strict class assignment, see <a href="sample_classification_predictions.html#Class_Pred_Strict" title="Sample Classification Predictions">Sample_Classification_Predictions#Class_Pred_Strict</a>. Default = 0.5.</li></ul>
+<h3><span class="mw-headline" id="Algorithm">Algorithm</span></h3>
+<p>Svmda uses the LIBSVM implementation using the user-specified values for the LIBSVM parameters (see <i>options</i> above). See <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">[1]</a> for further details of this implementation and the available options. 
+In particular, see section 7 "Multi-class classification" for an explanation of how LIBSVM uses a pairwise "one-against-one" approach, building SVM models for each pair of classes, followed by a voting strategy to pick the predicted class.
+</p><p>The default SVMDA parameters cost, nu and gamma have value ranges rather than single values. This svm function uses a search over the grid of appropriate parameters using cross-validation to select the optimal SVM parameter values and builds an SVM model using those values. This is the recommended usage. The user can avoid this grid-search by passing in single values for these parameters, however.
+</p>
+<h4><span class="mw-headline" id="Model_building_performance">Model building performance</span></h4>
+<p>Building a single SVM model can sometimes be slow, especially if the calibration dataset is large. Using ranges for the SVM parameters to search for the optimal parameter combination increases the final model building time significantly. If cross-validation is used the calculation is again increased, possibly dramatically if the number of CV subsets is large. Some suggestions for faster SVM building include: 
+</p>
+<dl><dd>1) Turning CV off ("none") during preliminary analyses. This is MUCH faster and cross-validation is still performed using a default "Random Subsets" with 5 data splits and 1 iteration,</dd>
+<dd>2) Using a coarse grid of SVM parameter values to search over for optimal values,</dd>
+<dd>3) Choosing the CV method carefully, at least initially. For example, use "Random Subsets" with a small number of data splits (e.g. 5) and a small "Number of Iterations" (e.g. 1).</dd>
+<dd>4) Using the compression option if the number of variables is large.</dd></dl>
+<h4><span class="mw-headline" id="C-SVC_and_nu-SVC">C-SVC and nu-SVC</span></h4>
+<p>There are two commonly used versions of SVM classification, 'C-SVC' and 'nu-SVC'.
+The original SVM formulations for Classification (SVC) used parameter C, [0, inf), to apply a penalty to the optimization for data points which were not correctly separated by the classifying hyperplane. An alternative version of SVM classification was later developed where the C penalty parameter was replaced by a nu, [0,1], parameter which applies a slightly different penalty. The main motivation for the nu version of SVM is that it has a has a more meaningful interpretation because nu represents an upper bound on the fraction of training samples which are errors (misclassified) and a lower bound on the fraction of samples which are support vectors. Some users feel nu is more intuitive to use than C.
+C and nu are just different versions of the penalty parameter. The same optimization problem is solved in either case. Thus it should not matter which form of SVM you use, C versus nu for classification. PLS_Toolbox uses the C version by default since this was the original formulation and is the most commonly used form. For more details on 'nu' SVMs see <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/nusvmtutorial.pdf">[2]</a>
+</p><p>The user must provide parameters (or parameter ranges) for SVM classification as:
+</p>
+<dl><dd><ul><li>'C-SVC':</li></ul>
+<dl><dd><b>C</b>,  (using linear kernel), or</dd>
+<dd><b>C</b>, <b>gamma</b> (using radial basis function kernel)</dd></dl></dd></dl>
+<dl><dd><ul><li>'nu-SVC':</li></ul>
+<dl><dd><b>nu</b>,  (using linear kernel), or</dd>
+<dd><b>nu</b>, <b>gamma</b> (using radial basis function kernel)</dd></dl></dd></dl>
+<p>Note that for nu-SVC there is a maximum threshold value for allowable nu as discussed in, for example, "A Tutorial on nu-Support Vector Machines" by Chen, Lin and Schölkopf. If SVMDA's parameter search range for nu has values exceeding this data dependent threshold then the tested nu parameter values are scaled down by a constant factor such that the largest nu value tested equals the maximum threshold nu value. This is the reason why the optimal nu value selected for the nu-SVC model is sometimes not one of the values specified in the nu parameter search range.
+</p>
+<h4><span class="mw-headline" id="Class_prediction_probabilities">Class prediction probabilities</span></h4>
+<p>LIBSVM calculates the probabilities of each sample belonging to each possible class if the "Probability Estimates" option is enabled (default setting) in the SVMDA analysis window (or if the <i>probabilityestimates</i> option is set equal to 1 (default value) in command line usage). The method is explained in <a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">[3]</a>, section 8, "Probability Estimates".    
+PLS_Toolbox provides these probability estimates in model.detail.predprobability or predict.detail.predprobability, which are nsample x nclasses arrays. The columns are the classes, in the order given by model.detail.svm.model.label (or prediction.detail.svm.model.label), where the class values are what was in the input X-block.class{1} or Y-block. These probabilities are used to find the most likely class for each sample and this is saved in pred.pred{2} and model.detail.predictedclass. This is a vector of length equal to the number of samples with values equal to class values (model.detail.class{1}).
+</p>
+<h4><span class="mw-headline" id="SVMDA_Parameters">SVMDA Parameters</span></h4>
+<ul><li><b>cost</b>: Cost [0 -&gt;inf] represents the penalty associated with errors. Error refers to a sample which do not lie on the proper side of the margin for that sample's class. Increasing cost value causes closer fitting to the calibration/training data and usually a narrower margin width. <i>nu</i> is not required if <i>cost</i> is specified.</li>
+<li><b>gamma</b>: Kernel <i>gamma</i> parameter controls the shape of the separating hyperplane. Increasing gamma usually increases number of support vectors.</li>
+<li><b>nu</b>: Nu (0 -&gt; 1] is an alternative parameter for specifying the penalty associated with errors. It indicates a lower bound on the number of support  vectors to use, given as a fraction of total calibration samples, and an upper bound on the fraction of training samples which are errors (misclassified). <i>cost</i> is not required if <i>nu</i> is specified. There is a constraint on the nu parameter, however, related to the number of training data points in each class. For every class pair, having n1 and n2 data points each, nu must be less than 2*min(n1, n2)/(n1+n2), i.e. nu must be less than the ratio of the smaller class count to the pair average class count. SVMDA automatically checks for this possibility in nu-svc.</li></ul>
+<h3><span class="mw-headline" id="Examples_of_SVMDA_models_on_simple_two-class_data">Examples of SVMDA models on simple two-class data</span></h3>
+<p>Users of SVMs will usually not pick the values for their SVM parameters cost/nu and gamma because there is no simple way to know what values would provide a good model for their data. Instead, they should search over parameter ranges testing SVM models to find which parameter combination works best for their data, as discussed below. However, it is still a good idea to have an idea of how these parameters affect how the SVM works on their data. For this reason we look here at the effects of cost/nu and gamma on a very simple dataset, an x-block of two variables where the data belong to just two classes, to allow visualization of the optimal separating boundary. In practice the user will usually work with multivariate x-block data having more than two variables and data belonging to multiple classes, so will only view the predicted classes versus actual classes and related skill measures, and some details such as the number of support vectors involved.
+</p><p>The effects of the cost, gamma and nu parameters on SVMDA are examined by applying SVMDA to a simple two-variable (x1,x2) dataset where 100 samples belong to red class and 100 to blue class. This is equivalent to an X-block having dimensions 200x2. The data are distributed as three clusters, two red clusters with 50 points each which lie nearly on either side of a blue cluster which has 100 points. SVMDA attempts to draw a dividing line between these clusters separating the x1 vs x2 domain into red and blue regions. It uses these calibration data points to find the optimal separating decision boundary (hyperplane) with the widest separating margin. Any future test samples will be classified as red or blue according to which side of the separating boundary they occur on. The following images show SVMDA classification models trained on these data using an RBF kernel and varying values for the cost, gamma and nu parameters. Note that an SVMDA model with linear kernel cannot be a good model for this dataset since the red and blue points cannot be separated by a straight line, linear boundary.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 443px;">
+	<li class="gallerycaption">Fig. 1. Two-class dataset</li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="Two-variable data with 100 red samples and 100 blue samples."><img alt="Two-variable data with 100 red samples and 100 blue samples." src="400px_two_class_data.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>Two-variable data with 100 red samples and 100 blue samples.
+</p>
+			</div>
+		</div></li>
+</ul>
+<p>The figures below show results for various SVMDA models built on the simple dataset. They are presented with the decision boundary shown as a black contour line, the margin edges shown by blue and red contours, data points which are support vectors marked by an enclosing circle, and data points which lie on the wrong side of the decision boundary (classification errors) marked with an 'x'. The decision boundary represents the zero contour of the decision function, blue and red margin edges represent the -1 and +1 contours of the decision function.
+</p>
+<h4><span class="mw-headline" id="Effect_of_varying_cost_parameter_for_SVMDA_using_RBF_kernel">Effect of varying cost parameter for SVMDA using RBF kernel</span></h4>
+<p>Fig. 2a-d show the effect of increasing the cost parameter from 0.1 to 100 while gamma is kept fixed = 0.01. When the cost is small. Fig. 2a, the margin is wide since there is a small penalty associated with data points which are within the margin. Note that any point which lies within the margin or on the wrong side of the decision boundary is a support vector. Increasing the cost parameter leads to a narrowing of the margin width and fewer data points remaining within the margin, until cost = 100 (Fig. 1d) where the margin is narrow enough to avoid having any points remain inside it. Further increases in cost have no effect on the margin since no data points remain to be penalized. At the other extreme, when cost is reduced to 0.01 or smaller, the margin expands until it encloses all the data points, so all points are support vectors. This is undesirable since fewer support vectors make a more efficient model when predicting for new data points and reduces the chance of overfitting the data. In this simple case, the separating boundary in all these cases keeps approximately the same smooth contour as in Fig. 2a, so overfitting is not an issue. If there was more overlapping of the red and blue data points then larger cost parameter would cause the separating boundary to deform more and the margin edges to be much more contorted as it tries to exclude data points from the margin.
+</p><p><br />
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 886px;">
+	<li class="gallerycaption">Fig. 2. Effect of varying <i>cost</i> parameter, with <i>gamma</i> = 0.01</li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="a) cost = 0.1"><img alt="a) cost = 0.1" src="400px_c0p1g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>a)  <i>cost = 0.1</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="b) cost = 1.0"><img alt="b) cost = 1.0" src="400px_c1g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>b)  <i>cost  = 1.0</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="c) cost = 10"><img alt="c) cost = 10" src="400px_c10g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>c)  <i>cost  = 10</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="d) cost = 100"><img alt="d) cost = 100" src="400px_c100g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>d)  <i>cost  = 100</i>
+</p>
+			</div>
+		</div></li>
+</ul>
+<h4><span class="mw-headline" id="Effect_of_varying_gamma_parameter_for_SVMDA_using_RBF_kernel">Effect of varying gamma parameter for SVMDA using RBF kernel</span></h4>
+<p>Fig. 3a-f show the effect of changing the gamma parameter while cost is held fixed at 1.0. These show that gamma has a major effect on how smooth or contorted the decision boundary will be, with smaller values of gamma creating a smoother decision boundary. Fig3a shows the decision boundary to be nearly linear, showing that the SVM with RBF kernel tends to the linear kernel solution for gamma values tending towards zero. At large gamma values, however, the decision boundary becomes more contorted and shows how the SVM can over-fit the calibration data. The SVM in Fig. 3f produces a decision boundary which would not be a very good class predictor for the class of new test data samples.
+</p><p><br />
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 886px;">
+	<li class="gallerycaption">Fig. 3. Effect of varying <i>gamma</i> parameter, with <i>cost</i> = 1.0</li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="a) gamma = 0.0001"><img alt="a) gamma = 0.0001" src="400px_c1g0p0001.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>a)  <i>gamma = 0.0001</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="b) gamma = 0.001"><img alt="b) gamma = 0.001" src="400px_c1g0p001.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>b)  <i>gamma = 0.001</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="c) gamma = 0.01"><img alt="c) gamma = 0.01" src="400px_c1g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>c)  <i>gamma = 0.01</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="d) gamma = 0.1"><img alt="d) gamma = 0.1" src="400px_c1g0p1.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>d)  <i>gamma = 0.1</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="e) gamma = 1.0"><img alt="e) gamma = 1.0" src="400px_c1g1.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>e)  <i>gamma = 1.0</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="f) gamma = 10.0"><img alt="f) gamma = 10.0" src="400px_c1g10.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>f)  <i>gamma = 10.0</i>
+</p>
+			</div>
+		</div></li>
+</ul>
+<p><br />
+In summary, these comparisons show that the gamma parameter controls how smooth the decision boundary will be, with larger gamma producing more complicated boundaries, while the cost parameter controls the width of the separating margin, with larger values of cost making the margin narrower. They both affect the location of the decision boundary.
+</p>
+<h4><span class="mw-headline" id="Effect_of_varying_nu_parameter_for_SVMDA_using_RBF_kernel">Effect of varying nu parameter for SVMDA using RBF kernel</span></h4>
+<p>Fig. 4a-d show the effect of decreasing the nu parameter from 0.5 to 0.01 while gamma is kept fixed = 0.01. These figures show that decreasing nu has the same effect as was obtained by increasing the cost parameter, that is, it causes the margin width to decrease. It shows how nu is simply a different representation of the cost penalty parameter, and for any value of nu there is a corresponding value of cost which produces the same SVM. The reason for its use is that its value can be interpreted as a lower bound on the number of samples which are support vectors, and also as an upper bound on the number of misclassification errors.
+</p><p><br />
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 886px;">
+	<li class="gallerycaption">Fig. 4. Effect of varying <i>nu</i> parameter, with <i>gamma</i> = 0.01</li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="a) nu= 0.5"><img alt="a) nu= 0.5" src="400px_n0p5g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>a)  <i>nu= 0.5</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="b) nu = 0.1"><img alt="b) nu = 0.1" src="400px_n0p1g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>b)  <i>nu  = 0.1</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="c) nu = 0.02"><img alt="c) nu = 0.02" src="400px_n0p02g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>c)  <i>nu  = 0.02</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="d) nu = 0.01"><img alt="d) nu = 0.01" src="400px_n0p01g0p01.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>d)  <i>nu  = 0.01</i>
+</p>
+			</div>
+		</div></li>
+</ul>
+<p><br />
+</p>
+<table class="wikitable" border="1" style="text-align:center; width:40%;">
+<caption>Table 1. Compare nu value to SV fraction
+</caption>
+<tbody><tr>
+<th>nu value</th>
+<th>SV fraction</th>
+<th>number of SVs
+</th></tr>
+<tr>
+<td>0.5</td>
+<td>0.505</td>
+<td>101
+</td></tr>
+<tr>
+<td>0.1</td>
+<td>0.105</td>
+<td>24
+</td></tr>
+<tr>
+<td>0.02</td>
+<td>0.045</td>
+<td>9
+</td></tr>
+<tr>
+<td>0.01</td>
+<td>0.020</td>
+<td>4
+</td></tr></tbody></table>
+<p>Table 1 shows how the value of nu is a lower bound on the support vector fraction (number of SV/200), and an upper bound on the fraction of training samples which are errors (misclassified) for the SVMs in Fig. 4. The upper bound on the fraction of misclassification is easily satisfied here because the only misclassifications were three datapoints in Fig.4a.
+</p>
+<h3><span class="mw-headline" id="Choosing_the_best_SVM_parameters">Choosing the best SVM parameters</span></h3>
+<p>The recommended technique is to repeatedly test SVMDA using different parameter values and select the parameter combination which gives the best results. For SVMDA using c-svc/nu-svc and an RBF kernel we select ranges of the c/nu and gamma parameters, choosing equi-spaced (or equi-spaced in log) parameters over the ranges. SVMDA using c-svc uses 9 values of c between 0.001 and 100, and 9 values of gamma between 10^-6 and 10 by default, then tests each of these 81 pair combinations. Each test builds a c-svc model on the calibration data using 5-fold cross-validation to produce a mis-classification rate result for that test. These tests are compared over all 81 tests to find which cost/gamma value combination gives the best cross-validation prediction (smallest mis-classification). A similar approach is used for nu-svc where values of nu and gamma are specified.
+The results for the best model when using the simple data in Fig. 1 are shown here in Fig. 5 for the c-svc and nu-svc cases. These models were selected by searching over the default parameter ranges for the optimal model. Note, the nu parameter range was extended to smaller values than the default nu range, to include 0.05 and 0.1.
+</p><p><br />
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 886px;">
+	<li class="gallerycaption">Fig. 5. Optimal SVMDA models for <i>c-svc</i> and <i>nu-svc</i></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="a) Optimal c-svc model. cost = 0.001, gamma = 0.03"><img alt="a) Optimal c-svc model. cost = 0.001, gamma = 0.03" src="400px_csvc_opt.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>a)  <i>Optimal c-svc model. cost = 0.001, gamma = 0.03</i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="b) Optimal nu-svc model. nu = 0.05, gamma = 0.003"><img alt="b) Optimal nu-svc model. nu = 0.05, gamma = 0.003" src="400px_nusvc_opt.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>b)  <i>Optimal nu-svc model. nu = 0.05, gamma = 0.003</i>
+</p>
+			</div>
+		</div></li>
+</ul>
+<p><br />
+The c-svc case in Fig. 5a has a very small cost parameter and all data points are support vectors. The decision boundary looks appropriate but this is not a good solution because of the large support vector fraction. Using an SVM to predict the class of a new sample involves calculating a sum over as many terms as there are support vectors. Thus a SVM with fewer support vectors will be faster when predicting the class of a new sample. Thus it would be good to limit the lower end of the cost parameter range to 0.1 perhaps. It should also be noted that
+SVMDA can have problems when using very small cost parameter (or nu very close to 1) while requesting <i>probability estimates</i> as this can result in bad model predictions for sample class. This problem does not arise when probability estimates are not requested. The next section discusses this problem in more detail. Note that all the models presented in Figs 1-5 were built with <i>probability estimates</i> disabled. Thus predictions are directly given by which side of the decision boundary the data points lie on.
+</p>
+<h4><span class="mw-headline" id="SVM_parameter_search_summary_plot">SVM parameter search summary plot</span></h4>
+<p>When SVMDA is run in the Analysis window it is possible to view the results of the SVM parameter search by clicking on the "Variance Captured" plot icon in the toolbar. If there are two SVM parameters with ranges of values, such as cost and gamma, then a figure appears showing the performance of the model plotted against cost and gamma (Fig. 6). The measure of performance used is the misclassification rate, defined as the number of incorrectly classified samples divided by the number of classified samples, based on the cross-validation (CV) predictions for the calibration data. The lowest value of misclassification rate is marked on the plot by an "X" and this indicates the values of the SVM cost and gamma parameters which yield the best performing model. The actual SVMDA model is built using these parameter values. If you are using the command line SVMDA function to build a model then the optimal SVM parameters are shown in model.detail.svm.cvscan.best. If you are using the graphical Analysis SVMDA then the optimal parameters are reported in the summary window which is shown when you mouse-over the model icon, once the model is built.
+</p><p>If the parameter search summary plot has the "X" marked on the edge of the plot (as in the example shown) then it is possible that re-running the analysis with additional values included for that parameter direction would lead to a more accurate optimal parameter set. For the example shown, this would suggest re-running the analysis with the Cost parameter range including values larger than 100. (However, it is unnecessary in this case since the misclassification error is already zero). Ideally the "X" should occur in the interior of the plot.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 493px;">
+	<li class="gallerycaption">Fig. 6. Parameter search summary</li>
+		<li class="gallerybox" style="width: 485px"><div style="width: 485px">
+			<div class="thumb" style="width: 480px;"><div style="margin:15px auto;"><a href="" class="image" title="CV misclassification rate as a function of SVM parameters."><img alt="CV misclassification rate as a function of SVM parameters." src="400px_svmda_paramsearch.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>CV misclassification rate as a function of SVM parameters.
+</p>
+			</div>
+		</div></li>
+</ul>
+<h3><span class="mw-headline" id="Possible_poor_prediction_from_the_optimal_SVM_model">Possible poor prediction from the optimal SVM model</span></h3>
+<p>In support vector classification (SVC) the LIBSVM package allows classification predictions to be derived two different ways.
+</p><p>1. The standard method it to calculate the decision function for the new sample and simply assign the class label according to the sign of the decision function (in the case of two-class data). This is equivalent to saying the sample's class is determined by which side of the decision boundary it occurs on.
+</p><p>2. The second method to predict the class of a new sample was developed in order to also provide probabilities of the sample belonging to each possible class (<a rel="nofollow" class="external autonumber" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">[4]</a>, section 8, "Probability Estimates"). In this method the new sample is assigned to the class for which it has the highest probability of belonging to.
+</p><p>These two prediction methods produce nearly identical predicted class values but in certain cases there are noticeable differences. Test samples which lie very close to the decision boundary on the +1 side, for example, can be given a predicted class by the second method which identifies them incorrectly as the -1 class.
+This discrepancy between the two prediction methods becomes most noticeable when the SVM margin becomes very wide and encloses most data points (which are then support vectors). For the simple two-class data used here this is illustrated by comparing the two prediction methods using any gamma value but with a small very small cost (or large nu) parameter in Fig. 7 below, where again the color indicates the actual class of data points and a superimposed <i>x</i> indicates the predicted class is incorrect for that point. The decision boundary looks reasonable and the simpler method of identifying class by which side of the decision boundary samples occur on gives good predictions (no data points have a superimposed <i>x</i>). The second method, Fig. 7b, completely fails, however, and predicts all samples as belonging to one class (red points are correctly predicted as red, all blue points are marked with an <i>x</i> indicating they are predicted incorrectly as being red. One approach to avoid such poor SVMs is to not use SVMs where most calibration samples are support vectors (i.e. the margin is very wide relative to the calibration dataset). The support vector fraction can only be checked after building the SVM, however. This problem can be avoided by not using a very small cost parameter value if using c-svc (or by not using a very large nu parameter value in nu-svc) if the <i>Probability Estimates</i> prediction method is used. (The nu value is a lower bound on the support vector fraction and in practice the actual support vector fraction turns out to be only slightly larger than the nu bounding value. Limiting nu to be 0.9 or smaller should avoid this problem. This is equivalent to using c-svc and using larger values for cost). 
+</p><p><br />
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 886px;">
+	<li class="gallerycaption">Fig. 7. Effect of enabling <i>probability estimates</i> for <i>c-svc</i> SVMDA</li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="a) Good c-svc model without prob. estimates. cost = 0.001, gamma = 0.01 All"><img alt="a) Good c-svc model without prob. estimates. cost = 0.001, gamma = 0.01 All" src="400px_probestsoff.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>a)  <i>Good c-svc model without prob. estimates. cost = 0.001, gamma = 0.01  All </i>
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 435px"><div style="width: 435px">
+			<div class="thumb" style="width: 430px;"><div style="margin:15px auto;"><a href="" class="image" title="b) Bad c-svc model with prob. estimates. cost = 0.001, gamma = 0.01"><img alt="b) Bad c-svc model with prob. estimates. cost = 0.001, gamma = 0.01" src="400px_probestson.png" decoding="async" width="400" height="300" /></a></div></div>
+			<div class="gallerytext">
+<p>b)  <i>Bad c-svc model with prob. estimates. cost = 0.001, gamma = 0.01</i>
+</p>
+			</div>
+		</div></li>
+</ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="lda.html" title="Lda">lda</a>, <a href="svm.html" title="Svm">svm</a>, <a href="plsda.html" title="Plsda">plsda</a>, <a href="knn.html" title="Knn">knn</a>, <a href="simca.html" title="Simca">simca</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930164544
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.055 seconds
+Real time usage: 0.066 seconds
+Preprocessor visited node count: 129/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 12981/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:730-0!canonical and timestamp 20240930164544 and revision id 12166.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Svmda&amp;oldid=12166">https://www.wiki.eigenvector.com/index.php?title=Svmda&amp;oldid=12166</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 11 December 2023, at 13:43.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

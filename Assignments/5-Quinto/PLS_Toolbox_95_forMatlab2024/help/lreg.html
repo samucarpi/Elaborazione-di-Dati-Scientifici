@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Lreg - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.32.0"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+<!--[if lt IE 9]><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Lreg rootpage-Lreg skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="en"><a href="https://wiki.eigenvector.com/index.php?title=Lreg">Lreg</a></h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>				<div id="contentSub"></div>
+				<div id="jump-to-nav"></div>				<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+				<a class="mw-jump-link" href="#p-search">Jump to search</a>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><div id="toc" class="toc"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2>Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Algorithm"><span class="tocnumber">3.3</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Cross-validation"><span class="tocnumber">3.4</span> <span class="toctext">Cross-validation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a>
+<ul>
+<li class="toclevel-2 tocsection-9"><a href="#Usage_from_LREG_Analysis_window"><span class="tocnumber">4.1</span> <span class="toctext">Usage from LREG Analysis window</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Predictions based on softmax multinomial logistic regression model.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>lreg - Launches an Analysis window with LREG as the selected method.</dd>
+<dd>[model] = lreg(x,options);</dd>
+<dd>[model] = lreg(x,y,options);</dd>
+<dd>[pred]  = lreg(x,model,options);</dd>
+<dd>[valid] = lreg(x,y,model,options);</dd>
+<dd>[options] = lreg('options');</dd></dl>
+<p>Please note that the recommended way to build and apply an LREG model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>. 
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Build an LREG model from input X and Y block data.  Alternatively, if a model is passed in LREG makes a Y prediction for an  input test X block.
+</p><p>LREG solves for the logistic regression model parameters using the minFunc software: 
+</p>
+<dl><dd>M. Schmidt. minFunc: unconstrained differentiable multivariate optimization in Matlab. <a rel="nofollow" class="external free" href="http://www.cs.ubc.ca/~schmidtm/Software/minFunc.html">http://www.cs.ubc.ca/~schmidtm/Software/minFunc.html</a>, 2005.</dd></dl>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block (predictor block) class "double" or "dataset", containing numeric values,</li>
+<li><b>y</b> = Y-block (optional) class "double" sample class values,</li>
+<li><b>model</b> = previously generated model (when applying model to new data).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard model structure model with the following fields (see <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a>):
+<ul><li><b>modeltype</b>: 'LREG',</li>
+<li><b>datasource</b>: structure array with information about input data,</li>
+<li><b>date</b>: date of creation,</li>
+<li><b>time</b>: time of creation,</li>
+<li><b>info</b>: additional model information,</li>
+<li><b>pred</b>: 2 element cell array with
+<ul><li>model predictions for each input block (when options.blockdetail='normal' x-block predictions are not saved and this will be an empty array)</li></ul></li>
+<li><b>detail</b>: sub-structure with additional model details and results, including:
+<ul><li>model.detail.lreg: Structure containing 'lreg' matrix of model coefficients.</li></ul></li></ul></li></ul>
+<ul><li><b>pred</b> a structure, similar to <b>model</b> for the new data.</li></ul>
+<h4><span class="mw-headline" id="Algorithm">Algorithm</span></h4>
+<p>The 'algorithm' option allows selection of Logistic Regression wit no regularization ('none'), 
+L2 regularization ('ridge'), L1 regularization ('lasso'), or equally weighted L1 and L2 regularization ('elasticnet').
+</p>
+<h4><span class="mw-headline" id="Cross-validation">Cross-validation</span></h4>
+<p>Cross-validation can be applied to LREG when using either the LREG Analysis window or the command line. From the Analysis window specify the cross-validation method in the usual way (clicking on the model icon's red check-mark, or the "Choose Cross-Validation" link in the flowchart).
+</p>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>options = a structure array with the following fields:
+</p>
+<ul><li><b>display</b>&#160;: [ 'off' |{'on'}] Governs display</li>
+<li><b>plots</b>: [ {'none'} | 'final' ] governs plotting of results.</li>
+<li><b>blockdetails</b>&#160;: [ {'standard'} | 'all' ] extent of detail included in model. 'standard' keeps only y-block, 'all' keeps both x- and y- blocks.</li>
+<li><b>waitbar</b>&#160;: [ 'off' |{'auto'}| 'on' ] governs use of waitbar during analysis. 'auto' shows waitbar if delay will likely be longer than a reasonable waiting period.</li>
+<li><b>algorithm</b>&#160;: [ {'ridge'} | 'none' | 'lasso' | 'elasticnet'] specify the LREG implementation to use:</li></ul>
+<dl><dd>'none' has no regularization,</dd>
+<dd>'ridge' uses L2 regularization,</dd>
+<dd>'lasso' uses L1 regularization, and</dd>
+<dd>'elasticnet' uses equally weighted L1 and L2 regularization..</dd></dl>
+<ul><li><b>maxIter</b>&#160;: [400] Maximum number of iterations allowed in the minFunc optimization solver.</li>
+<li><b>lambda</b>&#160;: [{0.1}] Regularization parameter</li>
+<li><b>preprocessing</b>: {[] []} preprocessing structures for x and y blocks (see PREPROCESS).</li>
+<li><b>compression</b>: [{'none'}| 'pca' | 'pls' ] type of data compression to perform on the x-block prior to calculaing or applying the LREG model. 'pca' uses a simple PCA model to compress the information. 'pls' uses a pls model. Compression can make the LREG more stable and less prone to overfitting.</li>
+<li><b>compressncomp</b>: [1] Number of latent variables (or principal components to include in the compression model.</li>
+<li><b>compressmd</b>: [{'yes'} | 'no'] Use Mahalnobis Distance corrected.</li>
+<li><b>cvmethod</b>&#160;: [{'con'} | 'vet' | 'loo' | 'rnd'] CV method, OR [] for Kennard-Stone single split.</li>
+<li><b>cvsplits</b>&#160;: [{5}] Number of CV subsets.</li>
+<li><b>cvi</b>&#160;: <i>M</i> element vector with integer elements allowing user defined subsets. (cvi) is a vector with the same number of elements as x has rows i.e., length(cvi) = size(x,1). Each cvi(i) is defined as:</li></ul>
+<dl><dd><dl><dd>cvi(i) = -2  the sample is always in the test set.</dd>
+<dd>cvi(i) = -1  the sample is always in the calibration set,</dd>
+<dd>cvi(i) =  0  the sample is always never used, and</dd>
+<dd>cvi(i) =  1,2,3... defines each test subset.</dd></dl></dd></dl>
+<h4><span class="mw-headline" id="Usage_from_LREG_Analysis_window">Usage from LREG Analysis window</span></h4>
+<p>See the lregdademo.m function for command line usage example.
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="crossval.html" title="Crossval">crossval</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="lregda.html" title="Lregda">lregda</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20231212200848
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.022 seconds
+Real time usage: 0.024 seconds
+Preprocessor visited node count: 38/1000000
+Preprocessor generated node count: 44/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1719-0!canonical and timestamp 20231212200848 and revision id 11146
+ -->
+</div></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Lreg&amp;oldid=11146">https://www.wiki.eigenvector.com/index.php?title=Lreg&amp;oldid=11146</a>"					</div>
+				<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+													</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-variants-label" />
+						<h3 id="p-variants-label">
+							<span>Variants</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-cactions-label" />
+						<h3 id="p-cactions-label"><span>More</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="main_page.html"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+			<div class="body">
+								<ul>
+					<li id="n-Main-Page"><a href="main_page.html">Main Page</a></li><li id="n-PLS_Toolbox.2FSolo"><a href="software_user_guide.html">PLS_Toolbox/Solo</a></li><li id="n-MIA_Toolbox.2FSolo.2BMIA"><a href="mia_toolbox_user_guide.html">MIA_Toolbox/Solo+MIA</a></li><li id="n-Solo_Predictor"><a href="solo_predictor_user_guide.html">Solo_Predictor</a></li><li id="n-Model_Exporter"><a href="model_exporter_user_guide.html">Model_Exporter</a></li><li id="n-DataSet-Object"><a href="dataset_object.html">DataSet Object</a></li><li id="n-Frequently-Asked-Questions"><a href="evri_faq.html">Frequently Asked Questions</a></li><li id="n-Eigenvector-Homepage"><a href="http://www.eigenvector.com/" rel="nofollow">Eigenvector Homepage</a></li><li id="n-MediaWiki-Help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents">MediaWiki Help</a></li>				</ul>
+							</div>
+		</div>
+			
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> This page was last edited on 13 September 2020, at 11:16.</li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html" title="Eigenvector Research Documentation Wiki:Privacy policy">Privacy policy</a></li>
+								<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html" title="Eigenvector Research Documentation Wiki:About">About Eigenvector Research Documentation Wiki</a></li>
+								<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html" title="Eigenvector Research Documentation Wiki:General disclaimer">Disclaimers</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-poweredbyico">
+						<a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		
+
+	<br/></body>
+</html>

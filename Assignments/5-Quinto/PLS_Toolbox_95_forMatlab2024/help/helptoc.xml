@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<toc version="1.0">
+  <tocitem target="main_page.html" image="./PLS_Toolbox.gif">
+    <tocitem target="software_user_guide.html" image="./bullet.gif">Software User Guide</tocitem>
+    <tocitem target="documentation.html" image="./bullet.gif">Documentation Access</tocitem>
+    <tocitem target="pls_toolbox_topics.html" image="./bullet.gif">Function Reference Manual</tocitem>
+    <tocitem target="dataset_object.html" image="./bullet.gif">DataSet Object</tocitem>
+    <tocitem target="support.html" image="./bullet.gif">Help and User Support</tocitem>
+  </tocitem>
+</toc>

@@ -1,0 +1,550 @@
+<!-- For style keys: http://jgraph.github.io/mxgraph/docs/js-api/files/util/mxConstants-js.html#mxConstants-->
+<!-- 
+Color selection website: http://html-color-codes.info/
+Styles website: http://www.vainolo.com/2011/05/13/jgraph-styles/
+Styles website: http://blog.draw.io/mxgraph-cell-styles
+
+All styles for javascript version, most of these work for java version:
+  http://jgraph.github.io/mxgraph/docs/js-api/files/util/mxConstants-js.html
+Actual Java Swing constants:
+  https://github.com/jgraph/jgraphx/blob/master/src/com/mxgraph/util/mxConstants.java
+-->
+
+<mxStylesheet>
+	<add as="defaultVertex" extend="defaultVertex">
+		<add as="fillColor" value="#adc5ff"/>
+		<add as="gradientColor" value="#7d85df"/>
+		<add as="strokeColor" value="#5d65df"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontColor" value="#1d258f"/>
+		<add as="fontFamily" value="Verdana"/>
+	</add>
+	<add as="defaultEdge" extend="defaultEdge">
+		<add as="labelBackgroundColor" value="white"/>
+		<add as="rounded" value="1"/>
+		<add as="edgeStyle" value="elbowEdgeStyle"/>
+		<add as="strokeColor" value="#5d65df"/>
+		<add as="fontSize" value="11"/>
+		<add as="fontColor" value="#1d258f"/>
+		<add as="fontFamily" value="Verdana"/>
+	</add>
+	<add as="label">
+		<add as="shape" value="label"/>
+		<add as="perimeter" value="rectanglePerimeter"/>
+		<add as="fontStyle" value="1"/>
+		<add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="40"/>
+		<add as="imageWidth" value="32"/>
+		<add as="imageHeight" value="32"/>
+		<add as="rounded" value="1"/>
+		<add as="shadow" value="1"/>
+		<add as="glass" value="1"/>
+	</add>
+	<add as="icon" extend="label">
+		<add as="align" value="center"/>
+		<add as="imageAlign" value="center"/>
+		<add as="verticalLabelPosition" value="bottom"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacingTop" value="4"/>
+		<add as="labelBackgroundColor" value="#FFFFFF"/>
+		<add as="spacing" value="0"/>
+		<add as="spacingLeft" value="0"/>
+		<add as="spacingTop" value="6"/>
+		<add as="fontStyle" value="0"/>
+		<add as="imageWidth" value="48"/>
+		<add as="imageHeight" value="48"/>
+	</add>
+	<add as="entity">
+		<add as="edgeStyle" value="entityRelationEdgeStyle"/>
+	</add>
+	<add as="vertical">
+		<add as="elbow" value="vertical"/>
+	</add>
+	<add as="straight">
+		<add as="shape" value="connector"/>
+		<add as="endArrow" value="classic"/>
+		<add as="edgeStyle" value="none"/>
+	</add>
+	<add as="arrow">
+		<add as="shape" value="arrow"/>
+	</add>
+	<add as="swimlane">
+		<add as="shape" value="swimlane"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="23"/>
+	</add>
+	<add as="group">
+		<add as="verticalAlign" value="top"/>
+		<add as="dashed" value="1"/>
+		<add as="opacity" value="50"/>
+	</add>
+	<add as="ellipse">
+		<add as="shape" value="ellipse"/>
+		<add as="perimeter" value="ellipsePerimeter"/>
+	</add>
+	<add as="rhombus">
+		<add as="shape" value="rhombus"/>
+		<add as="perimeter" value="rhombusPerimeter"/>
+	</add>
+	<add as="triangle">
+		<add as="shape" value="triangle"/>
+		<add as="perimeter" value="trianglePerimeter"/>
+	</add>
+	<add as="line">
+		<add as="shape" value="line"/>
+		<add as="strokeWidth" value="4"/>
+		<add as="labelBackgroundColor" value="white"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacingTop" value="8"/>
+	</add>
+	<add as="image">
+		<add as="shape" value="image"/>
+		<add as="labelBackgroundColor" value="white"/>
+		<add as="verticalLabelPosition" value="bottom"/>
+		<add as="verticalAlign" value="top"/>
+	</add>
+	<add as="roundImage" extend="image">
+		<add as="perimeter" value="ellipsePerimeter"/>
+	</add>
+	<add as="rhombusImage" extend="image">
+		<add as="perimeter" value="rhombusPerimeter"/>
+	</add>
+  <!-- EVRI SPECIFIC -->
+  <!--May want to change selection stroke or high light color. -->
+  <!--   <add as="" value=""/>  -->
+  <add as="data_unloaded" extend="defaultVertex">
+    <add as="editable" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#7693E9"/>
+    <add as="gradientColor" value="#ADBEF2"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="1"/>
+		<add as="spacingLeft" value="1"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  	<add as="data_unloaded2" extend="defaultVertex">
+    <add as="editable" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#7693E9"/>
+    <add as="gradientColor" value="#ADBEF2"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="0"/>
+    <add as="arcSize" value="50"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="1"/>
+		<add as="spacingLeft" value="1"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  <add as="data_loaded" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#CCCC00"/>
+    <add as="gradientColor" value="#333300"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="1"/>
+		<add as="spacingLeft" value="1"/>
+    <add as="spacingTop" value="1"/>
+    <add as="indicatorColor" value="#2E64FE"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  <add as="data_loaded2" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#202020"/>
+    <add as="gradientColor" value="#2E64FE"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="0"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="1"/>
+		<add as="spacingLeft" value="1"/>
+    <add as="spacingTop" value="1"/>
+    <add as="indicatorColor" value="#2E64FE"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+	<add as="model_unloaded2" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#AAD6A9"/>
+    <add as="gradientColor" value="#C0E1BF"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="0"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+    <add as="dashed" value="1"/>
+	</add>
+  <add as="model_unloaded" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#9dc3a1"/>
+    <add as="gradientColor" value="#C0E1BF"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+    <add as="dashed" value="1"/>
+	</add>
+  <add as="model_loaded" extend="defaultVertex">
+    <add as="shadow" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#003300"/>
+    <add as="gradientColor" value="#04B404"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="indicatorShape" value="circle"/>
+    <add as="indicatorColor" value="#FF0000"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+    <add as="model_loaded2" extend="defaultVertex">
+    <add as="shadow" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#003300"/>
+    <add as="gradientColor" value="#04B404"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="0"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="indicatorShape" value="circle"/>
+    <add as="indicatorColor" value="#FF0000"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  
+    <add as="prediction_unloaded" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#E39A6A"/>
+    <add as="gradientColor" value="#ffc299"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+    <add as="dashed" value="1"/>
+	</add>
+  <add as="prediction_loaded" extend="defaultVertex">
+    <add as="shadow" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#e65c00"/>
+    <add as="gradientColor" value="#803300"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="indicatorShape" value="circle"/>
+    <add as="indicatorColor" value="#FF0000"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+    <add as="dashed" value="0"/>
+	</add>
+  
+  
+  
+	<add as="evriEdge" extend="defaultEdge">
+    <add as="editable" value="0"/>
+		<add as="labelBackgroundColor" value="white"/>
+		<add as="rounded" value="0"/>
+		<add as="strokeColor" value="#1545C9"/>
+    <add as="strokeWidth" value="2"/>
+    <add as="endArrow" value="open"/>
+		<add as="fontSize" value="11"/>
+		<add as="fontColor" value="#000000"/>
+		<add as="fontFamily" value="Verdana"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  	<add as="evriEdgeStraight" extend="straight">
+    <add as="editable" value="0"/>
+		<add as="labelBackgroundColor" value="white"/>
+		<add as="rounded" value="0"/>
+		<add as="strokeColor" value="#1545C9"/>
+    <add as="strokeWidth" value="2"/>
+    <add as="endArrow" value="open"/>
+		<add as="fontSize" value="11"/>
+		<add as="fontColor" value="#000000"/>
+		<add as="fontFamily" value="Verdana"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+  <add as="evriEdgeOval" extend="defaultEdge">
+    <add as="editable" value="0"/>
+		<add as="labelBackgroundColor" value="none"/>
+		<add as="rounded" value="0"/>
+		<add as="strokeColor" value="#1545C9"/>
+    <add as="strokeWidth" value="2"/>
+    <add as="endArrow" value="oval"/>
+    <add as="endSize" value="4"/>
+    <add as="startArrow" value="oval"/>
+    <add as="startSize" value="4"/>
+		<add as="fontSize" value="11"/>
+		<add as="fontColor" value="#000000"/>
+		<add as="fontFamily" value="Verdana"/>
+    <add as="spacingTop" value="8"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+	</add>
+	<add as="evriEdgeNoArrow" extend="defaultEdge">
+		<add as="labelBackgroundColor" value="none"/>
+		<add as="rounded" value="0"/>
+		<add as="strokeColor" value="#1545C9"/>
+    <add as="strokeWidth" value="2"/>
+    <add as="endArrow" value="none"/>
+		<add as="fontSize" value="11"/>
+		<add as="fontColor" value="#000000"/>
+		<add as="fontFamily" value="Verdana"/>
+    <add as="spacingTop" value="8"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>	
+	<add as="data_unloaded_gray" extend="defaultVertex">
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#E8E8E8"/>
+    <add as="gradientColor" value="#BFBFBF"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="top"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="2"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="1"/>
+    <add as="lineColor" value="#003300"/>
+    <add as="strokeWidth" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+	<add as="preprocessing_loaded" extend="ellipse">
+    <add as="editable" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#CCCC00"/>
+    <add as="gradientColor" value="#333300"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="6"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="0"/>
+    <add as="lineColor" value="#003300"/>
+    <add as="strokeWidth" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+  	<add as="preprocessing_loaded_blue" extend="ellipse">
+    <add as="editable" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#202020"/>
+    <add as="gradientColor" value="#2E64FE"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="3"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="0"/>
+    <add as="lineColor" value="#003300"/>
+    <add as="strokeWidth" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+  <add as="preprocessing_unloaded" extend="ellipse">
+    <add as="editable" value="0"/>
+    <add as="strokeColor" value="#000000"/>
+    <add as="fillColor" value="#7693E9"/>
+    <add as="gradientColor" value="#ADBEF2"/>
+    <add as="fontFamily" value="Helvetica"/>
+		<add as="fontSize" value="12"/>
+    <add as="fontColor" value="#FFFFFF"/>
+    <add as="fontStyle" value="1"/>
+    <add as="rounded" value="1"/>
+    <add as="align" value="left"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="spacing" value="2"/>
+		<add as="spacingLeft" value="3"/>
+    <add as="spacingTop" value="1"/>
+    <add as="dashed" value="1"/>
+    <add as="lineColor" value="#003300"/>
+    <add as="strokeWidth" value="1"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>  
+  <add as="evriSwimLaneV">
+		<add as="shape" value="swimlane"/>
+    <add as="horizontal" value="false"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="#D8D8D8"/>
+    <add as="gradientColor" value="#FFFFFF"/>
+    <add as="align" value="left"/>
+    <add as="fontColor" value="#000000"/>
+    <add as="resizable" value="0"/>
+    <add as="autosize" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="indicatorColor" value="#FF0000"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+  <add as="evriSwimLaneH">
+		<add as="shape" value="swimlane"/>
+    <add as="horizontal" value="true"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="#D8D8D8"/>
+    <add as="gradientColor" value="#FFFFFF"/>
+    <add as="align" value="left"/>
+    <add as="fontColor" value="#000000"/>
+    <add as="resizable" value="0"/>
+    <add as="autosize" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="indicatorColor" value="#FF0000"/>
+	</add>
+  <add as="evriSwimPoolV">
+		<add as="shape" value="swimlane"/>
+    <add as="horizontal" value="false"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="#D8D8D8"/>
+    <add as="gradientColor" value="#FFFFFF"/>
+    <add as="align" value="left"/>
+    <add as="fontColor" value="#000000"/>
+    <add as="resizable" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+  <add as="evriSwimPoolH">
+		<add as="shape" value="swimlane"/>
+    <add as="horizontal" value="true"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="#D8D8D8"/>
+    <add as="gradientColor" value="#FFFFFF"/>
+    <add as="align" value="left"/>
+    <add as="fontColor" value="#000000"/>
+    <add as="resizable" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>  
+  <add as="evriSwimLaneV_transparent">
+		<add as="shape" value="swimlane"/>
+    <add as="horizontal" value="false"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="none"/>
+    <add as="gradientColor" value="none"/>
+    <add as="align" value="left"/>
+    <add as="fontColor" value="#000000"/>
+    <add as="resizable" value="0"/>
+    <add as="autosize" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>
+  <add as="evriSwimPoolH_noline">
+    <add as="horizontal" value="true"/>
+		<add as="fontSize" value="12"/>
+		<add as="fontStyle" value="1"/>
+		<add as="startSize" value="20"/>
+    <add as="strokeColor" value=""/>
+    <add as="fillColor" value="none"/>
+    <add as="align" value="left"/>
+    <add as="resizable" value="0"/>
+    <add as="spacingLeft" value="20"/>
+    <add as="resizable" value="0"/>
+    <add as="editable" value="0"/>
+  </add>  
+  
+</mxStylesheet>
+
+

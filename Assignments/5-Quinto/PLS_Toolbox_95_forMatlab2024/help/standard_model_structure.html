@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Standard Model Structure - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Standard_Model_Structure rootpage-Standard_Model_Structure skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Standard_Model_Structure"><span class="mw-page-title-main">Standard Model Structure</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>Many higher-level PLS_Toolbox functions such as PCA and PLS output the results of analyses in a standard model format. This format, the Standard Model Structure, contains the key results of an analysis, as well as information needed to reproduce those results. The Standard Model Structure is typically used by PLS_Toolbox functions to review the model calibration or apply it to new data (for example, predicting on unknown data). However, the experienced user can access much of the information in the model from the command line to perform various tasks. This section describes the standard model structure in general and also shows some of these advanced applications.
+</p><p>As of Version 7.0 of PLS_Toolbox and Solo, the models are accessed as <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel Objects</a> which, in addition to providing the same content access described below, also provide some easy-to-use <a href="evrimodel_objects.html" title="EVRIModel Objects">methods and properties for building, manipulating, and reviewing models</a> from Matlab's command-line, scripts, and functions.
+</p>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Using_Structures"><span class="tocnumber">2</span> <span class="toctext">Using Structures</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#PCA_Example"><span class="tocnumber">3</span> <span class="toctext">PCA Example</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Description"><span class="tocnumber">4</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-5"><a href="#model"><span class="tocnumber">4.1</span> <span class="toctext">model</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#model.classification"><span class="tocnumber">4.2</span> <span class="toctext">model.classification</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#model.detail"><span class="tocnumber">4.3</span> <span class="toctext">model.detail</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#Summary"><span class="tocnumber">5</span> <span class="toctext">Summary</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Using_Structures">Using Structures</span></h2>
+<p>As the name implies, Standard Model Structures are created with a MATLAB variable type called a “structure.” In a MATLAB structure, a single variable contains one or more named "fields" (consider it like a variable containing other variables). These fields are accessed by giving the base variable name (here called "model") followed by a period and the name of the field. For example:
+</p>
+<pre>model.date</pre>
+<p>returns the contents of the <tt>date</tt> field from the model.
+</p><p>In the case of Standard Model Structures, the fields which show up are standardized to help the user identify useful parts of any model. Some of the fields of the Standard Model Structure have self-explanatory contents, such as description strings; other fields contain data matrices with varying contents. Additionally, some Standard Model Structure fields contain MATLAB cell arrays. A cell array is a container for matrices or strings that can be indexed into. When cell arrays are used, they are denoted either by the word "cell" or by surrounding the size or content with curly brackets, { }. For more information about indexing into cell arrays, see the MATLAB documentation on cells; in general, they are indexed using curly brackets giving the indices of the cell to extract,  e.g., <tt>mycell{2,3}</tt>
+</p><p>One special field in all Standard Model Structures is the <tt>detail</tt> field. This field contains a separate structure with lower-level details about the model. The contents of this field vary between different model types and typically contains important details about the model. The contents are accessed by simply addressing first the top-level variable (e.g. “model”), then the detail field, then finally the sub-field to extract. For instance, to access the sum squared captured information (ssq table) for a pca model you would use the following:
+</p>
+<pre>model.detail.ssq</pre>
+<p>Although the exact fields present in any model vary depending on the model type, the following example, a PCA model, shows many of the general model characteristics.
+</p>
+<h2><span class="mw-headline" id="PCA_Example">PCA Example</span></h2>
+<pre>model = 
+       modeltype: 'PCA'
+      datasource: {[1x1 struct]}
+            date: '29-Mar-2004'
+            time: [2004 3 29 8 57 37.4400]
+            info: 'Scores are in cell 1 of the loads field.'
+           loads: {2x1 cell}
+            pred: {[]}
+            tsqs: {2x1 cell}
+    ssqresiduals: {2x1 cell}
+     description: {3x1 cell}
+          detail: [1x1 struct]
+
+model.datasource{1}=
+       name: 'Wine'
+     author: 'B.M. Wise'
+       date: [2001 5 14 13 47 53.9500]
+    moddate: [2001 6 6 10 27 23.5100]
+       size: [10 5]
+
+model.detail=
+             data: {[]}
+              res: {[]}
+              ssq: [5x4 double]
+            rmsec: []
+           rmsecv: []
+            means: {[]}
+             stds: {[]}
+           reslim: {[3.1403]}
+           tsqlim: {[10.0327]}
+           reseig: [3x1 double]
+               cv: ''
+            split: []
+             iter: []
+           includ: {2x1 cell}
+            label: {2x1 cell}
+        labelname: {2x1 cell}
+        axisscale: {2x1 cell}
+    axisscalename: {2x1 cell}
+            title: {2x1 cell}
+        titlename: {2x1 cell}
+            class: {2x1 cell}
+        classname: {2x1 cell}
+    preprocessing: {[1x1 struct]}
+          options: [1x1 struct]</pre>
+<h2><span class="mw-headline" id="Description">Description</span></h2>
+<h3><span class="mw-headline" id="model">model</span></h3>
+<ul><li><tt>modeltype</tt>: Contains a keyword defining the type of model.</li></ul>
+<ul><li><tt>datasource</tt>: Contains information about the data used for the model, but does not contain original data. <tt>datasource</tt> basically contains a subset of the fields of the original DataSet Object. If more than one block of data is used for a model (e.g., PLS models require two blocks), <tt>datasource</tt> will be size <tt>1xj</tt>, where <tt>j</tt> is the number of blocks used for the model (1x2 in the case of PLS).</li></ul>
+<ul><li><tt>date</tt>: Contains a string description of the date on which the model was calculated.</li></ul>
+<ul><li><tt>time</tt>: Contains a time-stamp vector including, in order, the year, month, day, hour, minute, and second at which the model was created. Useful for distinguishing between different models, as no two models can be created with the same time-stamp.</li></ul>
+<ul><li><tt>loads</tt>: Contains factors recovered for the data. In the case of PCA or PLS models, the rows are the "scores" and "loadings" of the data. For PARAFAC, it is the loadings of each mode. The size of the loads field will be <tt>dxj</tt>, where d is the number of modes (dimensions) and j is the number of blocks of data used by the model (Table 1). PCA models will be 2x1 (two modes, one block), PLS models will usually be 2x2 (two modes, two blocks), PARAFAC will often be <tt>dx1</tt> where <tt>d</tt> is at least 3. Other model types follow this same pattern.</li></ul>
+<p><br />
+</p>
+<dl><dd><table class="wikitable" border="1">
+<caption><b>Loads field contents.</b>
+</caption>
+<tbody><tr>
+<th>Model Type</th>
+<th>Field loads contains:
+</th></tr>
+<tr>
+<td>PCA, MCR</td>
+<td><tt>{ X-block Scores X-block Loadings }</tt>
+</td></tr>
+<tr>
+<td>PLS, PCR</td>
+<td><tt>{ X-block Scores Y-block Scores</tt><br /><tt>X-block Loadings Y-block Loadings }</tt>
+</td></tr>
+<tr>
+<td>PARAFAC</td>
+<td><tt>{ X-block Loadings (mode 1)</tt> <br /> <tt>X-block Loadings (mode 2)</tt> <br /> <tt>X-block Loadings (mode 3)</tt> <br /> <tt>...}</tt>
+</td></tr></tbody></table></dd></dl>
+<p><br />
+</p>
+<dl><dd>The contents of each cell will generally be an <tt>mxk</tt> array in which m is the size of the given block for the given mode (e.g., for <tt>loads{1,1}</tt>, <tt>m</tt> would be equal to the size of the first mode of the X-block) and <tt>k</tt> is the number of components or factors included in the model. This format may be different for different model types.</dd></dl>
+<p><b>Examples of indexing into the loads field:</b>
+</p>
+<dl><dd>For a PCA model, a plot of the scores for all principal components can be made using:</dd></dl>
+<dl><dd><pre>plot(model.loads{1});</pre></dd></dl>
+<dl><dd>To plot the scores for only the first principal component, type:</dd></dl>
+<dl><dd><pre>plot(model.loads{1}(:,1));</pre></dd></dl>
+<dl><dd>Similarly, a plot of the loadings for the first principal component can be made using:</dd></dl>
+<dl><dd><pre>plot(model.loads{2}(:,1);</pre></dd></dl>
+<dl><dd>You can also use the model to export data so that they can be used in other programs. The following could be used to export an XY text-formatted file of the loadings of the first principal component:</dd></dl>
+<dl><dd><pre>xy=[ [1:size(model.loads{2},1)]'  model.loads{2}(:,1) ];</pre></dd>
+<dd>save xy.prn xy –ascii</dd></dl>
+<dl><dd>If the axisscale field for this data contains a useful axis to plot against, the XY data can be created using</dd>
+<dd><pre>xy=[model.detail.axisscale{2}(model.detail.includ{2})' model.loads{2}(:,1)];</pre></dd></dl>
+<dl><dd>Similarly, the <tt>axisscale</tt> could be used in the plot commands given above.</dd></dl>
+<dl><dd>The goal of PCA is to recreate a data set from its loadings and scores. When the proper number of principal components is used one can reproduce the original data set within the noise level. The reconstructed data is calculated as follows:</dd></dl>
+<dl><dd><pre>data_reconstructed = model.loads{1}*model.loads{2}';</pre></dd></dl>
+<dl><dd>It is also possible to reconstruct the data with fewer factors. The general command for n principal components is:</dd></dl>
+<dl><dd><pre>model.loads{1}(:,1:n) * model.loads{2}(:,1:n)';</pre></dd></dl>
+<ul><li><tt>tsqs</tt>: Contains Hotelling's T2 values. The T2 values are a distance measure of the scores or loadings with respect to their respective origins. The tsqs field is a cell equal in size and similar in definition to the loads field. The field will be size dxj, where d is the number of modes (dimensions) and j is the number of blocks of data used by the model. Row 1 contains the mode 1 T2 values (samples), row 2 contains the T2 values for mode 2 (variables), etc., while column 1 contains T2 values for the X-block and column 2 contains T2 values for the Y-block (if any was used for the given model type).</li></ul>
+<dl><dd>A relatively large value in tsqs{1,1} indicates a sample that has relatively large influence and loading on the PCA model. Similarly, large values in tsqs{2,1} indicate variables with significant influence and loading on the model. These are often used with statistical limits given in the details field and discussed below.</dd>
+<dd>When a model is applied to new data, the output prediction structure will contain the T2 values for the predictions rather than the calibration data.</dd></dl>
+<ul><li><tt>ssqresiduals</tt>: Contains the sum-of-squares (SSQ) differences between the original data and the reconstructed data. The field will be size dxj, where d is the number of modes (dimensions) and j is the number of blocks of data used by the model. The first row of the cell contains sum-of-squares differences for each sample (indicating samples which have large out-of-model residuals), while the second row contains sum-of-squares differences for each variable (indicating variables which have large out-of-model residuals). Again, each block is represented by a column, so the X-block sample sum-of-squares residuals can be extracted using:</li></ul>
+<dl><dd><pre>model.ssqresiduals{1,1}</pre></dd></dl>
+<dl><dd>When a model is applied to new data, the output prediction structure will contain the SSQ residuals for the predictions rather than the calibration data.</dd></dl>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="model.classification">model.classification</span></h3>
+<p>Classification models been standardized to produce class prediction probability for each class. This simplifies comparing prediction skill between model types and allowa for prediction rules based on "most probable" class assignment or a more conservative "strict" class assignment rule. The class prediction probabilities are used when creating the <a href="confusiontable.html" title="Confusiontable">Confusion Table</a> or matrix <a href="" class="new" title="ConfusionMatrix (page does not exist)">Confusion Matrix</a> prediction summaries.
+</p><p>Note that these probability-based predictions can differ from simple threshold-based prediction (where class A versus B class assignment depends on whether predicted y is greater or less than an optimal separating threshold value of y). The probability-based class assignment can perform better than the simple threshold-based class assignment in the case of classes which are not easily (for example, linearly) separable.
+</p><p>Class assignment performance using the threshold-based method is what is reported in model.detail.classerrc/cv/p and model.detail.misclassedc/cv/p. These are seen when viewing the model summary by mouse-over on the model image in the Analysis window.
+</p>
+<ul><li><tt>classification</tt>: Present for classification model types, this field allows the results of classifier methods to be compared more easily. The field is a struct which contains information about the classification of each X-block sample, These are calibration samples in the case of a model and test samples in the case of a pred structure. Note that these classification is based on Y-block predictions. If cross-validation has been applied to the model then there is another field <tt>model.detail.cvclassification</tt> which holds similar classification information but which is based on cross-validation predictions. The classification struct has the following fields:</li></ul>
+<dl><dd><ul><li><tt>probability</tt> = Probability by class (all probabilities). It is an array, nsamples x nclasses which gives the probability of each sample belonging to each class. The columns are in order given by the classnums/classids field. This is calculated as;</li></ul></dd>
+<dd>SVMDA: probability is provided by the underlying LIBSVM as described in the “Class prediction probabilities” section of <a href="svmda.html#Class_prediction_probabilities" title="Svmda">SVMDA</a>.</dd>
+<dd>PLSDA, ANNDA, ANNDLDA: probability derived from predicting 0/1 for not-in-class/in-class.</dd>
+<dd>KNN: probability equals fraction of nearest neighbors which have this class.</dd>
+<dd>SIMCA: probability for each class obtained from tha sample’s Q and Tsquared from the class’  sub-model.</dd>
+<dd>These calculations are described in more detail at <a href="sample_classification_predictions.html#Class_Probability_Calculation" title="Sample Classification Predictions">Sample_Classification_Predictions#Class_Probability_Calculation</a></dd></dl>
+<dl><dd><ul><li><tt>mostprobable</tt> = Most probable class (largest probability ONLY). It is a vector of length nsample with values equal to the most probable class for each sample.</li>
+<li><tt>inclass</tt> = Strict in class (probability &gt; strictthreshold in only ONE class). The probability threshold is set by option <i>strictthreshold</i> for classifier methods, with default = 0.5. <tt>inclass</tt> is a vector of length nsample with values equal to the most probable class for each sample provided this probability is &gt; strictthreshold. If there is no class with probability &gt; strictthreshold, or there are more than one classes with probability &gt; strictthreshold for a sample then the sample’s inclass value is zero.</li></ul></dd></dl>
+<dl><dd><ul><li><tt>inclasses</tt> = Strict multi-class (probability &gt; strictthreshold in one or more classes). It is an array, nsamples x nclasses which has value 1 for classes where a sample has probability is &gt; strictthreshold, or zero otherwise.</li></ul></dd></dl>
+<dl><dd><ul><li><tt>classnums</tt> = The unique, non-zero classes in the calibration data sorted in ascending order. These are the classes of each column in .probability and .inclasses.</li></ul></dd></dl>
+<dl><dd><ul><li><tt>classids</tt> = The classes IDs in the calibration data corresponding to classnums.</li></ul></dd></dl>
+<dl><dd>Example: model.classification for a model predicting 4 classes has fields</dd></dl>
+<dl><dd><dl><dd>Probability =</dd></dl></dd></dl>
+<pre>0.93  0.36  0.14  0.27
+0.87  0.46  0.32  0.18
+0.19  0.93  0.30  0.39
+0.27  0.21  0.84  0.39
+0.20  0.27  0.92  0.82
+</pre>
+<dl><dd><dl><dd>mostprobable  = [ 1 1 2 3 3]</dd></dl></dd></dl>
+<dl><dd><dl><dd>inclass = [ 1 1 2 3 0]</dd></dl></dd></dl>
+<dl><dd><dl><dd>inclasses =</dd></dl></dd></dl>
+<pre>1  0  0  0
+1  0  0  0
+0  1  0  0
+0  0  1  0
+0  0  1  1
+</pre>
+<dl><dd><dl><dd>classnums = [1 2 3 4]</dd></dl></dd></dl>
+<dl><dd><dl><dd>classids = {'Class 1'  'Class 2'  'Class 3'  'Class 4'}</dd></dl></dd></dl>
+<dl><dd>For additional information on how to use these fields, see <a href="sample_classification_predictions.html" title="Sample Classification Predictions">Sample Classification Predictions</a>.</dd></dl>
+<h3><span class="mw-headline" id="model.detail">model.detail</span></h3>
+<ul><li><tt>history</tt>: A cell array containing an entry log of datetime and changes made to the model.</li></ul>
+<ul><li><tt>data</tt>: Contains the data used to calculate the model. In order to save memory, many methods do not save the primary (X) block in the first cell. See the options for a given analysis method to learn more about storing the X-block data in the model (see, for example, the blockdetails option for PCA and PLS). Y-block data (i.e., model.detail.data{2} ) is usually stored, when available.</li></ul>
+<ul><li><tt>res</tt>: Contains the residuals calculated as the difference between the reconstructed data and the original data, res = y_pred - y_obs. As with the detail.data field, the X-block residuals are not usually stored, due to excessive size. As such, this field may be empty. If using a two-block method such as PLS, the second cell of model.detail.res will usually contain the prediction residuals.</li></ul>
+<ul><li><tt>rmsec</tt> and <tt>rmsecv</tt>: Contain any root-mean-square error of calibration and cross-validation (respectively) that was calculated for the model. These are vectors equal in length to the maximum number of factors requested for a given cross-validation calculation. A value of NaN will be used for any value which was not calculated.</li></ul>
+<ul><li><tt>ssq</tt>: Contains the eigenvalues or other variance-captured information for a model. For PCA models–, the first column is the PC number, the second column contains the eigenvectors, the third column contains the eigenvalues scaled to a sum of 100, and the last column contains the cumulative eigenvalues. As such, the eigenvalues can be extracted using:</li></ul>
+<dl><dd><pre>model.detail.ssq(:,3)</pre></dd></dl>
+<dl><dd>For PLS models, the first column is the Latent Variable number, followed by the variance captured for the X-block, the cumulative variance captured for the X-block, the variance captured for the Y-block, and the cumulative variance captured for the Y-block.</dd></dl>
+<dl><dd>Users should be advised that other model types use this field in different ways. For more information contact Eigenvector Research at helpdesk@eigenvector.com.</dd></dl>
+<ul><li><tt>reslim</tt>: Contains the 95% confidence limit for the block 1 sample Q residuals; i.e., for the values in model.ssqresiduals{1}. For PCA, this value is calculated using&#160;:</li></ul>
+<dl><dd><pre>residuallimit(model,.95)</pre></dd></dl>
+<dl><dd>For some multiway model types this field may contain a structure with additional information. For help on this topic, contact Eigenvector Research at helpdesk@eigenvector.com.</dd></dl>
+<ul><li><tt>tsqlim</tt>: A cell containing the 95% confidence limit for the block 1 sample T2 values in  model.tsqs. For PCA, this value is calculated using</li></ul>
+<pre>[n_samples,n_pcs]=size(model.loads{1});
+tsqlim(n_samples,n_pcs,.95);
+</pre>
+<dl><dd>For some multiway model types, this field may contain a structure with additional information. For help on this topic, contact Eigenvector Research at helpdesk@eigenvector.com.</dd></dl>
+<ul><li><tt>reseig</tt>: Contains the residual eigenvalues for PCA models only.</li></ul>
+<ul><li><tt>cv</tt>, <tt>split</tt>, <tt>iter</tt>: Contain information about the settings used when cross-validating the model, including:</li></ul>
+<pre>               cv: the encoded cross-validation method 
+            split: the total number of splits (test groups)
+             iter: the number of iterations (for random mode only)</pre>
+<ul><li><tt>include, label, labelname, axisscale, axisscalename, title, titlename, class, classname</tt>:  Contain information from DataSet Object fields. If the original data used to calculate the model were stored in a DataSet Object, certain fields from the DataSet Object are extracted and stored in the model. Each of these fields is extracted for each mode and each block such that model.detail.label{1,2} returns the mode 1 labels for block 2 (Y-block), and <tt>model.detail.class{2,1}</tt> returns the mode 2 classes for block 1 (X-block). For more information on these fields, see the DataSet Object section at the beginning of this chapter.</li></ul>
+<dl><dd>Note that although DataSet Objects use the second index of many of these fields to store multiple "sets," the model structures indicate the block number with the second index, and the set number with the third index.</dd></dl>
+<ul><li><tt>preprocessing</tt>: Contains a cell of preprocessing structures. The preprocessing structures are used with the function preprocess to process the data for the model. There is one structure in the cell for each block required by the model and each structure may have zero, one or multiple records, with each record representing one preprocessing method applied to the data. Thus, the X-block preprocessing is stored in model.detail.preprocessing{1}.</li></ul>
+<ul><li><tt>options</tt>: Contains the options given as input to the modeling function.</li></ul>
+<ul><li><tt>cvclassification</tt>: If cross-validation has been applied to the model then this field is populated. It holds similar classification information to <tt>model.classification</tt> but is based on cross-validation predictions instead of normal predictions.</li></ul>
+<h2><span class="mw-headline" id="Summary">Summary</span></h2>
+<p>Similar to a DataSet Object, the Standard Model Structure organizes results of an analysis into a logical hierarchy. From this structure, a user can both explore results and generate predictions. As you become more familiar with its organization, you will see how convenient it is to access and manipulate model information using the Standard Model Structure.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930092418
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.017 seconds
+Real time usage: 0.022 seconds
+Preprocessor visited node count: 105/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 2056/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:493-0!canonical and timestamp 20240930092418 and revision id 12019.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Standard_Model_Structure&amp;oldid=12019">https://www.wiki.eigenvector.com/index.php?title=Standard_Model_Structure&amp;oldid=12019</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 4 December 2023, at 00:50.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

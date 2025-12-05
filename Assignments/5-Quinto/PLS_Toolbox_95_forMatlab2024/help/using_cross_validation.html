@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Using Cross-Validation - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Using_Cross-Validation rootpage-Using_Cross-Validation skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Using_Cross-Validation"><span class="mw-page-title-main">Using Cross-Validation</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Background"><span class="tocnumber">1</span> <span class="toctext">Background</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Graphical_User_Interface"><span class="tocnumber">2</span> <span class="toctext">Graphical User Interface</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Cross-Validation_Results"><span class="tocnumber">3</span> <span class="toctext">Cross-Validation Results</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Command-Line"><span class="tocnumber">4</span> <span class="toctext">Command-Line</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Custom_Cross-Validation"><span class="tocnumber">5</span> <span class="toctext">Custom Cross-Validation</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Choosing_the_Cross-Validation_Method"><span class="tocnumber">6</span> <span class="toctext">Choosing the Cross-Validation Method</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#Venetian_Blinds"><span class="tocnumber">6.1</span> <span class="toctext">Venetian Blinds</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Contiguous_Blocks"><span class="tocnumber">6.2</span> <span class="toctext">Contiguous Blocks</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Random_Subsets"><span class="tocnumber">6.3</span> <span class="toctext">Random Subsets</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Leave-One-Out"><span class="tocnumber">6.4</span> <span class="toctext">Leave-One-Out</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Custom"><span class="tocnumber">6.5</span> <span class="toctext">Custom</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Cross-Validation_Recommendations"><span class="tocnumber">6.6</span> <span class="toctext">Cross-Validation Recommendations</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Cross-Validation_By_Classes"><span class="tocnumber">6.7</span> <span class="toctext">Cross-Validation By Classes</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Stratified_Cross-Validation"><span class="tocnumber">6.8</span> <span class="toctext">Stratified Cross-Validation</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Background">Background</span></h2>
+<p>Cross validation is a very useful tool that serves two critical functions in chemometrics:
+</p>
+<ol><li>It enables an assessment of the optimal complexity of a model (for example, the number of PCs in a PCA or PCR model, or the number of LVs in a PLS model), and</li>
+<li>It allows an estimation of the performance of a model when it is applied to unknown data.</li></ol>
+<p>For a given data set, cross validation involves a series of experiments, hereby called <i>sub-validation</i> experiments, each of which involves the removal of a subset of objects from a dataset (the <i>test set</i>), construction of a model using the remaining objects in the dataset (the <i>model building set</i>), and subsequent application of the resulting model to the removed objects. This way, each sub-validation experiment involves testing a model with objects that were <i>not</i> used to build the model.
+</p><p>A typical cross-validation procedure usually involves more than one sub-validation experiment, each of which involves the selection of different subsets of samples for model building and model testing.  As there are several different modeling methods in chemometrics, there are also several different cross-validation methods, and these vary with respect to <i>how</i> the different sample subsets are selected for these sub-validation experiments.  The properties of the 5 different cross-validation methods that are available in PLS_Toolbox are discussed below, and summarized in Table 1.
+</p><p>For the following descriptions, n is the total number of objects in the data set, and s is the number of data splits specified for the cross-validation procedure, which must be less than n/2.
+</p><p><b>Venetian Blinds:</b> Each test set is determined by selecting every s<sup>th</sup> object in the data set, starting at objects numbered 1 through s.
+</p><p><b>Contiguous Blocks:</b> Each test sets is determined by selecting contiguous blocks of n/s objects in the data set, starting at object number 1.
+</p><p><b>Random Subsets:</b> s different test sets are determined through random selection of n/s objects in the data set, such that no single object is in more than one test set. This procedure is repeated r times, where r is the number of iterations. It is the averaged results of the iterations that is used in the report of the cross validation results.
+</p><p><b>Leave-One-Out:</b> Each single object in the data set is used as a test set.
+</p><p><b>Custom:</b> Each of the test sets is manually defined by the user. Provisions can be made to "force" specific objects to be in every test set, never be in a test set, or not be used in the cross validation procedure at all.
+</p><p><b>Table 1. Properties of different cross-validation methods in Solo and PLS_Toolbox.</b>
+</p>
+<table border="1" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+<td></td>
+<td><b>Venetian Blinds</b></td>
+<td><b>Contiguous Blocks</b></td>
+<td><b>Random Subsets</b></td>
+<td><b>Leave-One Out</b></td>
+<td><b>Custom</b>
+</td></tr>
+<tr valign="top">
+<td><b>Test sample selection scheme</b>
+</td>
+<td>
+<p><a href="" class="image"><img alt="Cv vet.jpg" src="cv_vet.jpg" decoding="async" width="88" height="132" /></a>
+</p>
+</td>
+<td>
+<p><a href="" class="image"><img alt="Cv con.jpg" src="cv_con.jpg" decoding="async" width="89" height="132" /></a>
+</p>
+</td>
+<td>
+<p><a href="" class="image"><img alt="Cv rnd.jpg" src="cv_rnd.jpg" decoding="async" width="89" height="133" /></a>
+</p>
+</td>
+<td>
+<p><a href="" class="image"><img alt="Cv loo.jpg" src="cv_loo.jpg" decoding="async" width="90" height="132" /></a>
+</p>
+</td>
+<td>
+<ul><li>User-defined subsets</li>
+<li>Can "force" specific objects into every test set, every model set, or exclude them from the CV procedure</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>Parameters</b>
+</td>
+<td>
+<ul><li>Number of Data Splits (s)</li>
+<li>Maximum number of PCs/LVs</li>
+<li>Total number of objects/samples (n)</li></ul>
+</td>
+<td>
+<ul><li>Number of Data Splits (s)</li>
+<li>Maximum number of PCs/LVs</li>
+<li>Total number of objects/samples (n)</li></ul>
+</td>
+<td>
+<ul><li>Number of Data Splits (s)</li>
+<li>Number of iterations (r)</li>
+<li>Maximum number of PCs/LVs</li>
+<li>Total number of objects/samples (n)</li></ul>
+</td>
+<td>
+<ul><li>Maximum number of PCs/LVs</li>
+<li>Total number of objects/samples (n)</li></ul>
+</td>
+<td>
+<ul><li>Number of data splits (s)</li>
+<li>Object membership for each split</li>
+<li>All user-defined</li>
+<li>Total number of objects/samples (n)</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>Number of sub-validation experiments</b>
+</td>
+<td>
+<p>= s
+</p>
+</td>
+<td>
+<p>= s
+</p>
+</td>
+<td>
+<p>= (s * r)
+</p>
+</td>
+<td>
+<p>= n
+</p>
+</td>
+<td>
+<p>= s
+</p>
+</td></tr>
+
+<tr>
+<td><b>Number of test samples per sub-validation</b>
+</td>
+<td>
+<p>= n/s
+</p>
+</td>
+<td>
+<p>= n/s
+</p>
+</td>
+<td>
+<p>= n/s
+</p>
+</td>
+<td>
+<p>=1
+</p>
+</td>
+<td>
+<ul><li>Can vary, user defined</li></ul>
+</td></tr>
+
+</tbody></table>
+<h2><span class="mw-headline" id="Graphical_User_Interface">Graphical User Interface</span></h2>
+<p>When using the Analysis GUI, the cross-validation settings can be accessed by clicking on the red checkmark on the corner of the Model button of the status panel; or by selecting the "Choose Cross-Validation" button on the Analysis Flowchart, or by selecting the Tools menu on the Analysis GUI, then selecting Cross-Validation.  Note that a set of data must first be loaded into the Analysis interface before the cross-validation utility is made available.  Once this is done, the Cross-Validation window appears.
+</p><p>The drop-down menu on the left is used to select the cross-validation method, and the slider bars on the right are used to specify parameters for the cross-validation method that is selected.  Note that not all of the parameters are relevant for every cross-validation method.  For example, if the "contiguous block" method is chosen, the user may only adjust two parameters: the Maximum Number of LVs and the Number of Data Splits (see Figure 1). The parameters that are available for each Cross-Validation method are specified in the second row of Table 1.
+</p><p>Figure 1. The Cross-Validation Window, with parameter selection shown for the "contiguous block" method.
+</p><p><a href="" class="image"><img alt="CrossValGUI contigblock.png" src="550px_crossvalgui_contigblock.png" decoding="async" width="550" height="457" /></a>
+</p><p>When the Cross-Validation window in Analysis GUI is first opened, the parameters specified in the slider bars default to values that are based on the dimensionality of the data.
+</p><p>Once the parameters have been set to desired values, select the "Apply" button to apply these settings and keep the Cross-Validation window open, or select the "OK: button to apply these settings and close the Cross-Validation Window.  Pressing the "Reset" Button causes the parameters to revert to their default settings. A quick way to verify that your cross-validation settings will be applied to the next analysis is to point the mouse to the checkbox on the corner of the Model button of the Analysis Status panel. If this checkmark is red, this indicates that your most recently specified cross-validation settings will be applied to the next analysis of the loaded data.
+</p><p>Figure 2. Verification that Cross-Validation is selected.
+</p><p><a href="" class="image"><img alt="Cv review settings.jpg" src="250px_cv_review_settings.jpg" decoding="async" width="250" height="175" /></a>
+</p>
+<h2><span class="mw-headline" id="Cross-Validation_Results">Cross-Validation Results</span></h2>
+<p>In Analysis GUI, the cross-validation process accompanies the construction of the "full" model, which uses the complete set of loaded data. Consequently, once the Analysis is executed, cross-validation results and plots will be made available along with results and plots for the "full" model.  For example, the Model Results window in Analysis will include a Root Mean Square Error of Cross-Validation (RMSECV) value along with the Root Mean Square Error of Calibration (RMSEC) value. The RMSECV is defined as
+</p>
+<dl><dd><dl><dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle RMSECV={\sqrt {\frac {\sum _{i=1}^{n}{\left(y_{i}-{\hat {y}}_{i}\right)^{2}}}{n}}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>R</mi>
+        <mi>M</mi>
+        <mi>S</mi>
+        <mi>E</mi>
+        <mi>C</mi>
+        <mi>V</mi>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <msqrt>
+            <mfrac>
+              <mrow>
+                <munderover>
+                  <mo>&#x2211;<!-- ∑ --></mo>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>i</mi>
+                    <mo>=</mo>
+                    <mn>1</mn>
+                  </mrow>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>n</mi>
+                  </mrow>
+                </munderover>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <msup>
+                    <mrow>
+                      <mo>(</mo>
+                      <mrow>
+                        <msub>
+                          <mi>y</mi>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi>i</mi>
+                          </mrow>
+                        </msub>
+                        <mo>&#x2212;<!-- − --></mo>
+                        <msub>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mover>
+                                <mi>y</mi>
+                                <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+                              </mover>
+                            </mrow>
+                          </mrow>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mi>i</mi>
+                          </mrow>
+                        </msub>
+                      </mrow>
+                      <mo>)</mo>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </msup>
+                </mrow>
+              </mrow>
+              <mi>n</mi>
+            </mfrac>
+          </msqrt>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle RMSECV={\sqrt {\frac {\sum _{i=1}^{n}{\left(y_{i}-{\hat {y}}_{i}\right)^{2}}}{n}}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3cfb27c36d5efab317ca3fad41f2553008df0039" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.505ex; width:32.779ex; height:7.509ex;" alt="{\displaystyle RMSECV={\sqrt {\frac {\sum _{i=1}^{n}{\left(y_{i}-{\hat {y}}_{i}\right)^{2}}}{n}}}}"/></span></dd></dl></dd></dl>
+<p>where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle {\hat {y}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>y</mi>
+              <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\hat {y}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3dc8de3d8ea01304329ef9518fad7a6d196c4c01" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.302ex; height:2.509ex;" alt="{\displaystyle {\hat {y}}}"/></span> contains the values of the Y variable that are estimated by cross-validation (where the value for each object i is estimated using a model that was built using a set of objects that does <i>not</i> include object i), <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML"  alttext="{\displaystyle y}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>y</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle y}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b8a6208ec717213d4317e666f1ae872e00620a0d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:1.155ex; height:2.009ex;" alt="{\displaystyle y}"/></span> contain the known values of the Y variable, and <i>n</i> is the total number of objects in the data set.
+</p><p>Also, selection of the "Plot Variance Captured" plot button will enable the user to plot RMSEC and RMSECV as a function of the number of latent variables retained in the model (see Figure 3). Such a plot is useful for determining the optimal number of latent variables to retain in a model that is built using the full set of data.
+</p><p>Figure 3. Plot of Calibration error and Cross-Validation error as a function of the number of latent variables retained in the PLS model.
+<a href="" class="image"><img alt="Rmsecv plot example.png" src="rmsecv_plot_example.png" decoding="async" width="494" height="308" /></a>
+</p><p>In principle, the RMSEC must always decrease as the number of latent variables retained in the model increases.  However, because the RMSECV is determined from the cross-validation experiment, in which the test samples were <i>not</i> used to build the model that was used to test them, this value can actually <i>increase</i> as too many latent variables are added to the model. The optimal number of latent variables depends on the specific objectives of the modeling project, but is typically the number at which the addition of another latent variable does not greatly improve the performance of the model. In this specific case, one could choose either 5 or 8 latent variables based on this criterion. However, if the consequences of overfitting, and subsequent poor predictive model performance, are particularly high, then one could conduct several cross-validation procedures using different sets of cross-validation methods and parameters, to enable a more confident decision to be made.
+</p><p>An additional plot that is made available by including cross-validation in the Analysis GUI is the analog to the common "calibration curve" scatter plot of predicted versus actual Y values. In this case, of course, there are two possible sources of "predicted" Y values: 1) Y values predicted by a model that uses all of the available objects in the data set (called "Y Predicted"), and 2) Y values predicted during cross-validation (called "Y CV Predicted").
+</p>
+<h2><span class="mw-headline" id="Command-Line">Command-Line</span></h2>
+<p>The command line version of cross-validation is called using the function crossval. The general syntax for crossval is
+</p>
+<pre>   results = crossval(x,y,rm,cvi,ncomp,options);
+</pre>
+<p>where x and y refer to the X block and Y block data (either in array or dataset object format), rm defines the regression or modeling method, cvi defines the cross-validation method, ncomp defines the maximum number of latent variables to use in cross validation, and options can be used to assign some optional parameters to the procedure. The input can be a cell array that specifies both the cross validation method and the relevant parameters for that method.  For example, cross-validation of the nir_data data set using the PLS modeling method (with the SIMPLS algorithm), and the contiguous block cross-validation method with 5 data splits and a maximum of 20 latent variables (as was specified in the GUI example discussed above, see Figure 2) would be done using the command:
+</p>
+<pre>   results = crossval(spec1,conc(:,1),'sim',{'con' 5},20);
+</pre>
+<p>The output of the command-line cross-validation routine is then stored in a structured array called results, which contains the following sub-arrays:
+</p>
+<pre>        press: [5x20 double]
+     cumpress: [1x20 double]
+       rmsecv: [1x20 double]
+        rmsec: [1x20 double]
+       cvpred: [30x1x20 double]
+       cvbias: [1x20 double]
+    classerrc: []
+   classerrcv: []
+   misclassed: {}
+          reg: []
+</pre>
+<p>Details regarding the syntax and output of crossval can be obtained by typing help crossval at the Matlab prompt.
+</p>
+<h2><span class="mw-headline" id="Custom_Cross-Validation">Custom Cross-Validation</span></h2>
+<p>In Solo and PLS_Toolbox, the user can also manually specify the subsets of samples to be used as tests sets in the cross-validation procedure, using the "Custom" cross-validation method. When using the GUI, if the "Custom" method in the Cross-Validation window (Figure 1) is chosen, then the user will be asked to specify a "custom cross-validation" vector that specifies the subsets of objects to be placed in each test subset for each sub-validation. This custom cross-validation vector can be a variable that is loaded or can be loaded from a class set in the DSO. This custom cross-validation vector must be a vector of integers with dimensionality <i>1 x n</i>, where <i>n</i> is the total number of objects in the currently-loaded data set. The values within this vector must adhere to the following set of rules:
+</p>
+<ul><li>A value of -2 indicates that the object is placed in <i>every test set</i> (never in a model-building set)</li>
+<li>A value of -1 indicates that the object is placed in <i>every model-building set</i> (never in a test set)</li>
+<li>A value of 0 indicates that the object is used for <i>neither</i> model-building nor model testing</li>
+<li>Values of 1,2,3… indicate the test set number for each object (for those objects that are used in the cross-validation procedure)</li></ul>
+<p>For example, for a data set containing 9 objects, a custom cross validation array of
+</p>
+<dl><dd><tt>[-1 0 1 1 -2 2 2 0 -1]</tt></dd></dl>
+<p>will result in two sub-validation experiments: one using objects 3,4 and 5 in the test set and 1,6,7 and 9 in the model-building set, and one using objects 5,6 and 7 in the test set and 1,3,4 and 9 in the model-building set.
+</p><p>This method can be particularly useful in cases where the data sets have relatively few objects, or they are generated from a designed experiment. In such cases, it might be necessary to "force" some objects to always be either in the test set, in the model-building set, or <i>out</i> of the cross-validation procedure entirely, in order to avoid misleading results, as discussed below.
+</p>
+<h2><span class="mw-headline" id="Choosing_the_Cross-Validation_Method">Choosing the Cross-Validation Method</span></h2>
+<p>There are many attributes that influence selection of the appropriate cross-validation scheme for a given situation.  These include the following:
+</p>
+<ul><li>The ordering of the samples in the dataset,</li>
+<li>The total number of objects (and variables) in the dataset</li>
+<li>The presence (or lack thereof) of replicate samples in the dataset</li>
+<li>The specific objective(s) of the analysis,</li>
+<li>The consequences/costs of overly optimistic or overly pessimistic results, and</li>
+<li>The amount of time available to do cross-validation</li></ul>
+<p>Also, there are two "traps" that one generally wants to avoid when selecting a cross-validation scheme:
+</p>
+<ul><li>The <i>ill-conditioned trap</i>:  for a given sub-validation, the selected test set and remaining model set cover different data "spaces"- thus leading to overly pessimistic cross-validation results</li>
+<li>The <i>replicate sample trap</i>: for a given sub-validation, replicates of the same physical sample are present in both the model-building set and the test set, thus leading to overly optimistic cross-validation results</li></ul>
+<p>With the above considerations in mind, several recommendations can be made about the appropriate cross-validation method and parameters for different generic situations. These recommendations are be made by cross-validation method below, and are summarized in Table 2, below.
+</p>
+<h3><span class="mw-headline" id="Venetian_Blinds">Venetian Blinds</span></h3>
+<p>This method is simple and easy to implement, and generally safe to use if there are relatively many objects that are already in random order. For time-series data, it can be useful for estimating errors in the method from non-temporal sources, provided that a sufficient number of data splits are specified.  However, for blocked data with replicates, one must choose parameters very carefully to avoid the replicate sample trap.  Similarly, for time-series data, a low number of splits can lead to in overly optimistic results.
+</p>
+<h3><span class="mw-headline" id="Contiguous_Blocks">Contiguous Blocks</span></h3>
+<p>Like Venetian Blinds, this method is simple and easy to implement, and generally safe to use in cases where there are relative many objects in random order. For data that is <i>not</i> randomly ordered, one must choose parameters carefully to avoid overly pessimistic results from the ill-conditioned trap. For time-series data and batch data, this method can be convenient for assessing the temporal stability and batch-to-batch stability of a model built from the data.
+</p>
+<h3><span class="mw-headline" id="Random_Subsets">Random Subsets</span></h3>
+<p>The random subset selection method is rather versatile, in that it can be used effectively in a wide range of situations, especially if one has the time to run multiple iterations of subset selections. As the number of splits is inversely proportional to the number of test samples per sub-validation, a higher number of splits can be used to avoid the ill-conditioned trap, and a lower number of splits can be used to avoid the replicate sample trap. However, a general disadvantage of this method is that the user has no control over the selection of test sample subsets for each sub-validation experiment, thus making it difficult to assess whether the results were adversely affected by either of these traps.  Fortunately, their effect can be reduced to some extent by increasing the number of iterations.
+</p>
+<h3><span class="mw-headline" id="Leave-One-Out">Leave-One-Out</span></h3>
+<p>This method is generally reserved for small data sets (n not greater than 20).  It might also be useful in the case of randomly distributed objects, if one has enough time or n is not too large.  However, it is not recommended even for small data sets if the objects are blocked with replicates or generated from a design of experiments (DOE), due to the replicate sample trap and ill-conditioned trap, respectively.
+</p>
+<h3><span class="mw-headline" id="Custom">Custom</span></h3>
+<p>Although this method requires some extra time to determine how the object subsets are selected for each sub-validation experiment, this flexibility is critical in several cases, especially for small data sets and data generated from a design of experiments (DOE). In addition, in the case of batch data, this flexibility allows the user to specify different individual batches, or sets of batches, as test sets for each sub-validation experiment- thus enabling batch-wise model validation.
+</p>
+<h3><span class="mw-headline" id="Cross-Validation_Recommendations">Cross-Validation Recommendations</span></h3>
+<p><b>Table 2: Recommendations regarding different Cross-Validation methods, for different types of data sets.</b>
+</p>
+<table border="1" cellpadding="5" cellspacing="0">
+
+<tbody><tr>
+<td></td>
+<td><b>Venetian Blinds</b></td>
+<td><b>Contiguous Blocks</b></td>
+<td><b>Random Subsets</b></td>
+<td><b>Leave-One Out</b></td>
+<td><b>Custom</b>
+</td></tr>
+<tr valign="top">
+<td><b>General Properties</b>
+</td>
+<td>
+<ul><li>Easy</li>
+<li>Relatively quick</li></ul>
+</td>
+<td>
+<ul><li>Easy</li>
+<li>Relatively quick</li></ul>
+</td>
+<td>
+<ul><li>Easy</li>
+<li>Can be slow, if n or number of iterations large</li>
+<li>Selection of subsets unknown</li></ul>
+</td>
+<td>
+<ul><li>Easiest! (Only one parameter)</li>
+<li><i>Avoid using if n&gt;20</i></li></ul>
+</td>
+<td>
+<ul><li>Flexible</li>
+<li>Requires time to determine/ construct cross validation array</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>Small data sets (&lt;~20 objects)</b>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<ul><li>OK, if many iterations done</li></ul>
+</td>
+<td>
+<ul><li>Good choice….</li>
+<li>....unless designed/DOE data</li></ul>
+</td>
+<td>
+<ul><li>often needed to avoid the  <i>ill-conditioned</i> <i>trap</i></li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>randomly-distributed objects</b>
+</td>
+<td>
+<ul><li>Good choice</li></ul>
+</td>
+<td>
+<ul><li>Good choice</li></ul>
+</td>
+<td>
+<ul><li>Good choice</li>
+<li>Can take a while with large n, many iterations</li></ul>
+</td>
+<td>
+<ul><li>OK, but….</li>
+<li>Can take a while with large n</li></ul>
+</td>
+<td>
+</td></tr>
+<tr valign="top">
+<td><b>time-series data</b>
+</td>
+<td>
+<ul><li>Useful for assessing  <i>NON-temporal</i> model errors</li></ul>
+<ul><li>Can be optimistic with low number of data splits</li></ul>
+</td>
+<td>
+<ul><li>Useful for assessing <i>temporal </i>stability of model</li></ul>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td></tr>
+<tr valign="top">
+<td><b>Batch data</b>
+</td>
+<td>
+<ul><li>Useful for assessing predictability <i>within</i> batches/parts of batches</li></ul>
+</td>
+<td>
+<ul><li>Useful for assessing predictability <i>between</i> batches/parts of batches</li></ul>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<ul><li>Can manually select "batch-wise" test sets</li></ul>
+</td></tr>
+<tr valign="top">
+<td><b>Blocked data (replicates)</b>
+</td>
+<td>
+<ul><li>Beware  the <i>replicate sample trap</i> (optimistic results)!</li></ul>
+</td>
+<td>
+<ul><li>Good way to avoid <i>replicate sample trap</i></li>
+<li>Beware the <i>ill-conditioned trap</i>!</li></ul>
+</td>
+<td>
+<ul><li>Can use to avoid <i>replicate sample trap</i> (high number of splits, high iterations preferable)</li></ul>
+</td>
+<td>
+<ul><li>overly optimistic results, due to <i>replicate sample trap</i></li></ul>
+</td>
+<td>
+</td></tr>
+
+</tbody></table>
+<h3><span class="mw-headline" id="Cross-Validation_By_Classes">Cross-Validation By Classes</span></h3>
+<p><a href="" class="image"><img alt="Cv gui classes.png" src="400px_cv_gui_classes.png" decoding="async" width="400" height="320" /></a>
+</p><p>As of version 9.3, there is a dropdown menu to choose to cross-validate by Sample Index, Classes, or Stratified. This dropdown menu will only be enabled if there is class information in your DataSet Object. If choosing Classes, then it will treat each class as a sample, meaning it will keep all the samples in a class together when doing cross-validation. This form of cross-validation is useful when there are many classes in your DataSet Object. It uses the function <a href="cvifromclass.html" title="Cvifromclass">cvifromclass</a> to create the cross-validation index vector. You cannot do custom cross-validation when doing cross-validation by classes.
+</p>
+<h3><span class="mw-headline" id="Stratified_Cross-Validation">Stratified Cross-Validation</span></h3>
+<p><a href="" class="image"><img alt="Cv gui stratified.png" src="400px_cv_gui_stratified.png" decoding="async" width="400" height="333" /></a>
+</p><p>Selecting stratified cross-validation from the dropdown menu will perform Stratified cross-validation which creates a cross-validation index vector that contains a proportionate representation of different classes in each split. This method uses the function <a href="stratifiedcvi.html" title="Stratifiedcvi">stratifiedcvi</a> to create the cross-validation index vector. This method is useful for scenarios where there are unbalanced classes. The above cross-validation image is using a DataSet that has three classes with the first 60 samples belonging to class 1, samples 61-90 belonging to class 2, and samples 91-100 belonging to class 3. 
+</p><p><a href="" class="image"><img alt="Stratified cv demo image.png" src="500px_stratified_cv_demo_image.png" decoding="async" width="500" height="455" /></a>
+</p><p>This above figure is using the same DataSet as described above and doing stratified cross-validation using Contiguous Block with four splits. The figure shows the first 60 samples belong to class 1 (red), samples 61-90 belong to class 2 (blue), and samples 91-100 belong to class 3 (green). The Y axis indicates which split or leave out group the samples belong to. The cross-validation method, in this case contiguous blocks with 4 splits, is applied to each class separately and then the individual cross-validation index vectors are combined.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930133645
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.205 seconds
+Real time usage: 0.610 seconds
+Preprocessor visited node count: 74/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 108/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:499-0!canonical and timestamp 20240930133644 and revision id 12045.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Using_Cross-Validation&amp;oldid=12045">https://www.wiki.eigenvector.com/index.php?title=Using_Cross-Validation&amp;oldid=12045</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 4 December 2023, at 13:43.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

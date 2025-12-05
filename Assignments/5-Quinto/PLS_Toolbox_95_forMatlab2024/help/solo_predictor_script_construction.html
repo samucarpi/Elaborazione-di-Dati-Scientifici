@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Solo Predictor Script Construction - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Solo_Predictor_Script_Construction rootpage-Solo_Predictor_Script_Construction skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction"><span class="mw-page-title-main">Solo Predictor Script Construction</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Workspace_Objects"><span class="tocnumber">1</span> <span class="toctext">Workspace Objects</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Script_Commands"><span class="tocnumber">2</span> <span class="toctext">Script Commands</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Importing_Commands"><span class="tocnumber">3</span> <span class="toctext">Importing Commands</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Importing_From_a_File"><span class="tocnumber">3.1</span> <span class="toctext">Importing From a File</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="#Importing_From_Matlab_MAT_Files"><span class="tocnumber">3.1.1</span> <span class="toctext">Importing From Matlab MAT Files</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-6"><a href="#Creating_Data_From_Script_Text"><span class="tocnumber">3.2</span> <span class="toctext">Creating Data From Script Text</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Creating_Literal_String_Constants"><span class="tocnumber">3.3</span> <span class="toctext">Creating Literal String Constants</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Creating_Objects_from_XML"><span class="tocnumber">3.4</span> <span class="toctext">Creating Objects from XML</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Advanced_Object_Creation_and_Modification"><span class="tocnumber">3.5</span> <span class="toctext">Advanced Object Creation and Modification</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#Application_of_Models_and_Preprocessing_Commands"><span class="tocnumber">4</span> <span class="toctext">Application of Models and Preprocessing Commands</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Requesting_Return_Values"><span class="tocnumber">5</span> <span class="toctext">Requesting Return Values</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="#Retrieving_Multiple_Values"><span class="tocnumber">5.1</span> <span class="toctext">Retrieving Multiple Values</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Common_Return_Properties"><span class="tocnumber">5.2</span> <span class="toctext">Common Return Properties</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="#Response_Message_Format"><span class="tocnumber">6</span> <span class="toctext">Response Message Format</span></a>
+<ul>
+<li class="toclevel-2 tocsection-15"><a href="#:xml"><span class="tocnumber">6.1</span> <span class="toctext">:xml</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#:plain"><span class="tocnumber">6.2</span> <span class="toctext">:plain</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="#:html"><span class="tocnumber">6.3</span> <span class="toctext">:html</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#:json"><span class="tocnumber">6.4</span> <span class="toctext">:json</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-19"><a href="#Write_To_File_Command"><span class="tocnumber">7</span> <span class="toctext">Write To File Command</span></a>
+<ul>
+<li class="toclevel-2 tocsection-20"><a href="#Export_command"><span class="tocnumber">7.1</span> <span class="toctext">Export command</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-21"><a href="#Other_Commands"><span class="tocnumber">8</span> <span class="toctext">Other Commands</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="#Scripting_Examples"><span class="tocnumber">9</span> <span class="toctext">Scripting Examples</span></a>
+<ul>
+<li class="toclevel-2 tocsection-23"><a href="#Reading_data_and_model_from_file_and_retrieve_results"><span class="tocnumber">9.1</span> <span class="toctext">Reading data and model from file and retrieve results</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="#Reading_data_from_passed_CSV"><span class="tocnumber">9.2</span> <span class="toctext">Reading data from passed CSV</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="#Reading_data_from_passed_XML"><span class="tocnumber">9.3</span> <span class="toctext">Reading data from passed XML</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="#Wait_for_file_and_output_to_results_file"><span class="tocnumber">9.4</span> <span class="toctext">Wait for file and output to results file</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<p><a href="solo_predictor_reference_manual.html" title="Solo Predictor Reference Manual">Solo_Predictor</a> and <a href="software_user_guide.html" title="Software User Guide">Solo</a> provide a simple, flexible scripting language with which clients can send instructions to load data, apply a model to that data ("make a prediction"), and retrieve results. A typical exchange follows this sequence:
+</p>
+<ol><li>load data</li>
+<li>load model</li>
+<li>apply model to data (make a prediction)</li>
+<li>return prediction results</li></ol>
+<p>This section describes the details of how to format a script, what commands are available and how the commands are used. The <a href="#Scripting_Examples" title="Solo Predictor Script Construction">next section gives <b>several quick-start example scripts</b></a> which can be used as templates to perform some standard analyses.
+</p><p>Some familiarity with multivariate analyses and modeling are presumed by this chapter. The user is directed to the PLS_Toolbox and Solo Manual and Tutorial to learn more about specific modeling methods and multivariate analysis in general.
+</p><p>It may also be useful to review the <a href="solo_predictor_script_commands_summary.html" title="Solo Predictor Script Commands Summary">Solo Predictor Script Commands Summary</a> as a starting point for familiarizing yourself with the scripting language.
+</p>
+<h2><span class="mw-headline" id="Workspace_Objects">Workspace Objects</span></h2>
+<p>Each command in a script creates or operates on objects stored by Solo_Predictor for the client. Objects include:
+</p><p><b>DataSet Objects</b> – contain data to be used in predictions.
+</p><p><b>Preprocessing Objects</b> – contain instructions for how to apply preprocessing to a DataSet.
+</p><p><b>Calibration Model Objects</b> – contain details on a calibration model from PLS_Toolbox or Solo.
+</p><p><b>Calibration Transfer Model Objects</b> – contain details on a calibration transfer model from PLS_Toolbox or Solo.
+</p><p><b>Prediction Objects</b> – contain results from applying a calibration.
+</p><p>Some other object types can be created and modified using the <a href="advanced_scripting_with_objects.html" title="Advanced Scripting with Objects">Advanced Scripting with Objects</a> methods.
+</p><p>When created, each object must be given a unique name (up to 64 characters in length) using only letters, numbers, and the underscore character ( _ ). Object names may not contain spaces and may not start with a number ("a1" is allowed, "1" is not), but are otherwise unlimited. Giving a new object the same name as a previously existing object overwrites the original object.
+</p><p>All objects exist in a persistent "workspace" – it remains intact from one request call to another. In addition, this workspace is usually unique to the individual client so that no two clients can access the objects in another's workspace (however, see the privateworkspace option in the Installation and Configuration section.)
+</p>
+<h2><span class="mw-headline" id="Script_Commands">Script Commands</span></h2>
+<p>Script commands fall into these categories:
+</p><p><b>1. <a href="#Importing_Commands" title="Solo Predictor Script Construction">Importing commands</a></b> – bring data or objects into Solo_Predictor
+</p>
+<dl><dd><dl><dd><tt>obj_data = 'content'</tt></dd></dl></dd></dl>
+<p><b>2. <a href="advanced_scripting_with_objects.html" title="Advanced Scripting with Objects">Object creation commands</a></b> - create advanced object types (see <a href="advanced_scripting_with_objects.html" title="Advanced Scripting with Objects">Advanced Scripting with Objects</a>)
+</p>
+<dl><dd><dl><dd><tt>obj = @objecttype(properties)</tt></dd></dl></dd></dl>
+<p><b>3. <a href="#Application_of_Models_and_Preprocessing_Commands" title="Solo Predictor Script Construction">Model and Preprocessing Application commands</a></b> – apply an object to data
+</p>
+<dl><dd><dl><dd><tt>obj_result = obj_data | obj_model</tt></dd></dl></dd></dl>
+<p><b>4. <a href="#Requesting_Return_Values" title="Solo Predictor Script Construction">Return Value Request commands</a></b> – request the value contained in an object.
+</p>
+<dl><dd><dl><dd><tt>obj_result</tt></dd></dl></dd></dl>
+<p><b>5. <a href="#Response_Message_Format" title="Solo Predictor Script Construction">Response Message Format commands</a></b> – set the output format for returned results and errors
+</p>
+<dl><dd><dl><dd><tt>:format</tt></dd></dl></dd></dl>
+<p><b>6. <a href="#Write_To_File_Command" title="Solo Predictor Script Construction">Write To File and Export commands</a></b> – creates an output file containing results
+</p>
+<dl><dd><dl><dd><tt>:writefile</tt></dd></dl></dd></dl>
+<p><b>7. <a href="#Other_Commands" title="Solo Predictor Script Construction">Other commands</a></b>
+</p>
+<dl><dd><dl><dd><tt>:command</tt></dd></dl></dd></dl>
+<p><b>8. Comments</b> – not processed by Solo_Predictor.
+</p>
+<dl><dd><dl><dd><tt>//comment</tt></dd>
+<dd><tt>#comment</tt></dd>
+<dd><tt>%comment</tt></dd></dl></dd></dl>
+<p>Each script can contain one or more commands, so more than one operation can be performed in a single call. Multiple commands are separated by semicolons. For example:
+</p>
+<pre> command; command; command
+</pre>
+<p>White-space characters in a command (i.e. spaces, tabs, line-feeds) are generally ignored. They can be included for readability but are not generally required. The exceptions to this rule are noted below (for example, in some of the data importing formats where white-space may be required.)
+</p><p>All script commands are also summarized <a href="solo_predictor_script_commands_summary.html" title="Solo Predictor Script Commands Summary">Solo_Predictor Script Commands Summary</a>.
+</p>
+<h2><span class="mw-headline" id="Importing_Commands">Importing Commands</span></h2>
+<p>Nearly all scripts start with one or more importing commands. To perform a prediction, a client must request the import of data and a model (at a minimum). Importing commands create data, models, or preprocessing objects in the client's workspace. These can be created from:
+</p>
+<ol><li>Reading the object from one of a number of supported file types, or</li>
+<li>Creating the object directly from text in the script.</li></ol>
+<p>In either case, the format of the command is the new object's name, followed by an equal sign and the content for the object in single quotes:
+</p>
+<pre> obj_1 = 'content'
+</pre>
+<p>The content takes various forms depending on the source of the object. Note that if the content needs to include a single quote, it should be escaped by adding a backslash in front of the quote:  \'  This is most often necessary when importing an XML object (see below)
+</p>
+<h3><span class="mw-headline" id="Importing_From_a_File">Importing From a File</span></h3>
+<p>Any of the objects used by Solo_Predictor can be loaded from a disk file. This is the most common form of import command when a client program can only save data to disk, and is also the most common command used to load a model. A file that is stored either locally on the server's computer or on a network-mounted drive can be loaded by providing the path and filename (including extension) of the file enclosed in single quotes.
+</p>
+<pre>obj_1 = 'C:/full/path/filename.ext'
+</pre>
+<p>or accessing from a network drive using its UNC path:
+</p>
+<pre>obj_1 = '//network-drive/modelfolder/filename.ext'
+</pre>
+<p>Note that the path to the file is always relative to the server, not the client. 
+</p><p>Solo_Predictor will automatically recognize the filetype and use the appropriate file reader to import the file.
+</p><p>If the file extension is not unique, or is misleading (e.g. a file in "XY" format that doesn't use the ".xy" extension or Opus files, which can have numerical extensions), a specific importer can be forced for use by prefixing the filename with a colon and the keyword associated with the importer to use plus a space followed by the filename. For example:
+</p>
+<pre>obj_1 = ':opusreadr C:/full/path/filename.ext'
+</pre>
+<p>would force the use of the Opus file reader on the specified filename. See the <a href="data_importing_formats.html" title="Data Importing Formats">Data Importing Formats</a> page to get a list of keywords that can be used to import the corresponding file types.
+</p>
+<h4><span class="mw-headline" id="Importing_From_Matlab_MAT_Files">Importing From Matlab MAT Files</span></h4>
+<p>If reading from a MATLAB .mat file containing more than one variable, a specific variable to load must be specified in the import command. This is done by appending a question mark followed by the variable name, all inside the single quotes.
+</p>
+<pre>obj_1 = 'C:/full/path/filename.mat?variable'
+</pre>
+<p>This is only necessary when the .mat file contains more than one variable. If only one variable is present, that variable will be loaded without a specific variable name being specified.
+</p><p>The Features and Supported Methods section discusses valid file types, and other types may be available. In general, the list of file types supported by the Analysis GUI and Workspace Browser in Solo and PLS_Toolbox are also supported by Solo_Predictor.
+</p>
+<h3><span class="mw-headline" id="Creating_Data_From_Script_Text">Creating Data From Script Text</span></h3>
+<p>Data can be created from a list of comma-separated values by simply passing those values as text between the quotation marks:
+</p>
+<pre>obj_1 = '1,2,3,4'
+</pre>
+<p>This would create an object that contains the values 1 through 4. Note that this form of input provides no means to assign labels or axis values corresponding to these values. As a result, no variable alignment or correction for missing or extra variables can be performed. It is assumed that the number of variables passed is appropriate for use with the model of interest.
+</p>
+<h3><span class="mw-headline" id="Creating_Literal_String_Constants">Creating Literal String Constants</span></h3>
+<p>For some object properties and methods, literal strings (a.k.a. string constants) are needed. To generate such strings, double-quotes can be used in place of the single quotes:
+</p>
+<pre>str_1 = "A String Here"
+</pre>
+<p>In this example, the object str_1 will be assigned the literal string between the double-quotes. Note that in older version of solo scripting, single quotes were required around the double quotes, indicating you were importing the string: <tt>'"this string"'</tt> but this approach is no longer necessary.
+</p>
+<h3><span class="mw-headline" id="Creating_Objects_from_XML">Creating Objects from XML</span></h3>
+<p>Any of the objects used by Solo_Predictor can be created from an XML format that is supported by both PLS_Toolbox and Solo. In this form, the content of the import command is an object's XML description.
+</p>
+<pre>obj_1 = '&lt;obj&gt;(XML formatted content)&lt;/obj&gt;'
+</pre>
+<p>Although XML input is more complex, it enables the widest range of features supported by Solo_Predictor, including variable replacement and alignment. To simplify its use, a template XML file showing the tags necessary to create a DataSet object is discussed in <a href="dataset_xml_format.html" title="DataSet XML Format">DataSet XML Format</a>. This template can be used to create and pass appropriate XML for these objects.
+</p><p>Any xml object that has been exported from Solo or PLS_Toolbox (including DataSet, Model, and Preprocessing objects) can be stored and passed into Solo_Predictor to re-create the given object.
+</p>
+<h3><span class="mw-headline" id="Advanced_Object_Creation_and_Modification">Advanced Object Creation and Modification</span></h3>
+<p>Objects can be created from an empty object definition using the "at" symbol prefix before an object type and its properties in parenthesis:
+</p>
+<pre>obj = @objecttype(properties)
+</pre>
+<p>The exact objects available depend on the product being used, but most support DataSet objects and EVRIScript objects. In addition, the inputs required by these objects differ.
+</p><p>Creating and working with objects is discussed on the <a href="advanced_scripting_with_objects.html" title="Advanced Scripting with Objects">Advanced Scripting with Objects</a> page.
+</p>
+<h2><span class="mw-headline" id="Application_of_Models_and_Preprocessing_Commands">Application of Models and Preprocessing Commands</span></h2>
+<p>Once a calibration model, calibration transfer model, or preprocessing object has been imported into Solo_Predictor, it can be applied to a DataSet object using the application command. This command consists of an output object name, an equal sign, a DataSet object's name, the bar character, and the model or preprocessing object to apply. The output of the application command depends on the type of object being applied.
+</p>
+<pre> modifieddata = data_obj | preprocessing_obj
+ modifieddata = data_obj | caltransfer_obj
+ prediction_obj = data_obj | model_obj
+</pre>
+<p>When applying a preprocessing object to a DataSet object, the result is always another DataSet which contains the modified data. This DataSet can then be used in subsequent application commands or retrieved using a Return Value Request command, described below.
+</p><p>When applying a calibration transfer model to data, the result is a modified version of the original DataSet object that can be used in a subsequent command (much like with preprocessing objects.)
+</p><p>A calibration model applied to data outputs a prediction object. Prediction objects are similar in content to a model, but contain results specific to the application results. It is most often the fields of this prediction object which a client will want to retrieve as the final result of a model application.
+</p>
+<h2><span class="mw-headline" id="Requesting_Return_Values">Requesting Return Values</span></h2>
+<p>The eventual goal of most scripts is to return one or more values to the client. A large number of different statistics, results, and information are available. These are all stored as properties of the objects in the client's workspace. The specific value or values an individual client will need to retrieve depends largely on the model being applied and the intended use of the model. Some typical requests will be discussed later.
+</p><p>A script can specify the values to return by sending a return request command. This command specifies an object's name followed by a period and the name of the property (also known as "field") to return.
+</p>
+<pre> Obj.property
+</pre>
+<p>The specified object's property will be returned to the client when the script finishes. Properties may contain strings, single numeric values, numeric vectors, numeric arrays or complex objects. The format of the contents will be based on the Response Message Format described later in this section.
+</p><p>Note that the returned value will be the value of the object and property at the point in the script where the statement occurs. Changing or clearing the object or property <i>after</i> the request statement will not affect the returned value.
+</p>
+<h3><span class="mw-headline" id="Retrieving_Multiple_Values">Retrieving Multiple Values</span></h3>
+<p>A given script can only return a single set of values. This can be from a single return request command or multiple "compatible" return request commands. Commands are compatible if the specified values can be concatenated horizontally into a row vector or matrix. To retrieve multiple compatible values, the script can simply include several return request commands within the body of the script (with terminating semicolons as is always necessary between commands.) For example:
+</p>
+<pre>Obj_A.property1;
+Obj_A.property2;
+Obj_B.property1;
+</pre>
+<p>If the commands refer to objects or data tables which cannot be combined in this manner (e.g. different number of rows or incompatible objects), Solo_Predictor will return a script error.
+</p><p>If multiple incompatible properties need to be retrieved by a script, multiple connections will need to be made to Solo_Predictor retrieving the desired properties one at a time. Remember that because objects are persistent from call to call, the objects created by one call to Solo_Predictor remain available for subsequent calls. See the Scripting Examples for an example of retrieving multiple values. Another option to retrieve multiple outputs is the Write to File command discussed later in this section.
+</p>
+<h3><span class="mw-headline" id="Common_Return_Properties">Common Return Properties</span></h3>
+<p>Model and prediction objects can be queried for a description of the properties which are typically used in predictions from the given model type. Sending the command:
+</p>
+<pre> Model_Obj.help.predictions
+</pre><p>
+will return an XML description of properties of Model_Obj which the client program might want to make available to the user. This description is comprised of a single  tag enclosing multiple  tags, each containing the description of an available property in the model including the following tags:
+</p><ul><li><b>&lt;label&gt;</b> contains a text description of the property's contents</li>
+<li><b>&lt;field&gt;</b> contains the full property name which should be used to access the given value. Add the contents of this field onto the string name of the prediction or model object followed by a period:  pred.field</li>
+<li><b>&lt;dimension&gt;</b> contains a string describing the type of return value provided in this property for the prediction of a single sample. This will be "scalar" (single value), "vector", or "matrix" and can be used by the client to ignore return value types which it cannot manage. "vector" means a single row of numbers. "matrix" means a table of values.</li></ul>
+<p>For example, the following XML fragment describes two fields available from a PCA model:
+</p>
+<pre>&lt;tr&gt;
+  &lt;td&gt;
+    &lt;label class="string"&gt;Scores&lt;/label&gt;
+    &lt;field class="string"&gt;loads{1}&lt;/field&gt;
+    &lt;dimension class="string"&gt;vector&lt;/dimension&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;label class="string"&gt;Hotelling's T^2&lt;/label&gt;
+    &lt;field class="string"&gt;tsqs{1}&lt;/field&gt;
+    &lt;dimension class="string"&gt;scalar&lt;/dimension&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+</pre><p>
+The first  tag describes the Model_Obj.loads{1} property which contains Scores and will be returned as a vector. The second  tag describes the Model_Obj.tsqs{1} property which contains the Hotelling's T^2 (T-squared) value which will be returned as a scalar (single value).
+</p><p>The client can use this list to populate a table (or other GUI) with outputs available from the predictions using a given model. Note that the help.predictions list is the same from a model object and any prediction objects made from it.
+</p><p>Because only model and prediction objects provide self-description of useful properties, the following the following tables, organized by object type, are provided to guide the user to some of the standard properties which clients may be interested in retrieving. Note that some properties may contain additional indexing information in either "curly" braces { } or in standard parenthesis ( ) and that this indexing must be included as shown.
+</p><p><b>Table 1. Commonly used properties for DataSet objects</b>
+</p>
+<table border="1" cellspacing="0" cellpadding="3">
+<tbody><tr>
+<td><b>Description / Content</b></td>
+<td><b>Property</b>
+</td></tr>
+<tr>
+<td>Numerical data</td>
+<td>.data
+</td></tr>
+<tr>
+<td>Labels for the variables</td>
+<td>.label{2}
+</td></tr>
+<tr>
+<td>Numerical axis scale for the variables</td>
+<td>.axisscale{2}
+</td></tr>
+</tbody></table>
+<p><br />
+<b>Table 2. Commonly used properties for Prediction and Model objects</b>
+</p>
+<table border="1" cellspacing="0" cellpadding="3">
+<tbody><tr>
+<td valign="top" colspan="3">
+<p><b>General Properties</b>
+</p>
+</td></tr>
+<tr>
+<td><b>Description / Content</b></td>
+<td><b>Property</b></td>
+<td><b>Notes</b>
+</td></tr>
+<tr>
+<td>Model Type</td>
+<td>.modeltype</td>
+<td>String keyword describing the type of model
+</td></tr>
+<tr>
+<td>Author</td>
+<td>.author</td>
+<td>Model's author. Usually defined by user's login name and            computer name.
+</td></tr>
+<tr>
+<td>Date Created</td>
+<td>.date</td>
+<td>Date only in text format (for time            information, see Timestamp)
+</td></tr>
+<tr>
+<td>Time Stamp</td>
+<td>.time</td>
+<td>Date/Time as vector of numbers: [Year Month            Day Hour Minute Second] (seconds includes fractional portion            describing miliseconds) When combined with author, this is            considered a unique identifier for the model.
+</td></tr>
+<tr>
+<td># of X variables total</td>
+<td>.datasource{1}.size(2)</td>
+<td>Total number of x-variables (included and            excluded)
+</td></tr>
+<tr>
+<td># of X variables used</td>
+<td>.datasource{1}.include_size(2)</td>
+<td>Number of x-variables used by model
+</td></tr>
+<tr>
+<td># of Y values</td>
+<td>.datasource{2}.include_size(2)</td>
+<td>Number of y-values being predicted by model
+</td></tr>
+<tr>
+<td>Preprocessing Step(s)</td>
+<td>.detail.preprocessing{1}</td>
+<td>An XML structure with all preprocessing            information (can be very large)
+</td></tr>
+<tr>
+<td>Preprocessing Step Descriptions</td>
+<td>model.detail.preprocessing{1}(n).description</td>
+<td>String description of the n-th preprocessing            step (returns error if n&gt;number of preprocessing steps;            it is safe to iterate until error)
+</td></tr>
+<tr>
+<td valign="top" colspan="3">
+<p><b>Numeric Results</b>
+</p>
+</td></tr>
+<tr>
+<td><b>Description / Content</b></td>
+<td><b>Property</b></td>
+<td><b>Notes</b>
+</td></tr>
+<tr>
+<td>Scores</td>
+<td>.scores</td>
+<td>The numeric scores of a model
+</td></tr>
+<tr>
+<td>Hotelling's T<sup>2</sup></td>
+<td>.t2</td>
+<td>These values will generally be "reduced" so that a value of 1 is at the pre-defined confidence limit.
+<p>See .detail.options.confidencelimit property to retrieve the confidence limit used for the reduced value.
+</p>
+</td></tr>
+<tr>
+<td>Sum-squared residuals (Q)</td>
+<td>.q</td>
+<td>Q residuals (a.k.a. SPE) These values will generally be "reduced" so that a value of 1 is at the pre-defined confidence limit.
+</td></tr>
+<tr>
+<td>Y Predictions, Classes or Scores</td>
+<td>.prediction</td>
+<td>For regression models, this is the y prediction(s) (may be multiple columns). For Classification models, this is an array of strings indicating the class for which the sample(s) are "in class". For other models, this is typically the scores. See .predictionlabel below.
+</td></tr>
+<tr>
+<td>T-contributions</td>
+<td>.tcon</td>
+<td>The Hotelling's T-squared contributions.
+</td></tr>
+<tr>
+<td>Q-conributions</td>
+<td>.qcon</td>
+<td>The Q contributions (X-block residuals).
+</td></tr>
+<tr>
+<td valign="top" colspan="3">
+<p><b>Labels, Axis Scales, and Include Flags</b>
+</p>
+</td></tr>
+<tr>
+<td><b>Description / Content</b></td>
+<td><b>Property</b></td>
+<td><b>Notes</b>
+</td></tr>
+<tr>
+<td>Prediction Lables</td>
+<td>.predictionlabel</td>
+<td>A string array of labels corresponding to each column of .prediction (see above). This field will always match the size of the .prediction output no matter what the model type or data source.
+</td></tr>
+<tr>
+<td>Y value labels</td>
+<td>.detail.label{2,2}</td>
+<td>Labels for all columns of y (included and excluded). Note that this may include labels for columns which the model is not predicting. The <i>.detail.includ{2,2}</i> vector will indicate which of these label(s) are actually being predicted. String may be empty if no labels exist.
+</td></tr>
+<tr>
+<td>X-block axisscale</td>
+<td>.detail.axisscale{2,1}</td>
+<td>Vector of any axisscale (e.g. frequency, wavelength) expected for the X-block variables. Note that Solo_Predictor will usually automatically handle mismatches in the axisscale if you provide the measured axisscale in the input DataSet object.
+</td></tr>
+
+<tr>
+<td>X-block labels</td>
+<td>.detail.label{2,1}</td>
+<td>String array of any labels expected for the X-block variables. Note that Solo_Predictor will usually automatically handle missing or mis-ordered variables if you include the labels in the input DataSet object.
+</td></tr>
+<tr>
+<td>X-block included variables</td>
+<td>.detail.includ{2,1}</td>
+<td>Vector indicating which of the original X-block variables are actually used by the model (also see "# of X variables used" above)
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Response_Message_Format">Response Message Format</span></h2>
+<p>All results returned by Solo_Predictor are text-based but the exact format of the text can be selected to best match the client program's ability to parse text. The format is selected using a format command which consists of a colon followed by a format keyword. A format command can be located anywhere within your script, before or after a return request command. As always, each command must be separated from other commands by semicolons. The following are valid output formats:
+</p>
+<h3><span class="mw-headline" id=":xml">:xml</span></h3>
+<p>Selects the XML format. This consists of three tags: result, error, date.
+</p><p>result&#160;: Contains any output produced by a "return value" command. The class of the returned value is given in the class attribute of this tag. Standard classes are "string" and "numeric" but other complex objects may be returned. Numeric values are given in comma- and semicolon-delimited format where commas delimit row-wise elements in vectors and arrays and semicolons delimit column-wise elements in vectors and arrays. For example, an array with two rows of 5 numbers would be returned as:
+</p>
+<pre> 1,2,3,4,5;6,7,8,9,10
+</pre>
+<p>In addition, the result tag will have a size attribute included with any string or numeric value. It will give the expected result's size in rows and columns. This can be used by the client to prepare an appropriately-sized matrix for the parsed result and for error checking on the parsed result.
+</p><p>error&#160;: Contains a text description of any errors which occurred during the script execution. If no errors occurred, the error tag will be empty.
+</p><p>date&#160;: Contains the date and time the request was received by the server.
+</p><p>In XML format, a response with no errors and no results will return as an XML structure with result and error tags empty. Date will contain the relevant date information as usual.
+</p><p>Example:
+</p>
+<pre>&lt;response&gt;
+&lt;result     class=&quot;numeric&quot; size=&quot;[2,5]&quot;&gt;
+1,2,3,4,5;6,7,8,9,10
+&lt;/result&gt;
+&lt;error     class=&quot;string&quot;/&gt;
+&lt;date     class=&quot;string&quot;&gt;Thu 06 Sep 2007 14:21:08&lt;/date&gt;
+&lt;/response&gt;
+</pre>
+<h3><span class="mw-headline" id=":plain">:plain</span></h3>
+<p>Selects the plain-text format. If any errors occurred, this will be an error message starting with the text: "ERROR:" and will supersede any results.
+</p><p>When no errors occurred, the content of any return values will be given in a space- and linefeed-delimited format where spaces delimit row-wise elements in vectors and arrays and linefeeds delimit column-wise elements in vectors or arrays. For example, an array with two rows of 5 numbers would appear as:
+</p>
+<pre>1     2     3     4     5
+6     7     8     9    10
+</pre>
+<p>Note that multiple spaces will almost always be used between row-wise elements.
+</p><p>In plain-text format, a response with no errors and no results will return as an empty (null) message.
+</p>
+<h3><span class="mw-headline" id=":html">:html</span></h3>
+<p>Selects an HTML-friendly format. This output is appropriate for display by any standard HTML-parser such as a web browser; All text is enclosed in preformatted text tags (&lt;pre&gt;). If any errors occurred, they will be displayed much like the plain format. Otherwise, the result will be included in an XML format (same as the result field in the xml format.)
+</p><p>If more than one format command is included in a script, only the last-encountered format command will be used.
+</p><p>The default format for the response is set by the default_format option. See the Installation and Configuration section for more information.
+</p>
+<h3><span class="mw-headline" id=":json">:json</span></h3>
+<p>Selects JavaScript Object Notation output format. This format is useful when the output needs to be parsed by a JavaScript application. Fields of DataSet objects will be returned as fields of a JavaScript object. Multi-row arrays will be returned as nested row-wise arrays. For example, an array with two rows of 5 numbers would appear as:
+</p>
+<pre>[[1,2,3,4,5],[6,7,8,9,10]]
+</pre>
+<p>Most objects (models, predictions) can NOT be encoded in JSON format and will be returned as a simple string saying:
+</p>
+<pre>"Unencodable Object"
+</pre>
+<p>In these cases, individual fields must be extracted before returning the value.
+</p>
+<h2><span class="mw-headline" id="Write_To_File_Command">Write To File Command</span></h2>
+<p>Another method of returning results to a client is the write-to-file command. This command provides a simple way to create a specifically-named output file based on a user-created "template" file. This command is particularly useful when the client is unable to parse returned strings, when passing particularly complicated return values, or when Solo_Predictor is being used by legacy systems which expect a file response. See the example scripts section for an example of their use.
+</p><p><b>NOTE:</b> By default, the <tt>writefilefolder</tt> option in the configuration file, default.xml, is blank. This disables the writefile command. This option must be configured before using the writefile command in any script.
+</p><p>The general format of the command is:
+</p>
+<pre>:writefile 'subpath/output.ext' 'path/template.tem' -append
+</pre>
+<p>When encountered in a script, this command specifies the output filename and extension (for example, 'subpath/output.ext', see note below regarding paths), the name of the template file ('path/template.tem', see note below regarding paths) and a flag indicating if the results should be appended to the end of the output file rather than replacing the file ("-append"). All values except the output filename are optional. If the -append flag is omitted, any existing output file is overwritten. 
+</p><p>If the template filename is omitted, a template file named as the output file but with extension '.tem', for example, 'output.tem' is expected in the same folder as the output file. In this case, if this .tem file is not found then writing output will fail.  Note that the only acceptable template file type is ".tem". Also, the output file suffix, '.ext' is typically .txt, or .csv, but is unrestricted
+</p><p>The paths on the output and template filenames are optional and but specified paths behave slightly differently between the two:
+</p>
+<ul><li><b>output</b>&#160;: any path on this filename will be appended to the <tt>writefilefolder</tt> path and must refer to a folder <i>below</i> the <tt>writefilefolder</tt>. It may not include any references to higher-level folders ( .. ). Thus, if no path is specified on this file, it will simply refer to the <tt>writefilefolder</tt>.</li>
+<li><b>template</b>&#160;: if no path is included on this filename, it is assumed to be in the <tt>writefilefolder</tt>. Otherwise, it is assumed to be a fully qualified folder name and the <tt>writefilefolder</tt> is not prepended.</li></ul>
+<p>The template file is a user-created text file containing one or more lines of text which contain static text and replacement keys. Static text is written to the output file exactly as it appears in the template file (including linefeeds, spaces, tabs and all other text characters). Replacement keys consist of any return request command, described earlier, inside square brackets [ ]. When the output file is written, replacement keys are replaced with the value(s) indicated by the contained return request command. For example, consider the following template text, which expects a prediction object 'pred' and a 'conc' variable exist in the workspace:
+</p>
+<pre>1, "residuals", [pred.q]
+2, "tsquared", [pred.t2]
+3, "y-prediction [[conc]]", [pred.prediction]
+</pre>
+<p>This template would create an output file like:
+</p>
+<pre>1, "residuals", 0.3225352
+2, "tsquared", 0.1212351
+3, "y-prediction [conc]", 12.25252
+</pre>
+<p>Note the following:
+</p>
+<ul><li>The &lt;writefilefolder&gt; option in the default.xml file configures the folder into which files can be written and template files may be read. If this option is set to empty (blank string), then no :writefile commands will be permitted.</li>
+<li>An optional formatting instruction can be included inside the replacement key brackets. This instruction consists of a simple fprintf instruction (%_._f) followed by a comma and the usual return request command. :For example:</li></ul>
+<pre>[%i,pred.prediction]
+</pre>
+<dl><dd>The percent sign can be followed by optional precision indicators _._ but must be followed by a format character (usually i, f, g, or e). For more information on formatting commands see: <a rel="nofollow" class="external text" href="http://www.mathworks.com/access/helpdesk/help/techdoc/ref/sprintf.html%7CMathworks">SPRINTF Documentation</a>]  )</dd></dl>
+<ul><li>When the return request command inside of a replacement key consists of more than one value, all values will be returned as comma separated list. To return in any other format, the template file must be hard-coded to access each value individually:  [pred.prediction(1)]  [pred.prediction(2)]</li>
+<li>To include square brackets as static text in a template, use double brackets [[ and ]].</li>
+<li>When using the -append mode, make certain to include any linefeed characters required. Without linefeed characters, each subsequent output will be appended to the same line.</li>
+<li>A common request is to have the :writefile command add a new row to the output file for each processed sample file. This can be accomplished by manually initializing the output file, for example output.txt, with any desired header text lines. Next, use the :writefile command with the "-append" flag and a template file specifying the desired fields to write out. It is important that the last line in the template file is a blank line as this inserts a newline character which is needed to have the output from successive processed files appear on separate lines in the output.txt file.</li></ul>
+<p>As an example, a template .tem file which contains the following two lines (second line is blank):
+</p>
+<pre>[pred.time]    [pred.prediction]    [pred.t2]    [pred.q]    [data.label{1}]    [data.date]
+
+</pre>
+<p>when used with :writefile and the '-append' flag will output something like the following it the output .txt file after three files have been processed, each files output written to its own line:
+</p>
+<pre>"Model_Date"             "Pred[mol%]"   "T2"    "Q"    "data_name"    "data_date"
+2017,4,12,20,56,38.154    0.623374    6.68099    611.281    basil2_1_1317    2017,4,12,20,56,36.786
+2017,4,12,20,56,38.664    0.59356    5.54621    521.627    basil2_2_1317    2017,4,12,20,56,38.494
+2017,4,12,21,46,32.798    0.3965    0.387434    158.553    basil3_1_1302    2017,4,12,21,46,31.671
+</pre>
+<p>The first line of this output.txt file was inserted manually by the user before Solo_Predictor was started. 
+</p><p>The quantity pred.time is the timestamp of the prediction being created, while data.date is the timestamp of the data being loaded into Solo_Predictor.
+</p><p><b>&lt;DATE&gt; Token</b>
+</p><p>If the writefile command's output file 'subpath/output.ext' contains the special 6-character string '&lt;DATE&gt;' then it will be automatically modified so that '&lt;DATE&gt;' is replaced by today's date, for example '28-Aug-2017' in the output file. If this file or path does not exist then it will be automatically created and the output written to it. This feature is convenient if you want to organize the writefile output from Solo_Predictor into separate files or folders for each day. An example usage is:
+</p>
+<dl><dd>':writefile 'projA/my&lt;DATE&gt;/output.txt' 'template.tem' -append'</dd></dl>
+<p>If Solo_Predictor's default.xml configuration file specified writefilefolder = 'C:\tmp\', then this writefile would output to a file at 'C:\tmp\projA\my28-Aug-2017\output.txt' on August 28th, where the values written are controlled by 'C:\tmp\template.tem'. Output would be appended to this file until midnight when the new file 'C:\tmp\projA\my29-Aug-2017\output.txt' would begin accumulating the writefile output, and so on.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Export_command">Export command</span></h3>
+<p>Any object can be exported to one of several filetypes using the command:
+</p>
+<pre>   :export 'output.ext' object
+</pre>
+<p>The extension on output filename 'output.ext' defines the filetype and must be one of the following:
+</p>
+<dl><dd><b>.xml</b> = XML encoding of the object</dd>
+<dd><b>.mat</b> = MAT file containing the object</dd>
+<dd><b>.m</b>   = m-file encoding of the object (Matlab m-code which, when executed, will recreate the object)</dd>
+<dd><b>.csv</b>  = CSV encoding of the object (only valid for dataset objects or numeric arrays)</dd>
+<dd><b>.spc</b>  = SPC encoding of the object (only valid for dataset objects or numeric arrays)</dd>
+<dd><b>.smat</b> = SMAT file containing the object (only available if secureMAT file feature is installed)</dd></dl>
+<p><b>Note:</b> This command requires the <i>writefilefolder</i> configuration property be assigned.
+</p>
+<h2><span class="mw-headline" id="Other_Commands">Other Commands</span></h2>
+<p>Several other commands exist for various operations. Each consists of a colon followed by the command name and can generally be used anywhere within a script.
+</p><p><b>:include 'path/script.txt' </b>
+</p><p>Include the contents of the specified file in the current script. The indicated text file (which can have any file name and extension but must include the full path to the file) will be executed by Solo_Predictor as if it had been passed explicitly in the current script.
+</p><p>This command permits a client to pass a simple :include command to invoke a possibly complicated script. The included script is always executed in the same workspace as the calling script and the calling script has access to any objects created by the included script.
+</p><p><b>:clear </b>
+</p><p>Clears all objects from the client's workspace. An error will result if a script clears all objects from the workspace, then subsequently attempts to refer to a cleared object.
+</p><p><b>:list </b>
+</p><p>Returns a list of the names of all objects in the client's workspace. This is generally only useful as the last instruction in a given script as subsequent return value requests will overwrite the output of this command.
+</p>
+<h2><span class="mw-headline" id="Scripting_Examples">Scripting Examples</span></h2>
+<p>The following sections show examples of basic scripts which might be used by a client calling into Solo_Predictor. To better understand how to connect to Solo_Predictor see the <a href="solo_predictor_example_connection_code.html" title="Solo Predictor Example Connection Code">Solo_Predictor Socket Connection Examples</a>. (For Solo_Predictor version 4.2, or earlier, see also: <a href="eigenvectortools.html#Examples" title="EigenvectorTools">EigenvectorTools Programming Examples</a> ).
+</p>
+<h3><span class="mw-headline" id="Reading_data_and_model_from_file_and_retrieve_results">Reading data and model from file and retrieve results</span></h3>
+<p>This example sets the output format to be a simple plain-text format, then reads data from an SPC-format file, reads a PLS model from a .mat file, and applies the model to the data. Finally, it returns the y-block predictions.
+</p>
+<pre>:plain;
+data = 'C:/datacollector/datafolder/spectrum1.spc';
+model = 'C:/modelfolder/mymodel.mat';
+pred = data | model;
+pred.prediction;
+</pre>
+<p>Recall that spaces and linefeeds are not necessary (only the semicolons are necessary) but they are included in the above script to help readability. The last line of the above script retrieves the y-block predictions from the applied model. In the case where the PLS model is predicting only one value (typical), the output string would be that single value. For example:
+</p>
+<pre> 14.23424
+</pre>
+<p>The application which made the call above would parse the result as a numerical value in order to use it.
+</p><p>Usually, two subsequent calls would then be used to retrieve the the T<sup>2</sup> and Q (sum squared residuals) values. First T<sup>2</sup>:
+</p>
+<pre> :plain;
+ pred.t2;
+</pre>
+<p>Note that the command starts with the :plain; instruction stating that the output should be in plain-text. Then the second call for the Q value:
+</p>
+<pre>:plain;
+pred.q
+</pre>
+<p>Note that all three of these values could be retrieved in one call if the three "retrieve values" commands were all included in the first script:
+</p>
+<pre>:plain;
+(other lines here)
+pred.prediction;
+pred.t2;
+pred.q;
+</pre>
+<p>This would return a space-separated output of the three values. For example:
+</p>
+<pre>14.23423  0.852324  0.242445
+</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Reading_data_from_passed_CSV">Reading data from passed CSV</span></h3>
+<p>This example starts by pre-reading a PCA model (when the client first starts), then makes predictions using that model by passing directly to the server in a comma-separated values format. The Q contributions and Hotelling's T<sup>2</sup> contributions are then retrieved.
+</p><p>When the client starts, it sends the single-command script
+</p>
+<pre>model = 'C:/modelfolder/mymodel.mat';
+</pre>
+<p>This model will remain in memory as long as the server is running.
+</p><p>Next, the following script is executed each time the client is ready to make a prediction. It passes the seven values expected by the model and makes a prediction.
+</p>
+<pre>:plain;
+data = '0,100,1242,2320,14,-50,232';
+pred = data | model;
+</pre>
+<p>Because this script returns no outputs and uses the "plain" response format, the successful application of the model will be indicated by an empty message returned by Solo_Predictor. The client can easily test for any errors by checking for a non-empty return string from the server.
+</p><p>With a successful model application, the client can retrieve the Q contributions:
+</p>
+<pre>:plain; pred.qcon
+</pre>
+<p>Again, the script requests a "plain" response format so the Q contributions (which are a row-vector of numbers) are returned in a space-delimited format. Finally, another script is sent to retrieve the T<sup>2</sup> contributions:
+</p>
+<pre>:plain; pred.tcon
+</pre>
+<p>The comma-separated return values from this script can also be easily parsed by the client.
+</p>
+<h3><span class="mw-headline" id="Reading_data_from_passed_XML">Reading data from passed XML</span></h3>
+<p>To modify the previous script to pass an XML data structure and include a series of labels with the data, the following script would be used for prediction calls:
+</p>
+<pre>:plain;
+data = '&lt;obj class="dataset"&gt;
+&lt;data class="numeric"&gt; 0,100,1242,2320,14,-50,232&lt;/data&gt;
+  &lt;label&gt;
+    &lt;set&gt;
+      &lt;mode&gt;2&lt;/mode&gt;
+      &lt;name&gt;variable labels&lt;/name&gt;
+      &lt;content&gt;
+        &lt;sr&gt;tempA&lt;/sr&gt;
+        &lt;sr&gt;Aspeed&lt;/sr&gt;
+        &lt;sr&gt;tempB&lt;/sr&gt; 
+        &lt;sr&gt;Bspeed&lt;/sr&gt; 
+        &lt;sr&gt;Rate&lt;/sr&gt; 
+        &lt;sr&gt;SetPoint&lt;/sr&gt; 
+        &lt;sr&gt;Time&lt;/sr&gt; 
+      &lt;/content&gt;
+    &lt;/set&gt;
+  &lt;/label&gt;
+&lt;/obj&gt;';
+pred = data | model;
+</pre>
+<p>For more information on the XML format, see <a href="dataset_xml_format.html" title="DataSet XML Format">DataSet_XML_Format</a>.
+</p>
+<h3><span class="mw-headline" id="Wait_for_file_and_output_to_results_file">Wait for file and output to results file</span></h3>
+<p>Wait for file provides a simple method to interface to programs which do not have the capability to send data through sockets. In this example, we will assume that a client program has been configured to save data files (in .xy format) to a specified "drop folder". Solo_Predictor will monitor this folder and, when a new file appears, it will load the data into an object named "data" (this name is not configurable) and execute an analysis script we will call "analyze.scr" (this name and file extension are also configurable. You could use "myanalyze.txt" instead of "analyze.scr", for example).
+</p><p>For this mode, the following options must be configured:
+</p>
+<dl><dd><b>waitforfile</b> must be "on"</dd>
+<dd><b>waitfolder</b> must give the full path to the drop folder ("c:/df" in this example)</dd>
+<dd><b>waitfilespec</b> must be defined as "*.xy" (to ignore all other file types in the folder.)</dd>
+<dd><b>waitscript </b>must point to the "analyze.scr" (or whatever you named it) with the entire path to the file.</dd></dl>
+<p>The analyze.scr will contain the steps we want to use to analyze the results, and it will contain the instructions to write the results out to a results file.
+</p><p><b>analyze.scr</b>
+</p>
+<pre>modl = 'C:/path/to/file/mymodel.mat';
+pred = data | modl;
+:writefile 'proj1/results.txt' 'c:/df/template.tem'
+</pre>
+<p>The first line loads the model from a .mat file located on a network drive. The second line applies the model to the data loaded from the dropped file. The final line writes the results out to a file named "results.txt" in a folder named "proj1" (which must already exist) in the "writefilefolder". The template file would be defined to output any of the results needed from this application. For an example, see the <a href="#Write_To_File_Command" title="Solo Predictor Script Construction"> :writefile definition in the Script Construction</a> section.
+</p><p>Alternatively, the last command could instead be <a href="#Export_command" title="Solo Predictor Script Construction">an <tt>:export</tt> command</a> to write a simple CSV-style format (for example):
+</p>
+<pre>modl = 'C:/path/to/file/mymodel.mat';
+pred = data | modl;
+results = pred.prediction;
+results = results|pred.T2;
+results = results|pred.Q;
+:export 'results.csv' results
+</pre>
+<!-- 
+NewPP limit report
+Cached time: 20240930090531
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.034 seconds
+Real time usage: 0.037 seconds
+Preprocessor visited node count: 152/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 2005/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:606-0!canonical and timestamp 20240930090531 and revision id 12255.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction&amp;oldid=12255">https://www.wiki.eigenvector.com/index.php?title=Solo_Predictor_Script_Construction&amp;oldid=12255</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 17 June 2024, at 09:56.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

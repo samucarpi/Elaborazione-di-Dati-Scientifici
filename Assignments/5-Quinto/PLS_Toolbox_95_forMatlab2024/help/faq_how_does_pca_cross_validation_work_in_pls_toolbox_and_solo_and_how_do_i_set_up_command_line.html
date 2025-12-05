@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Faq how does PCA cross validation work in PLS Toolbox and Solo and how do I set up command line - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Faq_how_does_PCA_cross_validation_work_in_PLS_Toolbox_and_Solo_and_how_do_I_set_up_command_line rootpage-Faq_how_does_PCA_cross_validation_work_in_PLS_Toolbox_and_Solo_and_how_do_I_set_up_command_line skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Faq_how_does_PCA_cross_validation_work_in_PLS_Toolbox_and_Solo_and_how_do_I_set_up_command_line"><span class="mw-page-title-main">Faq how does PCA cross validation work in PLS Toolbox and Solo and how do I set up command line</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><h3><span class="mw-headline" id="Issue:">Issue:</span></h3>
+<p>How does PCA cross-validation work in PLS_Toolbox and Solo and how do I set up the command-line options to best use it?
+</p>
+<h3><span class="mw-headline" id="Possible_Solutions:">Possible Solutions:</span></h3>
+<p><b>Missing Data Approach to PCA Cross-Validation</b>
+</p><p>PCA cross-validation in PLS_Toolbox and Solo is very different from other software packages. It does cross-validation using a missing data approach where it tests to see how well the PCA model does at replacing columns of the left-out samples (So it is leaving both samples AND variables out). This gives an estimate of how well the PCA model is fitting systematic information (that needed to replace the missing variables) versus noise (which won't be useful in replacing missing variables, and will, in fact, be detrimental in doing so.) This is more diagnostic than the standard residuals test which will continuously decrease asymptotically towards zero. 
+</p><p>For a description of how this method is done and how it compares to other PCA cross-validation methods, see:
+</p><p><b><a rel="nofollow" class="external text" href="https://link.springer.com/article/10.1007%2Fs00216-007-1790-1">Cross-validation of component models: A critical look at current methods" R. Bro, K. Kjeldahl, A. K. Smilde, H. A. L. Kiers; Analytical and Bioanalytical Chemistry, March 2008, Volume 390, Issue 5, pp 1241-1251</a></b>
+</p><p><b>Command-Line Settings for PCA Cross-Validation</b>
+</p><p>The unusual approach to cross-validation means that, when calling the <code>crossval</code> function for PCA, you need to define both a pattern to leave out samples (the "cvi" input to crossval) AND a pattern to leave out variables (defined by the "pcacvi" option in the options input.) The I/O for crossval is:
+</p>
+<pre>&gt;&gt; results = crossval(x,y,rm,cvi,ncomp,options);
+</pre>
+<p>By default, the pcacvi option is 'loo' meaning it leaves one variable out at a time. Thus, for each split of samples, <code>crossval</code> splits the data again into as many sets are there are variables. 
+</p><p>In the Analysis window, we use logic which defines what pcacvi to use which, given the number of included variables (<code>n</code>), does the calculation:
+</p>
+<pre>&gt;&gt; if n&gt;25;
+      cvopts.pcacvi = {'con' min(10,floor(sqrt(n)))};
+    else
+      cvopts.pcacvi = {'loo'}; 
+    end
+</pre>
+<p>This says that, if the number of included variables is 25 or fewer, it does a "leave one out" pattern on the variables. Otherwise, it does a contiguous block leave-out of variables split into either the square root of the number of variables or 10, whichever is less. For example, with 1500 variables, it would choose 10 splits (because sqrt(1500) = about 38). This means that <code>crossval</code> would take the variables and split them into 10 groups and leave out one group at a time. 
+</p><p>Using a contiguous block split of variables when lots of variables are present will be both significantly faster as well as more accurate (with 1500 variables, you often expect there to be a lot of correlated noise between variables). It is worth noting that this assumes adjacent variables are correlated with each other. Obviously there are cases where that may not be the case. In such cases, you can use other leave-out patterns on the variables, including custom sets where you choose the pattern. 
+</p><p>So, to maximize the accuracy and speed of PCA cross-validation, modify the pcacvi option when calling <code>crossval</code>. For example:
+</p>
+<pre>&gt;&gt; opts        = crossval('options');
+&gt;&gt; opts.pcacvi = {'con' 10};
+&gt;&gt; results     = crossval(x,[],'pca',{'con' 5}, 15, opts);
+</pre>
+<p>The command-line function <code>crossval</code> does not "automatically" adjust the pcacvi because many command-line users want more control over such options and switching from one method to another could cause unexpected results when doing very specific testing.
+</p><p><br />
+<b>Still having problems? Please contact our helpdesk at <a rel="nofollow" class="external text" href="mailto:helpdesk@eigenvector.com">helpdesk@eigenvector.com</a></b>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930134150
+Cache expiry: 86400
+Reduced expiry: false
+Complications: []
+CPU time usage: 0.004 seconds
+Real time usage: 0.010 seconds
+Preprocessor visited node count: 5/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1581-0!canonical and timestamp 20240930134150 and revision id 10185.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Faq_how_does_PCA_cross_validation_work_in_PLS_Toolbox_and_Solo_and_how_do_I_set_up_command_line&amp;oldid=10185">https://www.wiki.eigenvector.com/index.php?title=Faq_how_does_PCA_cross_validation_work_in_PLS_Toolbox_and_Solo_and_how_do_I_set_up_command_line&amp;oldid=10185</a>"</div></div>
+		<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="" title="Special:Categories">Category</a>: <ul><li><a href="category_faq.html" title="Category:FAQ">FAQ</a></li></ul></div></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 5 December 2018, at 14:42.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

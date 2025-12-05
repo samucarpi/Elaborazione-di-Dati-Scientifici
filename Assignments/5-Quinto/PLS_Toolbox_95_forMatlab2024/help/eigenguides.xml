@@ -1,0 +1,388 @@
+<movielist>
+  <movie>
+    <name>Advanced Preprocessing 1 (Introduction)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/advanced-preprocessing-1-introduction/</link>
+  </movie>
+  <movie>
+    <name>Advanced Preprocessing 2 (GLS in classification)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/advanced-preprocessing-2-gls-in-classification/</link>
+  </movie>
+  <movie>
+    <name>Advanced Preprocessing 3 (EPO in classification)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/advanced-preprocessing-3-epo-in-classification/</link>
+  </movie>
+  <movie>
+    <name>Advanced Preprocessing 4 (External Clutter)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/advanced-preprocessing-4-external-clutter/</link>
+  </movie>
+  <movie>
+    <name>Advanced Preprocessing 5 (GLS in regression)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/advanced-preprocessing-5-gls-in-regression/</link>
+  </movie>
+  <movie>
+    <name>Analysis Window - Introduction</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/analysis-window-introduction/</link>
+  </movie>
+  <movie>
+    <name>Analysis Window - Report Writer</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/analysis-window-report-writer/</link>
+  </movie>
+  <movie>
+    <name>Batch Modeling Tools - Introduction</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/batch-modeling-tools-introduction/</link>
+  </movie>
+  <movie>
+    <name>Eigenvector Company Profile</name>
+    <category>Introduction</category>
+    <category_order>2</category_order>
+    <link>https://eigenvector.com/aiovg_videos/eigenvector-company-profile/</link>
+  </movie>
+  <movie>
+    <name>Modifying Class Symbols</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/modifying-class-symbols/</link>
+  </movie>
+  <movie>
+    <name>Nonlinear Methods 1 (Introduction/MLR)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/nonlinear-methods-1-introduction-mlr/</link>
+  </movie>
+  <movie>
+    <name>Nonlinear Methods 2 (Polytransform/MLR)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/nonlinear-methods-2-polytransform-mlr/</link>
+  </movie>
+  <movie>
+    <name>Nonlinear Methods 3 (Locally Weighted Regression)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/nonlinear-methods-3-locally-weighted-regression/</link>
+  </movie>
+  <movie>
+    <name>Nonlinear Methods 4 (Support Vector Machines)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/nonlinear-methods-4-support-vector-machines/</link>
+  </movie>
+  <movie>
+    <name>Nonlinear Methods 5 (Summary)</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/nonlinear-methods-5-summary/</link>
+  </movie>
+  <movie>
+    <name>PCA on Wine Data</name>
+    <category>Introduction</category>
+    <category_order>2</category_order>
+    <link>https://eigenvector.com/aiovg_videos/pca-on-wine-data/</link>
+  </movie>
+  <movie>
+    <name>PLS on Tablet Data</name>
+    <category>Introduction</category>
+    <category_order>2</category_order>
+    <link>https://eigenvector.com/aiovg_videos/pls-on-tablet-data/</link>
+  </movie>
+  <movie>
+    <name>PLS-DA to classify alcoholics on blood/urine tests</name>
+    <category>Introduction</category>
+    <category_order>2</category_order>
+    <link>https://eigenvector.com/aiovg_videos/pls-da-to-classify-alcoholics-on-blood-urine-tests/</link>
+  </movie>
+  <movie>
+    <name>Preprocessing - Managing Listed Items</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/preprocessing-managing-listed-items/</link>
+  </movie>
+  <movie>
+    <name>Robust PCA</name>
+    <category>Advanced Topics</category>
+    <category_order>4</category_order>
+    <link>https://eigenvector.com/aiovg_videos/robust-pca/</link>
+  </movie>
+  <movie>
+    <name>Using the Hierarchical Model Builder</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/using-the-hierarchical-model-builder/</link>
+  </movie>
+  <movie>
+    <name>What's New in Version 7.0</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/introduction-to-version-7-0/</link>
+  </movie>
+  <movie>
+    <name>Workspace Browser - Applying Preprocessing</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/workspace-browser-applying-preprocessing/</link>
+  </movie>
+  <movie>
+    <name>Workspace Browser - Importing and Augmenting Data</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/workspace-browser-importing-and-augmenting-data/</link>
+  </movie>
+  <movie>
+    <name>Workspace Browser - Introduction</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/workspace-browser-introduction/</link>
+  </movie>
+  <movie>
+    <name>Drag and Drop From Matlab Workspace</name>
+    <category>General How-To</category>
+    <category_order>3</category_order>
+    <link>https://eigenvector.com/aiovg_videos/drag-and-drop-from-matlab-workspace/</link>
+  </movie>
+  <movie>
+    <name>Importing Multivariate Images</name>
+    <category>Image Analysis</category>
+    <category_order>5</category_order>
+    <link>https://eigenvector.com/aiovg_videos/importing-multivariate-images/</link>
+  </movie>
+  <movie>
+    <name>Multivariate Analysis of Images</name>
+    <category>Image Analysis</category>
+    <category_order>5</category_order>
+    <link>https://eigenvector.com/aiovg_videos/multivariate-analysis-of-images/</link>
+  </movie>
+  <movie>
+    <name>Plotting and TrendTool with Images</name>
+    <category>Image Analysis</category>
+    <category_order>5</category_order>
+    <link>https://eigenvector.com/aiovg_videos/plotting-and-trendtool-with-images/</link>
+  </movie> 
+  <movie>
+    <name>Image and Particle Analysis with Solo+MIA 6.2</name>
+    <category>Image Analysis</category>
+    <category_order>5</category_order>
+    <link>https://eigenvector.com/aiovg_videos/image-and-particle-analysis-with-solomia-6-2/</link>
+  </movie>
+  <movie>
+    <name>Webinar Series</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/resources/webinars/</link>
+  </movie>
+
+  <movie>
+    <name>EVRI-thing You Need to Know About Hyperspectral Image Analysis with PCA</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/webinar-evri-thing-you-need-to-know-about-hyperspectral-image-analysis-with-pca/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About the Model Optimizer</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evrithing-you-need-to-know-about-the-model-optimizer/</link>
+  </movie>
+  <movie>
+    <name>Addendum-Robust PLS for Automatically Detecting Outliers</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/robust-pls-for-automatically-detecting-outliers/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About the Hierarchical Model Builder</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/webinar-hierarchical-model-builder/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Performing ASCA</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-asca/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Performing PLS-DA</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-performing-pls-da/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Improving Models with Variable Selection</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-improving-models-with-variable-selection/</link>
+  </movie>
+  <movie>
+    <name>Addendum-Variable Selection for PLS-DA Models</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/variable-selection-for-pls-da-models/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Data Visualization with PLS_Toolbox and Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-data-visualization-with-pls_toolbox-and-solo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Importing Data into PLS_Toolbox and Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-importing-data-into-pls_toolbox-and-solo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About How to Build and Deploy Instrument Standardization Models</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-how-to-build-and-deploy-instrument-standardization-models/</link>
+  </movie>
+  <movie>
+    <name>Addendum-Model Centric Calibration Transfer Tool</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/embed-instrument-standardization-directly-into-multivariate-models/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Curve Resolution</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-curve-resolution/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Deploying Models with Model_Exporter</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-model_exporter/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Cross-Validation</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-cross-validation/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Logistic Regression</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-logistic-regression/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know to Get Started with PLS_Toolbox and Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-to-get-started-with-pls_toolbox-and-solo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About How to do Principal Components Analysis</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-how-to-do-principal-components-analysis/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About How to do Partial Least Squares Regression</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-how-to-do-partial-least-squares-regression/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Making Great Plots in PLS_Toolbox and Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-making-great-plots-in-pls_toolbox-solo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Preprocessing</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-preprocessing/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Developing Classification Solutions</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-developing-classification-solutions/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Scripting and Objects in PLS_Toolbox</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-scripting-and-objects-in-pls_toolbox/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About TrendTool for Exploring Order Data</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-trendtool-for-exploring-ordered-data/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About PLS_Toolbox and Solo 90</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-pls_toolbox-solo-90/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About t-SNE and UMAP in PLS_Toolbox/Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-t-sne-umap-in-pls_toolbox-solo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About ANN Options in PLS_Toolbox/Solo</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-ann-options-in-pls_toolboxsolo/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Modeling Fluorescence EEM Data</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-modeling-fluorescence-eem-data/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Batch Analysis</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-batch-analysis/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About MLR, Ridge, LASSO and ElasticNet</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-mlr-ridge-lasso-and-elasticnet/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Automated Hierarchical Classification Models</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-automated-hierarchical-classification-models/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Gray Classical Least Squares</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-gray-classical-least-squares/</link>
+  </movie>
+  <movie>
+    <name>EVRI-thing You Need to Know About Machine Learning with Hyperspectral Images - Eigenvector</name>
+    <category>Webinars</category>
+    <category_order>6</category_order>
+    <link>https://eigenvector.com/aiovg_videos/evri-thing-you-need-to-know-about-machine-learning-with-hyperspectral-images/</link>
+  </movie>
+
+</movielist>

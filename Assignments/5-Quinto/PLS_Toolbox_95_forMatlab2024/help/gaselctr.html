@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Gaselctr - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Gaselctr rootpage-Gaselctr skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Gaselctr"><span class="mw-page-title-main">Gaselctr</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Examples"><span class="tocnumber">5</span> <span class="toctext">Examples</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#See_Also"><span class="tocnumber">6</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Genetic algorithm for variable selection with PLS.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>model = gaselctr(x,y,<i>options</i>)</dd>
+<dd>[fit,pop,cavfit,cbfit] = gaselctr(x,y,<i>options</i>)</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>GASELCTR uses a genetic algorithm optimization to minimize cross validation error for variable selection.
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = the predictor block (x-block), and</li>
+<li><b>y</b> = the predicted block (y-block) (note that all scaling should be done prior to running GASELCTR).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard GENALG model structure with the following fields:
+<ul><li><b>modeltype</b>: 'GENALG' This field will always have this value.</li>
+<li><b>datasource</b>: {[1x1 struct] [1x1 struct]}, structures defining where the X- and Y-blocks came from.</li>
+<li><b>date</b>: date stamp for when GASELCTR was run.</li>
+<li><b>time</b>:  time stamp for when GASELCTR was run.</li>
+<li><b>info</b>: 'Fit results in "rmsecv", population included variables in "icol"', information field describing where the fitness results for each member of the population are contained.</li>
+<li><b>rmsecv</b>: fitness results for each member of the population, for X <i>M</i>x<i>N</i> and <i>Mp</i> unique populations at convergence then rmsecv will be <i>1xMp</i>.</li>
+<li><b>icol</b>: each row of icol corresponds to the variables used for that member of the population (a 1 [one] means that variable was used and a 0 [zero] means that it was not), for X <i>M</i>x<i>N</i> and <i>Mp</i> unique populations at convergence then icol will be <i>Mp</i>x<i>N</i>, and</li>
+<li><b>detail</b>: [1x1 struct], a structure array containing model details including the following fields:
+<ul><li><b>avefit</b>: the average fitness at each generation.</li>
+<li><b>bestfit</b>: the best fitness at each generation, and</li>
+<li><b>options</b>: a structure corresponding to the options discussed above.</li></ul></li></ul></li></ul>
+<p>For the second output syntax shown above,
+</p>
+<ul><li><b>fit</b> is the same as <tt>model.rmsecv</tt></li>
+<li><b>pop</b> is the same as <tt>model.icol</tt></li>
+<li><b>cavfit</b> is the same as <tt>model.detail.avefit</tt></li>
+<li><b>cbfit</b> is the same as <tt>model.detail.bestfit</tt></li></ul>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p><i>options</i> is a structure array with the following fields:
+</p>
+<ul><li><b>plots</b>: ['none' | {'intermediate'} | 'replicates' | 'final' ] Governs plots.
+<ul><li>'<b>final'</b> gives only a final summary plot.</li>
+<li>'<b>replicates'</b> gives plots at the end of each replicate.</li>
+<li>'<b>intermediate'</b> gives plots during analysis.</li>
+<li>'<b>none'</b> gives no plots.</li></ul></li>
+<li><b>display</b>: [{'on'}| 'off' ] governs output to the command window.</li>
+<li><b>popsize</b>: {64} the population size (16<u>&lt;</u>popsize<u>&lt;</u>256 and popsize must be divisible by 4),</li>
+<li><b>maxgenerations</b>: {100} the maximum number of generations (25<u>&lt;</u>mg<u>&lt;</u>500),</li>
+<li><b>mutationrate</b>: {0.005} the mutation rate (typically 0.001<u>&lt;</u>mt<u>&lt;</u>0.01),</li>
+<li><b>windowwidth</b>: {1} the number of variables in a window (integer window width),</li>
+<li><b>convergence</b>: {50} percent of population the same at convergence (typically cn=80),</li>
+<li><b>initialterms</b>: {30} percent terms included at initiation (10<u>&lt;</u>it<u>&lt;</u>50),</li>
+<li><b>crossover</b>: {2} breeding cross-over rule (cr = 1: single cross-over; cr = 2: double cross-over),</li>
+<li><b>algorithm</b>: [ 'mlr' | {'pls'} ] regression algorithm,</li>
+<li><b>ncomp</b>: {10} maximum number of latent variables for PLS models,</li>
+<li><b>cv</b>: [ 'rnd' | {'con'} ] cross-validation option ('rnd': random subset cross-validation; 'con': contiguous block subset cross-validation),</li>
+<li><b>split</b>: {5} number of subsets to divide data into for cross-validation,</li>
+<li><b>iter</b>: {1} number of iterations for cross-validation at each generation,</li>
+<li><b>preprocessing</b>: {[ ] [ ]} a cell containing standard preprocessing structures for the X- and Y-blocks respectively (see PREPROCESS),</li>
+<li><b>preapply</b>: [ {0} | 1 } If 1, preprocessing is applied to data prior to GA. This speeds up the performance of the selection, but may reduce the accuracy of the cross-validation results. Output "fit" values should only be compared to each other. A full cross-validation should be run after analysis to get more accurate RMSECV values.</li>
+<li><b>reps</b>: {1} the number of replicate runs to perform,</li>
+<li><b>target</b>: a two element vector [target_min target_max] describing the target range for number of variables/terms included in a model n. Outside of this range, the penaltyslope option is applied by multiplying the fitness for each member of the population by:</li></ul>
+<dl><dd><tt>penaltyslope*(target_min-n)</tt> when n&lt;target_min, or</dd>
+<dd><tt>penaltyslope*(n-target_max)</tt> when n&gt;target_max.</dd>
+<dd>Field <tt>target</tt> is used to bias models towards a given range of included variables (see penaltyslope below),</dd></dl>
+<ul><li><b>targetpct</b>: {1} flag indicating if values in field target are given in percent of variables (1) or in absolute number of variables (0), and</li>
+<li><b>penaltyslope</b>: {0} the slope of the penalty function (see target above).</li></ul>
+<h3><span class="mw-headline" id="Examples">Examples</span></h3>
+<p>To use mean centering outside the genetic algorithm (no additional centering will be performed within the algorithm) do the following:
+</p>
+  <pre>  x2 = mncn(x);
+  y2 = mncn(y);
+  [fit,pop] = gaselctr(x2,y2);</pre>
+<p>To use mean centering inside the genetic algorithm (centering will be performed for each cross-validation subset) do the following:
+</p>
+<pre>  
+  options = gaselctr('options');
+  options.preprocessing{1} = preprocess('default', 'mean center');
+  options.preprocessing{2} = preprocess('default', 'mean center');
+  [fit,pop] = gaselctr(x2,y2,options);
+</pre>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="calibsel.html" title="Calibsel">calibsel</a>, <a href="fullsearch.html" title="Fullsearch">fullsearch</a>, <a href="genalg.html" title="Genalg">genalg</a>, <a href="genalgplot.html" title="Genalgplot">genalgplot</a>, <a href="ipls.html" title="Ipls">ipls</a>,<a href="genetic_algorithms_for_variable_selection.html" title="Genetic Algorithms for Variable Selection">Genetic Algorithms for Variable Selection</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930145143
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.010 seconds
+Real time usage: 0.012 seconds
+Preprocessor visited node count: 33/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 294/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:109-0!canonical and timestamp 20240930145143 and revision id 1162.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Gaselctr&amp;oldid=1162">https://www.wiki.eigenvector.com/index.php?title=Gaselctr&amp;oldid=1162</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 7 November 2016, at 14:58.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>SIMCA Model Builder GUI - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-SIMCA_Model_Builder_GUI rootpage-SIMCA_Model_Builder_GUI skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=SIMCA_Model_Builder_GUI"><span class="mw-page-title-main">SIMCA Model Builder GUI</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#How_to_Assemble_a_SIMCA_Model"><span class="tocnumber">1</span> <span class="toctext">How to Assemble a SIMCA Model</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Working_with_the_SIMCA_Model_Builder"><span class="tocnumber">1.1</span> <span class="toctext">Working with the SIMCA Model Builder</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Choosing_the_Classification_Rule"><span class="tocnumber">1.2</span> <span class="toctext">Choosing the Classification Rule</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#Q"><span class="tocnumber">1.2.1</span> <span class="toctext">Q</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="#T^2"><span class="tocnumber">1.2.2</span> <span class="toctext">T^2</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="#Both"><span class="tocnumber">1.2.3</span> <span class="toctext">Both</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#Combined"><span class="tocnumber">1.2.4</span> <span class="toctext">Combined</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="#See_Also"><span class="tocnumber">1.3</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="How_to_Assemble_a_SIMCA_Model">How to Assemble a SIMCA Model</span></h2>
+<h3><span class="mw-headline" id="Working_with_the_SIMCA_Model_Builder">Working with the SIMCA Model Builder</span></h3>
+<p>In order to build a <a href="simca.html" title="Simca">SIMCA</a> model, SIMCA submodels must be built first. SIMCA submodels are essentially individual <a href="pca.html" title="Pca">PCA</a> models, each built on the data from a class or a group of classes. To build a submodel:
+</p>
+<ol><li>If multiple class sets are available in the data, select a class set to model using the "Class Set" control at the top of the window (Note: all models must use the same class set. Changing the class set during model building will clear all existing submodels).</li>
+<li>Select one or more classes in the "Available Classes" list (Note: If multiple classes are selected for an individual submodel, all selected classes will be used in building the submodel).</li>
+<li>Click "Fit Model" to activate the PCA user interface in order to build a submodel.</li>
+<li>In the PCA interface, choose the appropriate preprocessing, number of components, validation settings etc. Note that the preprocessing and number of included variables may be set independently for each PCA submodel.  See <a href="review_results_with_pls_toolbox.html" class="mw-redirect" title="Review Results with PLS Toolbox">Review_Results_with_PLS_Toolbox</a>.</li>
+<li>Once an acceptable submodel is constructed, return to the SIMCA interface and click "Add Model".</li>
+<li>Repeat the previous steps (2-5) for additional models.</li>
+<li>Adjust settings using the "SIMCA Model Options" button (The "A/B" button next to the "Assemble SIMCA Model" button). See 'Choosing the Classification rule' section below.</li>
+<li>Click "Assemble SIMCA Model".</li>
+<li><a href="review_simca_model_results.html" title="Review SIMCA Model Results"> Review the assembled SIMCA model</a> using the main Analysis window.</li>
+<li>To classify new data, import new data into the Analysis interface and click "Prediction" to apply the assembled SIMCA model.</li></ol>
+<p><br />
+Below is an image of the SIMCA Model Building interface after one class model has been built.
+</p><p><a href="" class="image"><img alt="Simcamodelbuilder.png" src="simcamodelbuilder.png" decoding="async" width="401" height="372" /></a>
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Choosing_the_Classification_Rule">Choosing the Classification Rule</span></h3>
+<p>Within the SIMCA Model Options is the classification "Rule". There are four options:
+</p>
+<ul><li>Q</li>
+<li>T^2</li>
+<li>Both</li>
+<li>Combined</li></ul>
+<p>The following discusses each rule.
+</p>
+<h4><span class="mw-headline" id="Q">Q</span></h4>
+<p>Only samples which are inside the Q confidence limit specified in the options will be considered "in-class". This would include only the samples in yellow and red in the figure below.
+</p><p>This option is one historically used by many researchers as the Q statistic is often very sensitive to differences between species.
+</p><p><a href="" class="image"><img alt="Simcaruleq.png" src="simcaruleq.png" decoding="async" width="418" height="292" /></a>
+</p>
+<h4><span id="T.5E2"></span><span class="mw-headline" id="T^2">T^2</span></h4>
+<p>Only samples which are inside the T^2 confidence limit specified in the options will be considered "in-class". This would include only the samples in yellow and red in the figure below.
+</p><p>This option is an unusual option as it is often the Q residuals which best separate classes. However, in a case where the Q may drift (due to instrumentation variations or noise), the T^2 could be more diagnostic of class differences.
+</p><p><a href="" class="image"><img alt="Simcarulet2.png" src="simcarulet2.png" decoding="async" width="418" height="292" /></a>
+</p>
+<h4><span class="mw-headline" id="Both">Both</span></h4>
+<p>Only samples which are inside both the T^2 and Q confidence limits specified in the options will be considered "in-class". This would include only the samples in yellow and red in the figure below.
+</p><p>Although this option is somewhat intuitive, it does ignore the concept that the within-class variation of two separate classes are not necessarily orthogonal and, thus, the "combined" rule may be more sensitive (see below.)
+</p><p><a href="" class="image"><img alt="Simcaruleboth.png" src="simcaruleboth.png" decoding="async" width="418" height="292" /></a>
+</p>
+<h4><span class="mw-headline" id="Combined">Combined</span></h4>
+<p>This rule first takes the Q and T^2 statistics "reduced" (normalized to) their confidence limits set in the options. Then the two statistics are combined using the equation:
+</p>
+<dl><dd>sqrt( Q^2 + (T^2)^2 )</dd></dl>
+<p>Only samples inside the sqrt(2) limit will be considered "in-class". This would include only the samples in yellow and red in the figure below.
+</p><p>This option is quite useful because it allows differences in both T^2 and Q to be considered together. Although T^2 and Q are technically orthogonal statistics, the differences between classes are often not orthogonal but their class means are often different. Thus, a member of Class B would be expected to have both a projection into the model (indicated by the T^2) as well as residuals (indicated by the Q). Note that for a set of random data, this approach can be shown to reliably match the "true positive" rate expected for the given confidence limits.
+</p><p><br />
+<a href="" class="image"><img alt="Simcarulecombined.png" src="simcarulecombined.png" decoding="async" width="418" height="292" /></a>
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="simca.html" title="Simca">simca</a>, <a href="pca.html" title="Pca">pca</a>, <a href="analysis_gui.html" class="mw-redirect" title="Analysis GUI">analysis_GUI</a>, <a href="t_squared_q_residuals_and_contributions.html" title="T-Squared Q residuals and Contributions">T-Squared_Q_residuals_and_Contributions</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240929214939
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.025 seconds
+Real time usage: 0.035 seconds
+Preprocessor visited node count: 32/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:484-0!canonical and timestamp 20240929214939 and revision id 11314.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=SIMCA_Model_Builder_GUI&amp;oldid=11314">https://www.wiki.eigenvector.com/index.php?title=SIMCA_Model_Builder_GUI&amp;oldid=11314</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 30 August 2021, at 05:51.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

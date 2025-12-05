@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Anndl - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Anndl rootpage-Anndl skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Anndl"><span class="mw-page-title-main">Anndl</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Inputs"><span class="tocnumber">3.1</span> <span class="toctext">Inputs</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Outputs"><span class="tocnumber">3.2</span> <span class="toctext">Outputs</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Training_Termination"><span class="tocnumber">3.3</span> <span class="toctext">Training Termination</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Cross-validation"><span class="tocnumber">3.4</span> <span class="toctext">Cross-validation</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#Options"><span class="tocnumber">4</span> <span class="toctext">Options</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Additional_information_on_the_‘sklearn’_ANNDL"><span class="tocnumber">5</span> <span class="toctext">Additional information on the ‘sklearn’ ANNDL</span></a>
+<ul>
+<li class="toclevel-2 tocsection-10"><a href="#Build_from_command-line"><span class="tocnumber">5.1</span> <span class="toctext">Build from command-line</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Build_from_Analysis_Window"><span class="tocnumber">5.2</span> <span class="toctext">Build from Analysis Window</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="#Additional_information_on_the_‘tensorflow’_ANNDL"><span class="tocnumber">6</span> <span class="toctext">Additional information on the ‘tensorflow’ ANNDL</span></a>
+<ul>
+<li class="toclevel-2 tocsection-13"><a href="#How_to_use_Tensorflow_layers"><span class="tocnumber">6.1</span> <span class="toctext">How to use Tensorflow layers</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Build_from_command-line_2"><span class="tocnumber">6.2</span> <span class="toctext">Build from command-line</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Build_from_Analysis_Window_2"><span class="tocnumber">6.3</span> <span class="toctext">Build from Analysis Window</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#Training_Epochs_vs._Loss_Plot"><span class="tocnumber">7</span> <span class="toctext">Training Epochs vs. Loss Plot</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="#ANNDL_and_ANN"><span class="tocnumber">8</span> <span class="toctext">ANNDL and ANN</span></a></li>
+<li class="toclevel-1 tocsection-18"><a href="#Usage_from_ANNDL_Analysis_window"><span class="tocnumber">9</span> <span class="toctext">Usage from ANNDL Analysis window</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#See_Also"><span class="tocnumber">10</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Predictions based on Artificial Deep Learning Neural Network (ANNDL) regression models.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>anndl  - Launches an Analysis window with ANNDL as the selected method.</dd>
+<dd>[model] = anndl(x,y,options);</dd>
+<dd>[pred] = anndl(x,model,options);</dd>
+<dd>[valid] = anndl(x,y,model,options);</dd></dl>
+<p>Please note that the recommended way to build and apply an ANNDL model from the command line is to use the Model Object. Please see <a href="evrimodel_objects.html" title="EVRIModel Objects"> this wiki page on building and applying models using the Model Object</a>.
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Build an ANNDL model from input X and Y block data using the specified number of layers and layer nodes. 
+Alternatively, if a model is passed in ANNDL makes a Y prediction for an input test X block. The ANNDL model 
+contains quantities (weights etc) calculated from the calibration data. When a model structure is passed in 
+to ANNDL then these weights do not need to be calculated. 
+</p><p>There are two options of ANNDL available:'sklearn' and 'tensorflow'. 
+</p>
+<ul><li>The 'sklearn' implementation is a Multi-layer Perceptron that uses backpropagation training. See <a rel="nofollow" class="external text" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html</a> for further details.</li>
+<li>The 'tensorflow' implementation is a feedforward ANNDL that provides a variety of hidden layer types, including Convolutional layers for CNNs. See <a rel="nofollow" class="external text" href="https://www.tensorflow.org/api_docs/python/tf/keras/Sequential">https://www.tensorflow.org/api_docs/python/tf/keras/Sequential</a> for further details.</li></ul>
+<p>'sklearn' is the ANNDL version used by default but the user can specify the option 'algorithm' = 'tensorflow' to use Tensorflow instead. 
+The Scikit-Learn implementation is fast. Tensorflow is slower in comparison, but provides more customization when building the network architecture. Comparisons between ANNDL implementations and ANN are discussed in further detail below.
+</p><p><b>Note: The PLS_Toolbox Python virtual environment must be configured in order to use this method. Find out more here: <a href="python_configuration.html" title="Python configuration">Python configuration</a>.</b>
+<b>At this time, one cannot terminate Python methods from building by the conventional CTRL+C. One way to stop ANNDL from building is when cross-validating by closing the Cross-Validation waitbar that appears. Please take this into account and mind the workspace when using this method.</b>
+</p>
+<h4><span class="mw-headline" id="Inputs">Inputs</span></h4>
+<ul><li><b>x</b> = X-block (predictor block) class "double" or "dataset", containing numeric values,</li>
+<li><b>y</b> = Y-block (predicted block) class "double" or "dataset", containing numeric values,</li>
+<li><b>model</b> = previously generated model (when applying model to new data).</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>model</b> = a standard model structure model with the following fields (see <a href="standard_model_structure.html" title="Standard Model Structure">Standard Model Structure</a>):
+<ul><li><b>modeltype</b>: 'ANNDL',</li>
+<li><b>datasource</b>: structure array with information about input data,</li>
+<li><b>date</b>: date of creation,</li>
+<li><b>time</b>: time of creation,</li>
+<li><b>info</b>: additional model information,</li>
+<li><b>pred</b>: 2 element cell array with
+<ul><li>model predictions for each input block (when options.blockdetail='normal' x-block predictions are not saved and this will be an empty array)</li></ul></li>
+<li><b>detail</b>: sub-structure with additional model details and results.</li></ul></li></ul>
+<ul><li><b>pred</b> a structure, similar to <b>model</b> for the new data.</li></ul>
+<h4><span class="mw-headline" id="Training_Termination">Training Termination</span></h4>
+<p>The ANNDL is trained on a calibration dataset to minimize prediction error, RMSEC. It is important to not overtrain, however, so some criteria for ending training are needed.
+</p><p>Sklearn's <b>max_iter</b> parameter is the maximum number of iterations for weight optimization. However, this number may not be reached for a couple of reasons. One reason being that the sklearn early stopping has been enabled. This means is that the sklearn method automatically sets 10% of the calibration data aside as validation data and optimization will stop if the validation score is not improving by <b>n_iter_no_change</b> (hard set to 10) or <b>tol</b> (this is a adjustable parameter in PLS_Toolbox). Accuracy can be increased on the calibration set by decreasing <b>tol</b>, but this leads to overfitting when cross-validating or predicting on the validation set.
+</p><p>Tensorflow training termination follows the same convention as the sklearn implementation, just under the software's respective parameter names. Termination will occur whenever either <b>options.tf.epochs</b> is reached or the rate of improvement does not exceed <b>options.tf.min_delta</b> after 20 epochs.
+Note these RMSE values refer to the internal preprocessed and scaled y values.
+</p>
+<h4><span class="mw-headline" id="Cross-validation">Cross-validation</span></h4>
+<p>Cross-validation can be applied to ANNDL when using either the ANNDL Analysis window or the command line. From the Analysis window specify the cross-validation method in the usual way (clicking on the model icon's red check-mark, or the "Choose Cross-Validation" link in the flowchart). In the cross-validation window the "Maximum Number of Nodes" specifies how many nodes in the first hidden layer (<b>nhid1</b>) to test over. Viewing RMSECV versus number of nhid1 nodes (toolbar icon to left of Scores Plot) is useful for choosing the number of layer 1 nodes. From the command line use the crossval method to add crossvalidation information to an existing model. Since these networks generally require large node sizes (unlike ANN), cross-validation is not done on every possible value from 1:nhid1 as this would take some time. Instead, we have implemented a rule as to what node sizes for nhid1 to test over should be. Here's the cross-validation rule that is set in place:
+</p><p>Note: nhid1 is the node size of the first hidden layer
+</p>
+<ul><li>If nhid1 &lt;= 10, cross-validation looping is done over [1:nhid1]
+<ul><li>e.g. Let nhid1 = 8, nhid1 looping array will be [1:8]</li></ul></li>
+<li>If nhid1 &gt; 10 and nhid1 &lt;= 100, cross-validation looping is done over [1 2 3 5 mod(nhid1,25) nhid1] (this array contains each value where mod(nhid1,25) is 0)
+<ul><li>e.g. Let nhid1 = 95,  nhid1 looping array will be [1 2 3 5 25 50 75 95]</li></ul></li>
+<li>If nhid1 &gt; 100, looping is done over [10 20 30 50 100 mod(nhid1,100) nhid1] (this array contains each value where mod(nhid1,100) is 0)
+<ul><li>e.g. Let nhid1 = 250, nhid1 looping array will be [10 20 30 50 100 200 250]</li></ul></li></ul>
+<p>Again, this is to avoid doing cross-validation over every possible value in 1:nhid1.
+</p><p>Starting in 9.1, one has more control in specifying the nodes to cross-validate over using the <b>cvskip</b> option. Adjusting this parameter will control the step size in cross-validation over the number of nodes in the first hidden layer. Empty is the default, so it will incorporate the rule above in determining what nodes to cross-validate over.                    Otherwise, an integer can be passed to specify the increment between nodes to cross-validate over.
+</p>
+<ul><li>e.g. Let nhid1 = 100. If <b>cvskip</b> is empty, it'll default to the rule above so nhid1 looping array will be [1 2 3 5 25 50 75 100]. Let <b>cvskip</b> be 10. Then the nhid1 looping array will be [1 10 20 30 40 50 60 70 80 90 100].</li></ul>
+<p>Note that it is possible to avoid doing cross-validation over a range of hidden-layer 1 nodes by using the <b>cvskip</b> parameter. Suppose you want to build the ANNDL model with 55 nodes in hidden-layer 1, and get RMSECV for that number of nodes only. You can do this by setting the number of nodes in hidden-layer 1 to be 55. Then set the value of <b>cvskip</b> to also be 55. When the model builds using 55 nodes in hidden layer 1 it will calculate the RMSECV for this ANN with 55 nodes in hidden-layer 1 (actually, it will also calculate RMSECV for the ANN with 1 node in hidden-layer 1).
+</p>
+<h3><span class="mw-headline" id="Options">Options</span></h3>
+<p>options = a structure array with the following fields:
+</p>
+<ul><li><b>display</b>&#160;: [ 'off' |{'on'}], Governs display</li>
+<li><b>plots</b>: [ {'none'} | 'final' ], Governs plotting of results.</li>
+<li><b>blockdetails</b>&#160;: [ {'standard'} | 'all' ], Extent of detail included in model. 'standard' keeps only y-block, 'all' keeps both x- and y- blocks.</li>
+<li><b>waitbar</b>&#160;: [ 'off' |{'auto'}| 'on' ], Governs use of waitbar during analysis. 'auto' shows waitbar if delay will likely be longer than a reasonable waiting period.</li>
+<li><b>warnings</b>&#160;: [{'off'} | 'on'], Silence or display any potential Python warnings. Only visible in the MATLAB command window.</li>
+<li><b>algorithm</b>&#160;: [{'sklearn'} | 'tensorflow'], ANNDL implementation to use.</li>
+<li><b>preprocessing</b>: {[] []}, Preprocessing structures for x and y blocks (see PREPROCESS).</li>
+<li><b>compression</b>: [{'none'}| 'pca' | 'pls' ], Type of data compression to perform on the x-block prior to calculating or applying the ANNDL model. 'pca' uses a simple PCA model to compress the information. 'pls' uses a pls model. Compression can make the ANNDL more stable and less prone to overfitting.</li>
+<li><b>compressncomp</b>: [1], Number of latent variables (or principal components to include in the compression model).</li>
+<li><b>compressmd</b>: [{'yes'} | 'no'], Use Mahalnobis Distance corrected.</li>
+<li><b>cvi</b>&#160;: <i>M</i> element vector with integer elements allowing user defined subsets. (cvi) is a vector with the same number of elements as x has rows i.e., length(cvi) = size(x,1). Each cvi(i) is defined as:</li></ul>
+<dl><dd><dl><dd>cvi(i) = -2  the sample is always in the test set.</dd>
+<dd>cvi(i) = -1  the sample is always in the calibration set,</dd>
+<dd>cvi(i) =  0  the sample is always never used, and</dd>
+<dd>cvi(i) =  1,2,3... defines each test subset.</dd></dl></dd></dl>
+<ul><li><b>cvskip</b>&#160;: [{[]}] Control the step size in cross-validation over the number of nodes in the first hidden layer. Empty is the default, so it will incorporate a 'smart rule' in determining what nodes to cross-validate over. More on this <a rel="nofollow" class="external text" href="#Cross-validation">here</a>. Otherwise, an integer can be passed to specify the increment between nodes to cross-validate over.</li>
+<li><b>sk</b>&#160;: structure representing the input parameters for when <b>algorithm</b>=<b>‘sklearn’</b>
+<ul><li><b>sk.activation</b>&#160;: [ {'relu'} | 'tanh' | 'logistic' | 'identity' ], Type of activation function applied to the weights.</li>
+<li><b>sk.solver</b>&#160;: [ {'adam'} | 'lbfgs' | 'sgd' ], Solver for weight optimization. The lbfgs optimizer is in the family of quasi-Newton methods does especially well for smaller datasets and converges faster. The sgd solver does traditional stochastic gradient descent. The adam solver is another flavor of stochastic gradient descent and does well on large datasets in terms of speed and score.</li>
+<li><b>sk.alpha</b>&#160;: [ {'1.0000e-04'} ], L2 Penalty parameter.</li>
+<li><b>sk.max_iter</b>&#160;: [ {'200'} ], Maximum number of iterations for weight optimization.</li>
+<li><b>sk.hidden_layer_sizes</b>&#160;: [ {'100'} ], Vector of node sizes. The ith element represents the number of nodes in the ith hidden layer in the network.</li>
+<li><b>sk.random_state</b>&#160;: [ {'1'} ], Random seed number. Set this to a number for reproducibility.</li>
+<li><b>sk.tol</b>&#160;: [ {'1.0000e-04'} ], Tolerance for optimization.</li>
+<li><b>sk.learning_rate_init</b>&#160;: [ {'1.0000e-03'} ], Initial learning rate.</li>
+<li><b>sk.batch_size</b>&#160;: [ {'12'} ], Number of samples in each of the minibatches.</li></ul></li></ul>
+<ul><li><b>tf</b>&#160;: structure representing the input parameters for when <b>algorithm</b>=<b>‘tensorflow’</b>
+<ul><li><b>tf.activation</b>&#160;: [ {'relu'} | 'tanh' | 'sigmoid' | 'linear' ], Type of activation function applied to the weights.</li>
+<li><b>tf.optimizer</b>&#160;: [{'adam'} | 'adamax' | 'rmsprop' | 'sgd'], Solver for weight optimization. The adam solver is another flavor of stochastic gradient descent and does well on large datasets in terms of speed and score. The adamax optimizer is an extension of adam and is based on the infinity norm. The rmsprop optimizer uses momentum and keeps a moving average of the gradients. The sgd solver does traditional stochastic gradient descent.</li>
+<li><b>tf.loss</b>&#160;: [{'mean_squared_error'} 'mean_absolute_error' 'log_cosh'], Choice of loss function to be minimized.</li>
+<li><b>tf.epochs</b>&#160;: [ {'200'} ], Maximum number of iterations for weight optimization.</li>
+<li><b>tf.hidden_layer</b>&#160;: [ {struct('type','Dense','units',100)} ], Cell array of structs, where each struct represents a hidden layer in the network. The struct accepts 3 possible fields: 'type', 'units', and 'size'. These layers are further explained below.</li>
+<li><b>tf.random_state</b>&#160;: [ {'1'} ], Random seed number. Set this to a number for reproducibility.</li>
+<li><b>tf.min_delta</b>&#160;: [ {'1.0000e-04'} ], Tolerance for optimization.</li>
+<li><b>tf.learning_rate</b>&#160;: [ {'1.0000e-03'} ], Initial learning rate.</li>
+<li><b>tf.batch_size</b>&#160;: [ {'12'} ], Number of samples in each of the minibatches.</li></ul></li></ul>
+<h3><span id="Additional_information_on_the_.E2.80.98sklearn.E2.80.99_ANNDL"></span><span class="mw-headline" id="Additional_information_on_the_‘sklearn’_ANNDL">Additional information on the ‘sklearn’ ANNDL</span></h3>
+<p>This implementation uses Scikit-Learn's MLPRegressor object. Not every parameter is able to be modified, but most are. This flavor of ANNDL only uses fully connected layer as opposed to Tensorflow. 
+</p><p><br />
+</p>
+<h4><span class="mw-headline" id="Build_from_command-line">Build from command-line</span></h4>
+<p>Here's an example of building a sklearn ANNDL using the sk substructure:
+</p>
+<pre>options                       = anndl('options');
+options.sk.hidden_layer_sizes = {10, 10, 10};
+options.sk.activation         = 'tanh';
+options.sk.solver             = 'lbfgs';
+model                         = anndl(x,y,options);
+</pre>
+<h4><span class="mw-headline" id="Build_from_Analysis_Window">Build from Analysis Window</span></h4>
+<p>Open window. Create layers by clicking the <b>Add Hidden Layer</b> button in the middle of the panel. This creates a new row, where each row corresponds to a hidden layer. Provide a value for the <b>Units</b> column by clicking the box and entering argument. Remove a layer by clicking the checkbox under the <b>Remove</b> column of the corresponding row of that layer.
+</p>
+<h3><span id="Additional_information_on_the_.E2.80.98tensorflow.E2.80.99_ANNDL"></span><span class="mw-headline" id="Additional_information_on_the_‘tensorflow’_ANNDL">Additional information on the ‘tensorflow’ ANNDL</span></h3>
+<p>PLS_Toolbox does not include the full slate that Tensorflow has to offer, but more than enough to get off the ground running to build deep neural networks. Tensorflow offers a wide variety of the types of layers to use, loss functions, optimizers, and activation functions. This chart goes over what has been adapted from Tensorflow thus far:
+</p>
+<ul><li><b>Layers</b> (visit here for more info: <a rel="nofollow" class="external text" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">https://www.tensorflow.org/api_docs/python/tf/keras/layers</a></li></ul>
+<ol><li>Dense (fully connected layer)</li>
+<li>Flatten (Takes weights from the previous layer and flattens to a 1-dimensional vector)</li>
+<li>Dropout (Randomly assign a fraction of the node values to 0.)</li>
+<li>BatchNormalization (Normalizes weights from the previous layer to have a mean output close to 0 and standard deviation close to 1)</li>
+<li>Conv[123]D (all three dimensions included)</li>
+<li>AveragePooling[123]D (all three dimensions included)</li>
+<li>MaxPooling[123]D (all three dimensions included)</li></ol>
+<ul><li><b>Optimizers</b> (visit here for more info: <a rel="nofollow" class="external text" href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers">https://www.tensorflow.org/api_docs/python/tf/keras/optimizers</a></li></ul>
+<ol><li>Adam</li>
+<li>Adamax</li>
+<li>RMSProp</li>
+<li>SGD</li></ol>
+<ul><li><b>Loss functions</b> (visit here for more info: <a rel="nofollow" class="external text" href="https://www.tensorflow.org/api_docs/python/tf/keras/losses">https://www.tensorflow.org/api_docs/python/tf/keras/losses</a></li></ul>
+<ol><li>Mean Square Error</li>
+<li>Mean Absolute Error</li>
+<li>Logcosh</li></ol>
+<ul><li><b>Activation functions</b> (visit here for more info: <a rel="nofollow" class="external text" href="https://www.tensorflow.org/api_docs/python/tf/keras/activations">https://www.tensorflow.org/api_docs/python/tf/keras/activations</a></li></ul>
+<ol><li>Relu</li>
+<li>Tanh</li>
+<li>Sigmoid</li>
+<li>Linear</li></ol>
+<h4><span class="mw-headline" id="How_to_use_Tensorflow_layers">How to use Tensorflow layers</span></h4>
+<p>Each of the layers included in PLS_Toolbox are used to do specific tasks, and therefore require different arguments. As noted above, the <b>tf.hidden_layer</b> parameter is a cell array of structs, each struct representing a hidden layer. The supported field names for these layers are the following
+</p>
+<ol><li>‘type’</li>
+<li>‘units’</li>
+<li>‘size’</li></ol>
+<p>Each hidden layer requires the ‘type’ field to be populated by one of the supported hidden layers provided above. This table explains the parameter mapping for the ‘units’ and ‘size’ fields and the corresponding Tensorflow parameter names by layer type:
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Layer Type</th>
+<th>Required Field(s)</th>
+<th>Tensorflow Parameter(s)</th>
+<th>Input data type
+</th></tr>
+<tr>
+<td>Dense</td>
+<td>units</td>
+<td>units</td>
+<td>integer([1,∞))
+</td></tr>
+<tr>
+<td>Flatten</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A
+</td></tr>
+<tr>
+<td>Dropout</td>
+<td>units</td>
+<td>rate</td>
+<td>float((0,1])
+</td></tr>
+<tr>
+<td>BatchNormalization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A
+</td></tr>
+<tr>
+<td>Conv1D</td>
+<td>units, size</td>
+<td>kernels, filter_size</td>
+<td>integer([1,∞)), integer([1,∞))
+</td></tr>
+<tr>
+<td>Conv2D</td>
+<td>units, size</td>
+<td>kernels, filter_size</td>
+<td>integer([1,∞)), [x y] (where x,y are integers specifying length and width)
+</td></tr>
+<tr>
+<td>Conv3D</td>
+<td>units, size</td>
+<td>kernels, filter_size</td>
+<td>integer([1,∞)), [x y z] (where x,y,z are integers specifying length, width, and height)
+</td></tr>
+<tr>
+<td>MaxPooling1D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>integer([1,∞))
+</td></tr>
+<tr>
+<td>MaxPooling2D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>[x y] (where x,y are integers specifying length and width)
+</td></tr>
+<tr>
+<td>MaxPooling3D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>[x y z] (where x,y,z are integers specifying length, width, and height)
+</td></tr>
+<tr>
+<td>AveragePooling1D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>integer([1,∞))
+</td></tr>
+<tr>
+<td>AveragePooling2D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>[x y] (where x,y are integers specifying length and width)
+</td></tr>
+<tr>
+<td>AveragePooling3D</td>
+<td>size</td>
+<td>pool_size</td>
+<td>[x y z] (where x,y,z are integers specifying length, width, and height)
+</td></tr></tbody></table>
+<h4><span class="mw-headline" id="Build_from_command-line_2">Build from command-line</span></h4>
+<p>With keeping the information from the above table in mind, here's an example of an ANNDL using 4 hidden layers. The following example network consists of 3 fully-connected hidden layers and then uses a dropout layer to randomly set 25% of the nodes to 0.
+</p>
+<pre>options                    = anndl('options');
+options.algorithm          = 'tensorflow';
+options.tf.hidden_layer{1} = struct('type','Dense','units',64);
+options.tf.hidden_layer{2} = struct('type','Dense','units',32);
+options.tf.hidden_layer{3} = struct('type','Dense','units',16);
+options.tf.hidden_layer{4} = struct('type','Dropout','units',0.25);
+model                      = anndl(x,y,options);
+</pre>
+<p>Here's an example of how to build a 2-dimensional Convolutional ANNDL model:
+</p>
+<pre>options                    = anndl('options'); 
+options.algorithm          = 'tensorflow';
+options.tf.hidden_layer{1} = struct('type','Conv2D','units',64, 'size', [3 3]);
+options.tf.hidden_layer{2} = struct('type','MaxPooling2D','size',[3 3]); 
+options.tf.hidden_layer{3} = struct('type','Conv2D','units',64, 'size', [3 3]);
+options.tf.hidden_layer{4} = struct('type','MaxPooling2D','size',[3 3]); 
+options.tf.hidden_layer{5} = struct('type','Flatten'); 
+options.tf.hidden_layer{6} = struct('type','Dense','units', 16);
+model                      = anndl(x,y,options);
+</pre>
+<h4><span class="mw-headline" id="Build_from_Analysis_Window_2">Build from Analysis Window</span></h4>
+<p>Open windows and switch the <b>Framework</b> to Tensorflow. Create layers by clicking the <b>Add Hidden Layer</b> button in the middle of the panel. This creates a new row, where each row corresponds to a hidden layer. Switch between layer types by clicking on a row's <b>Layer Type</b> dropdown menu. Provide value(s) for the <b>Units</b> column by clicking the box and entering arguments. For the <b>Pool/Kernel Size</b> column, enter arguments that are space separated if applicable (convolutional and pooling layers). Remove a layer by clicking the checkbox under the <b>Remove</b> column of the corresponding row of that layer.
+</p><p>Notes: 
+</p>
+<ol><li>The activation function from the options structure is applied to each of the Dense and Conv1D, Conv2D, and Conv3D layers in 9.0.</li>
+<li>Tensorflow's ‘channel_last’ convention is followed in 9.0. Data must be arranged in this manner in order to build CNN's</li></ol>
+<h3><span class="mw-headline" id="Training_Epochs_vs._Loss_Plot">Training Epochs vs. Loss Plot</span></h3>
+<p>The scikit-learn and tensorflow network solvers/optimizers gives the model loss at each given training epoch (with the exception of the 'lbfgs' solver in scikit-learn). This plot can give helpful insight on how to tune the learning rate, batch size, and the number of training epochs. This plot can be accessed in both ANNDL and ANNDLDA by the Scores button <a href="" class="image"><img alt="Plot loads variable statistics icon.png" src="21px_plot_loads_variable_statistics_icon.png" decoding="async" width="21" height="20" /></a> in the Analysis toolbar for both of these methods. Below shows and describes cases where these parameters can be tuned to get more desirable results. For further reading on this topic, be sure to check out this <a rel="nofollow" class="external text" href="https://cs231n.github.io/neural-networks-3/#baby%7CStanford">Course Lecture on Epochs vs. Loss Plots</a>
+</p><p>Optimizing parameters with Training Epochs vs. Loss Plot:
+</p>
+<ul><li>Learning Rate
+<ul><li>One can tune their learning rate by examining the shape and direction of the loss curve. As shown in the diagram, a curve like the one in red tells us that our learning rate is tuned enough as this is the ideal curve we are looking for - one where the loss drops significantly after a few epochs and asymptotically approaches 0. The other curves highlight particular cases where the learning rate needs to be tuned, where the corresponding label to that curve in the legend suggests how to tune your learning rate. Follow this diagram to tune your learning rate accordingly.</li></ul></li></ul>
+<p><a href="" class="image"><img alt="LearningRateLoss.PNG" src="400px_learningrateloss.png" decoding="async" width="400" height="301" /></a>.
+</p>
+<ul><li>Batch Size
+<ul><li>In an ideal calibration, we want this curve looking as smooth as possible. Reducing the amount of noise in the loss can lead to more consistent and reliable results. If you see a plot like this, where the loss contains a significant number of spikes:</li></ul></li></ul>
+<p><a href="" class="image"><img alt="BatchSizeLossBad.PNG" src="400px_batchsizelossbad.png" decoding="async" width="400" height="263" /></a> 
+</p><p>then increasing the batch size is known to fix this issue:
+</p><p><a href="" class="image"><img alt="BatchSizeLossGood.PNG" src="400px_batchsizelossgood.png" decoding="async" width="400" height="257" /></a>
+</p><p>Increase the batch size as you see fit until you reach a curve that resembles the one above.
+</p>
+<ul><li>Training Epochs
+<ul><li>If one sees that the number of epochs in the plot is nearly equal to the specified maximum number of epochs and the loss does not improve, one can decrease the number of epochs to receive faster and nearly identical results.</li></ul></li></ul>
+<h3><span class="mw-headline" id="ANNDL_and_ANN">ANNDL and ANN</span></h3>
+<p>The two neural network Python implementations have similarities and differences with our ANN implementation. ANNDL offers the ability to build more than 2 hidden layers unlike ANN. This can help in contexts where a more complex network architecture is needed for complex datasets. The node sizes in these neural networks should also be treated differently. In ANN it is advised to keep these node sizes small and to avoid using a second hidden layer, if possible. After testing by some of our staff, we have found that the Python neural networks in ANNDL do well when the node sizes are much larger than that of ANN. Not only can these ANNDL models perform comparably well with ANN but the speed when changing node sizes scales very well, unlike ANN. Another advantage (and disadvantage) is the breadth of parameters to tinker with. While it is nice to have more of a variety options to choose from, building the perfect Python neural network can be time-consuming. In ANN not as many parameters need to be modified and the resulting model is a smaller, robust architecture. 
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Usage_from_ANNDL_Analysis_window">Usage from ANNDL Analysis window</span></h3>
+<p>The window for ANNDL is more involved than ANN's window. Switching between implementations is possible from the panel. There are a few bedrock parameters underneath the implementation selection. Then there is the Hidden Layer Table. This table is recommended to modify the hidden layers, rather than using the Options Window. The use of this table fairly straighforward: add layers by clicking the <b>Add Hidden Layer Button</b> and fill out the necessary information. This comes pretty natural with the Scikit-Learn ANNDL. If using Tensorflow, see the Additional Information for Tensorflow Implementation section. X-Block compression is also made available from the panel. Provide the method of compression from the menu selection, and provide the amount of components to reduce to. 
+</p><p>When using the ANNDL Analysis window, like in the ANN Analysis window, it is possible to specify a scan over a range of hidden layer nodes to use in the first hidden layer. This is enabled by setting the “Maximum number of Nodes” value in the cross-validation window. This causes ANNDL models to be built for the range of hidden layer nodes up to the specified number and the resulting RMSECV plotted versus the number of nodes is shown by clicking on the “Plot cross-validation results” plot icon in the ANNDL Analysis window’s toolbar. This can be useful for deciding how many nodes to use in the first hidden layer. While cross-validating over a range of node sizes in the first hidden layer, the sizes in the remaining hidden layers stay fixed. Note that this plot is only advisory. The resulting model is built with the input parameter number of nodes, ‘nhid’, and its model.detail.rmsecv value relates to this number of nodes.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="anndlda.html" title="Anndlda">anndlda</a>, <a href="annda.html" title="Annda">annda</a>, <a href="python.html" title="Python">python</a>, <a href="analysis.html" title="Analysis">analysis</a>, <a href="crossval.html" title="Crossval">crossval</a>, <a href="lwr.html" title="Lwr">lwr</a>, <a href="modelselector.html" title="Modelselector">modelselector</a>, <a href="pls.html" title="Pls">pls</a>, <a href="pcr.html" title="Pcr">pcr</a>, <a href="preprocess.html" title="Preprocess">preprocess</a>, <a href="svm.html" title="Svm">svm</a>, <a href="evrimodel_objects.html" title="EVRIModel Objects">EVRIModel_Objects</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930205642
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.047 seconds
+Real time usage: 0.059 seconds
+Preprocessor visited node count: 78/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1233/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:1740-0!canonical and timestamp 20240930205642 and revision id 12354.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Anndl&amp;oldid=12354">https://www.wiki.eigenvector.com/index.php?title=Anndl&amp;oldid=12354</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 29 August 2024, at 23:08.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

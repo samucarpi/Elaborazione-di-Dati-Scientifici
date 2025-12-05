@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Preprocess - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Preprocess rootpage-Preprocess skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Preprocess"><span class="mw-page-title-main">Preprocess</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Case_1)_Specification_of_Preprocessing"><span class="tocnumber">3.1</span> <span class="toctext">Case 1) Specification of Preprocessing</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Case_2)_Estimate_preprocessing_parameters_(calibrate)"><span class="tocnumber">3.2</span> <span class="toctext">Case 2) Estimate preprocessing parameters (calibrate)</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Case_3)_Apply_preprocessing_to_new_data_(apply)"><span class="tocnumber">3.3</span> <span class="toctext">Case 3) Apply preprocessing to new data (apply)</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Case_4)_Remove_preprocessing_from_preprocessed_data_(undo)"><span class="tocnumber">3.4</span> <span class="toctext">Case 4) Remove preprocessing from preprocessed data (undo)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Selection and application of standard <a href="model_building__preprocessing_methods.html" title="Model Building: Preprocessing Methods">preprocessing methods</a>.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>s = preprocess;                   %Modal GUI to select preprocessing</dd>
+<dd>[s,changed] = preprocess(s); %Modal GUI to modify preprocessing</dd>
+<dd>list = preprocess('initcatalog');&#160;% Gives a list of the available methods</dd>
+<dd>preprocess('keywords'); %Lists valid method names.</dd>
+<dd>s = preprocess('default','methodname');            %Non-GUI interactive preprocessing selection</dd>
+<dd>[datap,sp] = preprocess('calibrate',s,data);   %single block calibration of preprocessing</dd>
+<dd>[datap,sp] = preprocess('calibrate',s,xblock,yblock);     %multi-block calibration of preprocessing</dd>
+<dd>datap = preprocess('apply',sp,data);                %apply to new data</dd>
+<dd>data = preprocess('undo',sp,datap)&#160;;               %undo preprocessing</dd>
+<dd>data = preprocess('undo_silent',sp,datap);     %undo preprocessing (no warnings)</dd>
+<dd>[datap,s] = preprocess(data);                       %Modal GUI to preprocess selected data</dd>
+<dd>[datap,s] = preprocess(data,s);                     %Modal GUI to preprocess selected data</dd></dl>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>PREPROCESS is a general tool to choose preprocessing steps and to perform the steps on data. It can be used as a graphical interface or as a command-line tool. See <a href="modelbuilding_preprocessingmethods.html" class="mw-redirect" title="ModelBuilding PreProcessingMethods">Model Building - PreProcessing Methods</a> for a description of the use of the graphical user interface. See <a href="user_defined_preprocessing.html" title="User Defined Preprocessing">User Defined Preprocessing</a> and <a href="preprouser.html" title="Preprouser">preprouser</a> for a description on how custom preprocessing can be added to the standard preprocessing options listed below.
+</p><p>From the command line, PREPROCESS can be used to perform four different tasks:
+</p>
+<ul><li>1) Specification of Preprocessing (or preprocessing steps),</li>
+<li>2) Estimate preprocessing parameters (calibrate),</li>
+<li>3) Apply preprocessing to new data (apply), and</li>
+<li>4) Remove the preprocessing previously performed on the data (undo).</li></ul>
+<h4><span id="Case_1.29_Specification_of_Preprocessing"></span><span class="mw-headline" id="Case_1)_Specification_of_Preprocessing">Case 1) Specification of Preprocessing</span></h4>
+<p>The purpose of the following calls to PREPROCESS is to generate standard preprocessing structure arrays that contain the desired preprocessing steps. The commands are listed here.
+</p>
+<pre>s = preprocess;
+</pre>
+<p>creates a GUI that allows the user to select preprocessing steps interactively. The output <tt>s</tt> is a standard preprocessing structure. If multiple preprocessing steps are selected, <tt>s</tt> is a multi-record structure with each record corresponding to a preprocessing step.
+</p>
+<pre>[s,changed] = preprocess(s);
+</pre>
+<p>allows the user to interactively edit a previously-built preprocessing structure <tt>s</tt>. The output <tt>s</tt> is the edited preprocessing structure. The second output <tt>changed</tt> is a flag that indicates whether the user clicked "OK" (==1) or "Cancel" (==0) to close the interface. If the user cancels, the output will be the same as the input (no changes have been made.)
+</p>
+<pre>s = preprocess('default','methodname');
+</pre>
+<p>returns the default preprocessing structure for method <tt>methodname</tt>. A list of valid method names, <tt>methodname</tt>, can be obtained using the command:
+</p>
+<pre>preprocess('keywords')
+</pre>
+<p>The technical description of the different types of preprocessing can be found on the <a href="model_building__preprocessing_methods.html" title="Model Building: Preprocessing Methods">Model Building: Preprocessing Methods</a> page. Below is list of standard methods that can be used for 'methodname':
+</p>
+<ul><li>'<b>abs'</b>: takes the absolute value of the data (see <a href="advanced_preprocessing__simple_mathematical_operations.html" title="Advanced Preprocessing: Simple Mathematical Operations">abs</a>),</li>
+<li>'<b>arithmetic'</b>: simple arithmetic operations,</li>
+<li>'<b>autoscale'</b>: centers columns to zero mean and scales to unit variance (see <a href="auto.html" title="Auto">auto</a>),</li>
+<li>'<b>autoscalenomean'</b>: variance (std) scaling, scales each variable by its standard deviation without mean-centering,</li>
+<li>'<b>baseline</b>: baselining using an iterative weighted least square algorithm (see <a href="wlsbaseline.html" title="Wlsbaseline">wlsbaseline</a>),</li>
+<li>'<b>whittaker'</b>: baselining using an automatic Whittaker filter,</li>
+<li>'<b>simple baseline'</b>: baselining base on user specified points (see <a href="baseline.html" title="Baseline">baseline</a>),</li>
+<li>'<b>classcenter'</b>: centers classes in data to the mean of each class (see <a href="classcenter.html" title="Classcenter">classcenter</a>).</li>
+<li>'<b>classcentroid'</b>: centers data to the centroid of all classes (see <a href="classcentroid.html" title="Classcentroid">classcentroid</a>).</li>
+<li>'<b>classcentroidscale'</b>: centers data to the centroid of all classes and scales to intra-class variance (see <a href="classcentroid.html" title="Classcentroid">classcentroid</a>).</li>
+<li>'<b>derivative'</b>: Savitzky-Golay smoothing and derivative across rows (see <a href="savgol.html" title="Savgol">savgol</a>),</li>
+<li>'<b>derivative columns'</b>: Savitzky-Golay smoothing and derivative down columns (see <a href="savgol.html" title="Savgol">savgol</a>),</li>
+<li>'<b>detrend'</b>: remove a linear trend (see <a href="baseline.html" title="Baseline">baseline</a>),</li>
+<li>'<b>eemfilter'</b>: EEM filtering,</li>
+<li>'<b>emsc'</b>: extended multiplicative scatter correction (see <a href="emscorr.html" title="Emscorr">emscorr</a>),</li>
+<li>'<b>epo'</b>: External Parameter Orthogonalization - remove clutter covariance (see <a href="glsw.html" title="Glsw">glsw</a>),</li>
+<li>'<b>gapsegment'</b>: gap segment derivatives (see <a href="gapsegment.html" title="Gapsegment">gapsegment</a>),</li>
+<li>'<b>gls weighting'</b>: generalized least squares weighting (see <a href="glsw.html" title="Glsw">glsw</a>),</li>
+<li>'<b>gscale'</b>: group/block scaling (see <a href="gscale.html" title="Gscale">gscale</a>),</li>
+<li>'<b>holoreact'</b>: Kaiser HoloReact Method (see <a href="hrmethodreadr.html" title="Hrmethodreadr">hrmethodreadr</a>),</li>
+<li>'<b>logdecay'</b>: log decay scaling,</li>
+<li>'<b>log10'</b>: calculate base 10 logarithm of data(<a href="advanced_preprocessing__simple_mathematical_operations.html" title="Advanced Preprocessing: Simple Mathematical Operations">log10</a>),</li>
+<li>'<b>mean center'</b>: center columns to have zero mean (see <a href="mncn.html" title="Mncn">mncn</a>),</li>
+<li>'<b>median center'</b>: center columns to have zero median (see <a href="medcn.html" title="Medcn">medcn</a>),</li>
+<li>'<b>minmax'</b>: min-max scaling, scales each row or column to have a minimum of 0 and a maximum of 1 (see <a href="minmax.html" title="Minmax">minmax</a>),</li>
+<li>'<b>msc'</b>: multiplicative scatter correction with offset, the mean is the reference spectrum (see <a href="mscorr.html" title="Mscorr">mscorr</a>),</li>
+<li>'<b>msc_median'</b>: multiplicative scatter correction with offset, the median is the reference spectrum (see <a href="mscorr.html" title="Mscorr">mscorr</a>),</li>
+<li>'<b>centering'</b>: multiway center,</li>
+<li>'<b>scaling'</b>: multiway scale,</li>
+<li>'<b>normalize'</b>: normalization of the rows (see <a href="normaliz.html" title="Normaliz">normaliz</a>),</li>
+<li>'<b>osc'</b>: orthogonal signal correction (see <a href="osccalc.html" title="Osccalc">osccalc</a> and <a href="oscapp.html" title="Oscapp">oscapp</a>),</li>
+<li>'<b>pareto'</b>: Pareto (sqrt std) scaling, scales each variable by the square root of its standard deviation,</li>
+<li>'<b>sqmnsc'</b>: Poisson (sqrt mean) scaling, scales each variable by the square root of its mean (see <a href="poissonscale.html" title="Poissonscale">poissonscale</a>),</li>
+<li>'<b>referencecorrection'</b>: reference/background correction,</li>
+<li>'<b>smooth'</b>: Savitzky-Golay smoothing (see <a href="savgol.html" title="Savgol">savgol</a>),</li>
+<li>'<b>snv'</b>: standard normal deviate (autoscale the rows, see <a href="snv.html" title="Snv">snv</a>),</li>
+<li>'<b>specalign'</b>: variable alignment via <a href="cow.html" title="Cow">cow</a> and <a href="registerspec.html" title="Registerspec">registerspec</a>,</li>
+<li>'<b>trans2abs'</b>: transmission to absorbance (<a href="advanced_preprocessing__simple_mathematical_operations.html" title="Advanced Preprocessing: Simple Mathematical Operations">log(1/T)</a>),</li>
+<li>'<b>window_filter'</b>: spectral filtering (see <a href="windowfilter.html" title="Windowfilter">windowfilter</a>).</li></ul>
+<p>Additional methods are available with MIA_Toolbox. The valid method names for 'methodname' follow.
+</p>
+<ul><li>'<b>Image_Flatfield'</b>: background subtraction (flatfield),</li>
+<li>'<b>Image_Close'</b>: close (dilate+erode)],</li>
+<li>'<b>Image_Dilate'</b>: dilate,</li>
+<li>'<b>Image_Erode'</b>: erode,</li>
+<li>'<b>Image_Max'</b>: replaces window of pixels with the max (see <a href="box_filter.html" title="Box filter">box_filter</a>),</li>
+<li>'<b>Image_Mean'</b>: replaces window of pixels with the mean (see <a href="box_filter.html" title="Box filter">box_filter</a>),</li>
+<li>'<b>Image_Median'</b>: replaces window of pixels with the median (see <a href="box_filter.html" title="Box filter">box_filter</a>),</li>
+<li>'<b>Image_Min'</b>: replaces window of pixels with the min (see <a href="box_filter.html" title="Box filter">box_filter</a>),</li>
+<li>'<b>Image_Open</b>: open (erode+dilate),</li>
+<li>'<b>Image_Smooth'</b>: smooth,</li>
+<li>'<b>Image_TrimmedMean'</b>: replaces window of pixels with the trimmed mean (see <a href="box_filter.html" title="Box filter">box_filter</a>),</li>
+<li>'<b>Image_TrimmedMedian'</b>: replaces window of pixels with the trimmed median (see <a href="box_filter.html" title="Box filter">box_filter</a>).</li></ul>
+<p>The following command generates a multi-record structure of the default preprocessing steps included in PREPROCESS.
+</p>
+<pre>list = prprocess('initcatalog');
+</pre>
+<h4><span id="Case_2.29_Estimate_preprocessing_parameters_.28calibrate.29"></span><span class="mw-headline" id="Case_2)_Estimate_preprocessing_parameters_(calibrate)">Case 2) Estimate preprocessing parameters (calibrate)</span></h4>
+<p>Many preprocessing methods derive statistics and other numerical values from the calibration data. These values must be stored and used when new data (test or other future data) is going to be preprocessed in the same way as the calibration data. Examples include the mean or variance for each variable of the calibration data.
+</p><p>The objective of the 'calibrate' call to PREPROCESS is to estimate preprocessing parameters, if any, from the calibration data set and perform preprocessing on the data. The I/O format is:
+</p>
+<pre>[datap,sp] = preprocess('calibrate',s,data);
+</pre>
+<p>The inputs are <tt>s</tt> a standard preprocessing structure and <tt>data</tt> the calibration data. The preprocessed data is returned in <tt>datap</tt>, and preprocessing parameters are returned in a modified preprocessing structure <tt>sp</tt>. Note that <tt>sp</tt> is used as an input with the 'apply' and 'undo' commands described below.
+</p><p>Short-cuts for each method can also be used. Examples for 'mean center' and 'autoscale' are
+</p>
+<pre>[datap,sp] = preprocess('calibrate','mean center',data);
+[datap,sp] = preprocess('calibrate','autoscale',data);
+</pre>
+<p>Preprocessing for some multi-block methods (specifically, 'osc' and 'gls weighting') require that the y-block be passed also. The I/O format in these cases is:
+</p>
+<pre>[datap,sp] = preprocess('calibrate',s,xblock,yblock);
+</pre>
+<h4><span id="Case_3.29_Apply_preprocessing_to_new_data_.28apply.29"></span><span class="mw-headline" id="Case_3)_Apply_preprocessing_to_new_data_(apply)">Case 3) Apply preprocessing to new data (apply)</span></h4>
+<p>Once the preprocessing steps have been calibrated on a set of data (see Case 2), the preprocessing can be "applied" to new data. The parameters determined during calibration are now used to preprocess the new data. For example, consider mean-centering. In this case, the parameters correspond to the mean of the calibration set. During 'apply', the new data are centered to the mean of the calibration data.
+</p><p>The following call to PREPROCESS
+</p>
+<pre>datap = preprocess('apply',sp,data);
+</pre>
+<p>applies the calibrated preprocessing <tt>sp</tt> to new data <tt>data</tt> and returns the preprocessed data <tt>datap</tt> that is class "dataset".
+</p>
+<h4><span id="Case_4.29_Remove_preprocessing_from_preprocessed_data_.28undo.29"></span><span class="mw-headline" id="Case_4)_Remove_preprocessing_from_preprocessed_data_(undo)">Case 4) Remove preprocessing from preprocessed data (undo)</span></h4>
+<p>The inverse operation of applying preprocessing is performed in the following call to PREPROCESS
+</p>
+<pre>data = preprocess('undo',sp,datap);
+</pre>
+<p>Inputs are <tt>sp</tt>, the calibrated preprocessing structure (See Case 2 above) and the preprocessed data, <tt>datap</tt> [class "double" or "dataset"]. The output is the "unpreprocessed" data <tt>data</tt>.
+</p><p>The 'undo' operation is most often used on y-block predictions in regression models and in missing data replacement algorithms (see <a href="mdcheck.html" title="Mdcheck">mdcheck</a> and <a href="replace.html" class="mw-redirect" title="Replace">replace</a>) in which the data is preprocessed and then an estimate of the data is converted back to the original unpreprocessed form.
+</p><p>Note that some preprocessing can not be undone (for example, 'osc' and 'sg'). In these cases, an inverse does not exist or has not been defined and an 'undo' call will result in a warning. Using 'undo_silent' instead of 'undo' suppresses the warning message. One reason for not defining an inverse, or undo, is because the procedure requires a significant amount of memory storage (e.g., when data sets are large).
+</p>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="analysis.html" title="Analysis">analysis</a>, <a href="crossval.html" title="Crossval">crossval</a>, <a href="pca.html" title="Pca">pca</a>, <a href="pcr.html" title="Pcr">pcr</a>, <a href="pls.html" title="Pls">pls</a>, <a href="preprocessiterator.html" title="Preprocessiterator">preprocessiterator</a>, <a href="" class="new" title="Preprocatalog (page does not exist)">preprocatalog</a>, <a href="preprouser.html" title="Preprouser">preprouser</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240930141005
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.021 seconds
+Real time usage: 0.025 seconds
+Preprocessor visited node count: 68/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:219-0!canonical and timestamp 20240930141005 and revision id 11101.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Preprocess&amp;oldid=11101">https://www.wiki.eigenvector.com/index.php?title=Preprocess&amp;oldid=11101</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 1 September 2020, at 08:54.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>

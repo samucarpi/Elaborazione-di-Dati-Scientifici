@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#progressContainer {
+  width: 100%;
+  /*background-color: rgba(221, 221, 221, 0);*/
+  background-color: rgba(214, 237, 255,0);
+  display: flex;
+}
+
+.progressSection {
+  flex-grow: 1;
+  /*background-color: rgb(13, 41, 64);*/
+  background-color: rgb(214, 237, 255);
+  margin: 2px;
+  height: 10px;
+  transition: width 0.5s ease-in-out;
+  border-radius: 5px; /* Add this line to curve the borders */
+  display: flex; /* Added to center the text */
+  user-select: none;
+}
+
+</style>
+</head>
+<body>
+
+<script defer>
+    //default colors for progress sections
+    var progressColor_notFilled = 'rgb(214, 237, 255)';
+    var progressColor_filled = 'rgb(13, 41, 64)';
+
+    function updateProgress(step) {
+    var sections = document.getElementsByClassName("progressSection");
+        for (var i = 0; i < sections.length; i++) {
+            if (step[i] == 1) {
+                sections[i].style.backgroundColor = progressColor_filled;
+            } else {
+                sections[i].style.backgroundColor = progressColor_notFilled;
+            }
+        }
+    } 
+
+    function updateTheme(theme) {
+        switch(theme) {
+            case "light":
+                progressColor_notFilled = "#bfbfbf";
+                progressColor_filled = 'rgb(13, 41, 64)';
+                break;
+            case "dark":
+                progressColor_notFilled = 'rgb(214, 237, 255)';
+                progressColor_filled = 'rgb(13, 41, 64)';
+                break;
+        }
+        updateProgress(Array.from(document.getElementsByClassName("progressSection")).map(el => el.style.backgroundColor === progressColor_filled ? 1 : 0));
+      }
+    function setup(htmlComponent) {
+        htmlComponent.addEventListener("DataChanged", function(event) {
+            const theme = htmlComponent.Data.Theme;
+            const data = htmlComponent.Data.Data;
+            updateTheme(theme)
+            updateProgress(data)
+        });
+    } 
+</script>
+
+<div id="progressContainer">
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+  <div class="progressSection" style="width: 0%"></div>
+</div>
+
+</body>
+</html>

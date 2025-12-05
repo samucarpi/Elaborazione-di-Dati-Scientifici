@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Parsexml - Eigenvector Research Documentation Wiki</title>
+
+
+
+    <link rel="stylesheet" href="load.css" media="screen" />        
+  
+
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href=""/>
+<meta name="generator" content="MediaWiki 1.39.6"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=1000"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.php" title="Eigenvector Research Documentation Wiki (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.wiki.eigenvector.com/api.php?action=rsd"/>
+<link rel="alternate" type="application/atom+xml" title="Eigenvector Research Documentation Wiki Atom feed" href=""/>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Parsexml rootpage-Parsexml skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled"><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><a href="https://wiki.eigenvector.com/index.php?title=Parsexml"><span class="mw-page-title-main">Parsexml</span></a></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From Eigenvector Research Documentation Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none" /><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Purpose"><span class="tocnumber">1</span> <span class="toctext">Purpose</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Synopsis"><span class="tocnumber">2</span> <span class="toctext">Synopsis</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Description"><span class="tocnumber">3</span> <span class="toctext">Description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Input"><span class="tocnumber">3.1</span> <span class="toctext">Input</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Optional_Input"><span class="tocnumber">3.2</span> <span class="toctext">Optional Input</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Outputs"><span class="tocnumber">3.3</span> <span class="toctext">Outputs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#See_Also"><span class="tocnumber">4</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="Purpose">Purpose</span></h3>
+<p>Convert XML file to a MATLAB structure.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<dl><dd>[object,theStruct] = parsexml(filename,nooutertag);</dd></dl>
+<p>If input <tt>filename</tt> is omitted, the user will be prompted for a file name  to read.
+</p>
+<h3><span class="mw-headline" id="Description">Description</span></h3>
+<p>Creates Matlab object from XML file. The format of the file must follow that used by ENCODEXML. Each XML tag will be encoded as a field in a Matlab structure. The top-level tag will be the single field in the top-level of the returned structure. All sub-tags will be sub-fields. Contents of the fields are specified using the 'class' attributes of each tag.  When 'class' is omitted, a single-entry (non-array) structure is assumed. Tags with the attribute 'class' will be encoded using the following rules:
+</p>
+<ul><li><b>class="string"</b>: Contents encoded as string or padded string array. If multiple row string, each row should be enclosed in <tt>&lt;sr&gt;</tt> tags.</li></ul>
+<ul>
+<pre>&lt;oneitem class="string"&gt;Just One String&lt;/oneitem&gt;</pre>
+<pre>&lt;multirow class="string&gt;
+  &lt;sr&gt;Row 1 string&lt;/sr&gt;
+  &lt;sr&gt;Row 2 string&lt;/sr&gt;
+  ...
+&lt;/multirow&gt;</pre>
+</ul>
+<ul><li><b>class="numeric"</b>  &#160;: Contents of tag must be a comma-delimited list of values with rows delimited by semicolons. Each row must have the same number of entries (each row must be equal in length) or an error will result. Multi-way matricies can be encapsulated in <tt>&lt;tn mode="i"&gt;</tt> tags where i is the mode that the enclosed item expands on (i&gt;=3).</li></ul>
+<dl><dd><dl><dd><b>Encoding</b>: Numeric class contents can be encoded as comma-separated values (csv) which is the default, or using base64 encoding. The encoding attribute can be supplied to specify when the contents are encoded using other than CSV. Options include:</dd></dl>
+<ul><li>encoding = "csv"           (default)</li>
+<li>encoding = "base64"</li></ul>
+<dl><dd>When base64 encoding is used, the additional attribute <b>precision</b> can be included to specify the precision of the numerical values encoded. Options include:</dd></dl>
+<ul><li>precision="64"   for 64-bit double precision values (default)</li>
+<li>precision="32"   for 32-bit single precision values</li>
+<li>precision="8"    for 8-bit unsigned integer values</li>
+<li>precision="1"    for boolean logical values</li></ul></dd></dl>
+<dl><dd><dl><dd>Example: row vector</dd></dl></dd></dl>
+<ul><pre>&lt;item class="numeric"&gt; 1,2,3,4 &lt;/item&gt; 
+</pre></ul>
+<dl><dd><dl><dd>Example: 2-way matrix</dd></dl></dd></dl>
+<ul><pre>&lt;item class="numeric"&gt; 11,12,13,14; 21 22 23 24 &lt;/item&gt; 
+</pre></ul>
+<dl><dd><dl><dd>Example: 3-way</dd></dl></dd></dl>
+<ul><pre>&lt;item class="numeric"&gt;
+  &lt;tn mode="3"&gt; 
+    111,112,113,114; 121,122,123,124 
+  &lt;/tn&gt; 
+  &lt;tn mode="3"&gt; 
+    211,212,213,214; 221,222,223,224
+  &lt;/tn&gt; 
+&lt;/item&gt; 
+</pre></ul>
+<ul><li><b>class="cell"</b>     &#160;: Contents encoded as Matlab cell. The format of contents is the same as HTML table tags (<tt>&lt;tr&gt;</tt> for a new row, <tt>&lt;td&gt;</tt> for a new container/column) with the added tag of <tt>&lt;tn mode="i"&gt;</tt> to describe a multi-dimensional cell (see <tt>class="numeric"</tt>).</li></ul>
+<dl><dd><dl><dd>Example: 3-way cell (with strings in each cell)</dd></dl></dd></dl>
+<ul><pre>&lt;item class="cell"&gt; 
+  &lt;tn mode="3"&gt; 
+     &lt;tr&gt; &lt;td&gt;slab 1, row 1, col 1&lt;td&gt; &lt;td&gt;slab 1, row 1, col 2&lt;td&gt; &lt;/tr&gt;
+     &lt;tr&gt; &lt;td&gt;slab 1, row 2, col 1&lt;td&gt; &lt;td&gt;slab 1, row 2, col 2&lt;td&gt; &lt;/tr&gt;
+  &lt;/tn&gt; 
+  &lt;tn mode="3"&gt; 
+     &lt;tr&gt; &lt;td&gt;slab 2, row 1, col 1&lt;td&gt; &lt;td&gt;slab 2, row 1, col 2&lt;td&gt; &lt;/tr&gt;
+     &lt;tr&gt; &lt;td&gt;slab 2, row 2, col 1&lt;td&gt; &lt;td&gt;slab 2, row 2, col 2&lt;td&gt; &lt;/tr&gt;
+  &lt;/tn&gt; 
+&lt;/item class="cell"&gt; 
+</pre></ul>
+<ul><li><b>class="structure"</b>&#160;: Used for struture arrays ONLY. Contents encoded into a structure array use array notation identical to that described for class="cell". If a structure is size [1 1] then it does not need to use array notation and must not be marked with this class attribute. Instead, the contents of the structure should simply be enclosed within the tag as sub-tags.</li></ul>
+<ul><li><b>class="dataset"</b>  &#160;: Contents will be interpreted as a DataSet Object. Any tags that do not map to valid DataSet Object fields will be ignored. See the DataSet definition for details on valid fields and ENCODEXML for examples of the DataSet XML format. Also see the simplified "dso" class below.</li></ul>
+<ul><li><b>class="dso"</b>&#160;: Contents will be interpreted as a DataSet Object using the <a href="dataset_xml_format.html" title="DataSet XML Format">simplified DataSet object definition</a>. This format is generally much easier to use to define a DataSet.</li></ul>
+<ul><li><b>NOTE: "Size" attribute</b>: Tags of class "numeric", "cell", or "structure" (structure-array only) should also include the attribute size="[...]" which gives the size of the tag's contents. The size value must be enclosed in square brackets and must be at least two elements long (use [0,0] for empty). For example &lt;myvalue class="numeric" size="[3,4]"&gt; says that the field myvalue will be numeric with 3 rows and 4 columns. Size can be multi-dimensional as needed (size="[2,4,6,2]" implies that the tag contents will be a 4-dimensional array of the given sizes.</li></ul>
+<h4><span class="mw-headline" id="Input">Input</span></h4>
+<ul><li><b>filename</b> = XML filname to convert. If input (filename) is omitted, the user will be prompted for a file name to read.</li></ul>
+<h4><span class="mw-headline" id="Optional_Input">Optional Input</span></h4>
+<ul><li><b>nooutertag</b> = [ {false} | true ] when set to "true" this input indicates that the outer-most xml object should be stripped from the resulting output (object). This allows direct access to the object itself rather than a structure with the object as the first and only field of that structure.</li></ul>
+<h4><span class="mw-headline" id="Outputs">Outputs</span></h4>
+<ul><li><b>object</b> = MATLAB object.</li>
+<li><b>theStruct' = is the pre-parsed XML object and allows access to raw field attributes and other content that cannot be converted into a Matlab object.</b></li></ul>
+<h3><span class="mw-headline" id="See_Also">See Also</span></h3>
+<p><a href="autoimport.html" title="Autoimport">autoimport</a>, <a href="encodexml.html" title="Encodexml">encodexml</a>, <a href="textreadr.html" title="Textreadr">textreadr</a>, <a href="xclreadr.html" class="mw-redirect" title="Xclreadr">xclreadr</a>
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20240929215756
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.009 seconds
+Real time usage: 0.012 seconds
+Preprocessor visited node count: 51/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 1144/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key newwiki_eigenvector_com:pcache:idhash:178-0!canonical and timestamp 20240929215756 and revision id 1799.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://www.wiki.eigenvector.com/index.php?title=Parsexml&amp;oldid=1799">https://www.wiki.eigenvector.com/index.php?title=Parsexml&amp;oldid=1799</a>"</div></div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation"  >
+	<h3
+		id="p-personal-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation"  >
+	<h3
+		id="p-namespaces-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation"  >
+	<input type="checkbox"
+		id="p-variants-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-variants-label"
+	/>
+	<label
+		id="p-variants-label"
+		 aria-label="Change language variant"
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation"  >
+	<h3
+		id="p-views-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item"><a href=""><span>Read</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation"  title="More options" >
+	<input type="checkbox"
+		id="p-cactions-checkbox"
+		role="button"
+		aria-haspopup="true"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox"
+		aria-labelledby="p-cactions-label"
+	/>
+	<label
+		id="p-cactions-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="main_page.html"
+			title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation"  >
+	<h3
+		id="p-navigation-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-Main-Page" class="mw-list-item"><a href="main_page.html"><span>Main Page</span></a></li><li id="n-PLS_Toolbox/Solo" class="mw-list-item"><a href="software_user_guide.html"><span>PLS_Toolbox/Solo</span></a></li><li id="n-MIA_Toolbox/Solo+MIA" class="mw-list-item"><a href="mia_toolbox_user_guide.html"><span>MIA_Toolbox/Solo+MIA</span></a></li><li id="n-Solo_Predictor" class="mw-list-item"><a href="solo_predictor_user_guide.html"><span>Solo_Predictor</span></a></li><li id="n-Model_Exporter" class="mw-list-item"><a href="model_exporter_user_guide.html"><span>Model_Exporter</span></a></li><li id="n-DataSet-Object" class="mw-list-item"><a href="dataset_object.html"><span>DataSet Object</span></a></li><li id="n-Frequently-Asked-Questions" class="mw-list-item"><a href="evri_faq.html"><span>Frequently Asked Questions</span></a></li><li id="n-Eigenvector-Homepage" class="mw-list-item"><a href="http://www.eigenvector.com/" rel="nofollow"><span>Eigenvector Homepage</span></a></li><li id="n-MediaWiki-Help" class="mw-list-item"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents"><span>MediaWiki Help</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation"  >
+	<h3
+		id="p-tb-label"
+		
+		class="vector-menu-heading "
+	>
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="" title="A list of all wiki pages that link here [j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="" title="A list of all special pages [q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo" >
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 7 July 2015, at 11:20.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="eigenvector_research_documentation_wiki_privacy_policy.html">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="eigenvector_research_documentation_wiki_about.html">About Eigenvector Research Documentation Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="eigenvector_research_documentation_wiki_general_disclaimer.html">Disclaimers</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></li>
+</ul>
+
+</footer>
+
+
+<br/></body>
+</html>
