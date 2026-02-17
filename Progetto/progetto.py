@@ -177,12 +177,11 @@ if __name__ == "__main__":
     plot_plsda_scores(pls_da, X_train_s, y_train, "3_PLSDA/PLSDA_scores.png")
 
     # Grafico y_pred vs campioni (train + test)
-    plot_ypred_vs_actual(pls_da, X_train_s, y_train, threshold=optimal_threshold, filename="3_PLSDA/PLSDA_ypred_train.png")
-    plot_ypred_vs_actual(pls_da, X_test_s, y_test, threshold=optimal_threshold, filename="3_PLSDA/PLSDA_ypred_test.png")
+    plot_ypred_vs_actual(pls_da, X_train_s, y_train, filename="3_PLSDA/PLSDA_ypred_train.png")
+    plot_ypred_vs_actual(pls_da, X_test_s, y_test, filename="3_PLSDA/PLSDA_ypred_test.png")
 
     # Y Predicted Plot combinato (Training + Test) con entrambe le colonne dummy
     plot_ypred_combined(pls_da, X_train_s, y_train, X_test_s, y_test,
-                        threshold=optimal_threshold,
                         filename="3_PLSDA/PLSDA_ypred_combined.png")
 
     # =====================================================================
@@ -342,7 +341,6 @@ if __name__ == "__main__":
         final_model  = pls_da
         final_X_eval = X_eval_s
         model_type   = "completo"
-        eval_threshold = optimal_threshold
     else:
         # Cerca nel dizionario dei risultati
         found = False
@@ -360,14 +358,12 @@ if __name__ == "__main__":
                     f"{best_row['model']}",
                     "5_Selezione/Confusion_matrix_best_reduced.png",
                 )
-                eval_threshold = res_data["optimal_threshold"]
                 found = True
                 break
         if not found:
             final_model  = pls_da
             final_X_eval = X_eval_s
             model_type   = "completo"
-            eval_threshold = optimal_threshold
 
     # =====================================================================
     # 5b.  APPLICABILITY  DOMAIN
@@ -429,7 +425,7 @@ if __name__ == "__main__":
     y_eval_pred = np.argmax(final_model.predict(final_X_eval), axis=1) + 1
 
     # Grafico y_pred vs campioni per Xeval
-    plot_ypred_eval(final_model, final_X_eval, threshold=eval_threshold,
+    plot_ypred_eval(final_model, final_X_eval,
                     filename="3_PLSDA/PLSDA_ypred_eval.png")
 
     n1 = int((y_eval_pred == 1).sum())
