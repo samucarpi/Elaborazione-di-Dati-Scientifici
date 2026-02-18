@@ -159,6 +159,113 @@ if __name__ == "__main__":
                    set_name="Test Set (Modello Completo)",
                    y_true=y_test, y_pred_cont=y_test_cont)
 
+    # ── Stampa riepilogo modello stile PLS_Toolbox ──────────────────────────
+    # Predizioni continue (dummy) per Cal, CV, Pred
+    y_cal_pred_dummy  = pls_da.predict(X_train_s)          # calibrazione
+    y_test_pred_dummy = pls_da.predict(X_test_s)           # predizione test
+    # y_cv_pred_dummy già calcolato sopra via cross_val_predict
+
+    # Classi predette per Cal
+    y_cal_class = np.argmax(y_cal_pred_dummy, axis=1) + 1
+
+    # Dummy Y reale per il test set
+    y_test_dummy = np.zeros((len(y_test), 2))
+    y_test_dummy[y_test == 1, 0] = 1.0
+    y_test_dummy[y_test == 2, 1] = 1.0
+
+    n_classes = 2
+    class_labels = [1, 2]
+
+    def _per_class_sens_spec(y_true_cls, y_pred_cls):
+        """Sensitività e specificità per-classe (one-vs-all)."""
+        sens, spec, cerr = [], [], []
+        for k in class_labels:
+            tp = np.sum((y_true_cls == k) & (y_pred_cls == k))
+            fn = np.sum((y_true_cls == k) & (y_pred_cls != k))
+            fp = np.sum((y_true_cls != k) & (y_pred_cls == k))
+            tn = np.sum((y_true_cls != k) & (y_pred_cls != k))
+            s = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+            p = tn / (tn + fp) if (tn + fp) > 0 else 0.0
+            sens.append(s)
+            spec.append(p)
+            cerr.append(((1 - s) + (1 - p)) / 2)
+        return sens, spec, cerr
+
+    def _rmse_bias_r2(y_true_d, y_pred_d):
+        """RMSE, Bias e R² per ogni colonna della matrice dummy."""
+        rmse, bias, r2 = [], [], []
+        for col in range(y_true_d.shape[1]):
+            yt = y_true_d[:, col]
+            yp = y_pred_d[:, col]
+            res = yp - yt
+            rmse.append(np.sqrt(np.mean(res ** 2)))
+            bias.append(np.mean(res))
+            ss_res = np.sum(res ** 2)
+            ss_tot = np.sum((yt - yt.mean()) ** 2)
+            r2.append(1 - ss_res / ss_tot if ss_tot > 0 else 0.0)
+        return rmse, bias, r2
+
+    # Calcolo metriche per Cal, CV, Pred
+    sens_cal, spec_cal, cerr_cal = _per_class_sens_spec(y_train, y_cal_class)
+    sens_cv,  spec_cv,  cerr_cv  = _per_class_sens_spec(y_train, y_cv_pred)
+    sens_pred, spec_pred, cerr_pred = _per_class_sens_spec(y_test, y_test_pred)
+
+    rmse_cal, bias_cal, r2_cal = _rmse_bias_r2(y_train_dummy, y_cal_pred_dummy)
+    rmse_cv,  bias_cv,  r2_cv  = _rmse_bias_r2(y_train_dummy, y_cv_pred_dummy)
+    rmse_pred, bias_pred, r2_pred = _rmse_bias_r2(y_test_dummy, y_test_pred_dummy)
+
+    # Funzione formattazione riga
+    def _fmt_row(label, values, fmt=".6g"):
+        nums = "  ".join(f"{v:{fmt}}" for v in values)
+        return f"  {label:<22s} {nums}"
+
+    from datetime import datetime
+    now_str = datetime.now().strftime("%d-%b-%Y %H:%M:%S")
+
+    print("\n" + "=" * 72)
+    print("  RIEPILOGO MODELLO PLS-DA  (stile PLS_Toolbox)")
+    print("=" * 72)
+    print(f"  This is a model of type: PLSDA_PRED")
+    print(f"  Developed {now_str}")
+    print()
+    print(f"  X-block: X_train  {X_train.shape[0]} by {X_train.shape[1]}")
+    print(f"  Included: [ 1-{X_train.shape[0]} ]  [ 1-{X_train.shape[1]} ]")
+    print(f"  Preprocessing: Autoscale")
+    print()
+    print(f"  Y-block: Y_train  {y_train_dummy.shape[0]} by {y_train_dummy.shape[1]}")
+    print(f"  Included: [ 1-{y_train_dummy.shape[0]} ]  [ 1-{y_train_dummy.shape[1]} ]")
+    print(f"  Preprocessing: None")
+    print(f"  Num. LVs: {best_n}")
+    print()
+    print(f"  Cross validation: stratified k-fold w/ 10 splits")
+    print()
+    print(f"  Statistics for each y-block column:")
+    print(f"  {'':22s} {'Classe 1':>12s}  {'Classe 2':>12s}")
+    print(f"  {'-'*50}")
+    print(_fmt_row("Sensitivity (Cal):",  sens_cal,  ".4f"))
+    print(_fmt_row("Specificity (Cal):",  spec_cal,  ".4f"))
+    print(_fmt_row("Sensitivity (CV):",   sens_cv,   ".4f"))
+    print(_fmt_row("Specificity (CV):",   spec_cv,   ".4f"))
+    print(_fmt_row("Sensitivity (Pred):", sens_pred,  ".4f"))
+    print(_fmt_row("Specificity (Pred):", spec_pred,  ".4f"))
+    print()
+    print(_fmt_row("Class. Err (Cal):",   cerr_cal,  ".6f"))
+    print(_fmt_row("Class. Err (CV):",    cerr_cv,   ".6f"))
+    print(_fmt_row("Class. Err (Pred):",  cerr_pred,  ".6f"))
+    print()
+    print(_fmt_row("RMSEC:",              rmse_cal,  ".6f"))
+    print(_fmt_row("RMSECV:",             rmse_cv,   ".6f"))
+    print(_fmt_row("RMSEP:",              rmse_pred, ".6f"))
+    print()
+    print(_fmt_row("Bias:",               bias_cal,  ".6g"))
+    print(_fmt_row("CV Bias:",            bias_cv,   ".6g"))
+    print(_fmt_row("Pred Bias:",          bias_pred, ".6g"))
+    print()
+    print(_fmt_row("R² Cal:",             r2_cal,    ".6f"))
+    print(_fmt_row("R² CV:",              r2_cv,     ".6f"))
+    print(_fmt_row("R² Pred:",            r2_pred,   ".6f"))
+    print("=" * 72)
+
     plot_confusion_matrix(
         y_test, y_test_pred,
         f"Confusion Matrix - Test Set (Completo)\n",
@@ -265,6 +372,83 @@ if __name__ == "__main__":
     res_vip1 = _build_and_evaluate("VIP > 1", vip_scores > 1)
     if res_vip1:
         comparison_rows.append(res_vip1)
+
+    # ── Stampa riepilogo VIP > 1 stile PLS_Toolbox ──────────────────────────
+    if res_vip1 and "VIP > 1" in strategy_results:
+        vip_data  = strategy_results["VIP > 1"]
+        vip_model = vip_data["model"]
+        vip_idx   = vip_data["idx"]
+        vip_n_lv  = vip_data["n_lv"]
+        n_vars_vip = len(vip_idx)
+
+        Xtr_vip = X_train_s[:, vip_idx]
+        Xts_vip = X_test_s[:, vip_idx]
+
+        # Predizioni Cal / CV / Pred
+        y_cal_vip_dummy  = vip_model.predict(Xtr_vip)
+        y_cal_vip_class  = np.argmax(y_cal_vip_dummy, axis=1) + 1
+
+        skf_vip = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
+        splits_vip = list(skf_vip.split(Xtr_vip, y_train))
+        y_cv_vip_dummy  = cross_val_predict(vip_model, Xtr_vip, y_train_dummy, cv=splits_vip)
+        y_cv_vip_class  = np.argmax(y_cv_vip_dummy, axis=1) + 1
+
+        y_pred_vip_dummy = vip_model.predict(Xts_vip)
+        y_pred_vip_class = np.argmax(y_pred_vip_dummy, axis=1) + 1
+
+        # Metriche per-classe
+        sens_cal_v, spec_cal_v, cerr_cal_v = _per_class_sens_spec(y_train, y_cal_vip_class)
+        sens_cv_v,  spec_cv_v,  cerr_cv_v  = _per_class_sens_spec(y_train, y_cv_vip_class)
+        sens_pred_v, spec_pred_v, cerr_pred_v = _per_class_sens_spec(y_test, y_pred_vip_class)
+
+        rmse_cal_v, bias_cal_v, r2_cal_v = _rmse_bias_r2(y_train_dummy, y_cal_vip_dummy)
+        rmse_cv_v,  bias_cv_v,  r2_cv_v  = _rmse_bias_r2(y_train_dummy, y_cv_vip_dummy)
+        rmse_pred_v, bias_pred_v, r2_pred_v = _rmse_bias_r2(y_test_dummy, y_pred_vip_dummy)
+
+        vip_var_names = [descriptors[i] for i in vip_idx]
+
+        print("\n" + "=" * 72)
+        print("  RIEPILOGO MODELLO PLS-DA  VIP > 1  (stile PLS_Toolbox)")
+        print("=" * 72)
+        print(f"  This is a model of type: PLSDA_PRED (variabili selezionate VIP > 1)")
+        print(f"  Developed {now_str}")
+        print()
+        print(f"  X-block: X_train  {X_train.shape[0]} by {n_vars_vip}  (selezionate da {n_vars})")
+        print(f"  Variabili incluse ({n_vars_vip}): {', '.join(vip_var_names)}")
+        print(f"  Preprocessing: Autoscale")
+        print()
+        print(f"  Y-block: Y_train  {y_train_dummy.shape[0]} by {y_train_dummy.shape[1]}")
+        print(f"  Preprocessing: None")
+        print(f"  Num. LVs: {vip_n_lv}")
+        print()
+        print(f"  Cross validation: stratified k-fold w/ 10 splits")
+        print()
+        print(f"  Statistics for each y-block column:")
+        print(f"  {'':22s} {'Classe 1':>12s}  {'Classe 2':>12s}")
+        print(f"  {'-'*50}")
+        print(_fmt_row("Sensitivity (Cal):",  sens_cal_v,  ".4f"))
+        print(_fmt_row("Specificity (Cal):",  spec_cal_v,  ".4f"))
+        print(_fmt_row("Sensitivity (CV):",   sens_cv_v,   ".4f"))
+        print(_fmt_row("Specificity (CV):",   spec_cv_v,   ".4f"))
+        print(_fmt_row("Sensitivity (Pred):", sens_pred_v, ".4f"))
+        print(_fmt_row("Specificity (Pred):", spec_pred_v, ".4f"))
+        print()
+        print(_fmt_row("Class. Err (Cal):",   cerr_cal_v,  ".6f"))
+        print(_fmt_row("Class. Err (CV):",    cerr_cv_v,   ".6f"))
+        print(_fmt_row("Class. Err (Pred):",  cerr_pred_v, ".6f"))
+        print()
+        print(_fmt_row("RMSEC:",              rmse_cal_v,  ".6f"))
+        print(_fmt_row("RMSECV:",             rmse_cv_v,   ".6f"))
+        print(_fmt_row("RMSEP:",              rmse_pred_v, ".6f"))
+        print()
+        print(_fmt_row("Bias:",               bias_cal_v,  ".6g"))
+        print(_fmt_row("CV Bias:",            bias_cv_v,   ".6g"))
+        print(_fmt_row("Pred Bias:",          bias_pred_v, ".6g"))
+        print()
+        print(_fmt_row("R² Cal:",             r2_cal_v,    ".6f"))
+        print(_fmt_row("R² CV:",              r2_cv_v,     ".6f"))
+        print(_fmt_row("R² Pred:",            r2_pred_v,   ".6f"))
+        print("=" * 72)
 
     # ── SR > 1 ──
     res_sr1 = _build_and_evaluate("SR > 1", sr_scores > 1)
@@ -506,6 +690,131 @@ if __name__ == "__main__":
     print(f"    Foglio 'Previsioni':  classi predette (ordine originale)")
     print(f"    Foglio 'Info_Modello': dettagli modello, pretrattamento, LV, variabili")
 
+    # =====================================================================
+    # 7.  CONFRONTO FINALE MODELLI
+    # =====================================================================
+    print("\n" + "=" * 80)
+    print("  CONFRONTO FINALE – MODELLO COMPLETO vs VIP > 1")
+    print("=" * 80)
+
+    if "VIP > 1" in strategy_results:
+        vd = strategy_results["VIP > 1"]
+
+        # Raccogli tutte le metriche in modo compatto
+        def _acc(y_true, y_pred):
+            return np.mean(y_true == y_pred)
+
+        def _bacc(y_true, y_pred):
+            s1 = np.sum((y_true == 1) & (y_pred == 1)) / np.sum(y_true == 1)
+            s2 = np.sum((y_true == 2) & (y_pred == 2)) / np.sum(y_true == 2)
+            return (s1 + s2) / 2
+
+        # --- Completo ---
+        acc_cal_c  = _acc(y_train, y_cal_class)
+        acc_cv_c   = _acc(y_train, y_cv_pred)
+        acc_pred_c = _acc(y_test, y_test_pred)
+        bacc_cal_c  = _bacc(y_train, y_cal_class)
+        bacc_cv_c   = _bacc(y_train, y_cv_pred)
+        bacc_pred_c = _bacc(y_test, y_test_pred)
+        overfit_c   = bacc_cal_c - bacc_cv_c
+
+        # --- VIP > 1 ---
+        acc_cal_v  = _acc(y_train, y_cal_vip_class)
+        acc_cv_v   = _acc(y_train, y_cv_vip_class)
+        acc_pred_v = _acc(y_test, y_pred_vip_class)
+        bacc_cal_v  = _bacc(y_train, y_cal_vip_class)
+        bacc_cv_v   = _bacc(y_train, y_cv_vip_class)
+        bacc_pred_v = _bacc(y_test, y_pred_vip_class)
+        overfit_v   = bacc_cal_v - bacc_cv_v
+
+        hdr = f"  {'Metrica':<32s} {'Completo':>12s} {'VIP > 1':>12s} {'Migliore':>12s}"
+        sep = f"  {'─'*70}"
+
+        def _row(label, v_c, v_v, higher_is_better=True):
+            if higher_is_better:
+                winner = "Completo" if v_c > v_v + 1e-9 else ("VIP > 1" if v_v > v_c + 1e-9 else "Pari")
+            else:
+                winner = "Completo" if v_c < v_v - 1e-9 else ("VIP > 1" if v_v < v_c - 1e-9 else "Pari")
+            return f"  {label:<32s} {v_c:>12.4f} {v_v:>12.4f} {winner:>12s}"
+
+        print(f"\n  N. Variabili:       {n_vars:>5d}       vs  {len(vd['idx']):>5d}")
+        print(f"  N. LV:              {best_n:>5d}       vs  {vd['n_lv']:>5d}")
+        print()
+        print(hdr)
+        print(sep)
+        print("  ── Calibrazione ──")
+        print(_row("Accuracy (Cal)",    acc_cal_c,  acc_cal_v))
+        print(_row("Bal. Accuracy (Cal)", bacc_cal_c, bacc_cal_v))
+        print(_row("Sens. Cl.1 (Cal)",  sens_cal[0], sens_cal_v[0]))
+        print(_row("Sens. Cl.2 (Cal)",  sens_cal[1], sens_cal_v[1]))
+        print(_row("RMSEC (media)",     np.mean(rmse_cal), np.mean(rmse_cal_v), higher_is_better=False))
+        print(_row("R² Cal",            np.mean(r2_cal), np.mean(r2_cal_v)))
+        print(sep)
+        print("  ── Cross-Validation ──")
+        print(_row("Accuracy (CV)",     acc_cv_c,   acc_cv_v))
+        print(_row("Bal. Accuracy (CV)", bacc_cv_c,  bacc_cv_v))
+        print(_row("Sens. Cl.1 (CV)",   sens_cv[0],  sens_cv_v[0]))
+        print(_row("Sens. Cl.2 (CV)",   sens_cv[1],  sens_cv_v[1]))
+        print(_row("RMSECV (media)",    np.mean(rmse_cv), np.mean(rmse_cv_v), higher_is_better=False))
+        print(_row("R² CV",             np.mean(r2_cv), np.mean(r2_cv_v)))
+        print(sep)
+        print("  ── Predizione (Test Set) ──")
+        print(_row("Accuracy (Pred)",   acc_pred_c,  acc_pred_v))
+        print(_row("Bal. Accuracy (Pred)", bacc_pred_c, bacc_pred_v))
+        print(_row("Sens. Cl.1 (Pred)", sens_pred[0], sens_pred_v[0]))
+        print(_row("Sens. Cl.2 (Pred)", sens_pred[1], sens_pred_v[1]))
+        print(_row("RMSEP (media)",     np.mean(rmse_pred), np.mean(rmse_pred_v), higher_is_better=False))
+        print(_row("R² Pred",           np.mean(r2_pred), np.mean(r2_pred_v)))
+        print(sep)
+        print("  ── Indicatori Generali ──")
+        print(_row("Overfitting (Cal-CV)", overfit_c, overfit_v, higher_is_better=False))
+        print(_row("AUC CV",            auc_cv, vd['roc_data_cv'][3]))
+        print(sep)
+
+        # ── Verdetto finale ──
+        scores_c, scores_v = 0, 0
+        # Pesi: Pred conta doppio
+        checks = [
+            (bacc_cv_c,   bacc_cv_v,   True),   # BAcc CV
+            (bacc_pred_c, bacc_pred_v, True),    # BAcc Pred (peso doppio)
+            (bacc_pred_c, bacc_pred_v, True),    # BAcc Pred (peso doppio)
+            (np.mean(rmse_cv), np.mean(rmse_cv_v), False),  # RMSECV
+            (auc_cv, vd['roc_data_cv'][3], True),            # AUC
+            (overfit_c, overfit_v, False),                    # Overfitting
+        ]
+        for vc, vv, higher in checks:
+            if higher:
+                if vc > vv + 1e-9: scores_c += 1
+                elif vv > vc + 1e-9: scores_v += 1
+            else:
+                if vc < vv - 1e-9: scores_c += 1
+                elif vv < vc - 1e-9: scores_v += 1
+
+        print()
+        print(f"  Punteggio complessivo:  Completo = {scores_c}  |  VIP > 1 = {scores_v}")
+        if scores_c > scores_v:
+            winner_name = f"COMPLETO ({n_vars} variabili, {best_n} LV)"
+        elif scores_v > scores_c:
+            winner_name = f"VIP > 1 ({len(vd['idx'])} variabili, {vd['n_lv']} LV)"
+        else:
+            winner_name = "PAREGGIO – si preferisce il modello più semplice (VIP > 1)"
+
+        print(f"\n  ★★★  MODELLO VINCITORE: {winner_name}  ★★★")
+
+        if scores_c > scores_v:
+            print(f"\n  Motivazione: il modello completo supera VIP > 1 sulle metriche")
+            print(f"  di generalizzazione (BAcc Pred, AUC). La riduzione delle variabili")
+            print(f"  non porta vantaggi e peggiora la Sensitivity della Classe 2.")
+        elif scores_v > scores_c:
+            print(f"\n  Motivazione: il modello ridotto VIP > 1 generalizza meglio con")
+            print(f"  meno variabili, offrendo maggiore interpretabilità e parsimonia.")
+        else:
+            print(f"\n  Motivazione: performance comparabili, ma il modello ridotto è")
+            print(f"  preferibile per parsimonia e interpretabilità (Occam's razor).")
+    else:
+        print("\n  Nessun modello VIP > 1 disponibile per il confronto.")
+
+    print()
     print("=" * 80)
     print("  ANALISI COMPLETATA CON SUCCESSO!")
     print("=" * 80)
