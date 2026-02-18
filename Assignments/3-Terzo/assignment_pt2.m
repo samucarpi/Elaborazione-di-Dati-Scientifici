@@ -53,9 +53,12 @@ subplot(1, 2, 2);
 plot(wl_cut, loading(:,1), 'b-', 'LineWidth', 1.0); hold on; % loading PC1
 plot(wl_cut, loading(:,2), 'r-', 'LineWidth', 1.0); % loading PC2
 yline(0);
+xlim([min(wl) max(wl)]);
+xticks(min(wl):200:max(wl)); % Passo 200 per non affollare troppo
+xtickangle(90);
 title('PCA LOADINGS SU ASSEXSCALE');
 xlabel('Wavenumber (cm^{-1})');
 ylabel('Peso (Loading)');
-legend({'Loading PC1', 'Loading PC2'}, 'Location', 'southeast');
+legend({'Loading PC2'}, 'Location', 'southeast');
 axis tight; 
 grid on;
