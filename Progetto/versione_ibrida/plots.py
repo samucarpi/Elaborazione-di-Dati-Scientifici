@@ -437,19 +437,82 @@ def compute_cv_scan(X, y_dummy, y_class, max_components=15, cv_folds=10):
         pls = PLSRegression(n_components=n_comp, scale=False)
         y_pred_cv = cross_val_predict(pls, X, y_dummy, cv=splits)
 
-        y_pred_class = np.argmax(y_pred_cv, axis=1) + 1
+        # Metodo ibrido: soglia ROC ottimale (Youden's J) sulla colonna Biodeg
+        y_cv_cont = y_pred_cv[:, 1]
+        y_binary = (y_class == 2).astype(int)
+        fpr_s, tpr_s, thr_s = roc_curve(y_binary, y_cv_cont)
+        J_s = tpr_s - fpr_s
+        thresh_opt = thr_s[np.argmax(J_s)]
+        y_pred_class = np.where(y_cv_cont >= thresh_opt, 2, 1)
         bacc = balanced_accuracy_score(y_class, y_pred_class)
 
         residuals = y_dummy[:, 1] - y_pred_cv[:, 1]
         rmsecv = np.sqrt(np.mean(residuals ** 2))
 
+        # Classification error per classe e totale
+        class_labels = np.unique(y_class)
+        cerr_per_class = []
+        for k in class_labels:
+            mask = y_class == k
+            cerr_k = 1.0 - np.mean(y_pred_class[mask] == k)
+            cerr_per_class.append(cerr_k)
+        mean_cerr = np.mean(cerr_per_class)  # media degli errori per-classe
+
         results.append({
             "n_components": n_comp,
             "balanced_accuracy": bacc,
             "rmsecv": rmsecv,
+            "class_err": mean_cerr,
+            "class_err_1": cerr_per_class[0],
+            "class_err_2": cerr_per_class[1],
         })
 
     return pd.DataFrame(results)
+
+
+def plot_cv_classification_error(df, filename="CV_classification_error.png", chosen_n=None):
+    """
+    Grafico del Classification Error (per classe e medio) vs numero di LV.
+    Usato per la scelta del numero ottimale di componenti latenti in PLS-DA.
+    """
+    fig, ax = plt.subplots(figsize=(12, 9))
+    nc = df["n_components"]
+
+    ax.plot(nc, df["class_err_1"], "s--", color="#E74C3C", lw=1.5, ms=6,
+            label="Class. Error – Classe 1 (Non Biodeg)", alpha=0.7)
+    ax.plot(nc, df["class_err_2"], "D--", color="#3498DB", lw=1.5, ms=6,
+            label="Class. Error – Classe 2 (Biodeg)", alpha=0.7)
+    ax.plot(nc, df["class_err"], "o-", color="#2C3E50", lw=2.5, ms=8,
+            label="Class. Error Medio (CV)", zorder=5)
+
+    if chosen_n is not None:
+        ax.axvline(chosen_n, color="#E67E22", ls="--", lw=1.5,
+                   label=f"LV scelto = {chosen_n}")
+
+    # Evidenzia il minimo
+    best_idx = df["class_err"].idxmin()
+    best_n = df.loc[best_idx, "n_components"]
+    best_err = df.loc[best_idx, "class_err"]
+    ax.annotate(f"Min = {best_err:.4f}\n(LV = {int(best_n)})",
+                xy=(best_n, best_err),
+                xytext=(best_n + 1.5, best_err + 0.03),
+                arrowprops=dict(arrowstyle="->", color="#555"),
+                fontsize=10, color="#333",
+                bbox=dict(boxstyle="round,pad=0.3", fc="#FFF9C4", ec="#999", alpha=0.9))
+
+    ax.set_xlabel("Numero Componenti Latenti (LV)", fontsize=12)
+    ax.set_ylabel("Classification Error (CV)", fontsize=12)
+    ax.set_title("PLS-DA – Classification Error in Cross-Validation vs Numero di LV\n",
+                 fontsize=14, fontweight="bold")
+    ax.set_xticks(nc)
+    ax.set_ylim(bottom=0)
+    ax.grid(True, ls=":", alpha=0.4)
+    ax.legend(loc="best", fontsize=9, framealpha=0.9)
+
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300, bbox_inches="tight")
+    plt.close()
+    print(f"  ✓ Salvato: {filename}")
 
 
 def plot_cv_optimization(df, filename="CV_optimization.png", chosen_n=None):
@@ -573,7 +636,7 @@ def plot_plsda_scores(model, X, labels, filename="PLSDA_scores.png"):
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_combined(model, X_train, y_train, X_test, y_test, threshold=0.5, filename="PLSDA_ypred_combined.png"):
+def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA_ypred_combined.png"):
     """
     Y Predicted Plot combinato (Training + Test).
 
@@ -628,8 +691,8 @@ def plot_ypred_combined(model, X_train, y_train, X_test, y_test, threshold=0.5, 
     ax.set_ylabel("$\\hat{y}$  (dummy)")
     ax.set_title("PLS-DA - Y Predicted Plot (Training + Test)\n", fontsize=14, fontweight="bold")
 
-    # Conteggio misclassificati (soglia ROC sulla colonna Biodeg)
-    yp_class_all = np.where(yp_all[:, 1] >= threshold, 2, 1)
+    # Conteggio misclassificati (argmax)
+    yp_class_all = np.argmax(yp_all, axis=1) + 1
     mis = (yp_class_all != y_all).sum()
     ax.text(0.5, -0.1, f"Misclassificati: {mis} / {n_tot}", fontsize=12, ha="center", transform=ax.transAxes, fontstyle="italic", color="#555555")
 
@@ -642,13 +705,13 @@ def plot_ypred_combined(model, X_train, y_train, X_test, y_test, threshold=0.5, 
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_vs_actual(model, X, y_true, threshold=0.5, filename="PLSDA_ypred_vs_actual.png"):
+def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png"):
     """
     Grafico dei valori predetti (y_pred continuo) vs campioni.
 
     Usa la colonna Biodeg (indice 1) della predizione dummy:
-      - y_pred ≥ threshold → Biodeg,  y_pred < threshold → Non Biodeg.
-    La soglia di decisione è determinata dalla curva ROC (Youden's J).
+      - y_pred ~ 1 → Biodeg,  y_pred ~ 0 → Non Biodeg.
+    La soglia di decisione è posta a 0.5 (coerente con argmax).
 
     I campioni sono colorati per classe reale; quelli che cadono
     dal lato sbagliato della soglia sono evidenziati con un bordo rosso.
@@ -659,8 +722,8 @@ def plot_ypred_vs_actual(model, X, y_true, threshold=0.5, filename="PLSDA_ypred_
     n = len(y_true)
     x_idx = np.arange(1, n + 1)
 
-    # Classificazione predetta con soglia ROC
-    y_pred_class = np.where(y_pred_cont >= threshold, 2, 1)
+    # Classificazione predetta (argmax ≡ soglia 0.5)
+    y_pred_class = np.argmax(y_pred_dummy, axis=1) + 1   # 1 o 2
     misclass = y_pred_class != y_true
 
     fig, ax = plt.subplots(figsize=(12, 9))
@@ -684,7 +747,7 @@ def plot_ypred_vs_actual(model, X, y_true, threshold=0.5, filename="PLSDA_ypred_
                    marker="X", s=60, edgecolors="red", linewidths=0.4,
                    label=f"Misclassificati")
 
-    ax.axhline(threshold, color="#FF1900", ls="-", lw=1, label=f"Soglia ROC (Youden's J) = {threshold:.4f}")
+    ax.axhline(0.5, color="#FF1900", ls="-", lw=1, label="Soglia decisionale (0.5)")
     ax.set_xlabel("Campione")
     ax.set_ylabel("$\\hat{y}$  (colonna Biodeg)")
     plot_name = "Training Set" if "train" in filename.lower() else "Test Set"
@@ -698,12 +761,12 @@ def plot_ypred_vs_actual(model, X, y_true, threshold=0.5, filename="PLSDA_ypred_
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_eval(model, X, threshold=0.5, filename="PLSDA_ypred_eval.png"):
+def plot_ypred_eval(model, X, filename="PLSDA_ypred_eval.png"):
     """
     Grafico dei valori predetti (y_pred continuo) vs campioni per Xeval.
 
     Non essendoci classi reali, i campioni sono colorati per classe PREDETTA
-    tramite soglia ROC (Youden's J).
+    tramite argmax (equivalente a soglia 0.5).
     """
     y_pred_dummy = model.predict(X)     # (n, 2)
     y_pred_cont  = y_pred_dummy[:, 1]   # colonna Biodeg: 0…1
@@ -711,8 +774,8 @@ def plot_ypred_eval(model, X, threshold=0.5, filename="PLSDA_ypred_eval.png"):
     n = len(y_pred_cont)
     x_idx = np.arange(1, n + 1)
 
-    # Classificazione predetta con soglia ROC
-    y_pred_class = np.where(y_pred_cont >= threshold, 2, 1)
+    # Classificazione predetta (argmax ≡ soglia 0.5)
+    y_pred_class = np.argmax(y_pred_dummy, axis=1) + 1   # 1 o 2
     n1 = (y_pred_class == 1).sum()
     n2 = (y_pred_class == 2).sum()
 
@@ -731,7 +794,7 @@ def plot_ypred_eval(model, X, threshold=0.5, filename="PLSDA_ypred_eval.png"):
 
     ax.axhline(0, color="gray", ls="--", lw=0.8, alpha=0.6)
     ax.axvline(0, color="gray", ls="--", lw=0.8, alpha=0.6)
-    ax.axhline(threshold, color="#FF1900", ls="-", lw=1, label=f"Soglia ROC (Youden's J) = {threshold:.4f}")
+    ax.axhline(0.5, color="#FF1900", ls="-", lw=1, label="Soglia decisionale (0.5)")
     ax.set_xlabel("Campione")
     ax.set_ylabel("$\\hat{y}$  (colonna Biodeg)")
     ax.set_title(f"PLS-DA - Valori Predetti vs Campioni - Xeval Set\n", fontsize=14, fontweight="bold")
