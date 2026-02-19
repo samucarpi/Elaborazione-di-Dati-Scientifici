@@ -636,7 +636,7 @@ def plot_plsda_scores(model, X, labels, filename="PLSDA_scores.png"):
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA_ypred_combined.png"):
+def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA_ypred_combined.png", threshold=0.5):
     """
     Y Predicted Plot combinato (Training + Test).
 
@@ -680,7 +680,8 @@ def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA
     # ── Separatore Train / Test ──
     ax.axvline(n_tr + 0.5, color="black", ls="-", lw=1.5, label="Train | Test")
 
-    # ── Soglia 0 (crossing point) ──
+    # ── Soglia ROC (linea decisionale) ──
+    ax.axhline(threshold, color="#FF1900", ls="-", lw=1, label=f"Soglia ROC = {threshold:.4f}")
     ax.axhline(0, color="gray", ls="--", lw=0.8, alpha=0.6)
 
     # ── Annotazioni set ──
@@ -691,8 +692,8 @@ def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA
     ax.set_ylabel("$\\hat{y}$  (dummy)")
     ax.set_title("PLS-DA - Y Predicted Plot (Training + Test)\n", fontsize=14, fontweight="bold")
 
-    # Conteggio misclassificati (argmax)
-    yp_class_all = np.argmax(yp_all, axis=1) + 1
+    # Conteggio misclassificati (soglia ROC sulla colonna Biodeg)
+    yp_class_all = np.where(yp_all[:, 1] >= threshold, 2, 1)
     mis = (yp_class_all != y_all).sum()
     ax.text(0.5, -0.1, f"Misclassificati: {mis} / {n_tot}", fontsize=12, ha="center", transform=ax.transAxes, fontstyle="italic", color="#555555")
 
@@ -705,13 +706,12 @@ def plot_ypred_combined(model, X_train, y_train, X_test, y_test, filename="PLSDA
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png"):
+def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png", threshold=0.5):
     """
     Grafico dei valori predetti (y_pred continuo) vs campioni.
 
-    Usa la colonna Biodeg (indice 1) della predizione dummy:
-      - y_pred ~ 1 → Biodeg,  y_pred ~ 0 → Non Biodeg.
-    La soglia di decisione è posta a 0.5 (coerente con argmax).
+    Usa la colonna Biodeg (indice 1) della predizione dummy.
+    La soglia di decisione è quella ottimale determinata dalla curva ROC.
 
     I campioni sono colorati per classe reale; quelli che cadono
     dal lato sbagliato della soglia sono evidenziati con un bordo rosso.
@@ -722,8 +722,8 @@ def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png")
     n = len(y_true)
     x_idx = np.arange(1, n + 1)
 
-    # Classificazione predetta (argmax ≡ soglia 0.5)
-    y_pred_class = np.argmax(y_pred_dummy, axis=1) + 1   # 1 o 2
+    # Classificazione predetta (soglia ROC)
+    y_pred_class = np.where(y_pred_cont >= threshold, 2, 1)
     misclass = y_pred_class != y_true
 
     fig, ax = plt.subplots(figsize=(12, 9))
@@ -747,7 +747,7 @@ def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png")
                    marker="X", s=60, edgecolors="red", linewidths=0.4,
                    label=f"Misclassificati")
 
-    ax.axhline(0.5, color="#FF1900", ls="-", lw=1, label="Soglia decisionale (0.5)")
+    ax.axhline(threshold, color="#FF1900", ls="-", lw=1, label=f"Soglia ROC = {threshold:.4f}")
     ax.set_xlabel("Campione")
     ax.set_ylabel("$\\hat{y}$  (colonna Biodeg)")
     plot_name = "Training Set" if "train" in filename.lower() else "Test Set"
@@ -761,12 +761,12 @@ def plot_ypred_vs_actual(model, X, y_true, filename="PLSDA_ypred_vs_actual.png")
     print(f"  \u2713 Salvato: {filename}")
 
 
-def plot_ypred_eval(model, X, filename="PLSDA_ypred_eval.png"):
+def plot_ypred_eval(model, X, filename="PLSDA_ypred_eval.png", threshold=0.5):
     """
     Grafico dei valori predetti (y_pred continuo) vs campioni per Xeval.
 
     Non essendoci classi reali, i campioni sono colorati per classe PREDETTA
-    tramite argmax (equivalente a soglia 0.5).
+    tramite la soglia ROC ottimale.
     """
     y_pred_dummy = model.predict(X)     # (n, 2)
     y_pred_cont  = y_pred_dummy[:, 1]   # colonna Biodeg: 0…1
@@ -774,8 +774,8 @@ def plot_ypred_eval(model, X, filename="PLSDA_ypred_eval.png"):
     n = len(y_pred_cont)
     x_idx = np.arange(1, n + 1)
 
-    # Classificazione predetta (argmax ≡ soglia 0.5)
-    y_pred_class = np.argmax(y_pred_dummy, axis=1) + 1   # 1 o 2
+    # Classificazione predetta (soglia ROC)
+    y_pred_class = np.where(y_pred_cont >= threshold, 2, 1)
     n1 = (y_pred_class == 1).sum()
     n2 = (y_pred_class == 2).sum()
 
@@ -794,7 +794,7 @@ def plot_ypred_eval(model, X, filename="PLSDA_ypred_eval.png"):
 
     ax.axhline(0, color="gray", ls="--", lw=0.8, alpha=0.6)
     ax.axvline(0, color="gray", ls="--", lw=0.8, alpha=0.6)
-    ax.axhline(0.5, color="#FF1900", ls="-", lw=1, label="Soglia decisionale (0.5)")
+    ax.axhline(threshold, color="#FF1900", ls="-", lw=1, label=f"Soglia ROC = {threshold:.4f}")
     ax.set_xlabel("Campione")
     ax.set_ylabel("$\\hat{y}$  (colonna Biodeg)")
     ax.set_title(f"PLS-DA - Valori Predetti vs Campioni - Xeval Set\n", fontsize=14, fontweight="bold")

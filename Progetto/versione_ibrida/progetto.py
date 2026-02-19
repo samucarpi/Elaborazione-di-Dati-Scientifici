@@ -286,12 +286,12 @@ if __name__ == "__main__":
     plot_plsda_scores(pls_da, X_train_s, y_train, "3_PLSDA/PLSDA_scores.png")
 
     # Grafico y_pred vs campioni (train + test)
-    plot_ypred_vs_actual(pls_da, X_train_s, y_train, filename="3_PLSDA/PLSDA_ypred_train.png")
-    plot_ypred_vs_actual(pls_da, X_test_s, y_test, filename="3_PLSDA/PLSDA_ypred_test.png")
+    plot_ypred_vs_actual(pls_da, X_train_s, y_train, filename="3_PLSDA/PLSDA_ypred_train.png", threshold=optimal_threshold)
+    plot_ypred_vs_actual(pls_da, X_test_s, y_test, filename="3_PLSDA/PLSDA_ypred_test.png", threshold=optimal_threshold)
 
     # Y Predicted Plot combinato (Training + Test) con entrambe le colonne dummy
     plot_ypred_combined(pls_da, X_train_s, y_train, X_test_s, y_test,
-                        filename="3_PLSDA/PLSDA_ypred_combined.png")
+                        filename="3_PLSDA/PLSDA_ypred_combined.png", threshold=optimal_threshold)
 
     # =====================================================================
     # 4.  ANALISI  DESCRITTORI  IMPORTANTI   (VIP  &  SR)
@@ -627,7 +627,7 @@ if __name__ == "__main__":
 
     # Grafico y_pred vs campioni per Xeval
     plot_ypred_eval(final_model, final_X_eval,
-                    filename="3_PLSDA/PLSDA_ypred_eval.png")
+                    filename="3_PLSDA/PLSDA_ypred_eval.png", threshold=final_threshold)
 
     n1 = int((y_eval_pred == 1).sum())
     n2 = int((y_eval_pred == 2).sum())
