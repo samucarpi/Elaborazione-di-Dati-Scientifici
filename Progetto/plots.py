@@ -429,12 +429,13 @@ def compute_cv_scan(X, y_dummy, y_class, max_components=15, cv_folds=10):
     tramite 10-Fold CV, per generare il grafico di selezione.
     """
     max_possible = min(max_components, X.shape[1])
-    kf = KFold(n_splits=cv_folds, shuffle=True, random_state=42)
+    kf = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+    splits = list(kf.split(X, y_class))
     results = []
 
     for n_comp in range(1, max_possible + 1):
         pls = PLSRegression(n_components=n_comp, scale=False)
-        y_pred_cv = cross_val_predict(pls, X, y_dummy, cv=kf)
+        y_pred_cv = cross_val_predict(pls, X, y_dummy, cv=splits)
 
         y_pred_class = np.argmax(y_pred_cv, axis=1) + 1
         bacc = balanced_accuracy_score(y_class, y_pred_class)
@@ -481,11 +482,6 @@ def plot_cv_classification_error(df, filename="CV_classification_error.png", cho
     if chosen_n is not None:
         ax.axvline(chosen_n, color="#E67E22", ls="--", lw=1.5,
                    label=f"LV scelto = {chosen_n}")
-        # Evidenzia il punto scelto
-        idx = df[df["n_components"] == chosen_n].index
-        if len(idx) > 0:
-            val = df.loc[idx[0], "class_err"]
-            ax.plot(chosen_n, val, "*", color="#E67E22", ms=18, zorder=6)
 
     # Evidenzia il minimo
     best_idx = df["class_err"].idxmin()
