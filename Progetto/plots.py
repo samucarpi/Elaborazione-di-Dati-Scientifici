@@ -429,13 +429,12 @@ def compute_cv_scan(X, y_dummy, y_class, max_components=15, cv_folds=10):
     tramite 10-Fold CV, per generare il grafico di selezione.
     """
     max_possible = min(max_components, X.shape[1])
-    kf = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
-    splits = list(kf.split(X, y_class))
+    kf = KFold(n_splits=cv_folds, shuffle=True, random_state=42)
     results = []
 
     for n_comp in range(1, max_possible + 1):
         pls = PLSRegression(n_components=n_comp, scale=False)
-        y_pred_cv = cross_val_predict(pls, X, y_dummy, cv=splits)
+        y_pred_cv = cross_val_predict(pls, X, y_dummy, cv=kf)
 
         y_pred_class = np.argmax(y_pred_cv, axis=1) + 1
         bacc = balanced_accuracy_score(y_class, y_pred_class)
@@ -443,13 +442,75 @@ def compute_cv_scan(X, y_dummy, y_class, max_components=15, cv_folds=10):
         residuals = y_dummy[:, 1] - y_pred_cv[:, 1]
         rmsecv = np.sqrt(np.mean(residuals ** 2))
 
+        # Classification error per classe e totale
+        class_labels = np.unique(y_class)
+        cerr_per_class = []
+        for k in class_labels:
+            mask = y_class == k
+            cerr_k = 1.0 - np.mean(y_pred_class[mask] == k)
+            cerr_per_class.append(cerr_k)
+        mean_cerr = np.mean(cerr_per_class)  # media degli errori per-classe
+
         results.append({
             "n_components": n_comp,
             "balanced_accuracy": bacc,
             "rmsecv": rmsecv,
+            "class_err": mean_cerr,
+            "class_err_1": cerr_per_class[0],
+            "class_err_2": cerr_per_class[1],
         })
 
     return pd.DataFrame(results)
+
+
+def plot_cv_classification_error(df, filename="CV_classification_error.png", chosen_n=None):
+    """
+    Grafico del Classification Error (per classe e medio) vs numero di LV.
+    Usato per la scelta del numero ottimale di componenti latenti in PLS-DA.
+    """
+    fig, ax = plt.subplots(figsize=(12, 9))
+    nc = df["n_components"]
+
+    ax.plot(nc, df["class_err_1"], "s--", color="#E74C3C", lw=1.5, ms=6,
+            label="Class. Error – Classe 1 (Non Biodeg)", alpha=0.7)
+    ax.plot(nc, df["class_err_2"], "D--", color="#3498DB", lw=1.5, ms=6,
+            label="Class. Error – Classe 2 (Biodeg)", alpha=0.7)
+    ax.plot(nc, df["class_err"], "o-", color="#2C3E50", lw=2.5, ms=8,
+            label="Class. Error Medio (CV)", zorder=5)
+
+    if chosen_n is not None:
+        ax.axvline(chosen_n, color="#E67E22", ls="--", lw=1.5,
+                   label=f"LV scelto = {chosen_n}")
+        # Evidenzia il punto scelto
+        idx = df[df["n_components"] == chosen_n].index
+        if len(idx) > 0:
+            val = df.loc[idx[0], "class_err"]
+            ax.plot(chosen_n, val, "*", color="#E67E22", ms=18, zorder=6)
+
+    # Evidenzia il minimo
+    best_idx = df["class_err"].idxmin()
+    best_n = df.loc[best_idx, "n_components"]
+    best_err = df.loc[best_idx, "class_err"]
+    ax.annotate(f"Min = {best_err:.4f}\n(LV = {int(best_n)})",
+                xy=(best_n, best_err),
+                xytext=(best_n + 1.5, best_err + 0.03),
+                arrowprops=dict(arrowstyle="->", color="#555"),
+                fontsize=10, color="#333",
+                bbox=dict(boxstyle="round,pad=0.3", fc="#FFF9C4", ec="#999", alpha=0.9))
+
+    ax.set_xlabel("Numero Componenti Latenti (LV)", fontsize=12)
+    ax.set_ylabel("Classification Error (CV)", fontsize=12)
+    ax.set_title("PLS-DA – Classification Error in Cross-Validation vs Numero di LV\n",
+                 fontsize=14, fontweight="bold")
+    ax.set_xticks(nc)
+    ax.set_ylim(bottom=0)
+    ax.grid(True, ls=":", alpha=0.4)
+    ax.legend(loc="best", fontsize=9, framealpha=0.9)
+
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300, bbox_inches="tight")
+    plt.close()
+    print(f"  ✓ Salvato: {filename}")
 
 
 def plot_cv_optimization(df, filename="CV_optimization.png", chosen_n=None):

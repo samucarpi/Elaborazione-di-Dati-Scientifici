@@ -102,11 +102,26 @@ if __name__ == "__main__":
     print("3. PLS-DA – OTTIMIZZAZIONE COMPONENTI (Stratified 10-Fold CV)")
     print("─" * 50)
 
-    # NUMERO DI COMPONENTI LATENTI
-    best_n = 7
-
+    # SCELTA AUTOMATICA DEL NUMERO DI COMPONENTI LATENTI
+    # Basata su Classification Error medio in CV (criterio primario per PLS-DA)
+    # e RMSECV (criterio secondario, per disambiguare a parità di class. error)
     cv_res = compute_cv_scan(X_train_s, y_train_dummy, y_train, max_components=15, cv_folds=10)
+
+    # Criterio 1: minimo classification error medio in CV
+    min_cerr = cv_res["class_err"].min()
+    # Candidati: tutti i numeri di LV con class_err entro 0.5% dal minimo
+    candidates = cv_res[cv_res["class_err"] <= min_cerr + 0.005]
+    # Criterio 2: tra i candidati, scegli quello con RMSECV più basso
+    best_idx = candidates["rmsecv"].idxmin()
+    best_n = int(cv_res.loc[best_idx, "n_components"])
+
+    print(f"\n  Selezione automatica LV:")
+    print(f"    Min Class. Error CV = {min_cerr:.4f}  (a LV = {int(cv_res.loc[cv_res['class_err'].idxmin(), 'n_components'])})")
+    print(f"    RMSECV al punto scelto = {cv_res.loc[best_idx, 'rmsecv']:.4f}")
+    print(f"    ➜ Numero ottimale di LV scelto: {best_n}")
+
     plot_cv_optimization(cv_res, "3_PLSDA/CV_optimization.png", chosen_n=best_n)
+    plot_cv_classification_error(cv_res, "3_PLSDA/CV_classification_error.png", chosen_n=best_n)
 
     # ── Modello finale ──
     print(f"\n  Fitting PLS-DA finale con {best_n} LV…")
