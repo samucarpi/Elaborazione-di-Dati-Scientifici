@@ -144,7 +144,7 @@ if __name__ == "__main__":
     y_test_cont = pls_da.predict(X_test_s)[:, 1]
     y_test_pred = np.where(y_test_cont >= optimal_threshold, 2, 1)
     test_metrics_full = compute_classification_metrics(
-        y_test, y_test_pred, f"Completo ({n_vars} var")
+        y_test, y_test_pred, f"Completo ({n_vars} var)")
 
     print(f"\n  Metriche Test Set (modello completo, {best_n} LV, soglia ROC = {optimal_threshold:.4f}):")
     print(f"    Accuracy:          {test_metrics_full['accuracy']:.4f}")
@@ -516,7 +516,7 @@ if __name__ == "__main__":
 
     # ── Stesso grafico per le metriche CV ──
     cv_comparison_rows = [compute_classification_metrics(
-        y_train, y_cv_pred, f"Completo ({n_vars} var")]
+        y_train, y_cv_pred, f"Completo ({n_vars} var)")]
     for label, res_data in strategy_results.items():
         cv_comparison_rows.append(res_data["metrics_cv"])
     comp_cv_df = pd.DataFrame(cv_comparison_rows)
