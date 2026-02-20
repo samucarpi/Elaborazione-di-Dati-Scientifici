@@ -119,20 +119,23 @@ if __name__ == "__main__":
     skf_final = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
     splits_final = list(skf_final.split(X_train_s, y_train))
     y_cv_pred_dummy = cross_val_predict(pls_da, X_train_s, y_train_dummy, cv=splits_final)
-    y_cv_pred = np.argmax(y_cv_pred_dummy, axis=1) + 1
-    cv_metrics = compute_classification_metrics(y_train, y_cv_pred, "CV")
-    print(f"\n  Metriche Cross-Validation (out-of-fold):")
-    print(f"    Accuracy:          {cv_metrics['accuracy']:.4f}")
-    print(f"    Balanced Accuracy: {cv_metrics['balanced_accuracy']:.4f}")
-    print(f"    Sensitivity:       {cv_metrics['sensitivity']:.4f}  (Biodeg)")
-    print(f"    Specificity:       {cv_metrics['specificity']:.4f}  (Non Biodeg)")
 
     # Calcolo soglia ottimale tramite curva ROC (Youden's J statistic)
+    # PRIMA di classificare, così y_cv_pred usa già la soglia ottimale
     y_cv_cont = y_cv_pred_dummy[:, 1]   # colonna Biodeg continua (out-of-fold)
     optimal_threshold, fpr_cv, tpr_cv, thresholds_cv, auc_cv = \
         compute_optimal_threshold(y_train, y_cv_cont)
     print(f"\n  Soglia ottimale (ROC, Youden's J): {optimal_threshold:.4f}")
     print(f"  AUC (Cross-Validation):            {auc_cv:.4f}")
+
+    # Classificazione CV con soglia ottimale (non argmax/0.5 implicita)
+    y_cv_pred = np.where(y_cv_cont >= optimal_threshold, 2, 1)
+    cv_metrics = compute_classification_metrics(y_train, y_cv_pred, "CV")
+    print(f"\n  Metriche Cross-Validation (out-of-fold, soglia={optimal_threshold:.4f}):")
+    print(f"    Accuracy:          {cv_metrics['accuracy']:.4f}")
+    print(f"    Balanced Accuracy: {cv_metrics['balanced_accuracy']:.4f}")
+    print(f"    Sensitivity:       {cv_metrics['sensitivity']:.4f}  (Biodeg)")
+    print(f"    Specificity:       {cv_metrics['specificity']:.4f}  (Non Biodeg)")
 
     # ROC Curve - Training Cross-Validation
     plot_roc_curve(fpr_cv, tpr_cv, thresholds_cv, auc_cv, optimal_threshold,
@@ -140,19 +143,19 @@ if __name__ == "__main__":
                    set_name="Cross-Validation Training (Modello Completo)",
                    y_true=y_train, y_pred_cont=y_cv_cont)
 
-    # ── Predizione test set ──
-    y_test_pred = np.argmax(pls_da.predict(X_test_s), axis=1) + 1
+    # ── Predizione test set con soglia ottimale determinata dal CV ──
+    y_test_cont = pls_da.predict(X_test_s)[:, 1]
+    y_test_pred = np.where(y_test_cont >= optimal_threshold, 2, 1)
     test_metrics_full = compute_classification_metrics(
         y_test, y_test_pred, f"Completo ({n_vars} var")
 
-    print(f"\n  Metriche Test Set (modello completo, {best_n} LV):")
+    print(f"\n  Metriche Test Set (modello completo, {best_n} LV, soglia={optimal_threshold:.4f}):")
     print(f"    Accuracy:          {test_metrics_full['accuracy']:.4f}")
     print(f"    Balanced Accuracy: {test_metrics_full['balanced_accuracy']:.4f}")
     print(f"    Sensitivity:       {test_metrics_full['sensitivity']:.4f}")
     print(f"    Specificity:       {test_metrics_full['specificity']:.4f}")
 
     # ROC Curve - Test Set (soglia determinata dal CV)
-    y_test_cont = pls_da.predict(X_test_s)[:, 1]
     _, fpr_test, tpr_test, thresholds_test, auc_test = \
         compute_optimal_threshold(y_test, y_test_cont)
     print(f"\n  AUC (Test Set):                    {auc_test:.4f}")
@@ -167,8 +170,8 @@ if __name__ == "__main__":
     y_test_pred_dummy = pls_da.predict(X_test_s)           # predizione test
     # y_cv_pred_dummy già calcolato sopra via cross_val_predict
 
-    # Classi predette per Cal
-    y_cal_class = np.argmax(y_cal_pred_dummy, axis=1) + 1
+    # Classi predette per Cal – stessa soglia ottimale CV
+    y_cal_class = np.where(y_cal_pred_dummy[:, 1] >= optimal_threshold, 2, 1)
 
     # Dummy Y reale per il test set
     y_test_dummy = np.zeros((len(y_test), 2))
@@ -285,13 +288,13 @@ if __name__ == "__main__":
     # Score Plot PLS-DA (LV1 vs LV2)
     plot_plsda_scores(pls_da, X_train_s, y_train, "3_PLSDA/PLSDA_scores.png")
 
-    # Grafico y_pred vs campioni (train + test)
-    plot_ypred_vs_actual(pls_da, X_train_s, y_train, filename="3_PLSDA/PLSDA_ypred_train.png")
-    plot_ypred_vs_actual(pls_da, X_test_s, y_test, filename="3_PLSDA/PLSDA_ypred_test.png")
+    # Grafico y_pred vs campioni (train + test) con soglia ROC ottimale
+    plot_ypred_vs_actual(pls_da, X_train_s, y_train, filename="3_PLSDA/PLSDA_ypred_train.png", threshold=optimal_threshold)
+    plot_ypred_vs_actual(pls_da, X_test_s, y_test, filename="3_PLSDA/PLSDA_ypred_test.png", threshold=optimal_threshold)
 
     # Y Predicted Plot combinato (Training + Test) con entrambe le colonne dummy
     plot_ypred_combined(pls_da, X_train_s, y_train, X_test_s, y_test,
-                        filename="3_PLSDA/PLSDA_ypred_combined.png")
+                        filename="3_PLSDA/PLSDA_ypred_combined.png", threshold=optimal_threshold)
 
     # =====================================================================
     # 4.  ANALISI  DESCRITTORI  IMPORTANTI   (VIP  &  SR)
@@ -457,6 +460,81 @@ if __name__ == "__main__":
     if res_sr1:
         comparison_rows.append(res_sr1)
 
+    # ── Stampa riepilogo SR > 1 stile PLS_Toolbox ──────────────────────────
+    if res_sr1 and "SR > 1" in strategy_results:
+        sr_data  = strategy_results["SR > 1"]
+        sr_model = sr_data["model"]
+        sr_idx   = sr_data["idx"]
+        sr_n_lv  = sr_data["n_lv"]
+        n_vars_sr = len(sr_idx)
+
+        Xtr_sr = X_train_s[:, sr_idx]
+        Xts_sr = X_test_s[:, sr_idx]
+
+        y_cal_sr_dummy   = sr_model.predict(Xtr_sr)
+        y_cal_sr_class   = np.argmax(y_cal_sr_dummy, axis=1) + 1
+
+        skf_sr = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
+        splits_sr = list(skf_sr.split(Xtr_sr, y_train))
+        y_cv_sr_dummy    = cross_val_predict(sr_model, Xtr_sr, y_train_dummy, cv=splits_sr)
+        y_cv_sr_class    = np.argmax(y_cv_sr_dummy, axis=1) + 1
+
+        y_pred_sr_dummy  = sr_model.predict(Xts_sr)
+        y_pred_sr_class  = np.argmax(y_pred_sr_dummy, axis=1) + 1
+
+        sens_cal_sr, spec_cal_sr, cerr_cal_sr = _per_class_sens_spec(y_train, y_cal_sr_class)
+        sens_cv_sr,  spec_cv_sr,  cerr_cv_sr  = _per_class_sens_spec(y_train, y_cv_sr_class)
+        sens_pred_sr, spec_pred_sr, cerr_pred_sr = _per_class_sens_spec(y_test, y_pred_sr_class)
+
+        rmse_cal_sr, bias_cal_sr, r2_cal_sr = _rmse_bias_r2(y_train_dummy, y_cal_sr_dummy)
+        rmse_cv_sr,  bias_cv_sr,  r2_cv_sr  = _rmse_bias_r2(y_train_dummy, y_cv_sr_dummy)
+        rmse_pred_sr, bias_pred_sr, r2_pred_sr = _rmse_bias_r2(y_test_dummy, y_pred_sr_dummy)
+
+        sr_var_names = [descriptors[i] for i in sr_idx]
+
+        print("\n" + "=" * 72)
+        print("  RIEPILOGO MODELLO PLS-DA  SR > 1  (stile PLS_Toolbox)")
+        print("=" * 72)
+        print(f"  This is a model of type: PLSDA_PRED (variabili selezionate SR > 1)")
+        print(f"  Developed {now_str}")
+        print()
+        print(f"  X-block: X_train  {X_train.shape[0]} by {n_vars_sr}  (selezionate da {n_vars})")
+        print(f"  Variabili incluse ({n_vars_sr}): {', '.join(sr_var_names)}")
+        print(f"  Preprocessing: Autoscale")
+        print()
+        print(f"  Y-block: Y_train  {y_train_dummy.shape[0]} by {y_train_dummy.shape[1]}")
+        print(f"  Preprocessing: None")
+        print(f"  Num. LVs: {sr_n_lv}")
+        print()
+        print(f"  Cross validation: stratified k-fold w/ 10 splits")
+        print()
+        print(f"  Statistics for each y-block column:")
+        print(f"  {'':22s} {'Classe 1':>12s}  {'Classe 2':>12s}")
+        print(f"  {'-'*50}")
+        print(_fmt_row("Sensitivity (Cal):",  sens_cal_sr,  ".4f"))
+        print(_fmt_row("Specificity (Cal):",  spec_cal_sr,  ".4f"))
+        print(_fmt_row("Sensitivity (CV):",   sens_cv_sr,   ".4f"))
+        print(_fmt_row("Specificity (CV):",   spec_cv_sr,   ".4f"))
+        print(_fmt_row("Sensitivity (Pred):", sens_pred_sr, ".4f"))
+        print(_fmt_row("Specificity (Pred):", spec_pred_sr, ".4f"))
+        print()
+        print(_fmt_row("Class. Err (Cal):",   cerr_cal_sr,  ".6f"))
+        print(_fmt_row("Class. Err (CV):",    cerr_cv_sr,   ".6f"))
+        print(_fmt_row("Class. Err (Pred):",  cerr_pred_sr, ".6f"))
+        print()
+        print(_fmt_row("RMSEC:",              rmse_cal_sr,  ".6f"))
+        print(_fmt_row("RMSECV:",             rmse_cv_sr,   ".6f"))
+        print(_fmt_row("RMSEP:",              rmse_pred_sr, ".6f"))
+        print()
+        print(_fmt_row("Bias:",               bias_cal_sr,  ".6g"))
+        print(_fmt_row("CV Bias:",            bias_cv_sr,   ".6g"))
+        print(_fmt_row("Pred Bias:",          bias_pred_sr, ".6g"))
+        print()
+        print(_fmt_row("R² Cal:",             r2_cal_sr,    ".6f"))
+        print(_fmt_row("R² CV:",              r2_cv_sr,     ".6f"))
+        print(_fmt_row("R² Pred:",            r2_pred_sr,   ".6f"))
+        print("=" * 72)
+
     # ── Confronto RMSECV tra modelli ──
     print("\n  Calcolo RMSECV per modelli ridotti…")
     cv_scans = {f"Completo ({n_vars} var)": cv_res}
@@ -524,20 +602,23 @@ if __name__ == "__main__":
 
     # Ricostruisco il modello migliore per Xeval
     if best_row["model"] == test_metrics_full["model"]:
-        final_model  = pls_da
-        final_X_eval = X_eval_s
-        model_type   = "completo"
+        final_model     = pls_da
+        final_X_eval    = X_eval_s
+        model_type      = "completo"
+        final_threshold = optimal_threshold          # soglia del modello completo
     else:
         # Cerca nel dizionario dei risultati
         found = False
         for label, res_data in strategy_results.items():
             if res_data["metrics"]["model"] == best_row["model"]:
-                final_model  = res_data["model"]
-                final_X_eval = X_eval_s[:, res_data["idx"]]
-                model_type   = f"ridotto ({label})"
+                final_model     = res_data["model"]
+                final_X_eval    = X_eval_s[:, res_data["idx"]]
+                model_type      = f"ridotto ({label})"
+                final_threshold = res_data["optimal_threshold"]  # soglia del modello ridotto
                 # Confusion matrix del modello ridotto migliore
-                y_test_pred_best = np.argmax(
-                    final_model.predict(X_test_s[:, res_data["idx"]]), axis=1) + 1
+                y_test_pred_best = np.where(
+                    final_model.predict(X_test_s[:, res_data["idx"]])[:, 1] >= final_threshold,
+                    2, 1)
                 plot_confusion_matrix(
                     y_test, y_test_pred_best,
                     f"Confusion Matrix - Test (Miglior Ridotto)\n",
@@ -547,9 +628,10 @@ if __name__ == "__main__":
                 found = True
                 break
         if not found:
-            final_model  = pls_da
-            final_X_eval = X_eval_s
-            model_type   = "completo"
+            final_model     = pls_da
+            final_X_eval    = X_eval_s
+            model_type      = "completo"
+            final_threshold = optimal_threshold
 
     # =====================================================================
     # 5b.  APPLICABILITY  DOMAIN
@@ -608,11 +690,13 @@ if __name__ == "__main__":
     print("6. PREVISIONE SET ESTERNO (Xeval) E EXPORT EXCEL")
     print("─" * 50)
 
-    y_eval_pred = np.argmax(final_model.predict(final_X_eval), axis=1) + 1
+    y_eval_cont = final_model.predict(final_X_eval)[:, 1]
+    y_eval_pred = np.where(y_eval_cont >= final_threshold, 2, 1)
 
-    # Grafico y_pred vs campioni per Xeval
+    # Grafico y_pred vs campioni per Xeval (soglia ROC del modello finale scelto)
     plot_ypred_eval(final_model, final_X_eval,
-                    filename="3_PLSDA/PLSDA_ypred_eval.png")
+                    filename="3_PLSDA/PLSDA_ypred_eval.png",
+                    threshold=final_threshold)
 
     n1 = int((y_eval_pred == 1).sum())
     n2 = int((y_eval_pred == 2).sum())
@@ -621,12 +705,23 @@ if __name__ == "__main__":
     print(f"    Classe 1 (Non Biodeg): {n1} ({100*n1/len(y_eval_pred):.1f}%)")
     print(f"    Classe 2 (Biodeg):     {n2} ({100*n2/len(y_eval_pred):.1f}%)")
 
+    # Affidabilità graduata: campioni fuori dominio con rapporto > 3× soglia
+    # sono "Altamente inaffidabile", gli altri "Poco inaffidabile"
+    h_ratio = h_eval / h_lim
+    q_ratio = Q_eval / Q_lim
+    max_ratio = np.maximum(h_ratio, q_ratio)
+
+    affidabilita = np.where(
+        ~out_eval, "Affidabile",
+        np.where(max_ratio > 3, "Altamente inaffidabile", "Poco inaffidabile")
+    )
+
     df_out = pd.DataFrame({
         "Sample_ID": range(1, len(y_eval_pred) + 1),
         "Predicted_Class": y_eval_pred,
         "Class_Label": np.where(y_eval_pred == 1, "Non Biodegradabile", "Biodegradabile"),
         "Dominio": np.where(out_eval, "No", "Sì"),
-        "Affidabilità": np.where(out_eval, "Bassa", "Alta"),
+        "Affidabilità": affidabilita,
     })
 
     # ── Informazioni dettagliate sul modello ──
@@ -696,10 +791,13 @@ if __name__ == "__main__":
     # 7.  CONFRONTO FINALE MODELLI
     # =====================================================================
     print("\n" + "=" * 80)
-    print("  CONFRONTO FINALE – MODELLO COMPLETO vs VIP > 1")
+    print("  CONFRONTO FINALE – MODELLO COMPLETO vs VIP > 1 vs SR > 1")
     print("=" * 80)
 
-    if "VIP > 1" in strategy_results:
+    has_vip = "VIP > 1" in strategy_results
+    has_sr  = "SR > 1" in strategy_results
+
+    if has_vip:
         vd = strategy_results["VIP > 1"]
 
         # Raccogli tutte le metriche in modo compatto
@@ -729,90 +827,125 @@ if __name__ == "__main__":
         bacc_pred_v = _bacc(y_test, y_pred_vip_class)
         overfit_v   = bacc_cal_v - bacc_cv_v
 
-        hdr = f"  {'Metrica':<32s} {'Completo':>12s} {'VIP > 1':>12s} {'Migliore':>12s}"
-        sep = f"  {'─'*70}"
+        # --- SR > 1 (se presente) ---
+        if has_sr:
+            sd = strategy_results["SR > 1"]
+            acc_cal_s   = _acc(y_train, y_cal_sr_class)
+            acc_cv_s    = _acc(y_train, y_cv_sr_class)
+            acc_pred_s  = _acc(y_test,  y_pred_sr_class)
+            bacc_cal_s  = _bacc(y_train, y_cal_sr_class)
+            bacc_cv_s   = _bacc(y_train, y_cv_sr_class)
+            bacc_pred_s = _bacc(y_test,  y_pred_sr_class)
+            overfit_s   = bacc_cal_s - bacc_cv_s
 
-        def _row(label, v_c, v_v, higher_is_better=True):
-            if higher_is_better:
-                winner = "Completo" if v_c > v_v + 1e-9 else ("VIP > 1" if v_v > v_c + 1e-9 else "Pari")
+        # ── Helper per righe a 3 modelli ──
+        def _winner3(vc, vv, vs, higher_is_better=True):
+            vals = {"Completo": vc, "VIP > 1": vv, "SR > 1": vs}
+            best_val = max(vals.values()) if higher_is_better else min(vals.values())
+            winners = [k for k, v in vals.items() if abs(v - best_val) < 1e-9]
+            return winners[0] if len(winners) == 1 else "Pari"
+
+        def _row3(label, vc, vv, vs, higher_is_better=True):
+            winner = _winner3(vc, vv, vs, higher_is_better) if has_sr else (
+                "Completo" if (vc > vv + 1e-9 if higher_is_better else vc < vv - 1e-9)
+                else ("VIP > 1" if (vv > vc + 1e-9 if higher_is_better else vv < vc - 1e-9)
+                      else "Pari"))
+            if has_sr:
+                return f"  {label:<32s} {vc:>10.4f} {vv:>10.4f} {vs:>10.4f} {winner:>10s}"
             else:
-                winner = "Completo" if v_c < v_v - 1e-9 else ("VIP > 1" if v_v < v_c - 1e-9 else "Pari")
-            return f"  {label:<32s} {v_c:>12.4f} {v_v:>12.4f} {winner:>12s}"
+                return f"  {label:<32s} {vc:>12.4f} {vv:>12.4f} {winner:>12s}"
 
-        print(f"\n  N. Variabili:       {n_vars:>5d}       vs  {len(vd['idx']):>5d}")
-        print(f"  N. LV:              {best_n:>5d}       vs  {vd['n_lv']:>5d}")
+        if has_sr:
+            hdr = f"  {'Metrica':<32s} {'Completo':>10s} {'VIP > 1':>10s} {'SR > 1':>10s} {'Migliore':>10s}"
+            sep = f"  {'─'*76}"
+            print(f"\n  N. Variabili:  {n_vars:>4d} (Completo)  /  {len(vd['idx']):>3d} (VIP>1)  /  {len(sd['idx']):>3d} (SR>1)")
+            print(f"  N. LV:         {best_n:>4d} (Completo)  /  {vd['n_lv']:>3d} (VIP>1)  /  {sd['n_lv']:>3d} (SR>1)")
+        else:
+            hdr = f"  {'Metrica':<32s} {'Completo':>12s} {'VIP > 1':>12s} {'Migliore':>12s}"
+            sep = f"  {'─'*70}"
+            print(f"\n  N. Variabili:       {n_vars:>5d}       vs  {len(vd['idx']):>5d}")
+            print(f"  N. LV:              {best_n:>5d}       vs  {vd['n_lv']:>5d}")
+
+        _s = lambda v: v if has_sr else 0.0  # shorthand per valori SR opzionali
+
         print()
         print(hdr)
         print(sep)
         print("  ── Calibrazione ──")
-        print(_row("Accuracy (Cal)",    acc_cal_c,  acc_cal_v))
-        print(_row("Bal. Accuracy (Cal)", bacc_cal_c, bacc_cal_v))
-        print(_row("Sens. Cl.1 (Cal)",  sens_cal[0], sens_cal_v[0]))
-        print(_row("Sens. Cl.2 (Cal)",  sens_cal[1], sens_cal_v[1]))
-        print(_row("RMSEC (media)",     np.mean(rmse_cal), np.mean(rmse_cal_v), higher_is_better=False))
-        print(_row("R² Cal",            np.mean(r2_cal), np.mean(r2_cal_v)))
+        print(_row3("Accuracy (Cal)",      acc_cal_c,  acc_cal_v,  _s(acc_cal_s)  if has_sr else 0))
+        print(_row3("Bal. Accuracy (Cal)", bacc_cal_c, bacc_cal_v, _s(bacc_cal_s) if has_sr else 0))
+        print(_row3("Sens. Cl.1 (Cal)",   sens_cal[0], sens_cal_v[0], _s(sens_cal_sr[0]) if has_sr else 0))
+        print(_row3("Sens. Cl.2 (Cal)",   sens_cal[1], sens_cal_v[1], _s(sens_cal_sr[1]) if has_sr else 0))
+        print(_row3("RMSEC (media)",      np.mean(rmse_cal), np.mean(rmse_cal_v), _s(np.mean(rmse_cal_sr)) if has_sr else 0, higher_is_better=False))
+        print(_row3("R² Cal",             np.mean(r2_cal), np.mean(r2_cal_v), _s(np.mean(r2_cal_sr)) if has_sr else 0))
         print(sep)
         print("  ── Cross-Validation ──")
-        print(_row("Accuracy (CV)",     acc_cv_c,   acc_cv_v))
-        print(_row("Bal. Accuracy (CV)", bacc_cv_c,  bacc_cv_v))
-        print(_row("Sens. Cl.1 (CV)",   sens_cv[0],  sens_cv_v[0]))
-        print(_row("Sens. Cl.2 (CV)",   sens_cv[1],  sens_cv_v[1]))
-        print(_row("RMSECV (media)",    np.mean(rmse_cv), np.mean(rmse_cv_v), higher_is_better=False))
-        print(_row("R² CV",             np.mean(r2_cv), np.mean(r2_cv_v)))
+        print(_row3("Accuracy (CV)",      acc_cv_c,   acc_cv_v,   _s(acc_cv_s)   if has_sr else 0))
+        print(_row3("Bal. Accuracy (CV)", bacc_cv_c,  bacc_cv_v,  _s(bacc_cv_s)  if has_sr else 0))
+        print(_row3("Sens. Cl.1 (CV)",   sens_cv[0],  sens_cv_v[0],  _s(sens_cv_sr[0])  if has_sr else 0))
+        print(_row3("Sens. Cl.2 (CV)",   sens_cv[1],  sens_cv_v[1],  _s(sens_cv_sr[1])  if has_sr else 0))
+        print(_row3("RMSECV (media)",    np.mean(rmse_cv), np.mean(rmse_cv_v), _s(np.mean(rmse_cv_sr)) if has_sr else 0, higher_is_better=False))
+        print(_row3("R² CV",             np.mean(r2_cv), np.mean(r2_cv_v), _s(np.mean(r2_cv_sr)) if has_sr else 0))
         print(sep)
         print("  ── Predizione (Test Set) ──")
-        print(_row("Accuracy (Pred)",   acc_pred_c,  acc_pred_v))
-        print(_row("Bal. Accuracy (Pred)", bacc_pred_c, bacc_pred_v))
-        print(_row("Sens. Cl.1 (Pred)", sens_pred[0], sens_pred_v[0]))
-        print(_row("Sens. Cl.2 (Pred)", sens_pred[1], sens_pred_v[1]))
-        print(_row("RMSEP (media)",     np.mean(rmse_pred), np.mean(rmse_pred_v), higher_is_better=False))
-        print(_row("R² Pred",           np.mean(r2_pred), np.mean(r2_pred_v)))
+        print(_row3("Accuracy (Pred)",      acc_pred_c,  acc_pred_v,  _s(acc_pred_s)   if has_sr else 0))
+        print(_row3("Bal. Accuracy (Pred)", bacc_pred_c, bacc_pred_v, _s(bacc_pred_s)  if has_sr else 0))
+        print(_row3("Sens. Cl.1 (Pred)",   sens_pred[0], sens_pred_v[0], _s(sens_pred_sr[0]) if has_sr else 0))
+        print(_row3("Sens. Cl.2 (Pred)",   sens_pred[1], sens_pred_v[1], _s(sens_pred_sr[1]) if has_sr else 0))
+        print(_row3("RMSEP (media)",       np.mean(rmse_pred), np.mean(rmse_pred_v), _s(np.mean(rmse_pred_sr)) if has_sr else 0, higher_is_better=False))
+        print(_row3("R² Pred",             np.mean(r2_pred), np.mean(r2_pred_v), _s(np.mean(r2_pred_sr)) if has_sr else 0))
         print(sep)
         print("  ── Indicatori Generali ──")
-        print(_row("Overfitting (Cal-CV)", overfit_c, overfit_v, higher_is_better=False))
-        print(_row("AUC CV",            auc_cv, vd['roc_data_cv'][3]))
+        print(_row3("Overfitting (Cal-CV)", overfit_c, overfit_v, _s(overfit_s) if has_sr else 0, higher_is_better=False))
+        auc_sr_val = sd['roc_data_cv'][3] if has_sr else 0.0
+        print(_row3("AUC CV",             auc_cv, vd['roc_data_cv'][3], _s(auc_sr_val) if has_sr else 0))
         print(sep)
 
         # ── Verdetto finale ──
-        scores_c, scores_v = 0, 0
-        # Pesi: Pred conta doppio
-        checks = [
-            (bacc_cv_c,   bacc_cv_v,   True),   # BAcc CV
-            (bacc_pred_c, bacc_pred_v, True),    # BAcc Pred (peso doppio)
-            (bacc_pred_c, bacc_pred_v, True),    # BAcc Pred (peso doppio)
-            (np.mean(rmse_cv), np.mean(rmse_cv_v), False),  # RMSECV
-            (auc_cv, vd['roc_data_cv'][3], True),            # AUC
-            (overfit_c, overfit_v, False),                    # Overfitting
+        scores_c, scores_v, scores_s = 0, 0, 0
+        checks3 = [
+            (bacc_cv_c,   bacc_cv_v,   bacc_cv_s   if has_sr else bacc_cv_v,   True),
+            (bacc_pred_c, bacc_pred_v, bacc_pred_s  if has_sr else bacc_pred_v, True),   # peso doppio
+            (bacc_pred_c, bacc_pred_v, bacc_pred_s  if has_sr else bacc_pred_v, True),
+            (np.mean(rmse_cv), np.mean(rmse_cv_v), np.mean(rmse_cv_sr) if has_sr else np.mean(rmse_cv_v), False),
+            (auc_cv, vd['roc_data_cv'][3], auc_sr_val, True),
+            (overfit_c, overfit_v, overfit_s if has_sr else overfit_v, False),
         ]
-        for vc, vv, higher in checks:
-            if higher:
-                if vc > vv + 1e-9: scores_c += 1
-                elif vv > vc + 1e-9: scores_v += 1
-            else:
-                if vc < vv - 1e-9: scores_c += 1
-                elif vv < vc - 1e-9: scores_v += 1
+        for vc, vv, vs, higher in checks3:
+            best_val = max(vc, vv, vs) if higher else min(vc, vv, vs)
+            eps = 1e-9
+            if abs(vc - best_val) < eps: scores_c += 1
+            if abs(vv - best_val) < eps: scores_v += 1
+            if has_sr and abs(vs - best_val) < eps: scores_s += 1
 
         print()
-        print(f"  Punteggio complessivo:  Completo = {scores_c}  |  VIP > 1 = {scores_v}")
-        if scores_c > scores_v:
-            winner_name = f"COMPLETO ({n_vars} variabili, {best_n} LV)"
-        elif scores_v > scores_c:
-            winner_name = f"VIP > 1 ({len(vd['idx'])} variabili, {vd['n_lv']} LV)"
+        if has_sr:
+            print(f"  Punteggio:  Completo = {scores_c}  |  VIP > 1 = {scores_v}  |  SR > 1 = {scores_s}")
+            best_score = max(scores_c, scores_v, scores_s)
+            if scores_c >= best_score and scores_c > scores_v and scores_c > scores_s:
+                winner_name = f"COMPLETO ({n_vars} var, {best_n} LV)"
+            elif scores_v >= best_score and scores_v > scores_c and scores_v > scores_s:
+                winner_name = f"VIP > 1 ({len(vd['idx'])} var, {vd['n_lv']} LV)"
+            elif scores_s >= best_score and scores_s > scores_c and scores_s > scores_v:
+                winner_name = f"SR > 1 ({len(sd['idx'])} var, {sd['n_lv']} LV)"
+            else:
+                # Pareggio: preferisci il più semplice (meno variabili)
+                candidates_tie = {}
+                if scores_c == best_score: candidates_tie["COMPLETO"] = n_vars
+                if scores_v == best_score: candidates_tie[f"VIP > 1"] = len(vd['idx'])
+                if scores_s == best_score: candidates_tie[f"SR > 1"] = len(sd['idx'])
+                simplest = min(candidates_tie, key=candidates_tie.get)
+                winner_name = f"{simplest} – scelto per parsimonia"
         else:
-            winner_name = "PAREGGIO – si preferisce il modello più semplice (VIP > 1)"
+            print(f"  Punteggio:  Completo = {scores_c}  |  VIP > 1 = {scores_v}")
+            if scores_c > scores_v:
+                winner_name = f"COMPLETO ({n_vars} var, {best_n} LV)"
+            elif scores_v > scores_c:
+                winner_name = f"VIP > 1 ({len(vd['idx'])} var, {vd['n_lv']} LV)"
+            else:
+                winner_name = "PAREGGIO – si preferisce il modello più semplice (VIP > 1)"
 
         print(f"\n  ★★★  MODELLO VINCITORE: {winner_name}  ★★★")
-
-        if scores_c > scores_v:
-            print(f"\n  Motivazione: il modello completo supera VIP > 1 sulle metriche")
-            print(f"  di generalizzazione (BAcc Pred, AUC). La riduzione delle variabili")
-            print(f"  non porta vantaggi e peggiora la Sensitivity della Classe 2.")
-        elif scores_v > scores_c:
-            print(f"\n  Motivazione: il modello ridotto VIP > 1 generalizza meglio con")
-            print(f"  meno variabili, offrendo maggiore interpretabilità e parsimonia.")
-        else:
-            print(f"\n  Motivazione: performance comparabili, ma il modello ridotto è")
-            print(f"  preferibile per parsimonia e interpretabilità (Occam's razor).")
     else:
         print("\n  Nessun modello VIP > 1 disponibile per il confronto.")
 
