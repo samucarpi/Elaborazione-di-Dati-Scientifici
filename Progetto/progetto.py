@@ -120,16 +120,16 @@ if __name__ == "__main__":
     splits_final = list(skf_final.split(X_train_s, y_train))
     y_cv_pred_dummy = cross_val_predict(pls_da, X_train_s, y_train_dummy, cv=splits_final)
 
-    # Calcolo soglia ottimale tramite curva ROC (Youden's J statistic)
-    # PRIMA di classificare, così y_cv_pred usa già la soglia ottimale
+    # Curva ROC per il grafico (AUC)
     y_cv_cont = y_cv_pred_dummy[:, 1]   # colonna Biodeg continua (out-of-fold)
-    optimal_threshold, fpr_cv, tpr_cv, thresholds_cv, auc_cv = \
+    _, fpr_cv, tpr_cv, thresholds_cv, auc_cv = \
         compute_optimal_threshold(y_train, y_cv_cont)
-    print(f"\n  Soglia ottimale (ROC, Youden's J): {optimal_threshold:.4f}")
-    print(f"  AUC (Cross-Validation):            {auc_cv:.4f}")
+    optimal_threshold = 0.5
+    print(f"\n  Criterio di classificazione: True Discriminant (argmax)")
+    print(f"  AUC (Cross-Validation):      {auc_cv:.4f}")
 
-    # Classificazione CV con soglia ottimale (non argmax/0.5 implicita)
-    y_cv_pred = np.where(y_cv_cont >= optimal_threshold, 2, 1)
+    # Classificazione CV – True Discriminant: argmax sulle colonne dummy
+    y_cv_pred = np.argmax(y_cv_pred_dummy, axis=1) + 1
     cv_metrics = compute_classification_metrics(y_train, y_cv_pred, "CV")
     print(f"\n  Metriche Cross-Validation (out-of-fold, soglia={optimal_threshold:.4f}):")
     print(f"    Accuracy:          {cv_metrics['accuracy']:.4f}")
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     # ── Predizione test set con soglia ottimale determinata dal CV ──
     y_test_cont = pls_da.predict(X_test_s)[:, 1]
-    y_test_pred = np.where(y_test_cont >= optimal_threshold, 2, 1)
+    y_test_pred = np.argmax(pls_da.predict(X_test_s), axis=1) + 1
     test_metrics_full = compute_classification_metrics(
         y_test, y_test_pred, f"Completo ({n_vars} var")
 
@@ -354,9 +354,9 @@ if __name__ == "__main__":
         m  = compute_classification_metrics(
             y_test, yp, f"{label} ({len(idx)} var, {n_best} LV)")
 
-        # Soglia ROC ottimale per il modello ridotto
+        # Curva ROC per il grafico (AUC) – classificazione usa soglia fissa 0.5 (truemax)
         y_cv_cont_sel = y_cv_sel[:, 1]
-        thresh_sel, fpr_sel, tpr_sel, thresholds_sel, auc_sel = \
+        _, fpr_sel, tpr_sel, thresholds_sel, auc_sel = \
             compute_optimal_threshold(y_train, y_cv_cont_sel)
 
         # Salva nel dizionario
@@ -366,7 +366,7 @@ if __name__ == "__main__":
             "bacc_cv": m_cv["balanced_accuracy"],
             "y_cv_pred": y_cv_sel_class,
             "y_cv_cont": y_cv_cont_sel,
-            "optimal_threshold": thresh_sel,
+            "optimal_threshold": 0.5,
             "roc_data_cv": (fpr_sel, tpr_sel, thresholds_sel, auc_sel),
         }
 
@@ -614,11 +614,10 @@ if __name__ == "__main__":
                 final_model     = res_data["model"]
                 final_X_eval    = X_eval_s[:, res_data["idx"]]
                 model_type      = f"ridotto ({label})"
-                final_threshold = res_data["optimal_threshold"]  # soglia del modello ridotto
+                final_threshold = 0.5  # true discriminant
                 # Confusion matrix del modello ridotto migliore
-                y_test_pred_best = np.where(
-                    final_model.predict(X_test_s[:, res_data["idx"]])[:, 1] >= final_threshold,
-                    2, 1)
+                y_test_pred_best = np.argmax(
+                    final_model.predict(X_test_s[:, res_data["idx"]]), axis=1) + 1
                 plot_confusion_matrix(
                     y_test, y_test_pred_best,
                     f"Confusion Matrix - Test (Miglior Ridotto)\n",
@@ -690,10 +689,11 @@ if __name__ == "__main__":
     print("6. PREVISIONE SET ESTERNO (Xeval) E EXPORT EXCEL")
     print("─" * 50)
 
-    y_eval_cont = final_model.predict(final_X_eval)[:, 1]
-    y_eval_pred = np.where(y_eval_cont >= final_threshold, 2, 1)
+    y_eval_dummy = final_model.predict(final_X_eval)
+    y_eval_cont = y_eval_dummy[:, 1]
+    y_eval_pred = np.argmax(y_eval_dummy, axis=1) + 1  # True Discriminant
 
-    # Grafico y_pred vs campioni per Xeval (soglia ROC del modello finale scelto)
+    # Grafico y_pred vs campioni per Xeval
     plot_ypred_eval(final_model, final_X_eval,
                     filename="3_PLSDA/PLSDA_ypred_eval.png",
                     threshold=final_threshold)
@@ -760,7 +760,7 @@ if __name__ == "__main__":
         "Valore": [
             "PLS-DA (Partial Least Squares Discriminant Analysis)",
             "Autoscaling (media=0, deviazione standard=1)",
-            "Argmax su Y dummy (assegnazione alla classe con ŷ maggiore)",
+            "True Discriminant (argmax: assegnazione alla classe con ŷ maggiore)",
             best_n,
             n_vars_used,
             selection_strategy,
