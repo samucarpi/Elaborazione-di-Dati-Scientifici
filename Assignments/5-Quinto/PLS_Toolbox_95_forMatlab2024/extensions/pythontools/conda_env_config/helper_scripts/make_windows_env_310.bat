@@ -1,1 +1,0 @@
-%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -NoExit -Command "& '%1'; conda remove -y -n pls_toolbox_windows_310 --all;  conda env create -f  '..\ymls\pls_toolbox_windows_310.yml' -p %2 > output.log; exit"
